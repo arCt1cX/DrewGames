@@ -7103,7 +7103,7 @@
       "answers": [
         "La parte posteriore del computer",
         "L'area principale dello schermo con icone e sfondo",
-        "Una stampante",
+        "Una periferica per stampare documenti",
         "Un tipo di software"
       ],
       "correctIndex": 1
@@ -7111,10 +7111,10 @@
     {
       "question": "Cosa significa 'salvare' un documento?",
       "answers": [
-        "Stampare il documento",
-        "Chiudere il programma",
+        "Stampare il documento nel computer",
+        "Chiudere il programma del computer",
         "Memorizzare il documento nel computer",
-        "Cancellare il documento"
+        "Cancellare il documento dal computer"
       ],
       "correctIndex": 2
     },
@@ -7131,10 +7131,10 @@
     {
       "question": "Cos'è un'app?",
       "answers": [
-        "Un tipo di cibo",
+        "Un tipo di cibo simile al pane",
         "Un programma che svolge una funzione specifica",
         "Un componente hardware",
-        "Una password"
+        "Una password molto difficile da ricordare"
       ],
       "correctIndex": 1
     },
