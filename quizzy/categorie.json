@@ -400,456 +400,891 @@
           }
     ],
     "medio": [
-        {
-            "question": "Quale evento segnò l'inizio del Medioevo?",
-            "answers": ["La scoperta dell'America", "La caduta dell'Impero Romano d'Occidente", "L'invenzione della stampa", "La nascita di Cristo"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Chi fu il re dei Franchi che divenne Imperatore del Sacro Romano Impero nel 800 d.C.?",
-            "answers": ["Carlo Martello", "Carlo Magno", "Federico Barbarossa", "Pipino il Breve"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Qual era la capitale dell’Impero Bizantino?",
-            "answers": ["Atene", "Roma", "Costantinopoli", "Alessandria"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Che cos'è il Codice di Hammurabi?",
-            "answers": ["Un poema epico", "Una raccolta di leggi", "Un trattato scientifico", "Una mappa antica"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Chi erano i Visigoti?",
-            "answers": ["Un popolo greco", "Una tribù celtica", "Un popolo germanico", "Una dinastia romana"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quale regina inglese fu soprannominata 'la regina vergine'?",
-            "answers": ["Maria la Sanguinaria", "Anna Bolena", "Elisabetta I", "Vittoria"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quale fu la causa scatenante della Rivoluzione Americana?",
-            "answers": ["La schiavitù", "Tasse senza rappresentanza", "Il commercio del tè", "La guerra con la Francia"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Chi fu l’imperatore romano che divise l’Impero in due parti?",
-            "answers": ["Nerone", "Costantino", "Diocleziano", "Traiano"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Cosa fu il Trattato di Versailles del 1919?",
-            "answers": ["Un accordo tra stati italiani", "La pace dopo la Prima Guerra Mondiale", "La fine dell’Impero Ottomano", "Un trattato commerciale"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale popolo sviluppò la scrittura cuneiforme?",
-            "answers": ["Egizi", "Sumeri", "Babilonesi", "Greci"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Cosa fu la Guerra dei Cent'Anni?",
-            "answers": ["Un conflitto tra Francia e Inghilterra", "Una guerra civile romana", "Una crociata", "Una ribellione tedesca"],
-            "correctIndex": 0
-          },
-          {
-            "question": "Chi era l’ultimo zar di Russia?",
-            "answers": ["Pietro il Grande", "Nicola II", "Ivan il Terribile", "Alessandro II"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Cosa fu la Lega di Delio-Attica?",
-            "answers": ["Un’alleanza greca contro i Persiani", "Un trattato commerciale", "Una dinastia egizia", "Un consiglio romano"],
-            "correctIndex": 0
-          },
-          {
-            "question": "Che cos’è il Feudalesimo?",
-            "answers": ["Un sistema politico moderno", "Un’ideologia religiosa", "Un sistema sociale medievale", "Un codice militare"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi scrisse 'Il contratto sociale'?",
-            "answers": ["Voltaire", "Locke", "Rousseau", "Montesquieu"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quale impero fu governato da Montezuma?",
-            "answers": ["Maya", "Azteco", "Inca", "Olmechi"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Chi fondò la città di Alessandria in Egitto?",
-            "answers": ["Marco Antonio", "Cesare", "Alessandro Magno", "Tolomeo"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Cosa fu la Riforma Protestante?",
-            "answers": ["Una rivoluzione politica", "Una rivoluzione industriale", "Una divisione religiosa del Cristianesimo", "Una guerra tra stati europei"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi furono i protagonisti della Guerra Fredda?",
-            "answers": ["USA e Giappone", "URSS e Cina", "USA e URSS", "Francia e Germania"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quale importante documento fu firmato nel 1215 in Inghilterra?",
-            "answers": ["Costituzione inglese", "Bill of Rights", "Magna Carta", "Trattato di Londra"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Che cos’è l’Illuminismo?",
-            "answers": ["Una corrente artistica", "Un movimento religioso", "Un movimento filosofico del '700", "Una rivoluzione militare"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi era Bismarck?",
-            "answers": ["Un filosofo", "Un imperatore tedesco", "Un cancelliere prussiano", "Un generale francese"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Dove si sviluppò la civiltà minoica?",
-            "answers": ["Italia", "Creta", "Egitto", "Spagna"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Che cos’è la “Pace di Augusta” del 1555?",
-            "answers": ["Una tregua tra Italia e Francia", "Un trattato religioso nell’Impero tedesco", "Un trattato commerciale", "Una pace tra papato e impero"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Chi era Annibale?",
-            "answers": ["Un imperatore romano", "Un condottiero cartaginese", "Un filosofo greco", "Un re etrusco"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Che cos'è il Paleolitico?",
-            "answers": ["L'età del ferro", "L'età della pietra antica", "Il periodo romano", "Un’epoca egizia"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quando fu abbattuta la Bastiglia?",
-            "answers": ["1789", "1815", "1492", "1848"],
-            "correctIndex": 0
-          },
-          {
-            "question": "Chi fondò il fascismo in Italia?",
-            "answers": ["Hitler", "Cavour", "Mussolini", "Garibaldi"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Che cos’era il Muro di Berlino?",
-            "answers": ["Una cinta muraria antica", "Un confine tra Est e Ovest", "Un monumento storico", "Un’opera d’arte"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Cosa fu la Conferenza di Yalta?",
-            "answers": ["Un incontro tra re europei", "Un trattato napoleonico", "Un vertice tra USA, URSS e Regno Unito durante la Seconda Guerra Mondiale", "Un piano di ricostruzione"],
-            "correctIndex": 2
-          }
+    {
+      "question": "Quale evento segnò l'inizio del Medioevo?",
+      "answers": [
+        "La scoperta del continente americano da parte di Colombo",
+        "La caduta dell’Impero Romano d’Occidente nel 476 d.C.",
+        "L’invenzione della stampa a caratteri mobili",
+        "La nascita di Gesù Cristo secondo la tradizione cristiana"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi fu il re dei Franchi che divenne Imperatore nel 800 d.C.?",
+      "answers": [
+        "Carlo Martello, noto per la vittoria di Poitiers",
+        "Carlo Magno, incoronato da Papa Leone III",
+        "Federico Barbarossa, imperatore del Sacro Romano Impero",
+        "Pipino il Breve, padre di Carlo Magno"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Qual era la capitale dell’Impero Bizantino?",
+      "answers": [
+        "Atene, centro culturale greco",
+        "Roma, capitale dell’Impero d’Occidente",
+        "Costantinopoli, fondata da Costantino",
+        "Alessandria, grande città egiziana"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Che cos'è il Codice di Hammurabi?",
+      "answers": [
+        "Un poema epico della Mesopotamia",
+        "Una raccolta di leggi babilonesi",
+        "Un antico trattato scientifico",
+        "Una mappa geografica sumera"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi erano i Visigoti?",
+      "answers": [
+        "Un popolo di origine greca antica",
+        "Una tribù celtica dell’Europa centrale",
+        "Un popolo germanico che invase Roma",
+        "Una dinastia romana in età imperiale"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Quale regina inglese fu detta 'la regina vergine'?",
+      "answers": [
+        "Maria I, nota come Maria la Sanguinaria",
+        "Anna Bolena, madre di Elisabetta",
+        "Elisabetta I, regina nel XVI secolo",
+        "Vittoria, regina dell’epoca industriale"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Quale fu la causa della Rivoluzione Americana?",
+      "answers": [
+        "La questione della schiavitù nei territori",
+        "L’imposizione di tasse senza rappresentanza",
+        "Il boicottaggio del commercio del tè",
+        "Una guerra precedente con la Francia"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi divise l’Impero Romano in due parti?",
+      "answers": [
+        "Nerone, noto imperatore del I secolo",
+        "Costantino, che cristianizzò l’impero",
+        "Diocleziano, riformatore del tardo impero",
+        "Traiano, conquistatore della Dacia"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Cos’era il Trattato di Versailles del 1919?",
+      "answers": [
+        "Un accordo politico tra stati italiani",
+        "Il trattato che concluse la Prima Guerra Mondiale",
+        "Un accordo che segnò la fine dell’Impero Ottomano",
+        "Un patto commerciale tra potenze europee"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi sviluppò la scrittura cuneiforme?",
+      "answers": [
+        "Gli Egizi nella valle del Nilo",
+        "I Sumeri nella Mesopotamia",
+        "I Babilonesi nelle città-stato",
+        "I Greci delle poleis"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Cosa fu la Guerra dei Cent'Anni?",
+      "answers": [
+        "Un conflitto tra Francia e Inghilterra",
+        "Una lunga guerra civile romana",
+        "Una delle prime crociate",
+        "Una ribellione popolare tedesca"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Chi era l’ultimo zar di Russia?",
+      "answers": [
+        "Pietro il Grande, modernizzatore",
+        "Nicola II, deposto nel 1917",
+        "Ivan il Terribile, sovrano spietato",
+        "Alessandro II, lo zar riformatore"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Cos’era la Lega Delio-Attica?",
+      "answers": [
+        "Un’alleanza militare tra città greche",
+        "Un trattato di natura commerciale",
+        "Una dinastia dell’antico Egitto",
+        "Un consiglio politico romano"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Che cos’è il Feudalesimo?",
+      "answers": [
+        "Un moderno sistema politico europeo",
+        "Un'ideologia religiosa medievale",
+        "Un sistema sociale basato su vassallaggio",
+        "Un insieme di leggi militari"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Chi scrisse 'Il contratto sociale'?",
+      "answers": [
+        "Voltaire, noto illuminista",
+        "Locke, filosofo inglese",
+        "Rousseau, pensatore svizzero",
+        "Montesquieu, autore de 'Lo spirito delle leggi'"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Quale impero era guidato da Montezuma?",
+      "answers": [
+        "L’impero Maya nel Centro America",
+        "L’impero Azteco del Messico",
+        "L’impero Inca delle Ande",
+        "La civiltà degli Olmechi"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi fondò Alessandria d’Egitto?",
+      "answers": [
+        "Marco Antonio, generale romano",
+        "Giulio Cesare, dittatore romano",
+        "Alessandro Magno, sovrano macedone",
+        "Tolomeo, faraone ellenistico"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Cos’era la Riforma Protestante?",
+      "answers": [
+        "Una rivoluzione politica in Europa",
+        "Una trasformazione dell’economia",
+        "Una rottura religiosa col cattolicesimo",
+        "Un conflitto tra nazioni europee"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Chi erano i protagonisti della Guerra Fredda?",
+      "answers": [
+        "Gli Stati Uniti e il Giappone imperiale",
+        "L’Unione Sovietica e la Cina",
+        "Gli USA e l’URSS in tensione ideologica",
+        "La Francia e la Germania postbellica"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Quale documento fu firmato in Inghilterra nel 1215?",
+      "answers": [
+        "Una prima forma di Costituzione nazionale",
+        "Il Bill of Rights britannico",
+        "La Magna Carta concessa ai baroni",
+        "Il Trattato di Londra tra nazioni"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Che cos’è l’Illuminismo?",
+      "answers": [
+        "Una corrente artistica europea",
+        "Un movimento spirituale cristiano",
+        "Un movimento filosofico del XVIII secolo",
+        "Una rivoluzione militare internazionale"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Chi era Bismarck?",
+      "answers": [
+        "Un importante pensatore tedesco",
+        "Un imperatore della Germania unita",
+        "Un cancelliere prussiano unificatore",
+        "Un generale della guerra franco-prussiana"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Dove si sviluppò la civiltà minoica?",
+      "answers": [
+        "Nel centro e sud della penisola italiana",
+        "Sull’isola di Creta nel Mar Egeo",
+        "Lungo il fiume Nilo in Egitto",
+        "Sulla costa atlantica della Spagna"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Cos’è la Pace di Augusta del 1555?",
+      "answers": [
+        "Una tregua tra regni italiani e francesi",
+        "Un trattato religioso nell’Impero tedesco",
+        "Un patto commerciale con la Spagna",
+        "Un accordo tra imperatore e papato"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi era Annibale?",
+      "answers": [
+        "Un imperatore romano famoso per le guerre",
+        "Un condottiero cartaginese delle guerre puniche",
+        "Un filosofo greco di scuola stoica",
+        "Un re etrusco leggendario"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Che cos'è il Paleolitico?",
+      "answers": [
+        "Il periodo in cui si usava il ferro",
+        "La fase più antica dell'età della pietra",
+        "L’epoca dell’Impero romano",
+        "Il periodo centrale dell’Egitto faraonico"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Quando fu abbattuta la Bastiglia?",
+      "answers": [
+        "Nel 1789 durante la Rivoluzione Francese",
+        "Nel 1815 alla fine del periodo napoleonico",
+        "Nel 1492, anno della scoperta dell’America",
+        "Nel 1848 durante i moti rivoluzionari"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Chi fondò il fascismo in Italia?",
+      "answers": [
+        "Adolf Hitler, leader tedesco",
+        "Camillo Benso di Cavour, statista",
+        "Benito Mussolini, nel 1919",
+        "Giuseppe Garibaldi, patriota italiano"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Che cos’era il Muro di Berlino?",
+      "answers": [
+        "Una fortificazione dell'antichità romana",
+        "Una barriera tra Berlino Est e Berlino Ovest",
+        "Un antico monumento della capitale tedesca",
+        "Un'opera architettonica commemorativa"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Cosa fu la Conferenza di Yalta?",
+      "answers": [
+        "Un incontro tra monarchi europei",
+        "Un trattato della guerra napoleonica",
+        "Un vertice alleato durante la Seconda Guerra Mondiale",
+        "Un piano economico postbellico"
+      ],
+      "correctIndex": 2
+    }
+  ],
+  "esperto": [
+    {
+      "question": "Quale fu la principale innovazione della Costituzione ateniese di Clistene?",
+      "answers": [
+        "L'introduzione della monarchia ereditaria",
+        "La creazione dell'assemblea degli anziani",
+        "La suddivisione della popolazione in tribù su base territoriale",
+        "L'ampliamento dei poteri dei magistrati religiosi"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Quale fu la causa diretta della Guerra del Peloponneso?",
+      "answers": [
+        "L'invasione della Persia da parte degli ateniesi",
+        "Il dominio commerciale spartano nel Mediterraneo",
+        "La crescente influenza di Atene tra le poleis",
+        "La spartizione dell’impero macedone"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Che ruolo ebbe Cicerone nella tarda Repubblica Romana?",
+      "answers": [
+        "Fu imperatore durante la guerra civile",
+        "Fu un generale fedele a Giulio Cesare",
+        "Fu un oratore e politico difensore della Repubblica",
+        "Fu un pretore impegnato nella riforma agraria"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Cosa prevedeva la Lex Hortensia del 287 a.C. a Roma?",
+      "answers": [
+        "L’abolizione del consolato",
+        "La parità legale tra patrizi e plebei",
+        "La distribuzione gratuita del grano",
+        "L’obbligo di servizio militare per i senatori"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi era il capo religioso e politico della città sumera?",
+      "answers": [
+        "Il faraone",
+        "Il califfo",
+        "Il lugal",
+        "Il basileus"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Quale innovazione introdusse l’Imperatore Diocleziano per governare l’Impero?",
+      "answers": [
+        "La trasformazione dell’esercito in guardia civile",
+        "La centralizzazione del potere nel Senato",
+        "La divisione del potere tra quattro sovrani",
+        "L’abolizione delle provincie"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Cosa fu il 'Prammatica Sanzione' di Carlo VI d’Asburgo?",
+      "answers": [
+        "Un trattato commerciale con la Francia",
+        "Un decreto di tolleranza religiosa",
+        "Un editto che stabiliva la successione femminile",
+        "Una legge che aboliva la servitù della gleba"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Chi fu l'autore della 'Storia della guerra del Peloponneso'?",
+      "answers": [
+        "Erodoto",
+        "Senofonte",
+        "Plutarco",
+        "Tucidide"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question": "Qual era l’obiettivo del Concilio di Trento?",
+      "answers": [
+        "L’unificazione delle chiese ortodosse e cattoliche",
+        "La definizione del dogma dell’infallibilità papale",
+        "La riforma della Chiesa contro il protestantesimo",
+        "La fondazione della Compagnia di Gesù"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Quale tra questi popoli non fece parte della civiltà micenea?",
+      "answers": [
+        "Achei",
+        "Dori",
+        "Ioni",
+        "Etruschi"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question": "Chi fu il principale teorico dell’assolutismo monarchico francese?",
+      "answers": [
+        "Jean-Jacques Rousseau",
+        "Voltaire",
+        "Jacques-Bénigne Bossuet",
+        "Montesquieu"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "In cosa consisteva il sistema del 'clientelismo' nella Roma repubblicana?",
+      "answers": [
+        "Un rapporto tra patrizi e senatori",
+        "Un’alleanza tra eserciti provinciali",
+        "Una relazione tra patroni e clienti per mutuo sostegno",
+        "Una gerarchia tra tribuni della plebe"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Che cos'è il 'Justinianeo Corpus Iuris Civilis'?",
+      "answers": [
+        "Un codice di leggi germaniche",
+        "Una raccolta giuridica dell’antico Egitto",
+        "La codificazione del diritto romano",
+        "Il codice militare di Roma imperiale"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Che ruolo ebbe la Dieta di Worms nel 1521?",
+      "answers": [
+        "Confermare l’indipendenza della Boemia",
+        "Condannare Martin Lutero e il suo pensiero",
+        "Scomunicare Enrico VIII d’Inghilterra",
+        "Proclamare Carlo V imperatore del Sacro Romano Impero"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi era Tommaso Moro e cosa scrisse?",
+      "answers": [
+        "Un esploratore veneziano, autore del 'Milione'",
+        "Un filosofo inglese, autore di 'Utopia'",
+        "Un cardinale spagnolo, autore del 'De officiis'",
+        "Un giurista romano, autore del 'Corpus Iuris'"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Cosa stabiliva il 'Dictatus Papae' di Gregorio VII?",
+      "answers": [
+        "L’indipendenza del papato dall’impero",
+        "L’investitura laica dei vescovi",
+        "La scomunica dei crociati eretici",
+        "Il diritto del re a nominare il papa"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Qual era la funzione dei 'giannizzeri' nell’Impero Ottomano?",
+      "answers": [
+        "Erano diplomatici presso le corti europee",
+        "Erano soldati d’élite reclutati tra i cristiani",
+        "Erano nobili turchi addetti al commercio",
+        "Erano governatori provinciali fedeli al sultano"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi fu Alcuino di York?",
+      "answers": [
+        "Un crociato inglese al servizio del re normanno",
+        "Un consigliere e studioso alla corte di Carlo Magno",
+        "Un re anglosassone che fondò l'università di Oxford",
+        "Un vescovo che partecipò al Concilio di Nicea"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Quale fu la motivazione principale della spedizione dei Mille?",
+      "answers": [
+        "Liberare il centro Italia dal potere temporale del papa",
+        "Unificare il Sud Italia sotto il Regno di Sardegna",
+        "Reprimere i moti rivoluzionari siciliani",
+        "Sconfiggere gli austriaci nel Veneto"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Cosa fu il Congresso di Vienna del 1815?",
+      "answers": [
+        "Una conferenza per ridisegnare l’Europa dopo Napoleone",
+        "Un incontro segreto tra monarchi assoluti",
+        "Una riunione per fondare la Società delle Nazioni",
+        "Un’assemblea che sancì la fine del Sacro Romano Impero"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Chi era Mazzini?",
+      "answers": [
+        "Un diplomatico austriaco",
+        "Un pensatore repubblicano italiano",
+        "Un ministro del Regno di Napoli",
+        "Un cardinale ostile al Risorgimento"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Qual era l’obiettivo del Patto di Varsavia?",
+      "answers": [
+        "L’alleanza tra i paesi NATO",
+        "La cooperazione tra i paesi del Terzo Mondo",
+        "Un patto militare tra URSS e paesi socialisti europei",
+        "Un accordo per la denuclearizzazione dell’Europa"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Che cosa fu il compromesso austro-ungarico del 1867?",
+      "answers": [
+        "Un trattato per annettere la Bosnia",
+        "L'accordo che creò la doppia monarchia asburgica",
+        "Un’alleanza militare tra Austria e Prussia",
+        "La concessione dell’indipendenza all’Ungheria"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chi proclamò l’Editto di Milano nel 313 d.C.?",
+      "answers": [
+        "Diocleziano e Massimiano",
+        "Costantino e Licinio",
+        "Costanzo Cloro e Teodosio",
+        "Valente e Valentiniano"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Quale tra questi eventi segna l’inizio dell’età moderna?",
+      "answers": [
+        "La caduta dell’Impero d’Oriente",
+        "La scoperta dell’America nel 1492",
+        "L’incoronazione di Carlo Magno",
+        "La Rivoluzione americana"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Cosa sancì il Trattato di Verdun dell’843?",
+      "answers": [
+        "La fine dell’Impero Romano d’Occidente",
+        "La divisione dell’Impero carolingio",
+        "La pace tra Bizantini e Franchi",
+        "L’unificazione del Sacro Romano Impero"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Che ruolo ebbe il Concordato del 1801 tra Napoleone e la Chiesa?",
+      "answers": [
+        "Restituì le terre confiscate al Papa",
+        "Abolì l’autorità papale in Francia",
+        "Riconobbe il cattolicesimo come religione della maggioranza",
+        "Rinunciò alla nomina dei vescovi"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Qual era l’obiettivo della politica di Realpolitik di Bismarck?",
+      "answers": [
+        "Promuovere l’unità italiana",
+        "Fondare una federazione europea",
+        "Unificare la Germania attraverso azioni pragmatiche",
+        "Riformare la monarchia prussiana in senso liberale"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Cosa rappresentava la 'Carta del Carnaro' scritta da D’Annunzio?",
+      "answers": [
+        "Un proclama monarchico per la restaurazione",
+        "Una costituzione per la Reggenza del Carnaro",
+        "Un manifesto del Partito Comunista Italiano",
+        "Un trattato tra Italia e Jugoslavia"
+      ],
+      "correctIndex": 1
+    }
+  ],
+   "laureato": [
+  {
+    "question": "Quale fu l'impatto delle Riforme Cluniacensi sulla struttura della Chiesa?",
+    "answers": [
+      "Favorirono la disciplina monastica",
+      "Indebolirono il potere papale",
+      "Consolidarono i vescovi locali",
+      "Promossero l’influenza laica"
     ],
-    "esperto": [
-        {
-            "question": "Quale fu la principale conseguenza del Congresso di Vienna del 1815?",
-            "answers": ["La proclamazione della Repubblica Italiana", "La restaurazione dell'Ancien Régime", "La fine dell'Impero Bizantino", "La divisione della Germania"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Chi scrisse le *Lettere Persiane*, critica della società francese del '700?",
-            "answers": ["Voltaire", "Montesquieu", "Diderot", "Rousseau"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale trattato pose fine alla Guerra dei Trent'anni?",
-            "answers": ["Pace di Utrecht", "Pace di Augusta", "Pace di Vestfalia", "Trattato di Versailles"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi fu cancelliere durante il Reich tedesco unificato del 1871?",
-            "answers": ["Guglielmo II", "Ludwig von Beethoven", "Otto von Bismarck", "Hindenburg"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Cosa prevedeva il Patto Molotov-Ribbentrop del 1939?",
-            "answers": ["Un'alleanza tra Italia e Germania", "Un’alleanza tra URSS e Polonia", "Un patto di non aggressione tra URSS e Germania", "La spartizione della Francia"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi furono i principali artefici della politica del *contenimento* durante la Guerra Fredda?",
-            "answers": ["Churchill e Roosevelt", "Truman e Kennan", "Stalin e Tito", "Eisenhower e Kennedy"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Che cos'è il Risorgimento?",
-            "answers": ["Una rivoluzione religiosa", "Il movimento per l’unità d’Italia", "Una corrente filosofica", "Un trattato militare"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Chi fu il successore di Lenin alla guida dell’URSS?",
-            "answers": ["Trotsky", "Brežnev", "Stalin", "Krusciov"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi fu il principale ideologo della rivoluzione culturale cinese?",
-            "answers": ["Sun Yat-sen", "Mao Zedong", "Chiang Kai-shek", "Deng Xiaoping"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale repubblica marinara ebbe il predominio commerciale nell’Adriatico?",
-            "answers": ["Genova", "Amalfi", "Pisa", "Venezia"],
-            "correctIndex": 3
-          },
-          {
-            "question": "Quando iniziò ufficialmente la Guerra del Vietnam?",
-            "answers": ["1954", "1961", "1965", "1973"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Cosa rappresentava il *Manifesto di Ventotene*?",
-            "answers": ["Una critica al fascismo", "Un piano economico", "Una proposta per l’unità europea", "Un trattato di alleanza tra Italia e Germania"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi fu il comandante della flotta ottomana nella battaglia di Lepanto?",
-            "answers": ["Solimano il Magnifico", "Selim II", "Ali Pascià", "Mustafà III"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Che cos’era la dottrina Monroe?",
-            "answers": ["Una teoria economica", "Un principio di politica estera statunitense", "Un trattato di pace", "Una dottrina religiosa"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale fu la funzione della Dieta di Worms nel 1521?",
-            "answers": ["Eleggere l’imperatore", "Processare Lutero", "Firmare la pace con i Turchi", "Fondare la Chiesa anglicana"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale ruolo aveva Cavour nel processo di unificazione italiana?",
-            "answers": ["Generale rivoluzionario", "Re piemontese", "Primo ministro del Regno di Sardegna", "Diplomatico del Papato"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi furono i protagonisti della crisi di Suez del 1956?",
-            "answers": ["Egitto, Francia, Regno Unito e Israele", "USA, URSS, Cina", "Italia, Libia, Tunisia", "Germania, Francia, URSS"],
-            "correctIndex": 0
-          },
-          {
-            "question": "In che anno venne promulgata la Costituzione italiana?",
-            "answers": ["1946", "1948", "1950", "1962"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale fu il principale risultato del trattato di Maastricht?",
-            "answers": ["La nascita della NATO", "La fine della Guerra Fredda", "La creazione dell’Unione Europea", "L’introduzione dell’ONU"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quale civiltà antica è nota per la creazione delle ziggurat?",
-            "answers": ["Egizi", "Babilonesi", "Sumeri", "Fenici"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi erano i *Giacobini* durante la Rivoluzione Francese?",
-            "answers": ["Una famiglia nobile", "Un gruppo monarchico", "Un movimento rivoluzionario radicale", "Un ordine religioso"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi era il comandante spartano a Leuttra nel 371 a.C.?",
-            "answers": ["Agesilao", "Leonida", "Pelopida", "Epaminonda"],
-            "correctIndex": 3
-          },
-          {
-            "question": "In quale anno scoppiò la guerra tra Iran e Iraq?",
-            "answers": ["1978", "1980", "1982", "1985"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Qual era il nome della politica economica di Stalin negli anni '30?",
-            "answers": ["Piano Marshall", "Perestrojka", "Collettivizzazione", "NEP"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Che cos'è la Lega di Cambrai?",
-            "answers": ["Un'alleanza militare anti-ottomana", "Una coalizione europea contro Venezia", "Un trattato commerciale tra città tedesche", "Una lega religiosa medievale"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Che ruolo ebbe la Guerra di Secessione americana nel dibattito sulla schiavitù?",
-            "answers": ["Lo ignorò completamente", "La abolì nel Nord", "Fu una delle sue cause principali", "Confermò la schiavitù in tutti gli Stati"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quale civiltà precolombiana era centrata nella zona andina?",
-            "answers": ["Maya", "Azteca", "Inca", "Olmechi"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Cosa fu il Piano Marshall?",
-            "answers": ["Un piano sovietico di espansione", "Un progetto di industrializzazione giapponese", "Un programma USA di aiuti all’Europa", "Una riforma economica francese"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Chi fu il principale architetto della Realpolitik in Europa?",
-            "answers": ["Metternich", "Bismarck", "Disraeli", "Napoleone III"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Cosa prevedeva il trattato di Tordesillas del 1494?",
-            "answers": ["La fine della guerra tra Inghilterra e Spagna", "La spartizione del mondo tra Spagna e Portogallo", "La nascita del Commonwealth", "Il dominio francese in America"],
-            "correctIndex": 1
-          }
+    "correctIndex": 0
+  },
+  {
+    "question": "In cosa si distingue il pensiero politico di Machiavelli?",
+    "answers": [
+      "Rifiuta il diritto divino",
+      "Favorisce il repubblicanesimo",
+      "Rivendica l’autonomia del potere",
+      "Promuove la teocrazia civile"
     ],
-    "laureato": [
-        {
-            "question": "Quale fu l'impatto delle Riforme Cluniacensi sulla struttura della Chiesa medievale?",
-            "answers": ["Riduzione del potere papale", "Centralizzazione e moralizzazione del clero", "Abolizione del celibato", "Espansione della simonia"],
-            "correctIndex": 1
-          },
-          {
-            "question": "In che modo Machiavelli differisce dai pensatori politici medievali nel 'Il Principe'?",
-            "answers": ["Propone una politica guidata da principi religiosi", "Sostiene una visione pragmatica e secolare del potere", "Elabora una teocrazia monarchica", "Riprende le idee aristoteliche sulla polis"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Qual è la tesi centrale della 'teoria del sistema-mondo' di Immanuel Wallerstein?",
-            "answers": ["Lo sviluppo è isolato nelle economie nazionali", "La divisione del lavoro globale crea disuguaglianza strutturale", "L'egemonia culturale è l’unico motore storico", "Il sistema capitalistico è autoregolato e neutro"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale fu il ruolo del concilio di Trento nel contesto della Controriforma?",
-            "answers": ["Favorire l'espansione del protestantesimo", "Ridefinire la dottrina cattolica e rafforzare la disciplina ecclesiastica", "Sopprimere le indulgenze", "Creare una chiesa unificata cristiana"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quali elementi distinguono il dispotismo illuminato dai regimi assolutisti precedenti?",
-            "answers": ["Il ritorno al feudalesimo", "L'abbandono del potere centrale", "L'applicazione razionale del potere per il 'bene pubblico'", "Il divieto di riforme giuridiche"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quale fu l'effetto a lungo termine della 'Pace di Vestfalia' (1648) sull'Europa?",
-            "answers": ["Creazione del Sacro Romano Impero", "Consolidamento degli stati nazionali e principio di sovranità", "Fine delle monarchie assolute", "Inizio dell’Unione Europea"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Che significato ebbe il 'Decretum Gratiani' nel diritto canonico?",
-            "answers": ["Un trattato di diritto romano", "La codificazione e armonizzazione delle norme ecclesiastiche", "Un’enciclica papale", "Un editto contro le eresie"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Qual era l'obiettivo principale del movimento panslavista nel XIX secolo?",
-            "answers": ["Creare una confederazione balcanica cristiana", "Sostenere l'egemonia turca", "Favorire l'integrazione politica dei popoli slavi", "Espandere l’Impero Austro-Ungarico"],
-            "correctIndex": 2
-          },
-          {
-            "question": "In che modo l'opera di E.P. Thompson ha influenzato la storiografia sociale?",
-            "answers": ["Ha rifiutato l'analisi delle classi", "Ha introdotto una lettura simbolica della cultura popolare", "Ha posto attenzione sull'esperienza soggettiva della classe operaia", "Ha applicato il metodo positivista alla storia orale"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Cosa caratterizza il concetto di *Stato di eccezione* in Carl Schmitt?",
-            "answers": ["La temporanea sospensione del diritto da parte del Parlamento", "L’esercizio legale del potere da parte del popolo", "Il potere sovrano come colui che decide sullo stato d’eccezione", "L’impossibilità di legittimare la sovranità"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quali erano le caratteristiche dell'economia-mondo veneziana nel XV secolo?",
-            "answers": ["Autarchia e isolamento commerciale", "Controllo delle rotte tra Oriente e Occidente tramite monopoli e reti creditizie", "Colonialismo territoriale su larga scala", "Sviluppo industriale centralizzato"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale fu l'importanza storica della 'battaglia di Alesia' del 52 a.C.?",
-            "answers": ["Segnò la fine della guerra civile tra Cesare e Pompeo", "Consolidò il potere dei Galli", "Permise a Cesare di conquistare la Gallia", "Fu la prima sconfitta romana in Britannia"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Come si distingue l’impero persiano achemenide in termini amministrativi?",
-            "answers": ["Assenza di organizzazione centrale", "Sistema satrapico con forte autonomia locale ma controllo imperiale", "Democrazia partecipativa tra popoli soggetti", "Sistema tribale decentralizzato"],
-            "correctIndex": 1
-          },
-          {
-            "question": "In che modo l’Editto di Caracalla del 212 d.C. influenzò l’Impero Romano?",
-            "answers": ["Limitò i diritti civili agli italici", "Concesse la cittadinanza romana a tutti gli uomini liberi dell'impero", "Rinforzò la monarchia assoluta", "Eliminò il senato"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Che ruolo ebbe il *Samudaripen* nella memoria collettiva europea?",
-            "answers": ["Fu un piano di industrializzazione", "Fu lo sterminio sistematico dei Rom e Sinti da parte dei nazisti", "Un trattato economico", "La fine del dominio ottomano"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Cosa intendeva Gramsci per *egemonia culturale*?",
-            "answers": ["Il dominio economico esercitato tramite il mercato", "Il potere militare delle élite", "La capacità di una classe dirigente di ottenere consenso attraverso la cultura e le istituzioni", "La propaganda diretta del regime"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Qual era lo scopo del *Patto di Laterano* del 1929?",
-            "answers": ["Ridare territori al Papa", "Fondare la CEI", "Normalizzare i rapporti tra Stato Italiano e Chiesa cattolica", "Unire Vaticano e Italia"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Che tipo di sistema economico proponeva Saint-Simon?",
-            "answers": ["Capitalismo finanziario", "Anarchismo mutualista", "Socialismo tecnocratico e industriale", "Neoliberismo imperiale"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Perché la battaglia di Manzikert (1071) fu determinante?",
-            "answers": ["Permise ai crociati di entrare a Gerusalemme", "Portò alla caduta di Costantinopoli", "Aprì l’Anatolia ai Turchi Selgiuchidi", "Fu la fine dell’Impero Persiano"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Qual è il contributo metodologico di Marc Bloch alla storiografia?",
-            "answers": ["Ha introdotto la teoria marxista nella storia", "Ha fondato l’approccio positivista", "Ha promosso l’uso dell’interdisciplinarità e della lunga durata", "Ha creato l’idea di 'tempo ciclico'"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Come interpretò Hobsbawm il 'secolo breve'?",
-            "answers": ["Come il periodo dal 1789 al 1914", "Come l'era della rivoluzione digitale", "Come l'arco temporale tra il 1914 e il 1991", "Come l’età della colonizzazione"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Quale evento segnò la fine dell’Impero Carolingio?",
-            "answers": ["Il trattato di Verdun", "La battaglia di Tours", "La morte di Carlo Magno", "L’invasione dei Normanni"],
-            "correctIndex": 0
-          },
-          {
-            "question": "Cosa prevedeva la Constitutio de Feudis del 1037?",
-            "answers": ["La trasmissione ereditaria dei feudi minori", "L’obbligo del giuramento di vassallaggio", "La riforma della Chiesa", "Il diritto di primogenitura assoluta"],
-            "correctIndex": 0
-          },
-          {
-            "question": "Chi fu al centro della *Questione delle investiture*?",
-            "answers": ["Federico Barbarossa e il Papa", "Enrico IV e Gregorio VII", "Carlo Magno e Leone III", "Luigi IX e Innocenzo III"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Quale civiltà sviluppò il sistema numerico posizionale con lo zero?",
-            "answers": ["Greci", "Egizi", "Indiani", "Romani"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Cosa rappresenta la 'teoria della giustificazione della guerra' di Sant’Agostino?",
-            "answers": ["Un pacifismo assoluto", "Una dottrina militare", "Una teologia morale che legittima la guerra se giusta", "Una teoria utilitarista"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Che ruolo ebbe la Scuola di Salamanca nel pensiero economico?",
-            "answers": ["Difese l’economia feudale", "Ignorò le leggi di mercato", "Anticipò concetti di economia moderna come il valore soggettivo e i limiti dell’intervento statale", "Fu ostile al concetto di proprietà"],
-            "correctIndex": 2
-          },
-          {
-            "question": "Qual era l’obiettivo delle 95 tesi di Lutero?",
-            "answers": ["Condannare la monarchia inglese", "Riformare la Chiesa, criticando la vendita delle indulgenze", "Fondare il calvinismo", "Promuovere l'ateismo razionale"],
-            "correctIndex": 1
-          },
-          {
-            "question": "Come si configurava l’autorità politica nelle poleis greche classiche?",
-            "answers": ["Totalmente centralizzata nel re", "Separata dalla religione", "Partecipativa e articolata in organi collegiali", "Derivata dal diritto romano"],
-            "correctIndex": 2
-          }
-    ]
+    "correctIndex": 2
+  },
+  {
+    "question": "Che idea centrale propone la teoria del sistema-mondo?",
+    "answers": [
+      "Le economie sono autonome",
+      "Il lavoro è equamente diviso",
+      "Esiste un centro e una periferia",
+      "Tutti gli stati sono sovrani"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "question": "Qual fu il ruolo del Concilio di Trento?",
+    "answers": [
+      "Definì la dottrina cattolica",
+      "Soppresse gli ordini minori",
+      "Abolì i sacramenti inutili",
+      "Favorì l’eresia luterana"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa distingue il dispotismo illuminato?",
+    "answers": [
+      "Governa con riforme razionali",
+      "Mantiene il feudalesimo",
+      "Limita l’educazione popolare",
+      "Rinuncia al controllo fiscale"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa stabilì la Pace di Vestfalia?",
+    "answers": [
+      "Confermò i confini imperiali",
+      "Divise l’Impero Romano",
+      "Riconobbe la sovranità statale",
+      "Unificò le Chiese cristiane"
+    ],
+    "correctIndex": 2
+  },
+  {
+    "question": "A cosa servì il Decretum Gratiani?",
+    "answers": [
+      "Ordinò il diritto canonico",
+      "Modificò i riti religiosi",
+      "Riformò il clero regolare",
+      "Abolì le regole monastiche"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa voleva ottenere il panslavismo?",
+    "answers": [
+      "Unire i popoli slavi",
+      "Isolare la Russia zarista",
+      "Espandere l’Austria Ungheria",
+      "Sottomettere la Polonia"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa introdusse E.P. Thompson nella storiografia?",
+    "answers": [
+      "Valorizzò le classi popolari",
+      "Negò l’uso delle fonti",
+      "Privilegiò l’analisi giuridica",
+      "Rifiutò il contesto sociale"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa significa lo Stato d’eccezione per Schmitt?",
+    "answers": [
+      "Il governo popolare diretto",
+      "La sospensione della legge",
+      "L’obbligo alla neutralità",
+      "La rinuncia all’autorità"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "question": "Qual era la forza dell’economia veneziana?",
+    "answers": [
+      "Il commercio marittimo",
+      "Le rendite feudali",
+      "L’agricoltura padana",
+      "L’espansione coloniale"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa rappresentò Alesia nel 52 a.C.?",
+    "answers": [
+      "Fine della resistenza gallica",
+      "Conquista della Britannia",
+      "Inizio della guerra civile",
+      "Caduta del Senato romano"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa caratterizzava l’Impero achemenide?",
+    "answers": [
+      "Satrapie amministrate centralmente",
+      "Tribù autonome e isolate",
+      "Assenza di burocrazia stabile",
+      "Dominio basato sulla schiavitù"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa fece l’Editto di Caracalla?",
+    "answers": [
+      "Concesse la cittadinanza imperiale",
+      "Limitò l’accesso al Senato",
+      "Riformò l’esercito di Roma",
+      "Escluse i provinciali dal potere"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cos'è il Samudaripen?",
+    "answers": [
+      "Lo sterminio dei Rom nel nazismo",
+      "Il massacro degli Armeni",
+      "La diaspora ebraica medievale",
+      "La repressione dei Baschi"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa intendeva Gramsci per egemonia?",
+    "answers": [
+      "Consenso ottenuto tramite cultura",
+      "Potere basato sulla coercizione",
+      "Controllo economico assoluto",
+      "Rifiuto del pensiero dominante"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa sancì il Patto Lateranense?",
+    "answers": [
+      "Accordo tra Italia e Vaticano",
+      "Unificazione del clero italiano",
+      "Esilio del pontefice regnante",
+      "Abolizione dei Patti Leonini"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa proponeva Saint-Simon?",
+    "answers": [
+      "Industria come guida sociale",
+      "Proprietà terriera ereditaria",
+      "Feudalesimo riformato",
+      "Ritorno al baratto rurale"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Perché è importante Manzikert?",
+    "answers": [
+      "Permise l’ingresso turco in Anatolia",
+      "Fermò la crociata bizantina",
+      "Favorì l’ascesa dei Mongoli",
+      "Divise l’Impero persiano"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa apportò Marc Bloch alla storia?",
+    "answers": [
+      "Interdisciplinarità e lunga durata",
+      "Studio del diritto feudale",
+      "Teoria della storiografia narrativa",
+      "Analisi comparata delle religioni"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa intende Hobsbawm per 'secolo breve'?",
+    "answers": [
+      "Dal 1914 al 1991",
+      "Dal 1789 al 1870",
+      "Dal 1900 al 1950",
+      "Dal 1848 al 1945"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa accadde con il Trattato di Verdun?",
+    "answers": [
+      "Divise l’Impero carolingio",
+      "Unificò l’Italia centrale",
+      "Creò l’Impero bizantino",
+      "Abolì il diritto di successione"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa prevedeva la Constitutio de Feudis?",
+    "answers": [
+      "Ereditarietà dei feudi minori",
+      "Esclusione dei feudatari minori",
+      "Divisione dei beni imperiali",
+      "Tasse dirette ai contadini"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Chi erano i protagonisti delle Investiture?",
+    "answers": [
+      "Enrico IV e Gregorio VII",
+      "Carlo Magno e Leone III",
+      "Giustiniano e Teodosio",
+      "Innocenzo III e Ottone I"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Chi sviluppò il sistema posizionale con zero?",
+    "answers": [
+      "Gli Indiani",
+      "I Greci",
+      "Gli Egizi",
+      "I Fenici"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa stabilisce Agostino sulla guerra?",
+    "answers": [
+      "La guerra può essere giusta",
+      "È sempre moralmente vietata",
+      "Va combattuta per fede",
+      "Non riguarda i cristiani"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa fece la Scuola di Salamanca?",
+    "answers": [
+      "Rifletté sul valore e sul prezzo",
+      "Rifiutò il commercio estero",
+      "Condannò la proprietà privata",
+      "Difese la schiavitù atlantica"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Cosa volevano le 95 tesi di Lutero?",
+    "answers": [
+      "Criticare le indulgenze",
+      "Difendere la gerarchia",
+      "Riformare la Bibbia",
+      "Unificare le Chiese"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "question": "Come era organizzata la polis greca?",
+    "answers": [
+      "Basata su istituzioni collettive",
+      "Gestita da un sovrano unico",
+      "Sottomessa al clero locale",
+      "Retta da forze mercenarie"
+    ],
+    "correctIndex": 0
+  }
+]
   },
   "Geografia": {
     "bambino": [
@@ -1503,7 +1938,7 @@
           },
           {
             "question": "Cos’è il 'gradiente adiabatico'?",
-            "answers": ["Il tasso di variazione della temperatura con l’altitudine", "La variazione del vento in una valle", "La dispersione della pioggia lungo una montagna", "La densità dell’atmosfera terrestre"],
+            "answers": ["La variazione della temperatura con l’altitudine", "La variazione del vento in una valle", "La dispersione della pioggia lungo una montagna", "La densità dell’atmosfera terrestre"],
             "correctIndex": 0
           },
           {
@@ -1573,7 +2008,7 @@
           },
           {
             "question": "Cos’è un estuario?",
-            "answers": ["Un’isola fluviale", "La foce a delta", "La foce a imbuto di un fiume", "Un ramo secondario del fiume"],
+            "answers": ["Un’isola fluviale", "La foce a delta di un fiume", "La foce a imbuto di un fiume", "Un ramo secondario del fiume"],
             "correctIndex": 2
           },
           {
@@ -1593,12 +2028,17 @@
           },
           {
             "question": "Cos'è un tombolo?",
-            "answers": ["Un tipo di delta", "Un istmo sabbioso che collega un'isola alla costa", "Un antico letto fluviale", "Una conca glaciofluviale"],
-            "correctIndex": 1
+  "answers": [
+    "Una formazione sabbiosa tra due masse",
+    "Un cordone che collega terra e isola",
+    "Un rilievo creato da correnti marine",
+    "Una lingua di sabbia tra due coste"
+  ],
+  "correctIndex": 1
           },
           {
             "question": "Che cos’è una 'isobara' in meteorologia?",
-            "answers": ["Una linea di uguale temperatura", "Una linea di uguale pressione atmosferica", "Una zona di alta pressione", "Un fronte freddo"],
+            "answers": ["Una linea di uguale temperatura", "Una linea di uguale pressione atmosferica", "Una zona di alta pressione atmosferica", "Un fronte freddo"],
             "correctIndex": 1
           },
           {
@@ -2652,7 +3092,7 @@
         },
         {
           "question": "Che cos’è un microscopio?",
-          "answers": ["Un tipo di computer", "Uno strumento per ascoltare", "Uno strumento per vedere cose piccole", "Una macchina fotografica"],
+          "answers": ["Un tipo di computer", "Uno strumento per ascoltare la radio", "Uno strumento per vedere cose piccole", "Una macchina fotografica"],
           "correctIndex": 2
         },
         {
@@ -2729,7 +3169,7 @@
     },
     {
       "question": "Qual è la funzione dei globuli bianchi?",
-      "answers": ["Trasportare ossigeno", "Digestione", "Proteggere dalle infezioni", "Formare ossa"],
+      "answers": ["Trasportare ossigeno", "Favorire la digestione", "Difendere l'organismo", "Costruire il tessuto osseo"],
       "correctIndex": 2
     },
     {
@@ -2744,7 +3184,7 @@
     },
     {
       "question": "Cosa sono gli asteroidi?",
-      "answers": ["Stelle cadenti", "Corpi rocciosi che orbitano nel Sistema Solare", "Piccoli pianeti", "Meteoriti che colpiscono la Terra"],
+      "answers": ["Stelle cadenti", "rocce spaziali in orbita", "Piccoli pianeti solidi", "masse rocciose cadute sulla terra"],
       "correctIndex": 1
     },
     {
@@ -2764,7 +3204,7 @@
     },
     {
       "question": "Cosa indica la biodiversità?",
-      "answers": ["La quantità di foreste", "La varietà delle forme di vita", "La qualità dell’acqua", "La purezza dell’aria"],
+      "answers": ["La quantità di foreste in una determinata area", "La varietà delle forme di vita", "La qualità dell’acqua in natura", "La purezza dell’aria"],
       "correctIndex": 1
     },
     {
@@ -2814,7 +3254,7 @@
     },
     {
       "question": "Quale fenomeno provoca le stagioni sulla Terra?",
-      "answers": ["La distanza dal Sole", "L'inclinazione dell'asse terrestre", "La rotazione della Terra", "La Luna"],
+      "answers": ["La distanza della Terra dal Sole", "L'inclinazione dell'asse terrestre", "La rotazione della Terra", "La rotazione della Luna"],
       "correctIndex": 1
     },
     {
@@ -2837,10 +3277,10 @@
     {
       "question": "Cosa descrive la seconda legge della termodinamica?",
       "answers": [
-        "L'energia si conserva",
-        "Il calore fluisce spontaneamente da un corpo caldo a uno freddo",
+        "L'energia si conserva rimanendo invariata",
+        "Il calore fluisce da un corpo caldo a uno freddo",
         "La quantità di moto è costante",
-        "Tutte le forze sono uguali e contrarie"
+        "Tutte le forze in natura sono uguali e contrarie"
       ],
       "correctIndex": 1
     },
@@ -2863,9 +3303,9 @@
       "question": "In chimica, cos'è un isotopo?",
       "answers": [
         "Una molecola ionizzata",
-        "Un atomo con stesso numero di protoni ma diverso numero di neutroni",
-        "Un gas nobile",
-        "Una molecola con doppio legame"
+        "Un atomo con stesso numero di protoni ma diverso di neutroni",
+        "Un gas inerte presente nella tavola periodica",
+        "Una molecola con un doppio legame covalente"
       ],
       "correctIndex": 1
     },
@@ -2892,10 +3332,10 @@
     {
       "question": "Cosa misura l’indice di rifrazione?",
       "answers": [
-        "La trasparenza di un materiale",
+        "Il grado di trasparenza di un materiale",
         "La velocità della luce in un materiale rispetto al vuoto",
         "La capacità di assorbire radiazioni",
-        "La lunghezza d’onda di un’onda"
+        "La distanza tra due creste successive di un'onda luminosa"
       ],
       "correctIndex": 1
     },
@@ -2924,7 +3364,7 @@
       "answers": [
         "Il buco nell’ozono",
         "L’energia solare riflessa dalla Luna",
-        "L’accumulo di gas come CO2 nell’atmosfera",
+        "L’accumulo di CO2 nell’atmosfera",
         "Il campo magnetico terrestre"
       ],
       "correctIndex": 2
@@ -2953,7 +3393,7 @@
       "question": "Cos’è una mutazione genetica?",
       "answers": [
         "Un errore nella replicazione del DNA",
-        "Una malattia",
+        "Un'evoluzione della specie'",
         "Una trasformazione della cellula",
         "Un’infezione da virus"
       ],
@@ -2983,9 +3423,9 @@
       "question": "Cos'è un ecosistema?",
       "answers": [
         "Una zona geografica con un solo tipo di clima",
-        "L'insieme di organismi e ambiente che interagiscono",
-        "Un insieme di cellule viventi",
-        "Una catena alimentare completa"
+        "L'insieme di organismi che interagiscono in un ambiente",
+        "Ungruppo di cellule che svolgono la stessa funzione",
+        "Una rete chiusa di predatori e prede in equilibrio"
       ],
       "correctIndex": 1
     },
@@ -2997,10 +3437,10 @@
     {
       "question": "Cos'è la litosfera?",
       "answers": [
-        "Il nucleo interno della Terra",
+        "Il nucleo più profondo della Terra",
         "La parte liquida del mantello",
-        "La parte solida più esterna della Terra",
-        "Lo strato d'ozono"
+        "La parte più esterna della Terra",
+        "Una fascia di gas che protegge dagli ultravioletti"
       ],
       "correctIndex": 2
     },
@@ -3029,7 +3469,7 @@
       "answers": [
         "C'è uno scambio di protoni",
         "Si forma una soluzione acida",
-        "Avviene un trasferimento di elettroni",
+        "C'è un trasferimento di elettroni",
         "Si rompe un legame ionico"
       ],
       "correctIndex": 2
@@ -3086,7 +3526,7 @@
       "answers": [
         "La forza elettrica tra due cariche",
         "Il flusso del campo elettrico attraverso una superficie",
-        "La densità di carica",
+        "La quantità di carica per unità di volume",
         "La capacità elettrica di un condensatore"
       ],
       "correctIndex": 1
@@ -3100,9 +3540,9 @@
       "question": "Qual è il ruolo della topoisomerasi nella replicazione del DNA?",
       "answers": [
         "Taglia e riunisce il DNA per prevenire tensioni nel filamento",
-        "Sintetizza i frammenti di Okazaki",
+        "Inizia la sintesi dei frammenti di Okazaki sulla catena lagging tramite RNA primer",
         "Riconosce sequenze promotrici",
-        "Incorpora i nucleotidi"
+        "Rimuove i legami a idrogeno tra le basi azotate per separare i filamenti di DNA"
       ],
       "correctIndex": 0
     },
@@ -3125,9 +3565,9 @@
       "question": "La legge di Lambert-Beer si applica a quale fenomeno?",
       "answers": [
         "Assorbimento della luce in una soluzione",
-        "Diffrazione della luce",
+        "Deviazione della luce in una fenditura",
         "Emissione di fotoni",
-        "Interferenza luminosa"
+        "Sovrapposizione di onde luminose"
       ],
       "correctIndex": 0
     },
@@ -3135,9 +3575,9 @@
       "question": "Qual è la differenza tra una reazione esotermica e una endotermica?",
       "answers": [
         "L’esotermica libera calore, l’endotermica lo assorbe",
-        "Una coinvolge elettroni, l’altra no",
-        "Una è chimica, l’altra fisica",
-        "Una è reversibile, l’altra no"
+        "L'esotermica coinvolge elettroni, l’endotermica no",
+        "L'esotermica è chimica, l’endotermica è fisica",
+        "L'esotermica è reversibile, l’endotermica no"
       ],
       "correctIndex": 0
     },
@@ -3145,9 +3585,9 @@
       "question": "Il principio di esclusione di Pauli afferma che:",
       "answers": [
         "Due elettroni non possono avere lo stesso stato quantico",
-        "L’energia si conserva",
+        "L’energia totale in un sistema isolato rimane costante nel tempo",
         "Le orbite sono quantizzate",
-        "Un elettrone può occupare più orbitali"
+        "Un elettrone può occupare più orbitali contemporaneamente"
       ],
       "correctIndex": 0
     },
@@ -3164,20 +3604,20 @@
     {
       "question": "In astrofisica, cosa rappresenta il limite di Chandrasekhar?",
       "answers": [
-        "Il massimo raggio di un buco nero",
+        "La dimensione oltre cui un buco nero non può rimanere stabile",
         "La soglia oltre la quale una nana bianca collassa in una stella di neutroni",
-        "La distanza massima osservabile",
-        "Il tempo che impiega la luce a uscire da un buco nero"
+        "La distanza massima raggiungibile da un telescopio ottico",
+        "Il tempo limite per cui la luce può essere emessa prima dell’orizzonte degli eventi"
       ],
       "correctIndex": 1
     },
     {
       "question": "Cos’è una molecola chirale?",
       "answers": [
-        "Una molecola simmetrica",
-        "Una molecola con un doppio legame",
+        "Una molecola con simmetria planare e sovrapponibile al suo specchio",
+        "Una molecola con un doppio legame carbonio-carbonio",
         "Una molecola non sovrapponibile alla sua immagine speculare",
-        "Una molecola con carica elettrica netta"
+        "Una molecola che possiede una distribuzione di carica elettrica sbilanciata"
       ],
       "correctIndex": 2
     },
@@ -3190,9 +3630,9 @@
       "question": "Cosa rappresenta il numero di Avogadro?",
       "answers": [
         "La massa di un protone",
-        "Il numero di molecole in una mole di sostanza",
+        "Il numero di molecole in una mole",
         "Il peso atomico di un elemento",
-        "La costante dei gas"
+        "Una costante utilizzata per descrivere il comportamento dei gas ideali"
       ],
       "correctIndex": 1
     },
@@ -3209,10 +3649,10 @@
     {
       "question": "Che cosa descrive la costante di Michaelis-Menten (Km)?",
       "answers": [
-        "La velocità massima della reazione",
+        "Il valore massimo che la velocità di reazione può raggiungere in presenza di substrato saturo",
         "La concentrazione di substrato alla quale l’enzima lavora alla metà della velocità massima",
-        "La quantità di enzima presente",
-        "Il pH ottimale dell’enzima"
+        "La quantità totale di enzima disponibile nel sistema di reazione",
+        "Il livello di acidità al quale l’attività enzimatica è più efficiente"
       ],
       "correctIndex": 1
     },
@@ -3259,10 +3699,10 @@
     {
       "question": "Cosa determina la polarità di una molecola?",
       "answers": [
-        "Il numero totale di atomi",
+        "Il numero totale di atomi presenti nella struttura molecolare",
         "La simmetria e la differenza di elettronegatività",
-        "Il colore",
-        "La massa atomica"
+        "Il colore in presenza di luce visibile",
+        "La massa atomic della molecola"
       ],
       "correctIndex": 1
     },
@@ -3270,7 +3710,7 @@
       "question": "Cosa descrive la legge di Hardy-Weinberg?",
       "answers": [
         "L’equilibrio genetico in una popolazione",
-        "La deriva genetica",
+        "La deriva genetica in una popolazione",
         "La selezione naturale",
         "La mutazione spontanea"
       ],
@@ -3672,7 +4112,7 @@
           },
           {
             "question": "Cos'è un crescendo?",
-            "answers": ["Una pausa improvvisa", "Un aumento graduale del volume", "Un rallentamento", "Un cambio di tonalità"],
+            "answers": ["Una pausa improvvisa", "Un aumento graduale del volume", "Un rallentamento graduale del volume", "Un cambio di tonalità"],
             "correctIndex": 1
           },
           {
@@ -3916,7 +4356,7 @@
     },
     {
       "question": "Che cos'è un cluster in musica contemporanea?",
-      "answers": ["Un insieme casuale di suoni", "Una nota prolungata", "Un insieme di note adiacenti", "Un effetto elettronico"],
+      "answers": ["Un insieme casuale di suoni intonati", "Una nota prolungata", "Un insieme di note adiacenti", "Un effetto elettronico con la chitarra"],
       "correctIndex": 2
     },
     {
@@ -3951,7 +4391,7 @@
     },
     {
       "question": "Cosa si intende per 'modulazione enharmonica'?",
-      "answers": ["Modulazione tra tonalità relative", "Modulazione tramite un accordo alterato", "Modulazione che usa suoni equivalenti con nomi diversi", "Modulazione per cadenza"],
+      "answers": ["Modulazione tra tonalità strettamente correlate", "Modulazione tramite un accordo alterato", "Modulazione che usa suoni equivalenti con nomi diversi", "Modulazione realizzata con una cadenza specifica"],
       "correctIndex": 2
     },
     {
@@ -4026,7 +4466,7 @@
     },
     {
       "question": "Cos’è un’interferenza battente?",
-      "answers": ["Battuta sincopata", "Due suoni vicini che generano una vibrazione", "Effetto eco", "Ritardo del suono"],
+      "answers": ["Un tipo di battuta sincopata", "Due suoni vicini che generano una vibrazione", "Un fenomeno di riflessione del suono che produce eco", "Un ritardo nel tempo di propagazione del suono"],
       "correctIndex": 1
     },
     {
@@ -4647,7 +5087,7 @@
       },
       {
         "question": "Cosa si intende per 'iperromanzo' secondo Umberto Eco?",
-        "answers": ["Un romanzo con molteplici livelli narrativi e percorsi di lettura", "Un'opera enciclopedica", "Un romanzo in versi", "Un libro scritto a più mani"],
+        "answers": ["Un romanzo con molteplici livelli narrativi e percorsi di lettura", "Un'opera che raccoglie molte informazioni e conoscenze", "Un romanzo in versi", "Un libro scritto a più mani da diversi autori"],
         "correctIndex": 0
       },
       {
@@ -4669,7 +5109,7 @@
       },
       {
         "question": "Cosa intende T.S. Eliot con il concetto di 'correlativo oggettivo'?",
-        "answers": ["Un insieme di oggetti, situazioni o eventi che evocano una particolare emozione", "La critica impersonale dell'autore", "La struttura interna del poema", "Un concetto simbolista ricorrente"],
+        "answers": ["Un insieme di oggetti, situazioni o eventi che evocano una particolare emozione", "La critica impersonale dell'autore", "La forma e lastruttura interna del poema", "Un concetto simbolista ricorrente"],
         "correctIndex": 0
       },
       {
@@ -4679,7 +5119,7 @@
       },
       {
         "question": "Che cos'è l'intertestualità secondo Julia Kristeva?",
-        "answers": ["Il tessuto di relazioni tra testi diversi", "La parodia letteraria", "La reinterpretazione critica", "La sovrascrittura narrativa"],
+        "answers": ["Il tessuto di relazioni tra testi diversi", "una forma di imitazione letteraria", "La reinterpretazione critica", "La sovrascrittura narrativa"],
         "correctIndex": 0
       },
       {
@@ -4729,7 +5169,7 @@
       },
       {
         "question": "Che ruolo ha la 'straniamento' (ostranenie) nella poetica di Šklovskij?",
-        "answers": ["Rendere familiare l’estraneo per rinnovare la percezione", "Abbellire il linguaggio poetico", "Eliminare il contenuto ideologico", "Semantizzare la forma poetica"],
+        "answers": ["Rendere familiare l’estraneo per rinnovare la percezione", "Abbellire il linguaggio poetico con figure retoriche e metafore", "Eliminare il contenuto ideologico per mantenere l'arte pura", "Semantizzare la forma poetica"],
         "correctIndex": 0
       },
       {
@@ -5415,7 +5855,7 @@
       },
       {
         "question": "Il rango di una matrice è:",
-        "answers": ["Il numero di righe", "Il numero massimo di righe linearmente indipendenti", "Il numero di colonne", "Il numero di zeri"],
+        "answers": ["Il numero di elementi non nulli nella matrice", "Il numero massimo di righe linearmente indipendenti", "La somma degli elementi diagonali", "Il numero di colonne con almeno un elemento zero"],
         "correctIndex": 1
       }
     ],
@@ -5462,7 +5902,7 @@
       },
       {
         "question": "Il polinomio minimo di una matrice quadrata A è:",
-        "answers": ["Il polinomio di grado minimo che annulla A", "Il determinante", "Il tracciato", "La trasposizione"],
+        "answers": ["Il polinomio di grado minimo che annulla A", "Il determinante", "La somma degli elementi sulla diagonale principale di A", "La matrice ottenuta invertendo le righe e le colonne di A"],
         "correctIndex": 0
       },
       {
@@ -5477,7 +5917,7 @@
       },
       {
         "question": "Il teorema di Cauchy-Riemann è necessario per:",
-        "answers": ["Analiticità di una funzione complessa", "Convergenza uniforme", "Continuità", "Esistenza di un integrale"],
+        "answers": ["Analiticità di una funzione complessa", "La convergenza uniforme di una serie di funzioni", "La continuità della funzione in un punto", "L'esistenza di un integrale"],
         "correctIndex": 0
       },
       {
@@ -5497,7 +5937,7 @@
       },
       {
         "question": "Il rango di una matrice coincide con:",
-        "answers": ["Il numero massimo di righe linearmente indipendenti", "Il numero di colonne", "Il determinante", "Il numero di elementi nulli"],
+        "answers": ["Il numero massimo di righe linearmente indipendenti", "Il numero totale di righe e di colonne", "Il valore assoluto del determinante", "Il numero di elementi nulli"],
         "correctIndex": 0
       },
       {
@@ -5512,7 +5952,7 @@
       },
       {
         "question": "Il metodo di Gauss-Jordan serve per:",
-        "answers": ["Risoluzione di sistemi lineari", "Calcolo di derivate", "Integrazione numerica", "Trovare autovalori"],
+        "answers": ["Risoluzione di sistemi lineari", "Calcolo di derivate di funzioni complesse", "Integrazione numerica di equazioni differenziali", "Trovare autovalori di una matrice"],
         "correctIndex": 0
       },
       {
@@ -5522,7 +5962,7 @@
       },
       {
         "question": "Una funzione è continua se:",
-        "answers": ["Il limite coincide con il valore della funzione", "Esiste la derivata", "È limitata", "È crescente"],
+        "answers": ["Il limite coincide con il valore della funzione", "La funzione è derivabile in quel punto", "Ha valori finiti in tutto l'intervallo", "La funzione è monotona crescente nel punto"],
         "correctIndex": 0
       },
       {
@@ -5739,7 +6179,7 @@
     },
     {
       "question": "Cosa significa che un materiale è conduttore?",
-      "answers": ["Fa passare l'elettricità", "Assorbe la luce", "Diventa caldo", "Si rompe facilmente"],
+      "answers": ["Fa passare l'elettricità", "Assorbe la luce", "Diventa caldo", "Si rompe facilmente se cade"],
       "correctIndex": 0
     },
     {
@@ -5864,7 +6304,7 @@
     },
     {
       "question": "In quale direzione agisce la forza di gravità?",
-      "answers": ["Verso l’alto", "In diagonale", "Verso il centro della Terra", "Verso il Sole"],
+      "answers": ["Verso il cielo", "Verso Napoli", "Verso il centro della Terra", "Verso il Sole"],
       "correctIndex": 2
     },
     {
@@ -5888,8 +6328,8 @@
       "question": "Cosa dice la prima legge della dinamica di Newton?",
       "answers": [
         "A ogni azione corrisponde una reazione uguale e contraria",
-        "Un corpo in moto rimane in moto se non agiscono forze esterne",
-        "La forza è uguale a massa per accelerazione",
+        "Un corpo rimane in moto se non agiscono forze esterne",
+        "La forza è proporzionale alla massa e all'accelerazione",
         "La massa è costante nel tempo"
       ],
       "correctIndex": 1
@@ -5901,7 +6341,7 @@
     },
     {
       "question": "Cos’è il lavoro in fisica?",
-      "answers": ["La quantità di energia spesa per muovere un oggetto", "Il numero di oggetti spostati", "Il tempo necessario a finire un compito", "La potenza esercitata da un corpo"],
+      "answers": ["La quantità di energia per muovere un oggetto", "Il numero di oggetti spostati in un determinato tempo", "Il tempo necessario a finire un compito", "La potenza esercitata da un corpo"],
       "correctIndex": 0
     },
     {
@@ -5926,7 +6366,7 @@
     },
     {
       "question": "Cos’è una trasformazione fisica?",
-      "answers": ["Una reazione chimica", "Una variazione dello stato della materia", "La produzione di energia", "La combustione"],
+      "answers": ["Una reazione chimica", "Una variazione dello stato della materia", "La produzione di energia", "La combustione di un corpo"],
       "correctIndex": 1
     },
     {
@@ -5946,7 +6386,7 @@
     },
     {
       "question": "Cos’è l’energia potenziale gravitazionale?",
-      "answers": ["Energia di un oggetto in moto", "Energia dovuta all’altezza rispetto al suolo", "Energia termica", "Energia elettrica in un circuito"],
+      "answers": ["Energia di un oggetto in moto", "Energia dovuta all’altezza rispetto al suolo", "Energia derivante dalla temperatura di un corpo", "Energia elettrica prodotta in un circuito"],
       "correctIndex": 1
     },
     {
@@ -5966,7 +6406,7 @@
     },
     {
       "question": "Quale dei seguenti fenomeni è un esempio di conduzione termica?",
-      "answers": ["Il Sole che scalda la Terra", "Il calore che passa attraverso una pentola", "L’aria calda che sale", "Una lampadina accesa"],
+      "answers": ["Il calore che arriva dal Sole alla Terra tramite radiazione", "Il calore che passa attraverso una pentola", "L’aria calda che sale", "Una lampadina accesa"],
       "correctIndex": 1
     },
     {
@@ -6098,7 +6538,7 @@
     },
     {
       "question": "Che cosa si conserva in un urto completamente elastico?",
-      "answers": ["Solo la quantità di moto", "Solo l'energia cinetica", "Quantità di moto e energia cinetica", "Solo la massa"],
+      "answers": ["Solo la quantità di moto", "La massa e l'energia cinetica", "Quantità di moto e energia cinetica", "La Quantità di moto e la massa"],
       "correctIndex": 2
     },
     {
@@ -6133,7 +6573,7 @@
     },
     {
       "question": "La legge di Stefan-Boltzmann lega:",
-      "answers": ["Pressione e temperatura", "Energia e massa", "Potenza irradiata e temperatura alla quarta potenza", "Energia e lunghezza d’onda"],
+      "answers": ["Pressione e temperatura", "Energia e massa secondo la relazione di Einstein", "Potenza irradiata e temperatura alla quarta potenza", "Energia e lunghezza d’onda nella radiazione elettromagnetica"],
       "correctIndex": 2
     },
     {
@@ -6153,8 +6593,13 @@
     },
     {
       "question": "Il principio di Archimede afferma che:",
-      "answers": ["La pressione in un liquido è uniforme", "Un corpo immerso in un fluido riceve una spinta verso l’alto pari al peso del fluido spostato", "I corpi galleggiano sempre", "L’acqua è incomprimibile"],
-      "correctIndex": 1
+      "answers": [
+    "La pressione esercitata da un liquido dipende dalla sua temperatura",
+    "Un corpo immerso riceve una spinta verso l’alto pari al peso del fluido spostato",
+    "Il volume di un corpo immerso in acqua rimane costante",
+    "I liquidi esercitano una pressione uguale in tutte le direzioni"
+  ],
+        "correctIndex": 1
     },
     {
       "question": "In una trasmissione di calore per convezione:",
@@ -6282,8 +6727,8 @@
       "question": "Il teorema di Noether collega:",
       "answers": [
         "Simmetrie e leggi di conservazione",
-        "Momento e energia",
-        "Campo elettrico e potenziale",
+        "Momento e energia cinetica",
+        "Campo elettrico e energia potenziale",
         "Temperatura e entropia"
       ],
       "correctIndex": 0
@@ -6383,7 +6828,7 @@
       "answers": [
         "Trovare stime per l'energia del ground state",
         "Calcolare l'energia potenziale",
-        "Determinare la probabilità di misura",
+        "Determinare la probabilità di ottenere un certo risultato in una misura",
         "Misurare lo spin"
       ],
       "correctIndex": 0
@@ -6423,8 +6868,8 @@
       "answers": [
         "Interazione tra elettroni e reticolo periodico",
         "Velocità della luce",
-        "Campo elettrico esterno",
-        "Spin orbit coupling"
+        "Effetto di un campo elettrico esterno applicato",
+        "Accoppiamento tra spin ed orbitale degli elettroni"
       ],
       "correctIndex": 0
     },
