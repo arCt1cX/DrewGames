@@ -7144,7 +7144,7 @@
         "Per cancellare il testo",
         "Per andare a capo o confermare un comando",
         "Per spegnere il computer",
-        "Per aprire il browser"
+        "Per aprire il browser in maniera automatica"
       ],
       "correctIndex": 1
     }
@@ -7166,7 +7166,7 @@
         "Gestire l'hardware e il software",
         "Navigare su internet",
         "Modificare le immagini",
-        "Giocare ai videogiochi"
+        "Permettere di giocare ai videogiochi"
       ],
       "correctIndex": 0
     },
@@ -7185,7 +7185,7 @@
       "answers": [
         "Un tipo di virus",
         "Un file video",
-        "Un formato di documento leggibile su molti dispositivi",
+        "Un formato di documento",
         "Un file audio"
       ],
       "correctIndex": 2
@@ -7205,7 +7205,7 @@
       "answers": [
         "Un programma di disegno",
         "Uno spazio di archiviazione online",
-        "Un tipo di computer",
+        "Un tipo di computer avanzato",
         "Un motore di ricerca"
       ],
       "correctIndex": 1
@@ -7213,9 +7213,9 @@
     {
       "question": "Cosa fa un antivirus?",
       "answers": [
-        "Aumenta la velocità del computer",
+        "Aumenta temporaneamente le prestazioni del computer",
         "Protegge il computer da software dannosi",
-        "Rimuove file inutili",
+        "Rimuove tutti i file inutili",
         "Installa programmi"
       ],
       "correctIndex": 1
@@ -7224,9 +7224,9 @@
       "question": "Cos'è una rete Wi-Fi?",
       "answers": [
         "Un cavo per la corrente",
-        "Un tipo di tastiera",
+        "Un tipo di antenna per la televisione",
         "Una rete wireless per collegarsi a Internet",
-        "Un'applicazione di chat"
+        "Un'applicazione che consente di ricevere messaggi gratuiti"
       ],
       "correctIndex": 2
     },
@@ -7234,7 +7234,7 @@
       "question": "Che cosa si intende per 'app'?",
       "answers": [
         "Un cavo USB",
-        "Un tipo di hardware",
+        "Un tipo di hardware utilizzato per far funzionare il computer",
         "Un programma per svolgere una funzione specifica",
         "Una parte del mouse"
       ],
@@ -7283,9 +7283,9 @@
     {
       "question": "Cos'è un 'bug' in informatica?",
       "answers": [
-        "Un virus",
+        "Un virus dannoso",
         "Un errore nel codice o nel software",
-        "Un programma utile",
+        "Un insetto nell'hardware",
         "Una protezione per il computer"
       ],
       "correctIndex": 1
@@ -7294,26 +7294,26 @@
       "question": "A cosa serve il tasto 'Ctrl' sulla tastiera?",
       "answers": [
         "Serve per fare combinazioni con altri tasti",
-        "Cancella il testo",
-        "Accende il computer",
-        "Controlla il volume"
+        "Cancella il carattera alla sinistra del cursore",
+        "inrterrompe l'alimentazione del computer",
+        "Controlla il volume audio"
       ],
       "correctIndex": 0
     },
     {
       "question": "Cosa indica il simbolo @ in un indirizzo email?",
       "answers": [
-        "Un errore",
+        "Un errore di sintassi",
         "Separazione tra utente e dominio",
         "Il nome del file",
-        "Una cartella"
+        "Distingue tra cartella e sottocartella"
       ],
       "correctIndex": 1
     },
     {
       "question": "Cos'è un backup?",
       "answers": [
-        "Un tipo di virus",
+        "Un tipo di virus malevolo",
         "Una copia di sicurezza dei dati",
         "Un programma di grafica",
         "Un'estensione video"
@@ -7323,9 +7323,9 @@
     {
       "question": "Qual è lo scopo di un firewall?",
       "answers": [
-        "Disegnare sullo schermo",
+        "Disegnare un muro di fuoco sullo schermo",
         "Controllare gli accessi alla rete",
-        "Scaricare file",
+        "Scaricare file molto grandi",
         "Fare ricerche su Internet"
       ],
       "correctIndex": 1
@@ -7345,8 +7345,8 @@
       "answers": [
         "Ripara computer",
         "Scrive codice per far funzionare i programmi",
-        "Vende software",
-        "Gioca ai videogiochi"
+        "Vende software ai bambini",
+        "Gioca ai videogiochi con mouse e tastiera"
       ],
       "correctIndex": 1
     },
@@ -7363,9 +7363,9 @@
     {
       "question": "Cosa significa 'scaricare un file'?",
       "answers": [
-        "Cancellarlo",
+        "Cancellarlo dal computer",
         "Spedirlo per email",
-        "Salvare una copia sul proprio dispositivo",
+        "Salvarlo sul proprio dispositivo",
         "Aprirlo nel browser"
       ],
       "correctIndex": 2
@@ -7393,10 +7393,10 @@
     {
       "question": "Che cos'è una cartella sul computer?",
       "answers": [
-        "Un programma",
+        "Un programma che esegue operazioni",
         "Un file video",
         "Uno spazio per organizzare file",
-        "Una stampante"
+        "Una stampante wireless"
       ],
       "correctIndex": 2
     },
@@ -7414,9 +7414,9 @@
       "question": "Cosa fa un motore di ricerca?",
       "answers": [
         "Aiuta a trovare informazioni su Internet",
-        "Disegna immagini",
-        "Scrive documenti",
-        "Riproduce musica"
+        "Fornisce strumenti di disegno grafico",
+        "Crea e modifica documenti di testo",
+        "Gestisce la riproduzione di file multimediali"
       ],
       "correctIndex": 0
     },
@@ -7424,9 +7424,9 @@
       "question": "Cos'è un'applicazione mobile?",
       "answers": [
         "Un programma per smartphone o tablet",
-        "Un virus per PC",
+        "Un virus per telefono",
         "Un file di testo",
-        "Un browser"
+        "Un browser che si può aprire solo da telefono"
       ],
       "correctIndex": 0
     },
@@ -7444,8 +7444,8 @@
       "question": "Cosa significa 'aggiornare' un programma?",
       "answers": [
         "Eliminare il programma",
-        "Scaricare una versione più recente",
-        "Cambiare il nome",
+        "Scaricare la versione più recente",
+        "Cambiare il nome del programma",
         "Chiudere il programma"
       ],
       "correctIndex": 1
@@ -7457,7 +7457,7 @@
       "answers": [
         "Un tipo di file immagine",
         "Un indirizzo numerico che identifica un dispositivo in rete",
-        "Una password",
+        "È una chiave d’accesso per proteggere un sistema",
         "Un programma di grafica"
       ],
       "correctIndex": 1
@@ -7466,9 +7466,9 @@
       "question": "Qual è la funzione del DNS?",
       "answers": [
         "Tradurre nomi di dominio in indirizzi IP",
-        "Controllare la velocità del Wi-Fi",
-        "Bloccare siti pericolosi",
-        "Memorizzare file temporanei"
+        "Monitorare le prestazioni della connessione internet",
+        "Filtrare automaticamente contenuti indesiderati",
+        "Gestire la cache dei browser web"
       ],
       "correctIndex": 0
     },
@@ -7486,9 +7486,9 @@
       "question": "Cosa fa il comando 'ping'?",
       "answers": [
         "Invia una richiesta a un server per verificarne la raggiungibilità",
-        "Controlla la memoria RAM",
+        "Controlla lo spazio libero su disco",
         "Chiude tutte le applicazioni",
-        "Installa un software"
+        "Aggiorna automaticamente tutti i driver di rete"
       ],
       "correctIndex": 0
     },
@@ -7505,9 +7505,9 @@
     {
       "question": "Cos'è il sistema binario?",
       "answers": [
-        "Un metodo di crittografia",
+        "Un metodo di crittografia numerica",
         "Un sistema numerico basato su 0 e 1",
-        "Una rete privata",
+        "Una complessa rete ferroviaria",
         "Una funzione del browser"
       ],
       "correctIndex": 1
@@ -7518,7 +7518,7 @@
         "La RAM è volatile, la ROM è permanente",
         "La ROM è più veloce",
         "La RAM è solo per grafica",
-        "La ROM si cancella ad ogni riavvio"
+        "La ROM si cancella ad ogni riavvio, la RAM no"
       ],
       "correctIndex": 0
     },
@@ -7565,10 +7565,10 @@
     {
       "question": "Che cos'è una variabile in programmazione?",
       "answers": [
-        "Un file",
+        "Un file audio",
         "Un'applicazione",
-        "Uno spazio che contiene un valore modificabile",
-        "Un tipo di password"
+        "Un valore modificabile",
+        "Un tipo di password alfanumerica"
       ],
       "correctIndex": 2
     },
@@ -7577,15 +7577,15 @@
       "answers": [
         "Un linguaggio di programmazione",
         "Una serie di istruzioni per risolvere un problema",
-        "Un errore di sistema",
-        "Un'app per modificare immagini"
+        "Un errore di sistema che blocca il sistema operativo",
+        "Un'app per modificare immagini con filtri"
       ],
       "correctIndex": 1
     },
     {
       "question": "Cosa indica HTTPS rispetto a HTTP?",
       "answers": [
-        "Un protocollo più veloce",
+        "Un protocollo più stabile e veloce",
         "La presenza di una connessione sicura",
         "Un tipo di sito italiano",
         "Una rete privata"
@@ -7597,7 +7597,7 @@
       "answers": [
         "Un software di editing video",
         "Un sistema di controllo versione",
-        "Un browser web",
+        "Un' applicazione per navigare su internet",
         "Un'app di videoconferenza"
       ],
       "correctIndex": 1
@@ -7615,7 +7615,7 @@
     {
       "question": "In che formato viene comunemente salvato un foglio di Excel?",
       "answers": [
-        ".xls o .xlsx",
+        ".xls",
         ".docx",
         ".txt",
         ".pdf"
@@ -7637,7 +7637,7 @@
       "answers": [
         "Il server locale del proprio computer",
         "Un dominio estero",
-        "Una rete Wi-Fi",
+        "Una rete Wi-Fi vicina",
         "Un'applicazione cloud"
       ],
       "correctIndex": 0
@@ -7645,10 +7645,10 @@
     {
       "question": "Cosa fa il comando `ls` in un terminale Linux?",
       "answers": [
-        "Cancella file",
+        "Cancella file di sistema",
         "Visualizza i file e le cartelle",
-        "Cambia directory",
-        "Copia file"
+        "Cambia directory di lavoro",
+        "Copia file da una posizione all'altra"
       ],
       "correctIndex": 1
     },
@@ -7658,7 +7658,7 @@
         "Una variabile costante",
         "Un ciclo infinito",
         "Un blocco di codice che può essere riutilizzato",
-        "Un errore"
+        "Un errore ostico nel codice sorgente"
       ],
       "correctIndex": 2
     },
@@ -7666,19 +7666,19 @@
       "question": "Qual è il compito di un server?",
       "answers": [
         "Fornire servizi o risorse ad altri computer",
-        "Stampare file",
-        "Navigare in Internet",
-        "Connettersi al Wi-Fi"
+        "Stampare file in maniera wireless",
+        "Navigare in Internet dal proprio computer o telefono",
+        "Connettersi al Wi-Fi automaticamente"
       ],
       "correctIndex": 0
     },
     {
       "question": "Che cos'è un booleano in programmazione?",
       "answers": [
-        "Una funzione grafica",
+        "Una funzione grafica utilizzata per simulazioni",
         "Un tipo di dato che può essere vero o falso",
-        "Un file criptato",
-        "Un errore di rete"
+        "Un file criptato che non può essere decriptato",
+        "Un errore di rete molto comune"
       ],
       "correctIndex": 1
     },
@@ -7706,8 +7706,8 @@
       "question": "Quale di questi è un IDE?",
       "answers": [
         "Visual Studio Code",
-        "Google",
-        "Slack",
+        "Google gemini 2.5",
+        "DeepSeek",
         "Chrome"
       ],
       "correctIndex": 0
@@ -7715,10 +7715,10 @@
     {
       "question": "In JavaScript, cosa fa il comando `console.log()`?",
       "answers": [
-        "Crea un file",
+        "Crea un file e lo salva sul computer",
         "Scrive output nella console",
         "Chiude il browser",
-        "Invia una mail"
+        "Invia una mail alla console"
       ],
       "correctIndex": 1
     },
@@ -7728,7 +7728,7 @@
         "Un file video",
         "Un file per configurazioni e dati strutturati",
         "Un'applicazione",
-        "Un file musicale"
+        "Un file musicale riproducibile"
       ],
       "correctIndex": 1
     },
@@ -7737,8 +7737,8 @@
       "answers": [
         "Un nuovo progetto",
         "Una modifica salvata nel repository",
-        "Un bug",
-        "Una richiesta di aiuto"
+        "Un bug segnalato nel codice sorgente",
+        "Una richiesta di aiuto inviata al team"
       ],
       "correctIndex": 1
     },
@@ -7746,9 +7746,9 @@
       "question": "In una rete, cosa fa uno switch?",
       "answers": [
         "Connette dispositivi e smista i dati in base all'indirizzo MAC",
-        "Traduce i nomi in IP",
-        "Fornisce l'accesso a Internet",
-        "Blocca gli aggiornamenti"
+        "Gestisce l'indirizzamento IP tra più reti distinte",
+        "Distribuisce automaticamente l'accesso a Internet tra più utenti",
+        "Controlla la sicurezza e la crittografia dei dati in una rete wireless"
       ],
       "correctIndex": 0
     }
@@ -7769,7 +7769,7 @@
       "answers": [
         "Solo il cliente",
         "Solo il fornitore",
-        "Responsabilità condivisa tra cliente e fornitore",
+        "Cliente e fornitore",
         "Nessuno"
       ],
       "correctIndex": 2
@@ -7787,9 +7787,9 @@
     {
       "question": "In un database relazionale, cos'è una 'foreign key'?",
       "answers": [
-        "Una chiave primaria",
+        "Una chiave primaria di una tabella sconosciuta",
         "Un campo che crea un legame tra due tabelle",
-        "Un indice univoco",
+        "Un tipo di indice che garantisce l'unicità dei valori",
         "Una funzione di aggregazione"
       ],
       "correctIndex": 1
@@ -7807,7 +7807,7 @@
     {
       "question": "Cosa fa il comando 'chmod' in Unix/Linux?",
       "answers": [
-        "Cambia i permessi di accesso a file o directory",
+        "Cambia i permessi di accesso ai file",
         "Modifica il nome di un file",
         "Cambia la data di creazione di un file",
         "Visualizza il contenuto di un file"
@@ -7847,7 +7847,7 @@
     {
       "question": "In sicurezza informatica, cosa si intende per 'phishing'?",
       "answers": [
-        "Un attacco che sfrutta vulnerabilità hardware",
+        "Un attacco che sfrutta vulnerabilità hardware per rubare dati",
         "Una tecnica per ottenere informazioni sensibili ingannando l'utente",
         "Un tipo di malware che cripta i dati",
         "Un metodo di autenticazione a due fattori"
@@ -7867,10 +7867,10 @@
     {
       "question": "In un sistema operativo, cosa rappresenta il 'kernel'?",
       "answers": [
-        "L'interfaccia grafica",
+        "L'interfaccia grafica che permette l'interazione con l'utente",
         "Il nucleo che gestisce le risorse hardware e software",
-        "Un'applicazione di sistema",
-        "Un driver di dispositivo"
+        "Un programma ausiliario utilizzato per il monitoraggio dei processi",
+        "Un modulo che permette la comunicazione con periferiche specifiche"
       ],
       "correctIndex": 1
     },
@@ -7918,8 +7918,8 @@
       "question": "In programmazione, cosa rappresenta il concetto di 'ricorsione'?",
       "answers": [
         "Una funzione che chiama se stessa",
-        "Un ciclo infinito",
-        "Una variabile globale",
+        "Un ciclo che non termina mai a causa di una condizione errata",
+        "Una variabile accessibile da qualsiasi parte del programma",
         "Un tipo di dato complesso"
       ],
       "correctIndex": 0
@@ -7947,9 +7947,9 @@
     {
       "question": "In un database, cosa fa una 'JOIN'?",
       "answers": [
-        "Elimina una tabella",
+        "Elimina una tabella dal database definitivamente",
         "Combina righe da due o più tabelle basate su una condizione correlata",
-        "Crea un nuovo indice",
+        "Crea un nuovo indice per velocizzare le query",
         "Aggiorna i permessi degli utenti"
       ],
       "correctIndex": 1
@@ -7959,10 +7959,10 @@
     {
       "question": "Cos'è un automa a stati finiti deterministico (DFA)?",
       "answers": [
-        "Un sistema operativo in tempo reale",
-        "Un automa con un solo stato finale",
+        "Un insieme di stati ordinati in modo gerarchico con transizioni cicliche",
+        "Un modello che accetta solo parole finite con simboli binari",
         "Un automa con una sola transizione possibile per ogni coppia stato/simbolo",
-        "Un algoritmo ricorsivo"
+        "Un algoritmo ricorsivo che genera linguaggi infiniti"
       ],
       "correctIndex": 2
     },
@@ -7979,9 +7979,9 @@
     {
       "question": "Nel contesto dei sistemi distribuiti, cosa rappresenta il 'teorema CAP'?",
       "answers": [
-        "Un principio per l’ottimizzazione della memoria cache",
-        "La teoria che afferma l’impossibilità di ottenere simultaneamente coerenza, disponibilità e tolleranza alla partizione",
-        "Un modello di comunicazione client-server",
+        "Ogni sistema distribuito può garantire simultaneamente scalabilità, consistenza e ridondanza",
+        "L’impossibilità di ottenere simultaneamente coerenza, disponibilità e tolleranza alla partizione",
+        "I sistemi distribuiti devono adottare protocolli sincroni per mantenere l’integrità dei dati",
         "Una tecnica di compressione dei dati"
       ],
       "correctIndex": 1
@@ -7989,8 +7989,8 @@
     {
       "question": "Cosa accade in una condizione di 'race condition'?",
       "answers": [
-        "Due thread aspettano lo stesso evento",
-        "Un processo viene eseguito senza priorità",
+        "La cache di un processore viene aggiornata in ritardo rispetto alla RAM",
+        "Un thread viene interrotto da un segnale esterno non gestito",
         "Il risultato di un'esecuzione dipende dall'ordine non controllato delle istruzioni concorrenti",
         "Un processo non riesce ad accedere alla memoria virtuale"
       ],
@@ -7999,10 +7999,10 @@
     {
       "question": "Cosa indica il termine 'memoization' in un algoritmo ricorsivo?",
       "answers": [
-        "Una strategia di parallelizzazione",
+        "Una strategia per suddividere un problema in sottoproblemi indipendenti",
         "Un metodo per evitare stack overflow",
         "Una tecnica per salvare i risultati già calcolati",
-        "Un tipo di allocazione dinamica"
+        "Un metodo per gestire la concorrenza tramite lock su variabili globali"
       ],
       "correctIndex": 2
     },
@@ -8030,7 +8030,7 @@
       "question": "Qual è il ruolo del 'Garbage Collector' in un linguaggio come Java?",
       "answers": [
         "Ottimizzare il codice per la CPU",
-        "Liberare memoria non più utilizzata automaticamente",
+        "Liberare memoria automaticamente",
         "Ridurre il consumo energetico",
         "Compilare codice dinamicamente"
       ],
@@ -8040,9 +8040,9 @@
       "question": "Cos'è una 'closure' in programmazione funzionale?",
       "answers": [
         "Una funzione che accede a variabili locali anche fuori dal suo contesto",
-        "Un ciclo indefinito",
-        "Una variabile globale",
-        "Una funzione che restituisce solo booleani"
+        "Una funzione che viene invocata automaticamente al termine di un ciclo",
+        "Una variabile che viene condivisa tra più funzioni",
+        "Una funzione speciale che serve esclusivamente per il controllo dei flussi condizionali"
       ],
       "correctIndex": 0
     },
@@ -8050,9 +8050,9 @@
       "question": "In una macchina Turing, cos'è la 'tape'?",
       "answers": [
         "Il registro centrale della CPU",
-        "La memoria cache",
+        "Una memoria volatile che conserva temporaneamente i risultati intermedi",
         "Una memoria infinita unidimensionale su cui si leggono e scrivono simboli",
-        "Una stack LIFO"
+        "Una sequenza di celle gestita secondo la politica FIFO"
       ],
       "correctIndex": 2
     },
@@ -8061,8 +8061,8 @@
       "answers": [
         "Un algoritmo per il training delle reti neurali",
         "Una tecnica di clustering",
-        "Un metodo per ordinare grafi",
-        "Una strategia di compressione dati"
+        "Un metodo per ordinare grafi orientati",
+        "Una strategia ottimale per la compressione dati"
       ],
       "correctIndex": 0
     },
@@ -8089,10 +8089,10 @@
     {
       "question": "Nel contesto dei sistemi operativi, cos'è una 'syscall'?",
       "answers": [
-        "Un comando di alto livello",
+        "Una funzione che permette all'utente di modificare la GUI del sistema operativo",
         "Una chiamata al kernel per accedere a risorse di sistema",
-        "Un errore hardware",
-        "Una libreria di sistema"
+        "Un evento asincrono che interrompe il flusso del processo corrente",
+        "Una routine automatica per il caricamento dei moduli di sistema"
       ],
       "correctIndex": 1
     },
@@ -8109,10 +8109,10 @@
     {
       "question": "Cos'è una 'funzione hash crittografica'?",
       "answers": [
-        "Una funzione che restituisce numeri casuali",
-        "Una funzione reversibile",
+        "Una funzione utilizzata per cifrare messaggi tramite chiavi pubbliche",
+        "Una funzione reversibile usata per recuperare dati originali da un codice hash",
         "Una funzione che restituisce output di lunghezza fissa difficilmente invertibile",
-        "Una funzione per comprimere immagini"
+        "Una funzione che analizza la frequenza dei caratteri nei messaggi cifrati"
       ],
       "correctIndex": 2
     },
@@ -8149,7 +8149,7 @@
     {
       "question": "Qual è lo scopo del 'MapReduce'?",
       "answers": [
-        "Distribuire il carico su una GPU",
+        "Suddividere un dataset tra più dispositivi per eseguire calcoli grafici complessi",
         "Eseguire query SQL in parallelo",
         "Gestire grandi volumi di dati in modo distribuito con map e reduce",
         "Effettuare backup in cloud"
@@ -8160,9 +8160,9 @@
       "question": "Cos'è un 'monade' in Haskell?",
       "answers": [
         "Una struttura dati mutabile",
-        "Un tipo di commento",
+        "Un meccanismo per rendere mutabili le strutture dati pure",
         "Un costrutto che incapsula effetti computazionali in modo funzionale",
-        "Un modulo importabile"
+        "Una sintassi alternativa per definire moduli in un linguaggio lazy"
       ],
       "correctIndex": 2
     },
@@ -8189,8 +8189,8 @@
     {
       "question": "Cosa misura il teorema di Shannon?",
       "answers": [
-        "La probabilità di errore nei calcoli",
-        "Il rumore elettrico nei circuiti",
+        "La capacità di un sistema di correggere automaticamente tutti gli errori",
+        "Il numero minimo di bit necessari per rappresentare un segnale analogico",
         "La quantità massima di informazione trasportabile in un canale",
         "La complessità computazionale di un algoritmo"
       ],
@@ -8201,8 +8201,8 @@
       "answers": [
         "La divisione di blocchi liberi",
         "L’unione di blocchi liberi adiacenti per evitare frammentazione",
-        "Un metodo di swapping",
-        "Una tecnica di caching"
+        "La compressione della memoria usata per migliorare l'accesso",
+        "La duplicazione di blocchi liberi per favorire l’allocazione rapida"
       ],
       "correctIndex": 1
     },
@@ -8239,10 +8239,10 @@
     {
       "question": "In blockchain, cos'è il consenso 'Proof of Work'?",
       "answers": [
-        "Un algoritmo per compressione",
+        "Garantire la trasparenza delle transazioni tramite una funzione di verifica lineare",
         "Un meccanismo in cui i nodi risolvono problemi computazionali per validare blocchi",
         "Una funzione di hashing crittografico",
-        "Un linguaggio di scripting per smart contracts"
+        "Proteggere i dati degli utenti tramite crittografia asimmetrica"
       ],
       "correctIndex": 1
     }
@@ -8557,7 +8557,7 @@
     "medio": [
       {
         "question": "Qual è la geometria molecolare della molecola d'acqua (H₂O)?",
-        "answers": ["Angolare (104.5°)", "Lineare", "Tetraedrica", "Trigonal planare"],
+        "answers": ["Angolare", "Lineare", "Tetraedrica", "Trigonal planare"],
         "correctIndex": 0
       },
       {
@@ -8714,7 +8714,7 @@
       },
       {
         "question": "Qual è l'ordine di reazione se raddoppiando la concentrazione di A la velocità quadruplica?",
-        "answers": ["Secondo ordine rispetto ad A", "Primo ordine", "Ordine zero", "Terzo ordine"],
+        "answers": ["Secondo ordine", "Primo ordine", "Ordine zero", "Terzo ordine"],
         "correctIndex": 0
       },
       {
@@ -8976,7 +8976,7 @@
       },
       {
         "question": "Quale tecnica misura la massa molecolare precisa di un composto organico?",
-        "answers": ["Spettrometria di massa ad alta risoluzione", "NMR", "IR", "UV-Vis"],
+        "answers": ["Spettrometria di massa ad alta risoluzione", "Spettroscopia NMR", "Spettroscopia IR (infrarossa), che identifica i gruppi funzionali", "Spettroscopia UV-Vis"],
         "correctIndex": 0
       },
       {
@@ -9720,7 +9720,7 @@
       },
       {
         "question": "In teoria della computabilità, quale problema è decidibile?",
-        "answers": ["Verificare se un DFA accetta una stringa", "Halting problem", "Post Correspondence Problem", "Equivalenza di due grammatiche non contestuali"],
+        "answers": ["Verificare se un DFA accetta una stringa", "Halting problem", "Verificare la corrispondenza tra coppie nel Post Correspondence Problem", "Determinare l'equivalenza di due grammatiche non contestuali"],
         "correctIndex": 0
       },
       {
