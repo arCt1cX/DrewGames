@@ -3,20 +3,26 @@ let tournamentState = {
     totalGames: 5,
     currentGame: 0,
     scores: {},
-    availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'bluffme', 'quizzy']
+    availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'bluffme', 'quizzy'],
+    usedGames: []
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     initTournament();
+    applyTranslations();
 });
 
 function initTournament() {
-    // Setup player count listener
     document.getElementById('playerCount').addEventListener('change', generatePlayerInputs);
     document.getElementById('gamesCount').addEventListener('change', updateGameCount);
     document.getElementById('startTournament').addEventListener('click', startTournament);
     
-    // Generate initial player inputs
+    // Initialize handlers
+    document.getElementById('submitScores').addEventListener('click', handleScoreSubmission);
+    document.getElementById('nextGame').addEventListener('click', setupNextGame);
+    document.getElementById('newTournament').addEventListener('click', resetTournament);
+    document.getElementById('endTournament').addEventListener('click', showFinalResults);
+    
     generatePlayerInputs();
 }
 
@@ -29,15 +35,10 @@ function generatePlayerInputs() {
         const input = document.createElement('div');
         input.className = 'player-input';
         input.innerHTML = `
-            <input type="text" id="player${i}" placeholder="Player ${i + 1} name">
+            <input type="text" id="player${i}" placeholder="Player ${i + 1}">
         `;
         container.appendChild(input);
     }
-}
-
-function updateGameCount() {
-    tournamentState.totalGames = parseInt(document.getElementById('gamesCount').value);
-    document.getElementById('totalGames').textContent = tournamentState.totalGames;
 }
 
 function startTournament() {
@@ -53,35 +54,37 @@ function startTournament() {
         tournamentState.scores[player.name] = 0;
     });
 
-    // Start first game
-    showScreen('game-select');
-    selectRandomGame();
+    setupNextGame();
 }
 
-function selectRandomGame() {
-    const randomIndex = Math.floor(Math.random() * tournamentState.availableGames.length);
-    const selectedGame = tournamentState.availableGames[randomIndex];
-    document.getElementById('selectedGame').textContent = selectedGame;
+function setupNextGame() {
+    if (tournamentState.currentGame >= tournamentState.totalGames) {
+        showFinalResults();
+        return;
+    }
+
+    // Select random game
+    let availableGames = tournamentState.availableGames.filter(g => !tournamentState.usedGames.includes(g));
+    if (availableGames.length === 0) {
+        tournamentState.usedGames = []; // Reset used games if all have been played
+        availableGames = [...tournamentState.availableGames];
+    }
+    
+    const randomIndex = Math.floor(Math.random() * availableGames.length);
+    const selectedGame = availableGames[randomIndex];
+    tournamentState.usedGames.push(selectedGame);
+
+    // Update UI
     document.getElementById('currentGame').textContent = tournamentState.currentGame + 1;
-
-    // Setup play button
-    document.getElementById('playGame').onclick = () => {
-        // Store current tournament state
-        localStorage.setItem('tournamentState', JSON.stringify(tournamentState));
-        // Navigate to the game
-        window.location.href = `../${selectedGame}/index.html?tournament=true`;
-    };
+    document.getElementById('selectedGame').textContent = selectedGame;
+    
+    // Save state and prepare for game
+    localStorage.setItem('tournamentState', JSON.stringify(tournamentState));
+    
+    showScreen('game-select');
 }
 
-function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    document.getElementById(screenId).classList.add('active');
-}
-
-// Add score entry functionality
-document.getElementById('submitScores').addEventListener('click', () => {
+function handleScoreSubmission() {
     const scoreInputs = document.querySelectorAll('.score-input input');
     scoreInputs.forEach(input => {
         const playerName = input.getAttribute('data-player');
@@ -89,15 +92,15 @@ document.getElementById('submitScores').addEventListener('click', () => {
         tournamentState.scores[playerName] += score;
     });
 
-    updateRankings();
     tournamentState.currentGame++;
-
+    updateRankings();
+    
     if (tournamentState.currentGame >= tournamentState.totalGames) {
         showFinalResults();
     } else {
         showScreen('rankings');
     }
-});
+}
 
 function updateRankings() {
     const rankings = tournamentState.players
@@ -109,44 +112,46 @@ function updateRankings() {
 
     const rankingsList = document.getElementById('rankingsList');
     rankingsList.innerHTML = rankings.map((player, index) => `
-        <div class="ranking-item">
+        <div class="ranking-item ${index === 0 ? 'winner' : ''}">
             <span>${index + 1}. ${player.name}</span>
-            <span>${player.score} points</span>
+            <span>${player.score} ${getTranslation('points')}</span>
         </div>
     `).join('');
 }
 
 function showFinalResults() {
     showScreen('final-results');
-    const finalRankings = document.getElementById('finalRankings');
-    const sortedPlayers = tournamentState.players
-        .map(player => ({
-            name: player.name,
-            score: tournamentState.scores[player.name]
-        }))
-        .sort((a, b) => b.score - a.score);
-
-    finalRankings.innerHTML = sortedPlayers.map((player, index) => `
-        <div class="ranking-item ${index === 0 ? 'winner' : ''}">
-            <span>${index + 1}. ${player.name}</span>
-            <span>${player.score} points</span>
-        </div>
-    `).join('');
+    updateRankings();
 }
 
-// Navigation handlers
-document.getElementById('nextGame').addEventListener('click', () => {
-    showScreen('game-select');
-    selectRandomGame();
-});
-
-document.getElementById('newTournament').addEventListener('click', () => {
+function resetTournament() {
     tournamentState = {
         players: [],
         totalGames: 5,
         currentGame: 0,
         scores: {},
-        availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'bluffme', 'quizzy']
+        availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'bluffme', 'quizzy'],
+        usedGames: []
     };
     showScreen('setup-screen');
+    generatePlayerInputs();
+}
+
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+    document.getElementById(screenId).classList.add('active');
+}
+
+// Handle game return
+window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('return') === 'true') {
+        const savedState = localStorage.getItem('tournamentState');
+        if (savedState) {
+            tournamentState = JSON.parse(savedState);
+            showScreen('score-entry');
+        }
+    }
 });

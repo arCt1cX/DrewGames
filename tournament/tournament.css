@@ -3,6 +3,7 @@
     padding: 20px;
     max-width: 800px;
     margin: 0 auto;
+    color: #f1f1f1;
 }
 
 .screen.active {
@@ -14,6 +15,17 @@
     padding: 20px;
     border-radius: 10px;
     margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+select {
+    background: rgba(123, 104, 238, 0.2);
+    border: 1px solid rgba(123, 104, 238, 0.3);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 200px;
 }
 
 .player-inputs {
@@ -32,7 +44,7 @@
 .player-input input {
     flex: 1;
     padding: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(123, 104, 238, 0.3);
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.1);
     color: white;
@@ -43,6 +55,7 @@
     padding: 15px;
     border-radius: 8px;
     margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .ranking-item {
@@ -50,26 +63,12 @@
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.ranking-item:last-child {
-    border-bottom: none;
-}
-
-.score-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.score-input {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+.ranking-item:hover {
+    transform: translateX(5px);
+    background: rgba(123, 104, 238, 0.2);
 }
 
 .selected-game {
@@ -96,4 +95,22 @@
     color: gold;
     font-size: 1.2em;
     font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.primary-button {
+    background: linear-gradient(45deg, #6a5acd, #9370db);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.4);
 }

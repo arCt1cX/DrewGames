@@ -238,7 +238,23 @@ const translations = {
                 'Se sbagli, la casella rimane libera',
                 'Vince chi forma per primo una linea di tre simboli'
             ]
-        }
+        },
+        'tournamentTitle': 'Modalità Torneo',
+        'numberOfGames': 'Numero di Giochi',
+        'numberOfPlayers': 'Numero di Giocatori',
+        'startTournament': 'Inizia Torneo',
+        'gameNumber': 'Gioco',
+        'of': 'di',
+        'randomGameSelected': 'Gioco Casuale Selezionato',
+        'playGame': 'Gioca',
+        'enterScores': 'Inserisci Punteggi',
+        'submitScores': 'Invia Punteggi',
+        'currentRankings': 'Classifica Attuale',
+        'nextGame': 'Prossimo Gioco',
+        'endTournament': 'Termina Torneo',
+        'tournamentResults': 'Risultati Torneo',
+        'newTournament': 'Nuovo Torneo',
+        'points': 'punti'
     },
     'en': {
         // Meta data
@@ -478,7 +494,23 @@ const translations = {
                 'If you are wrong, the square remains free',
                 'The first to form a line of three symbols wins'
             ]
-        }
+        },
+        'tournamentTitle': 'Tournament Mode',
+        'numberOfGames': 'Number of Games',
+        'numberOfPlayers': 'Number of Players',
+        'startTournament': 'Start Tournament',
+        'gameNumber': 'Game',
+        'of': 'of',
+        'randomGameSelected': 'Random Game Selected',
+        'playGame': 'Play Game',
+        'enterScores': 'Enter Game Scores',
+        'submitScores': 'Submit Scores',
+        'currentRankings': 'Current Rankings',
+        'nextGame': 'Next Game',
+        'endTournament': 'End Tournament',
+        'tournamentResults': 'Tournament Results',
+        'newTournament': 'New Tournament',
+        'points': 'points'
     }
 };
 
