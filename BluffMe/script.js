@@ -494,23 +494,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const text = await response.text();
             
-            // Split the text by new lines and filter out any empty lines or BOM characters
-            const categories = text
-                .replace(/^\uFEFF/, '') // Remove BOM if present
-                .split(/\r?\n/) // Split on both \r\n and \n
+            // Split the text by new lines and properly filter
+            const loadedCategories = text
+                .replace(/^\uFEFF/, '')  // Remove BOM if present
+                .split(/\r?\n/)          // Handle both CRLF and LF
                 .map(category => category.trim())
-                .filter(category => category && category.length > 0 && !category.startsWith('//')); // Remove empty lines and comments
+                .filter(category => {
+                    return category && 
+                           category.length > 0 && 
+                           !category.startsWith('//');
+                });
             
-            console.log(`Loaded ${categories.length} categories`); // Debug log
+            console.log(`[BluffMe] Loaded ${loadedCategories.length} categories`);
             
-            if (categories.length === 0) {
+            if (loadedCategories.length === 0) {
                 throw new Error('No categories found in file');
             }
             
-            return categories;
+            return loadedCategories;
         } catch (error) {
-            console.error('Error loading categories:', error);
-            // Fallback list of categories in case of error
+            console.error('[BluffMe] Error loading categories:', error);
             return getText('fallbackCategories');
         }
     }
@@ -541,7 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get a random category
         const randomIndex = Math.floor(Math.random() * categories.length);
         currentCategory = categories[randomIndex];
-        console.log(`Selected category ${randomIndex}: ${currentCategory}`); // Debug log
+        console.log(`[BluffMe] Selected category ${randomIndex + 1}/${categories.length}: ${currentCategory}`); // Debug log
         
         categoryDisplay.textContent = currentCategory;
         
