@@ -12,27 +12,67 @@
 
 .setup-container {
     background: rgba(123, 104, 238, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.games-setup, .players-setup {
+    margin-bottom: 30px;
+}
+
+.games-setup h2, .players-setup h2 {
+    color: #7b68ee;
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.player-count {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.player-count label {
+    color: #f1f1f1;
+    margin-right: 10px;
+    font-size: 1.1em;
 }
 
 select {
     background: rgba(123, 104, 238, 0.2);
-    border: 1px solid rgba(123, 104, 238, 0.3);
+    border: 2px solid rgba(123, 104, 238, 0.3);
     color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border-radius: 8px;
     margin: 10px 0;
-    width: 200px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 12px auto;
+    padding-right: 30px;
+}
+
+select:hover {
+    background-color: rgba(123, 104, 238, 0.3);
+    border-color: rgba(123, 104, 238, 0.5);
 }
 
 .player-inputs {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 12px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .player-input {
@@ -42,12 +82,25 @@ select {
 }
 
 .player-input input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid rgba(123, 104, 238, 0.3);
-    border-radius: 5px;
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(123, 104, 238, 0.3);
+    border-radius: 8px;
     background: rgba(255, 255, 255, 0.1);
     color: white;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+.player-input input:focus {
+    border-color: #7b68ee;
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    box-shadow: 0 0 10px rgba(123, 104, 238, 0.3);
+}
+
+.player-input input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .rankings-list {
@@ -284,25 +337,21 @@ select {
 }
 
 @media (max-width: 480px) {
-    .score-input {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-        padding: 12px;
+    .setup-container {
+        padding: 20px;
+        margin: 15px;
     }
 
-    .score-input label {
-        text-align: center;
-        margin-bottom: 5px;
+    select, .player-input input {
+        font-size: 1em;
     }
 
-    .score-input input {
-        width: 100%;
-        max-width: none;
+    .games-setup h2, .players-setup h2 {
+        font-size: 1.2em;
     }
 
-    h2 {
-        text-align: center;
-        margin-bottom: 1.5em;
+    #startTournament {
+        padding: 12px 25px;
+        font-size: 1.1em;
     }
 }
