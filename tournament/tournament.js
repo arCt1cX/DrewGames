@@ -160,21 +160,31 @@ function startTournament() {
 }
 
 function handleScoreSubmission() {
-    const scoreInputs = document.querySelectorAll('.score-input');
-    scoreInputs.forEach(input => {
-        const playerName = input.getAttribute('data-player');
-        const score = input.classList.contains('selected') ? 1 : 0;
-        tournamentState.scores[playerName] += score;
-    });
+	const scoreInputs = document.querySelectorAll('.score-input');
 
-    tournamentState.currentGame++;
-    updateRankings();
-    
-    if (tournamentState.currentGame >= tournamentState.totalGames) {
-        showFinalResults();
-    } else {
-        showScreen('rankings');
-    }
+	// Determine if this round is a double-points round
+	const currentRoundNumber = tournamentState.currentGame + 1; // currentGame is completed games
+	const isDoublePointsRound = tournamentState.doublePointsGames.includes(currentRoundNumber);
+
+	// Apply scores (2 points if double round, else 1)
+	scoreInputs.forEach(input => {
+		const playerName = input.getAttribute('data-player');
+		const hasPoint = input.classList.contains('selected');
+		const pointsToAdd = hasPoint ? (isDoublePointsRound ? 2 : 1) : 0;
+		tournamentState.scores[playerName] += pointsToAdd;
+	});
+
+	// Flag for rankings banner
+	tournamentState.lastGameWasDouble = isDoublePointsRound;
+
+	tournamentState.currentGame++;
+	updateRankings();
+	
+	if (tournamentState.currentGame >= tournamentState.totalGames) {
+		showFinalResults();
+	} else {
+		showScreen('rankings');
+	}
 }
 
 function updateRankings() {

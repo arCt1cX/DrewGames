@@ -13,7 +13,15 @@ const availableGames = {
 function startTournament() {
     const numPlayers = parseInt(document.getElementById('playerCount').value);
     const numGames = parseInt(document.getElementById('gameCount').value);
-    tournament.totalGames = numGames; // Store total games count
+    
+    tournament = {
+        players: [],
+        scores: {},
+        currentGame: 1,
+        totalGames: numGames,  // Store the total games properly
+        gameHistory: []
+    };
+
     // ...existing code...
 }
 
@@ -44,21 +52,22 @@ function selectRandomGame() {
 function updateGameDisplay() {
     const gameTitle = document.getElementById('currentGameTitle');
     if (gameTitle) {
-        // Use tournament.totalGames instead of hardcoded value
         gameTitle.textContent = `${getTranslation('game')} ${tournament.currentGame} ${getTranslation('of')} ${tournament.totalGames}`;
     }
     // ...existing code...
 }
 
-function initializeTournament() {
-    tournament = {
-        players: [],
-        scores: {},
-        currentGame: 1,
-        totalGames: 5, // Default value
-        gameHistory: []
-    };
-    // ...existing code...
+function nextGame() {
+    // Ensure we don't lose totalGames when advancing
+    tournament.currentGame++;
+    
+    if (tournament.currentGame > tournament.totalGames) {
+        showFinalResults();
+        return;
+    }
+    
+    updateGameDisplay();
+    selectRandomGame();
 }
 
 // ...existing code...
