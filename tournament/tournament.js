@@ -5,7 +5,10 @@ let tournamentState = {
     scores: {},
     availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy'],
     gameWeights: {},  // New property to track game weights
-    usedGames: []     // Keep this to track history but not for filtering
+    usedGames: [],     // Keep this to track history but not for filtering
+    doublePointsGames: [],
+    doublePointsUsed: false,
+    lastGameWasDouble: false
 };
 
 function updateGameCount() {
@@ -117,15 +120,44 @@ function startTournament() {
     });
 
     tournamentState.currentGame = 0;
+
+    // Set up double points games based on tournament length
+    tournamentState.doublePointsGames = [];
+    if (tournamentState.totalGames === 5) {
+        // One double points game between 3rd and 5th game
+        const doubleGame = Math.floor(Math.random() * 3) + 3;
+        tournamentState.doublePointsGames.push(doubleGame);
+    } else if (tournamentState.totalGames === 10) {
+        // Two double points games after first game
+        while (tournamentState.doublePointsGames.length < 2) {
+            const game = Math.floor(Math.random() * 9) + 2;
+            if (!tournamentState.doublePointsGames.includes(game)) {
+                tournamentState.doublePointsGames.push(game);
+            }
+        }
+    } else if (tournamentState.totalGames === 20) {
+        // Three double points games anywhere after first game
+        while (tournamentState.doublePointsGames.length < 3) {
+            const game = Math.floor(Math.random() * 19) + 2;
+            if (!tournamentState.doublePointsGames.includes(game)) {
+                tournamentState.doublePointsGames.push(game);
+            }
+        }
+    }
+    
     setupNextGame();
 }
 
 function handleScoreSubmission() {
     const scoreInputs = document.querySelectorAll('.score-input input');
+    tournamentState.lastGameWasDouble = tournamentState.doublePointsGames.includes(tournamentState.currentGame + 1);
+    
     scoreInputs.forEach(input => {
         const playerName = input.getAttribute('data-player');
         const score = parseInt(input.value) || 0;
-        tournamentState.scores[playerName] += score;
+        // Apply double points if this was a double points game
+        const finalScore = tournamentState.lastGameWasDouble ? score * 2 : score;
+        tournamentState.scores[playerName] += finalScore;
     });
 
     tournamentState.currentGame++;
@@ -153,6 +185,19 @@ function updateRankings() {
             <span>${player.score} points</span>
         </div>
     `).join('');
+    
+    // If this was a double points game, show the surprise animation
+    if (tournamentState.lastGameWasDouble) {
+        const doublePointsAlert = document.createElement('div');
+        doublePointsAlert.className = 'double-points-alert';
+        doublePointsAlert.innerHTML = `
+            <div class="double-points-content">
+                <h3>🎉 DOUBLE POINTS! 🎉</h3>
+                <p>This round's points were doubled!</p>
+            </div>
+        `;
+        document.getElementById('rankingsList').prepend(doublePointsAlert);
+    }
 }
 
 function showFinalResults() {
@@ -181,7 +226,10 @@ function resetTournament() {
         scores: {},
         availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy'],
         gameWeights: {},
-        usedGames: []
+        usedGames: [],
+        doublePointsGames: [],
+        doublePointsUsed: false,
+        lastGameWasDouble: false
     };
     showScreen('setup-screen');
     generatePlayerInputs();
