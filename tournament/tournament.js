@@ -91,6 +91,8 @@ function setupNextGame() {
     tournamentState.usedGames.push(selectedGame); // Keep for history
     
     document.getElementById('currentGame').textContent = tournamentState.currentGame + 1;
+    // Ensure total games label stays in sync with saved state
+    document.getElementById('totalGames').textContent = tournamentState.totalGames;
     document.getElementById('selectedGame').textContent = selectedGame;
     
     localStorage.setItem('tournamentState', JSON.stringify(tournamentState));
@@ -263,17 +265,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('newTournament').addEventListener('click', resetTournament);
     
     generatePlayerInputs();
-    updateGameCount();
 
-    // Handle return from game
+    // Handle return from game FIRST to avoid resetting totals to 5
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('return') === 'true') {
+    const isReturn = urlParams.get('return') === 'true';
+    if (isReturn) {
         const savedState = localStorage.getItem('tournamentState');
         if (savedState) {
             tournamentState = JSON.parse(savedState);
+            // Sync UI with saved totals so header shows the right number
+            const totalGamesEl = document.getElementById('totalGames');
+            if (totalGamesEl) totalGamesEl.textContent = tournamentState.totalGames;
+            const gamesCountSelect = document.getElementById('gamesCount');
+            if (gamesCountSelect) gamesCountSelect.value = String(tournamentState.totalGames);
             showScreen('score-entry');
+            return;
         }
     }
+
+    // Normal init path when not returning from a game
+    updateGameCount();
 });
 
 function getTranslation(key) {
