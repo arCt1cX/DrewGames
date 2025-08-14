@@ -3,56 +3,36 @@ let tournamentState = {
     totalGames: 5,
     currentGame: 0,
     scores: {},
-    // Fix casing in game URLs to match directory names
-    availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy']
+    availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy'],
+    usedGames: []
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    initTournament();
-    applyTranslations();
-});
-
-function initTournament() {
-    const playerCountSelect = document.getElementById('playerCount');
-    const gamesCountSelect = document.getElementById('gamesCount');
-    const startButton = document.getElementById('startTournament');
-    
-    if (playerCountSelect) playerCountSelect.addEventListener('change', generatePlayerInputs);
-    if (gamesCountSelect) gamesCountSelect.addEventListener('change', updateGameCount);
-    if (startButton) startButton.addEventListener('click', startTournament);
-    
-    // Initialize with default values
-    tournamentState.totalGames = parseInt(document.getElementById('gamesCount').value) || 5;
-    
-    // Generate initial player inputs
-    generatePlayerInputs();
-}
-
-function updateGameCount(event) {
-    const newCount = parseInt(event.target.value);
-    if (!isNaN(newCount)) {
-        tournamentState.totalGames = newCount;
-        const totalGamesSpan = document.getElementById('totalGames');
-        if (totalGamesSpan) {
-            totalGamesSpan.textContent = newCount;
-        }
-    }
+// Define core functions first
+function updateGameCount() {
+    tournamentState.totalGames = parseInt(document.getElementById('gamesCount').value);
+    document.getElementById('totalGames').textContent = tournamentState.totalGames;
 }
 
 function generatePlayerInputs() {
     const count = parseInt(document.getElementById('playerCount').value);
     const container = document.getElementById('playerInputs');
-    if (!container) return;
-
     container.innerHTML = '';
+
     for (let i = 0; i < count; i++) {
         const input = document.createElement('div');
         input.className = 'player-input';
         input.innerHTML = `
-            <input type="text" id="player${i}" placeholder="Player ${i + 1}" required>
+            <input type="text" id="player${i}" placeholder="Player ${i + 1}">
         `;
         container.appendChild(input);
     }
+}
+
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+    document.getElementById(screenId).classList.add('active');
 }
 
 function startTournament() {
@@ -68,8 +48,34 @@ function startTournament() {
         tournamentState.scores[player.name] = 0;
     });
 
+    // Generate score input fields
+    const scoreInputs = document.getElementById('scoreInputs');
+    scoreInputs.innerHTML = tournamentState.players.map(player => `
+        <div class="score-input">
+            <label>${player.name}</label>
+            <input type="number" data-player="${player.name}" min="0" value="0">
+        </div>
+    `).join('');
+
+    // Start first game
+    tournamentState.currentGame = 0;
     setupNextGame();
 }
+
+// Initialize tournament when document is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Setup initial event listeners
+    document.getElementById('playerCount').addEventListener('change', generatePlayerInputs);
+    document.getElementById('gamesCount').addEventListener('change', updateGameCount);
+    document.getElementById('startTournament').addEventListener('click', startTournament);
+    document.getElementById('submitScores').addEventListener('click', handleScoreSubmission);
+    document.getElementById('nextGame').addEventListener('click', setupNextGame);
+    document.getElementById('newTournament').addEventListener('click', resetTournament);
+    
+    // Initialize with default values
+    generatePlayerInputs();
+    updateGameCount();
+});
 
 function setupNextGame() {
     if (tournamentState.currentGame >= tournamentState.totalGames) {
@@ -151,13 +157,6 @@ function resetTournament() {
     generatePlayerInputs();
 }
 
-function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    document.getElementById(screenId).classList.add('active');
-}
-
 // Handle game return
 window.addEventListener('load', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -168,4 +167,5 @@ window.addEventListener('load', () => {
             showScreen('score-entry');
         }
     }
+});
 });
