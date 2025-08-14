@@ -7,7 +7,6 @@ let tournamentState = {
     usedGames: []
 };
 
-// Define core functions first
 function updateGameCount() {
     tournamentState.totalGames = parseInt(document.getElementById('gamesCount').value);
     document.getElementById('totalGames').textContent = tournamentState.totalGames;
@@ -35,20 +34,47 @@ function showScreen(screenId) {
     document.getElementById(screenId).classList.add('active');
 }
 
+function setupNextGame() {
+    if (tournamentState.currentGame >= tournamentState.totalGames) {
+        showFinalResults();
+        return;
+    }
+
+    let availableGames = tournamentState.availableGames.filter(g => !tournamentState.usedGames.includes(g));
+    if (availableGames.length === 0) {
+        tournamentState.usedGames = [];
+        availableGames = [...tournamentState.availableGames];
+    }
+    
+    const randomIndex = Math.floor(Math.random() * availableGames.length);
+    const selectedGame = availableGames[randomIndex];
+    tournamentState.usedGames.push(selectedGame);
+
+    document.getElementById('currentGame').textContent = tournamentState.currentGame + 1;
+    document.getElementById('selectedGame').textContent = selectedGame;
+    
+    localStorage.setItem('tournamentState', JSON.stringify(tournamentState));
+    
+    showScreen('game-select');
+    
+    // Setup play button
+    document.getElementById('playGame').onclick = () => {
+        localStorage.setItem('tournamentState', JSON.stringify(tournamentState));
+        window.location.href = `../${selectedGame}/index.html?tournament=true`;
+    };
+}
+
 function startTournament() {
-    // Collect player names
     const playerInputs = document.querySelectorAll('.player-input input');
     tournamentState.players = Array.from(playerInputs).map(input => ({
         name: input.value || input.placeholder,
         score: 0
     }));
 
-    // Initialize scores
     tournamentState.players.forEach(player => {
         tournamentState.scores[player.name] = 0;
     });
 
-    // Generate score input fields
     const scoreInputs = document.getElementById('scoreInputs');
     scoreInputs.innerHTML = tournamentState.players.map(player => `
         <div class="score-input">
@@ -57,51 +83,8 @@ function startTournament() {
         </div>
     `).join('');
 
-    // Start first game
     tournamentState.currentGame = 0;
     setupNextGame();
-}
-
-// Initialize tournament when document is ready
-document.addEventListener('DOMContentLoaded', () => {
-    // Setup initial event listeners
-    document.getElementById('playerCount').addEventListener('change', generatePlayerInputs);
-    document.getElementById('gamesCount').addEventListener('change', updateGameCount);
-    document.getElementById('startTournament').addEventListener('click', startTournament);
-    document.getElementById('submitScores').addEventListener('click', handleScoreSubmission);
-    document.getElementById('nextGame').addEventListener('click', setupNextGame);
-    document.getElementById('newTournament').addEventListener('click', resetTournament);
-    
-    // Initialize with default values
-    generatePlayerInputs();
-    updateGameCount();
-});
-
-function setupNextGame() {
-    if (tournamentState.currentGame >= tournamentState.totalGames) {
-        showFinalResults();
-        return;
-    }
-
-    // Select random game
-    let availableGames = tournamentState.availableGames.filter(g => !tournamentState.usedGames.includes(g));
-    if (availableGames.length === 0) {
-        tournamentState.usedGames = []; // Reset used games if all have been played
-        availableGames = [...tournamentState.availableGames];
-    }
-    
-    const randomIndex = Math.floor(Math.random() * availableGames.length);
-    const selectedGame = availableGames[randomIndex];
-    tournamentState.usedGames.push(selectedGame);
-
-    // Update UI
-    document.getElementById('currentGame').textContent = tournamentState.currentGame + 1;
-    document.getElementById('selectedGame').textContent = selectedGame;
-    
-    // Save state and prepare for game
-    localStorage.setItem('tournamentState', JSON.stringify(tournamentState));
-    
-    showScreen('game-select');
 }
 
 function handleScoreSubmission() {
@@ -134,14 +117,27 @@ function updateRankings() {
     rankingsList.innerHTML = rankings.map((player, index) => `
         <div class="ranking-item ${index === 0 ? 'winner' : ''}">
             <span>${index + 1}. ${player.name}</span>
-            <span>${player.score} ${getTranslation('points')}</span>
+            <span>${player.score} points</span>
         </div>
     `).join('');
 }
 
 function showFinalResults() {
     showScreen('final-results');
-    updateRankings();
+    const finalRankings = document.getElementById('finalRankings');
+    const sortedPlayers = tournamentState.players
+        .map(player => ({
+            name: player.name,
+            score: tournamentState.scores[player.name]
+        }))
+        .sort((a, b) => b.score - a.score);
+
+    finalRankings.innerHTML = sortedPlayers.map((player, index) => `
+        <div class="ranking-item ${index === 0 ? 'winner' : ''}">
+            <span>${index + 1}. ${player.name}</span>
+            <span>${player.score} points</span>
+        </div>
+    `).join('');
 }
 
 function resetTournament() {
@@ -157,8 +153,18 @@ function resetTournament() {
     generatePlayerInputs();
 }
 
-// Handle game return
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('playerCount').addEventListener('change', generatePlayerInputs);
+    document.getElementById('gamesCount').addEventListener('change', updateGameCount);
+    document.getElementById('startTournament').addEventListener('click', startTournament);
+    document.getElementById('submitScores').addEventListener('click', handleScoreSubmission);
+    document.getElementById('nextGame').addEventListener('click', setupNextGame);
+    document.getElementById('newTournament').addEventListener('click', resetTournament);
+    
+    generatePlayerInputs();
+    updateGameCount();
+
+    // Handle return from game
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('return') === 'true') {
         const savedState = localStorage.getItem('tournamentState');
@@ -167,5 +173,4 @@ window.addEventListener('load', () => {
             showScreen('score-entry');
         }
     }
-});
 });
