@@ -57,10 +57,10 @@ function setupNextGame() {
     
     showScreen('game-select');
     
-    // Modified play button handler
+    // Setup play button
     document.getElementById('playGame').onclick = () => {
         localStorage.setItem('tournamentState', JSON.stringify(tournamentState));
-        window.location.href = `../${selectedGame}/index.html?tournament=true&gameNumber=${tournamentState.currentGame + 1}&totalGames=${tournamentState.totalGames}`;
+        window.location.href = `../${selectedGame}/index.html?mode=tournament`;
     };
 }
 
