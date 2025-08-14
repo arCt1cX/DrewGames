@@ -354,4 +354,23 @@ select:hover {
         padding: 12px 25px;
         font-size: 1.1em;
     }
+
+    #setup-screen h1 {
+        font-size: 1.8em;
+        margin: 30px 0;
+    }
+
+    .random-game-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .selected-game {
+        font-size: 1.6em;
+    }
+
+    #playGame {
+        padding: 12px 30px;
+        font-size: 1.1em;
+    }
 }
