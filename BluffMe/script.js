@@ -494,10 +494,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const text = await response.text();
             
-            // Split the text by new lines and filter out any empty lines
-            return text.split('\n')
+            // Split the text by new lines and filter out any empty lines or BOM characters
+            const categories = text
+                .replace(/^\uFEFF/, '') // Remove BOM if present
+                .split(/\r?\n/) // Split on both \r\n and \n
                 .map(category => category.trim())
-                .filter(category => category.length > 0);
+                .filter(category => category && category.length > 0 && !category.startsWith('//')); // Remove empty lines and comments
+            
+            console.log(`Loaded ${categories.length} categories`); // Debug log
+            
+            if (categories.length === 0) {
+                throw new Error('No categories found in file');
+            }
+            
+            return categories;
         } catch (error) {
             console.error('Error loading categories:', error);
             // Fallback list of categories in case of error
@@ -526,16 +536,13 @@ document.addEventListener('DOMContentLoaded', () => {
         count = 0;
         countDisplay.textContent = count;
         
-        // Reset timer state
-        clearInterval(timerInterval);
-        isTimerRunning = false;
-        
-        // Reset timer color
-        timerDisplay.style.color = 'var(--secondary-color)';
+        console.log(`Total categories available: ${categories.length}`); // Debug log
         
         // Get a random category
         const randomIndex = Math.floor(Math.random() * categories.length);
         currentCategory = categories[randomIndex];
+        console.log(`Selected category ${randomIndex}: ${currentCategory}`); // Debug log
+        
         categoryDisplay.textContent = currentCategory;
         
         // Get a random time limit
@@ -664,4 +671,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize the game
     initGame();
-}); 
+});
