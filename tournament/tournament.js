@@ -3,8 +3,8 @@ let tournamentState = {
     totalGames: 5,
     currentGame: 0,
     scores: {},
-    availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'bluffme', 'quizzy'],
-    usedGames: []
+    // Fix casing in game URLs to match directory names
+    availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy']
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,29 +13,43 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initTournament() {
-    document.getElementById('playerCount').addEventListener('change', generatePlayerInputs);
-    document.getElementById('gamesCount').addEventListener('change', updateGameCount);
-    document.getElementById('startTournament').addEventListener('click', startTournament);
+    const playerCountSelect = document.getElementById('playerCount');
+    const gamesCountSelect = document.getElementById('gamesCount');
+    const startButton = document.getElementById('startTournament');
     
-    // Initialize handlers
-    document.getElementById('submitScores').addEventListener('click', handleScoreSubmission);
-    document.getElementById('nextGame').addEventListener('click', setupNextGame);
-    document.getElementById('newTournament').addEventListener('click', resetTournament);
-    document.getElementById('endTournament').addEventListener('click', showFinalResults);
+    if (playerCountSelect) playerCountSelect.addEventListener('change', generatePlayerInputs);
+    if (gamesCountSelect) gamesCountSelect.addEventListener('change', updateGameCount);
+    if (startButton) startButton.addEventListener('click', startTournament);
     
+    // Initialize with default values
+    tournamentState.totalGames = parseInt(document.getElementById('gamesCount').value) || 5;
+    
+    // Generate initial player inputs
     generatePlayerInputs();
+}
+
+function updateGameCount(event) {
+    const newCount = parseInt(event.target.value);
+    if (!isNaN(newCount)) {
+        tournamentState.totalGames = newCount;
+        const totalGamesSpan = document.getElementById('totalGames');
+        if (totalGamesSpan) {
+            totalGamesSpan.textContent = newCount;
+        }
+    }
 }
 
 function generatePlayerInputs() {
     const count = parseInt(document.getElementById('playerCount').value);
     const container = document.getElementById('playerInputs');
-    container.innerHTML = '';
+    if (!container) return;
 
+    container.innerHTML = '';
     for (let i = 0; i < count; i++) {
         const input = document.createElement('div');
         input.className = 'player-input';
         input.innerHTML = `
-            <input type="text" id="player${i}" placeholder="Player ${i + 1}">
+            <input type="text" id="player${i}" placeholder="Player ${i + 1}" required>
         `;
         container.appendChild(input);
     }
@@ -130,7 +144,7 @@ function resetTournament() {
         totalGames: 5,
         currentGame: 0,
         scores: {},
-        availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'bluffme', 'quizzy'],
+        availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy'],
         usedGames: []
     };
     showScreen('setup-screen');
