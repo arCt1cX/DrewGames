@@ -25,6 +25,7 @@ const translations = {
         'navPrivacy': 'Privacy Policy',
         'navTerms': 'Termini di Servizio',
         'navCookies': 'Cookie Policy',
+        'navTournament': 'Modalità Torneo',
         
         // Games Catalog Page
         'gamesPageTitle': 'La Collezione Completa dei Giochi',
@@ -264,6 +265,7 @@ const translations = {
         'navPrivacy': 'Privacy Policy',
         'navTerms': 'Terms of Service',
         'navCookies': 'Cookie Policy',
+        'navTournament': 'Tournament Mode',
         
         // Games Catalog Page
         'gamesPageTitle': 'The Complete Collection of Games',
@@ -632,4 +634,4 @@ function applyTranslations() {
             languageToggle.style.display = 'none';
         }
     }
-} 
+}

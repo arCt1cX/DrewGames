@@ -327,7 +327,9 @@
                     </div>
                     <div class="button-container">
                         <div id="indicator4_4p" class="turn-indicator">PREMI ORA</div>
-                        <button id="button4_4p" class="player-button">Premi</button>
+                        <button id="button4_4p" class="player-button" tabindex="0" aria-label="Player 4 button" onkeydown="handleKeyPress(event, 4)">
+    Premi
+</button>
                     </div>
                     <div id="status4_4p" class="status-display"></div>
                     <div id="placement4_4p" class="placement-display">4° POSTO</div>
@@ -364,4 +366,4 @@
     <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
