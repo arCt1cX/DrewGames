@@ -37,15 +37,26 @@ function showScreen(screenId) {
     });
     document.getElementById(screenId).classList.add('active');
     
-    // If showing score entry screen, generate score inputs
+    // If showing score entry screen, generate player buttons
     if (screenId === 'score-entry') {
         const scoreInputs = document.getElementById('scoreInputs');
         scoreInputs.innerHTML = tournamentState.players.map(player => `
-            <div class="score-input">
-                <label>${player.name}:</label>
-                <input type="number" data-player="${player.name}" min="0" value="0">
+            <div class="score-input" data-player="${player.name}">
+                <div class="player-name">${player.name}</div>
+                <div class="score-indicator">🏆</div>
             </div>
         `).join('');
+
+        // Add click handlers to player names
+        document.querySelectorAll('.score-input').forEach(el => {
+            let hasPoint = false;
+            el.addEventListener('click', () => {
+                const indicator = el.querySelector('.score-indicator');
+                hasPoint = !hasPoint;
+                el.classList.toggle('selected', hasPoint);
+                indicator.style.opacity = hasPoint ? '1' : '0.2';
+            });
+        });
     }
 }
 
@@ -149,15 +160,11 @@ function startTournament() {
 }
 
 function handleScoreSubmission() {
-    const scoreInputs = document.querySelectorAll('.score-input input');
-    tournamentState.lastGameWasDouble = tournamentState.doublePointsGames.includes(tournamentState.currentGame + 1);
-    
+    const scoreInputs = document.querySelectorAll('.score-input');
     scoreInputs.forEach(input => {
         const playerName = input.getAttribute('data-player');
-        const score = parseInt(input.value) || 0;
-        // Apply double points if this was a double points game
-        const finalScore = tournamentState.lastGameWasDouble ? score * 2 : score;
-        tournamentState.scores[playerName] += finalScore;
+        const score = input.classList.contains('selected') ? 1 : 0;
+        tournamentState.scores[playerName] += score;
     });
 
     tournamentState.currentGame++;

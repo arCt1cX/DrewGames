@@ -177,7 +177,18 @@ select {
     background: rgba(123, 104, 238, 0.1);
     padding: 15px;
     border-radius: 8px;
-    flex-wrap: wrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.score-input:hover {
+    background: rgba(123, 104, 238, 0.2);
+    transform: translateX(5px);
+}
+
+.score-input.selected {
+    background: rgba(123, 104, 238, 0.3);
+    transform: translateX(10px);
 }
 
 .score-input label {
@@ -198,6 +209,18 @@ select {
     text-align: center;
     -webkit-appearance: none;
     margin: 0;
+}
+
+.player-name {
+    font-size: 1.2em;
+    color: #f1f1f1;
+    flex: 1;
+}
+
+.score-indicator {
+    font-size: 1.4em;
+    opacity: 0.2;
+    transition: all 0.3s ease;
 }
 
 .score-inputs {
