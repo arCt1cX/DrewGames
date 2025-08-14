@@ -143,3 +143,35 @@ select {
     height: 18px;
     opacity: 0.9;
 }
+
+.score-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+    background: rgba(123, 104, 238, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.score-input label {
+    font-size: 1.1em;
+    color: #f1f1f1;
+    min-width: 100px;
+}
+
+.score-input input {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid rgba(123, 104, 238, 0.3);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.score-inputs {
+    margin: 20px 0;
+}

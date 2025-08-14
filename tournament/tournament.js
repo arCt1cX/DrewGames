@@ -32,6 +32,17 @@ function showScreen(screenId) {
         screen.classList.remove('active');
     });
     document.getElementById(screenId).classList.add('active');
+    
+    // If showing score entry screen, generate score inputs
+    if (screenId === 'score-entry') {
+        const scoreInputs = document.getElementById('scoreInputs');
+        scoreInputs.innerHTML = tournamentState.players.map(player => `
+            <div class="score-input">
+                <label>${player.name}:</label>
+                <input type="number" data-player="${player.name}" min="0" value="0">
+            </div>
+        `).join('');
+    }
 }
 
 function setupNextGame() {
@@ -66,6 +77,15 @@ function setupNextGame() {
 
 function startTournament() {
     const playerInputs = document.querySelectorAll('.player-input input');
+    const playerCount = playerInputs.length;
+    
+    // Update available games based on player count
+    tournamentState.availableGames = ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'BluffMe', 'quizzy'];
+    // Only add Chain Reaction if player count is 3 or 6
+    if (playerCount === 3 || playerCount === 6) {
+        tournamentState.availableGames.push('chainreaction');
+    }
+
     tournamentState.players = Array.from(playerInputs).map(input => ({
         name: input.value || input.placeholder,
         score: 0
@@ -75,15 +95,6 @@ function startTournament() {
         tournamentState.scores[player.name] = 0;
     });
 
-    const scoreInputs = document.getElementById('scoreInputs');
-    scoreInputs.innerHTML = tournamentState.players.map(player => `
-        <div class="score-input">
-            <label>${player.name}</label>
-            <input type="number" data-player="${player.name}" min="0" value="0">
-        </div>
-    `).join('');
-
-    tournamentState.currentGame = 0;
     setupNextGame();
 }
 
