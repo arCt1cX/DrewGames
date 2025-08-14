@@ -114,3 +114,32 @@ select {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(123, 104, 238, 0.4);
 }
+
+.home-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(123, 104, 238, 0.2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: rgba(123, 104, 238, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.9;
+}
