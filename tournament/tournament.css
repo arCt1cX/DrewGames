@@ -1,13 +1,56 @@
 .screen {
     display: none;
+    min-height: 100vh;
+    position: relative;
     padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    color: #f1f1f1;
 }
 
 .screen.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title styling for game screens */
+.screen h2 {
+    text-align: center;
+    margin: 20px 0 40px;
+    color: #7b68ee;
+    font-size: 1.4em;
+}
+
+/* Content containers */
+.random-game-container,
+.score-inputs,
+.rankings-list {
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Score entry screen specific */
+#score-entry {
+    text-align: center;
+}
+
+#score-entry .score-inputs {
+    margin: auto;
+    padding: 30px;
+}
+
+/* Rankings screen specific */
+#rankings {
+    text-align: center;
+}
+
+#rankings .rankings-list {
+    margin: auto;
+    padding: 30px;
+}
+
+/* Button container positioning */
+.ranking-controls {
+    margin-top: auto;
+    padding: 20px 0;
 }
 
 .setup-container {
@@ -399,5 +442,10 @@ select:hover {
     #playGame {
         padding: 12px 30px;
         font-size: 1.1em;
+    }
+
+    .screen h2 {
+        margin: 15px 0 30px;
+        font-size: 1.2em;
     }
 }
