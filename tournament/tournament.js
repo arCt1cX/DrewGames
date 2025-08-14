@@ -4,7 +4,8 @@ let tournamentState = {
     currentGame: 0,
     scores: {},
     availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy'],
-    usedGames: []
+    gameWeights: {},  // New property to track game weights
+    usedGames: []     // Keep this to track history but not for filtering
 };
 
 function updateGameCount() {
@@ -51,16 +52,30 @@ function setupNextGame() {
         return;
     }
 
-    let availableGames = tournamentState.availableGames.filter(g => !tournamentState.usedGames.includes(g));
-    if (availableGames.length === 0) {
-        tournamentState.usedGames = [];
-        availableGames = [...tournamentState.availableGames];
-    }
+    // Calculate total weight
+    const totalWeight = Object.values(tournamentState.gameWeights).reduce((a, b) => a + b, 0);
     
-    const randomIndex = Math.floor(Math.random() * availableGames.length);
-    const selectedGame = availableGames[randomIndex];
-    tournamentState.usedGames.push(selectedGame);
+    // Generate random value between 0 and total weight
+    let random = Math.random() * totalWeight;
+    let selectedGame = tournamentState.availableGames[0]; // Default fallback
+    
+    // Select game based on weights
+    for (const game of tournamentState.availableGames) {
+        random -= tournamentState.gameWeights[game];
+        if (random <= 0) {
+            selectedGame = game;
+            break;
+        }
+    }
 
+    // Reduce the weight for the selected game
+    tournamentState.gameWeights[selectedGame] = Math.max(
+        20, // Minimum 20% chance to be picked
+        tournamentState.gameWeights[selectedGame] - 30 // Reduce by 30% each time
+    );
+
+    tournamentState.usedGames.push(selectedGame); // Keep for history
+    
     document.getElementById('currentGame').textContent = tournamentState.currentGame + 1;
     document.getElementById('selectedGame').textContent = selectedGame;
     
@@ -95,6 +110,13 @@ function startTournament() {
         tournamentState.scores[player.name] = 0;
     });
 
+    // Initialize game weights
+    tournamentState.gameWeights = {};
+    tournamentState.availableGames.forEach(game => {
+        tournamentState.gameWeights[game] = 100; // Start with 100% chance
+    });
+
+    tournamentState.currentGame = 0;
     setupNextGame();
 }
 
@@ -158,6 +180,7 @@ function resetTournament() {
         currentGame: 0,
         scores: {},
         availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy'],
+        gameWeights: {},
         usedGames: []
     };
     showScreen('setup-screen');
