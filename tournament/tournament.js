@@ -182,21 +182,20 @@ function updateRankings() {
     rankingsList.innerHTML = rankings.map((player, index) => `
         <div class="ranking-item ${index === 0 ? 'winner' : ''}">
             <span>${index + 1}. ${player.name}</span>
-            <span>${player.score} points</span>
+            <span>${player.score} ${getTranslation('points')}</span>
         </div>
     `).join('');
-    
-    // If this was a double points game, show the surprise animation
+
     if (tournamentState.lastGameWasDouble) {
         const doublePointsAlert = document.createElement('div');
         doublePointsAlert.className = 'double-points-alert';
         doublePointsAlert.innerHTML = `
             <div class="double-points-content">
-                <h3>🎉 DOUBLE POINTS! 🎉</h3>
-                <p>This round's points were doubled!</p>
+                <h3>${getTranslation('doublePoints')}</h3>
+                <p>${getTranslation('doublePointsMessage')}</p>
             </div>
         `;
-        document.getElementById('rankingsList').prepend(doublePointsAlert);
+        rankingsList.prepend(doublePointsAlert);
     }
 }
 
@@ -236,6 +235,9 @@ function resetTournament() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize translations
+    applyTranslations();
+    
     document.getElementById('playerCount').addEventListener('change', generatePlayerInputs);
     document.getElementById('gamesCount').addEventListener('change', updateGameCount);
     document.getElementById('startTournament').addEventListener('click', startTournament);
@@ -256,3 +258,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+function getTranslation(key) {
+    const translations = {
+        en: {
+            points: 'points',
+            doublePoints: '🎉 DOUBLE POINTS! 🎉',
+            doublePointsMessage: "This round's points were doubled!",
+        },
+        it: {
+            points: 'punti',
+            doublePoints: '🎉 PUNTI DOPPI! 🎉',
+            doublePointsMessage: 'I punti di questo turno sono stati raddoppiati!',
+        },
+        // Add other languages here
+    };
+
+    const userLang = navigator.language || navigator.userLanguage;
+    const lang = userLang.startsWith('it') ? 'it' : 'en'; // Default to English if not Italian
+
+    return translations[lang][key] || translations['en'][key];
+}
+
+function applyTranslations() {
+    document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        element.textContent = getTranslation(key);
+    });
+}

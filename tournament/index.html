@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tournament Mode - DrewGames</title>
+    <title data-i18n="tournamentTitle">Tournament Mode</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="tournament.css">
 </head>
@@ -12,34 +12,34 @@
         <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="currentColor"/>
         </svg>
-        <span>Home</span>
+        <span data-i18n="navHome">Home</span>
     </div>
 
     <div id="tournament-app">
         <!-- Setup Screen -->
         <div id="setup-screen" class="screen active">
-            <h1>Tournament Mode</h1>
+            <h1 data-i18n="tournamentTitle">Tournament Mode</h1>
             
             <div class="setup-container">
                 <div class="games-setup">
-                    <h2>Number of Games</h2>
+                    <h2 data-i18n="numberOfGames">Number of Games</h2>
                     <select id="gamesCount">
-                        <option value="5">5 Games</option>
-                        <option value="10">10 Games</option>
-                        <option value="20">20 Games</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
                     </select>
                 </div>
 
                 <div class="players-setup">
-                    <h2>Players</h2>
+                    <h2 data-i18n="players">Players</h2>
                     <div class="player-count">
-                        <label>Number of Players:</label>
+                        <label data-i18n="numberOfPlayers">Number of Players:</label>
                         <select id="playerCount">
-                            <option value="2">2 Players</option>
-                            <option value="3">3 Players</option>
-                            <option value="4">4 Players</option>
-                            <option value="5">5 Players</option>
-                            <option value="6">6 Players</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
                         </select>
                     </div>
                     <div id="playerInputs" class="player-inputs">
@@ -47,51 +47,52 @@
                     </div>
                 </div>
 
-                <button id="startTournament" class="primary-button">Start Tournament</button>
+                <button id="startTournament" class="primary-button" data-i18n="startTournament">Start Tournament</button>
             </div>
         </div>
 
         <!-- Game Selection Screen -->
         <div id="game-select" class="screen">
-            <h2>Game <span id="currentGame">1</span> of <span id="totalGames">5</span></h2>
+            <h2><span data-i18n="game">Game</span> <span id="currentGame">1</span> <span data-i18n="of">of</span> <span id="totalGames">5</span></h2>
             <div class="random-game-container">
-                <h3>Random Game Selected:</h3>
+                <h3 data-i18n="randomGameSelected">Random Game Selected:</h3>
                 <div id="selectedGame" class="selected-game"></div>
-                <button id="playGame" class="primary-button">Play Game</button>
+                <button id="playGame" class="primary-button" data-i18n="playGame">Play Game</button>
             </div>
         </div>
 
         <!-- Score Entry Screen -->
         <div id="score-entry" class="screen">
-            <h2>Enter Game Scores</h2>
+            <h2 data-i18n="enterScores">Enter Game Scores</h2>
             <div id="scoreInputs" class="score-inputs">
                 <!-- Score inputs will be generated here -->
             </div>
-            <button id="submitScores" class="primary-button">Submit Scores</button>
+            <button id="submitScores" class="primary-button" data-i18n="submitScores">Submit Scores</button>
         </div>
 
         <!-- Rankings Screen -->
         <div id="rankings" class="screen">
-            <h2>Current Rankings</h2>
+            <h2 data-i18n="currentRankings">Current Rankings</h2>
             <div id="rankingsList" class="rankings-list">
                 <!-- Rankings will be generated here -->
             </div>
             <div class="ranking-controls">
-                <button id="nextGame" class="primary-button">Next Game</button>
-                <button id="endTournament" class="secondary-button">End Tournament</button>
+                <button id="nextGame" class="primary-button" data-i18n="nextGame">Next Game</button>
+                <button id="endTournament" class="secondary-button" data-i18n="endTournament">End Tournament</button>
             </div>
         </div>
 
         <!-- Final Results Screen -->
         <div id="final-results" class="screen">
-            <h1>Tournament Results</h1>
+            <h1 data-i18n="tournamentResults">Tournament Results</h1>
             <div id="finalRankings" class="final-rankings">
                 <!-- Final rankings will be generated here -->
             </div>
-            <button id="newTournament" class="primary-button">New Tournament</button>
+            <button id="newTournament" class="primary-button" data-i18n="newTournament">New Tournament</button>
         </div>
     </div>
 
+    <script src="../lang.js"></script>
     <script src="tournament.js"></script>
 </body>
 </html>

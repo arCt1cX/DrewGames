@@ -240,21 +240,24 @@ const translations = {
             ]
         },
         'tournamentTitle': 'Modalità Torneo',
-        'numberOfGames': 'Numero di Giochi',
-        'numberOfPlayers': 'Numero di Giocatori',
+        'numberOfGames': 'Numero di Partite',
+        'players': 'Giocatori',
+        'numberOfPlayers': 'Numero di Giocatori:',
         'startTournament': 'Inizia Torneo',
-        'gameNumber': 'Gioco',
+        'game': 'Partita',
         'of': 'di',
-        'randomGameSelected': 'Gioco Casuale Selezionato',
+        'randomGameSelected': 'Gioco Selezionato Casualmente:',
         'playGame': 'Gioca',
-        'enterScores': 'Inserisci Punteggi',
+        'enterScores': 'Inserisci i Punteggi',
         'submitScores': 'Invia Punteggi',
         'currentRankings': 'Classifica Attuale',
-        'nextGame': 'Prossimo Gioco',
+        'nextGame': 'Prossima Partita',
         'endTournament': 'Termina Torneo',
-        'tournamentResults': 'Risultati Torneo',
+        'tournamentResults': 'Risultati del Torneo',
         'newTournament': 'Nuovo Torneo',
-        'points': 'punti'
+        'points': 'punti',
+        'doublePoints': '🎉 PUNTI DOPPI! 🎉',
+        'doublePointsMessage': 'I punti di questo round sono stati raddoppiati!'
     },
     'en': {
         // Meta data
@@ -497,11 +500,12 @@ const translations = {
         },
         'tournamentTitle': 'Tournament Mode',
         'numberOfGames': 'Number of Games',
-        'numberOfPlayers': 'Number of Players',
+        'players': 'Players',
+        'numberOfPlayers': 'Number of Players:',
         'startTournament': 'Start Tournament',
-        'gameNumber': 'Game',
+        'game': 'Game',
         'of': 'of',
-        'randomGameSelected': 'Random Game Selected',
+        'randomGameSelected': 'Random Game Selected:',
         'playGame': 'Play Game',
         'enterScores': 'Enter Game Scores',
         'submitScores': 'Submit Scores',
@@ -510,7 +514,9 @@ const translations = {
         'endTournament': 'End Tournament',
         'tournamentResults': 'Tournament Results',
         'newTournament': 'New Tournament',
-        'points': 'points'
+        'points': 'points',
+        'doublePoints': '🎉 DOUBLE POINTS! 🎉',
+        'doublePointsMessage': 'This round\'s points were doubled!'
     }
 };
 
