@@ -333,4 +333,38 @@ p {
     100% {
         transform: rotate(0deg);
     }
-} 
+}
+
+/* Add tournament return button styles */
+.tournament-return-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(123, 104, 238, 0.2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.tournament-return-button:hover {
+    background-color: rgba(123, 104, 238, 0.4);
+    transform: translateY(-2px);
+}
+
+.tournament-return-button.hidden {
+    display: none;
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.9;
+}
