@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const reverseRevealScreen = document.getElementById('reverse-reveal-screen');
     const reverseAnonymousAnswer = document.getElementById('reverse-anonymous-answer');
     const playAgainReverseBtn = document.getElementById('play-again-reverse');
+    const reverseAnswerAuthor = document.getElementById('reverse-answer-author');
+    const revealAuthorBtn = document.getElementById('reveal-author-btn');
     
     // Apply game translations
     if (typeof applyGameTranslations === 'function') {
@@ -384,6 +386,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (answers.length === 0) return;
         const randomIndex = Math.floor(Math.random() * answers.length);
         reverseAnonymousAnswer.textContent = answers[randomIndex];
+        // Find the author (player index + 1)
+        let authorIndex = reverseAnswers.findIndex(a => a === answers[randomIndex]);
+        const lang = getUserLanguage();
+        const translations = gameTranslations[lang] || gameTranslations['en'];
+        reverseAnswerAuthor.textContent = translations.reverseAuthorText.replace('{n}', authorIndex + 1);
+        reverseAnswerAuthor.style.display = 'none';
+        if (revealAuthorBtn) {
+            revealAuthorBtn.textContent = translations.revealAuthorBtn;
+            revealAuthorBtn.style.display = '';
+        }
         showScreen(reverseRevealScreen);
     }
     
@@ -450,6 +462,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (playAgainReverseBtn) {
         playAgainReverseBtn.addEventListener('click', () => {
             showScreen(setupScreen);
+        });
+    }
+
+    if (revealAuthorBtn) {
+        revealAuthorBtn.addEventListener('click', () => {
+            reverseAnswerAuthor.style.display = '';
+            revealAuthorBtn.style.display = 'none';
         });
     }
     

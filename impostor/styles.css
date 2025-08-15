@@ -368,3 +368,24 @@ p {
     height: 18px;
     opacity: 0.9;
 }
+
+/* Make reverse answer textarea bigger and prevent mobile zoom */
+#reverse-answer-input {
+    font-size: 16px;
+    min-height: 60px;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #3d3d3d;
+    background-color: #2d2d2d;
+    color: #e1e1e1;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    outline: none;
+}
+
+@media (max-width: 600px) {
+  #reverse-answer-input {
+    font-size: 16px;
+  }
+}

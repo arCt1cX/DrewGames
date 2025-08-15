@@ -40,6 +40,8 @@ const gameTranslations = {
         'revealAnonymousAnswer': 'Rivela una Risposta Anonima',
         'anonymousAnswerIs': 'La risposta anonima è:',
         'guessWhoText': 'Chi pensi abbia scritto questa risposta? Discutete tra di voi!',
+        'reverseAuthorText': 'Il giocatore {n} ha scritto questa risposta!',
+        'revealAuthorBtn': 'Mostra Autore',
     },
     'en': {
         'gameTitle': 'Impostor Game',
@@ -81,6 +83,8 @@ const gameTranslations = {
         'revealAnonymousAnswer': 'Reveal Anonymous Answer',
         'anonymousAnswerIs': 'The anonymous answer is:',
         'guessWhoText': 'Who do you think wrote this answer? Discuss among yourselves!',
+        'reverseAuthorText': 'Player {n} wrote this answer!',
+        'revealAuthorBtn': 'Reveal Author',
     }
 };
 
