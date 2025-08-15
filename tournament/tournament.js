@@ -113,7 +113,7 @@ function startTournament() {
     // Update available games based on player count
     tournamentState.availableGames = ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'BluffMe', 'quizzy'];
     // Only add Chain Reaction if player count is 3 or 6
-    if (playerCount === 3 || playerCount === 6) {
+    if (playerCount === 6) {
         tournamentState.availableGames.push('chainreaction');
     }
 
