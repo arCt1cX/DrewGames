@@ -124,18 +124,31 @@
                     <option value="5">5 <span class="impostor-text">Impostori</span></option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="mode-select" id="modeLabel">Mode:</label>
+                <select id="mode-select">
+                    <option value="classic" id="classicMode">Classic</option>
+                    <option value="reverse" id="reverseMode">Reverse Impostor</option>
+                </select>
+            </div>
             <button id="start-game" class="btn primary-btn">Inizia Gioco</button>
         </div>
 
-        <!-- Player Turn Screen -->
+        <!-- Player Turn Screen (add answer input for reverse mode) -->
         <div id="player-turn-screen" class="game-screen">
-            <h2><span id="playerTurnText">Turno del Giocatore</span> <span id="current-player-num">1</span></h2>
-            <p><span id="passPhoneText">Passa il telefono al giocatore</span> <span id="current-player-num-text">1</span></p>
-            <button id="show-prompt" class="btn primary-btn pulse-btn"><span id="showPromptText">Mostra il mio Prompt</span></button>
+            <h2><span id="playerTurnText">Player Turn</span> <span id="current-player-num">1</span></h2>
+            <p><span id="passPhoneText">Pass the phone to player</span> <span id="current-player-num-text">1</span></p>
+            <button id="show-prompt" class="btn primary-btn pulse-btn"><span id="showPromptText">Show my Prompt</span></button>
             
             <div id="prompt-container" class="hidden">
                 <p class="prompt-text" id="player-prompt"></p>
-                <button id="hide-prompt" class="btn secondary-btn"><span id="seenItText">Ho Visto</span></button>
+                <!-- Answer input for reverse mode -->
+                <div id="reverse-answer-container" class="hidden">
+                    <label for="reverse-answer-input" id="typeYourAnswer">Type your answer:</label>
+                    <input type="text" id="reverse-answer-input" maxlength="100" autocomplete="off" />
+                    <button id="submit-reverse-answer" class="btn secondary-btn"><span id="submitAnswer">Submit Answer</span></button>
+                </div>
+                <button id="hide-prompt" class="btn secondary-btn"><span id="seenItText">I've Seen It</span></button>
             </div>
         </div>
 
@@ -172,6 +185,17 @@
                 <p id="impostor-prompt" class="prompt-text impostor-text"></p>
             </div>
             <button id="play-again" class="btn primary-btn"><span id="playAgainText">Gioca di Nuovo</span></button>
+        </div>
+
+        <!-- Anonymous Answer Reveal Screen for Reverse Mode -->
+        <div id="reverse-reveal-screen" class="game-screen">
+            <h2 id="revealAnonymousAnswer">Reveal Anonymous Answer</h2>
+            <div class="info-card">
+                <p id="anonymousAnswerIs">The anonymous answer is:</p>
+                <p id="reverse-anonymous-answer" class="prompt-text"></p>
+            </div>
+            <p id="guessWhoText">Who do you think wrote this answer? Discuss among yourselves!</p>
+            <button id="play-again-reverse" class="btn primary-btn"><span id="playAgainText">Play Again</span></button>
         </div>
     </div>
 

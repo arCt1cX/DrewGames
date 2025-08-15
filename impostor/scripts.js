@@ -35,6 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const impostorPromptElement = document.getElementById('impostor-prompt');
     const playAgainBtn = document.getElementById('play-again');
     
+    const modeSelect = document.getElementById('mode-select');
+    const reverseAnswerContainer = document.getElementById('reverse-answer-container');
+    const reverseAnswerInput = document.getElementById('reverse-answer-input');
+    const submitReverseAnswerBtn = document.getElementById('submit-reverse-answer');
+    const reverseRevealScreen = document.getElementById('reverse-reveal-screen');
+    const reverseAnonymousAnswer = document.getElementById('reverse-anonymous-answer');
+    const playAgainReverseBtn = document.getElementById('play-again-reverse');
+    
     // Apply game translations
     if (typeof applyGameTranslations === 'function') {
         applyGameTranslations();
@@ -52,6 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
         allPhrasePairs: [],
         hasImpostor: true // New property to track if there's an impostor
     };
+    
+    let reverseAnswers = [];
+    let selectedMode = 'classic';
     
     // Load prompts from the text file
     async function loadPrompts() {
@@ -108,6 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
             impostorCountInput.value = maxImpostors;
         }
         
+        selectedMode = modeSelect ? modeSelect.value : 'classic';
+        reverseAnswers = [];
+        
         // Reset game state
         gameState.currentPlayer = 1;
         gameState.prompts = [];
@@ -116,57 +130,71 @@ document.addEventListener('DOMContentLoaded', () => {
         // Determine if this game will have impostors (1/50 chance of no impostor)
         gameState.hasImpostor = Math.random() > 0.05; // 95% chance to have impostors
         
-        if (gameState.hasImpostor) {
-            // Use the weighted random selection for impostors instead of completely random
-            gameState.impostorIndices = selectWeightedRandomImpostors(
-                gameState.playerCount, 
-                gameState.impostorCount,
-                previousImpostors
-            );
-            
-            // Randomly select a phrase pair for this round
-            const randomPairIndex = Math.floor(Math.random() * gameState.allPhrasePairs.length);
-            const selectedPair = gameState.allPhrasePairs[randomPairIndex];
-            
-            // Always use first phrase for group, second phrase for impostor
-            gameState.groupPrompt = selectedPair.groupPhrase;
-            gameState.impostorPrompt = selectedPair.impostorPhrase;
-            
-            console.log(`Game started with ${gameState.playerCount} players, ${gameState.impostorCount} impostors`);
-            console.log(`Impostors are players: ${gameState.impostorIndices.map(idx => idx + 1).join(', ')}`);
-            console.log(`Group prompt: ${gameState.groupPrompt}`);
-            console.log(`Impostor prompt: ${gameState.impostorPrompt}`);
-            
-            // Save the current impostors to the history
-            // Add the current impostors to the beginning of the history array
-            previousImpostors = [...gameState.impostorIndices, ...previousImpostors];
-            // Trim the history to keep only the last 3 games' worth of impostors
-            const maxHistoryLength = gameState.playerCount * 3;
-            if (previousImpostors.length > maxHistoryLength) {
-                previousImpostors = previousImpostors.slice(0, maxHistoryLength);
-            }
-            console.log("Updated impostor history:", previousImpostors);
-        } else {
-            // No impostor game!
+        if (selectedMode === 'reverse') {
+            // Only use group prompt, no impostors
+            gameState.impostorCount = 0;
             gameState.impostorIndices = [];
-            
-            // Select just a group prompt
+            gameState.hasImpostor = false;
+            // Select a group prompt
             const randomPairIndex = Math.floor(Math.random() * gameState.allPhrasePairs.length);
             const selectedPair = gameState.allPhrasePairs[randomPairIndex];
-            
-            // Always use the first (left) phrase for the group
             gameState.groupPrompt = selectedPair.groupPhrase;
-            gameState.impostorPrompt = ""; // Not used in this game
+            gameState.currentPlayer = 1;
+            updatePlayerTurnUI();
+            showScreen(playerTurnScreen);
+        } else {
+            if (gameState.hasImpostor) {
+                // Use the weighted random selection for impostors instead of completely random
+                gameState.impostorIndices = selectWeightedRandomImpostors(
+                    gameState.playerCount, 
+                    gameState.impostorCount,
+                    previousImpostors
+                );
+                
+                // Randomly select a phrase pair for this round
+                const randomPairIndex = Math.floor(Math.random() * gameState.allPhrasePairs.length);
+                const selectedPair = gameState.allPhrasePairs[randomPairIndex];
+                
+                // Always use first phrase for group, second phrase for impostor
+                gameState.groupPrompt = selectedPair.groupPhrase;
+                gameState.impostorPrompt = selectedPair.impostorPhrase;
+                
+                console.log(`Game started with ${gameState.playerCount} players, ${gameState.impostorCount} impostors`);
+                console.log(`Impostors are players: ${gameState.impostorIndices.map(idx => idx + 1).join(', ')}`);
+                console.log(`Group prompt: ${gameState.groupPrompt}`);
+                console.log(`Impostor prompt: ${gameState.impostorPrompt}`);
+                
+                // Save the current impostors to the history
+                // Add the current impostors to the beginning of the history array
+                previousImpostors = [...gameState.impostorIndices, ...previousImpostors];
+                // Trim the history to keep only the last 3 games' worth of impostors
+                const maxHistoryLength = gameState.playerCount * 3;
+                if (previousImpostors.length > maxHistoryLength) {
+                    previousImpostors = previousImpostors.slice(0, maxHistoryLength);
+                }
+                console.log("Updated impostor history:", previousImpostors);
+            } else {
+                // No impostor game!
+                gameState.impostorIndices = [];
+                
+                // Select just a group prompt
+                const randomPairIndex = Math.floor(Math.random() * gameState.allPhrasePairs.length);
+                const selectedPair = gameState.allPhrasePairs[randomPairIndex];
+                
+                // Always use the first (left) phrase for the group
+                gameState.groupPrompt = selectedPair.groupPhrase;
+                gameState.impostorPrompt = ""; // Not used in this game
+                
+                console.log("Special game: No impostor!");
+                console.log(`Group prompt for everyone: ${gameState.groupPrompt}`);
+            }
             
-            console.log("Special game: No impostor!");
-            console.log(`Group prompt for everyone: ${gameState.groupPrompt}`);
+            // Update UI for first player
+            updatePlayerTurnUI();
+            
+            // Switch screen
+            showScreen(playerTurnScreen);
         }
-        
-        // Update UI for first player
-        updatePlayerTurnUI();
-        
-        // Switch screen
-        showScreen(playerTurnScreen);
     }
     
     // Function to select impostors with weighted randomization
@@ -251,24 +279,42 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hide prompt container initially
         promptContainer.classList.add('hidden');
         showPromptBtn.classList.remove('hidden');
+        // Reset answer input for reverse mode
+        if (selectedMode === 'reverse') {
+            reverseAnswerInput.value = '';
+            reverseAnswerContainer.classList.add('hidden');
+        }
     }
     
     // Show prompt for current player
     function showPrompt() {
-        // In a no-impostor game, everyone gets the same prompt
-        // Otherwise, check if current player is an impostor
-        const isImpostor = gameState.hasImpostor && gameState.impostorIndices.includes(gameState.currentPlayer - 1);
-        
-        // Set the appropriate prompt
-        playerPrompt.textContent = isImpostor ? gameState.impostorPrompt : gameState.groupPrompt;
-        
-        // Show prompt container
-        promptContainer.classList.remove('hidden');
-        showPromptBtn.classList.add('hidden');
+        if (selectedMode === 'reverse') {
+            playerPrompt.textContent = gameState.groupPrompt;
+            promptContainer.classList.remove('hidden');
+            showPromptBtn.classList.add('hidden');
+            reverseAnswerContainer.classList.remove('hidden');
+            hidePromptBtn.classList.add('hidden');
+        } else {
+            // In a no-impostor game, everyone gets the same prompt
+            // Otherwise, check if current player is an impostor
+            const isImpostor = gameState.hasImpostor && gameState.impostorIndices.includes(gameState.currentPlayer - 1);
+            
+            // Set the appropriate prompt
+            playerPrompt.textContent = isImpostor ? gameState.impostorPrompt : gameState.groupPrompt;
+            
+            // Show prompt container
+            promptContainer.classList.remove('hidden');
+            showPromptBtn.classList.add('hidden');
+            hidePromptBtn.classList.remove('hidden');
+        }
     }
     
     // Move to next player or writing screen
     function nextPlayerOrWriting() {
+        if (selectedMode === 'reverse') {
+            // Should not be called in reverse mode, handled by submitReverseAnswerBtn
+            return;
+        }
         if (gameState.currentPlayer < gameState.playerCount) {
             // Move to next player
             gameState.currentPlayer++;
@@ -331,6 +377,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         showScreen(revealScreen);
     }
+
+    function showReverseAnonymousAnswer() {
+        // Pick a random answer
+        const answers = reverseAnswers.filter(a => a && a.length > 0);
+        if (answers.length === 0) return;
+        const randomIndex = Math.floor(Math.random() * answers.length);
+        reverseAnonymousAnswer.textContent = answers[randomIndex];
+        showScreen(reverseRevealScreen);
+    }
     
     // Helper to show a specific screen and hide others
     function showScreen(screenToShow) {
@@ -359,6 +414,44 @@ document.addEventListener('DOMContentLoaded', () => {
     playAgainBtn.addEventListener('click', () => {
         showScreen(setupScreen);
     });
+
+    if (modeSelect) {
+        modeSelect.addEventListener('change', (e) => {
+            selectedMode = e.target.value;
+            // Hide impostor count if reverse mode
+            if (selectedMode === 'reverse') {
+                document.getElementById('impostor-count').parentElement.style.display = 'none';
+            } else {
+                document.getElementById('impostor-count').parentElement.style.display = '';
+            }
+        });
+        selectedMode = modeSelect.value;
+    }
+
+    if (submitReverseAnswerBtn) {
+        submitReverseAnswerBtn.addEventListener('click', () => {
+            const answer = reverseAnswerInput.value.trim();
+            if (answer.length === 0) return;
+            reverseAnswers[gameState.currentPlayer - 1] = answer;
+            reverseAnswerInput.value = '';
+            reverseAnswerContainer.classList.add('hidden');
+            // Move to next player or reveal
+            if (gameState.currentPlayer < gameState.playerCount) {
+                gameState.currentPlayer++;
+                updatePlayerTurnUI();
+                showPromptBtn.classList.remove('hidden');
+            } else {
+                // All players have answered, show anonymous answer
+                showReverseAnonymousAnswer();
+            }
+        });
+    }
+
+    if (playAgainReverseBtn) {
+        playAgainReverseBtn.addEventListener('click', () => {
+            showScreen(setupScreen);
+        });
+    }
     
     // Add impostor count validation
     playerCountInput.addEventListener('change', () => {

@@ -30,7 +30,16 @@ const gameTranslations = {
         'playerText': 'Il giocatore',
         'theirPromptWasText': 'Il suo prompt era:',
         'playAgainText': 'Gioca di Nuovo',
-        'phrasesFile': 'frasi_gioco_impostore.txt'
+        'phrasesFile': 'frasi_gioco_impostore.txt',
+        'modeLabel': 'Modalità:',
+        'classicMode': 'Classica',
+        'reverseMode': 'Impostore al Contrario',
+        'reverseInstructions': 'Tutti riceveranno lo stesso prompt. Ogni giocatore scrive la propria risposta. Una risposta verrà mostrata in modo anonimo: indovinate chi l\'ha scritta!',
+        'typeYourAnswer': 'Scrivi la tua risposta:',
+        'submitAnswer': 'Invia Risposta',
+        'revealAnonymousAnswer': 'Rivela una Risposta Anonima',
+        'anonymousAnswerIs': 'La risposta anonima è:',
+        'guessWhoText': 'Chi pensi abbia scritto questa risposta? Discutete tra di voi!',
     },
     'en': {
         'gameTitle': 'Impostor Game',
@@ -62,7 +71,16 @@ const gameTranslations = {
         'playerText': 'Player',
         'theirPromptWasText': 'Their prompt was:',
         'playAgainText': 'Play Again',
-        'phrasesFile': 'impostor_phrases_en.txt'
+        'phrasesFile': 'impostor_phrases_en.txt',
+        'modeLabel': 'Mode:',
+        'classicMode': 'Classic',
+        'reverseMode': 'Reverse Impostor',
+        'reverseInstructions': 'Everyone will get the same prompt. Each player writes their answer. One answer will be shown anonymously: guess who wrote it!',
+        'typeYourAnswer': 'Type your answer:',
+        'submitAnswer': 'Submit Answer',
+        'revealAnonymousAnswer': 'Reveal Anonymous Answer',
+        'anonymousAnswerIs': 'The anonymous answer is:',
+        'guessWhoText': 'Who do you think wrote this answer? Discuss among yourselves!',
     }
 };
 
