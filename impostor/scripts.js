@@ -390,6 +390,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let authorIndex = reverseAnswers.findIndex(a => a === answers[randomIndex]);
         const lang = getUserLanguage();
         const translations = gameTranslations[lang] || gameTranslations['en'];
+        document.getElementById('revealAnonymousAnswer').textContent = translations.revealAnonymousAnswer;
+        document.getElementById('anonymousAnswerIs').textContent = translations.anonymousAnswerIs;
+        document.getElementById('guessWhoText').textContent = translations.guessWhoText;
+        playAgainReverseBtn.textContent = translations.playAgainText;
         reverseAnswerAuthor.textContent = translations.reverseAuthorText.replace('{n}', authorIndex + 1);
         reverseAnswerAuthor.style.display = 'none';
         if (revealAuthorBtn) {
@@ -461,6 +465,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (playAgainReverseBtn) {
         playAgainReverseBtn.addEventListener('click', () => {
+            // Hide reverse reveal screen and its elements
+            reverseRevealScreen.classList.remove('active');
+            reverseAnswerAuthor.style.display = 'none';
+            if (revealAuthorBtn) revealAuthorBtn.style.display = 'none';
             showScreen(setupScreen);
         });
     }
