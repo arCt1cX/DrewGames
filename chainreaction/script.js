@@ -33,21 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let isPaused = false;
     let isGamePaused = false; // New variable for the pause/resume button
     
-    // Tournament integration: pre-select number of players if in tournament mode
-    const urlParams = new URLSearchParams(window.location.search);
-    const isTournament = urlParams.get('mode') === 'tournament';
-    if (isTournament) {
-        try {
-            const tournamentState = JSON.parse(localStorage.getItem('tournamentState'));
-            if (tournamentState && tournamentState.players && tournamentState.players.length) {
-                const playerCount = tournamentState.players.length;
-                // If there is a player count selection, set it
-                const playerCountSelect = document.getElementById('playerCount');
-                if (playerCountSelect) playerCountSelect.value = playerCount;
-            }
-        } catch (e) {}
-    }
-    
     // Fetch words from the appropriate words file based on language
     async function fetchWords() {
         try {

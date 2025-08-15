@@ -41,26 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load questions
     loadQuestions();
 
-    // Tournament integration: pre-fill player count and names if in tournament mode
-    const urlParams = new URLSearchParams(window.location.search);
-    const isTournament = urlParams.get('mode') === 'tournament';
-    if (isTournament) {
-        try {
-            const tournamentState = JSON.parse(localStorage.getItem('tournamentState'));
-            if (tournamentState && tournamentState.players && tournamentState.players.length) {
-                document.getElementById('player-count').value = tournamentState.players.length;
-                document.getElementById('continue-to-players').click();
-                setTimeout(() => {
-                    const playerInputs = document.querySelectorAll('.player-name-input input');
-                    tournamentState.players.forEach((p, i) => {
-                        if (playerInputs[i]) playerInputs[i].value = p.name;
-                    });
-                    document.getElementById('start-game').click();
-                }, 400);
-            }
-        } catch (e) {}
-    }
-
     function initEventListeners() {
         // Welcome screen
         document.getElementById('start-setup').addEventListener('click', function() {
