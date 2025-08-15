@@ -1201,6 +1201,23 @@ document.addEventListener('DOMContentLoaded', () => {
         initGame();
     });
     
+    // Tournament integration: pre-select number of players if in tournament mode
+    const urlParams = new URLSearchParams(window.location.search);
+    const isTournament = urlParams.get('mode') === 'tournament';
+    if (isTournament) {
+        try {
+            const tournamentState = JSON.parse(localStorage.getItem('tournamentState'));
+            if (tournamentState && tournamentState.players && tournamentState.players.length) {
+                const playerCount = tournamentState.players.length;
+                // Find the player mode button and select it
+                const playerButtons = document.querySelectorAll('[data-players]');
+                playerButtons.forEach(btn => btn.classList.remove('selected'));
+                const btn = Array.from(playerButtons).find(b => b.getAttribute('data-players') == playerCount);
+                if (btn) btn.classList.add('selected');
+            }
+        } catch (e) {}
+    }
+    
     // Event Listeners - 2 Player Game
     
     // Player Buttons - 2 Player

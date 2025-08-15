@@ -291,6 +291,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show prompt for current player
     function showPrompt() {
         if (selectedMode === 'reverse') {
+            const lang = getUserLanguage();
+            const translations = gameTranslations[lang] || gameTranslations['en'];
+            document.getElementById('typeYourAnswer').textContent = translations.typeYourAnswer;
+            submitReverseAnswerBtn.textContent = translations.submitAnswer;
             playerPrompt.textContent = gameState.groupPrompt;
             promptContainer.classList.remove('hidden');
             showPromptBtn.classList.add('hidden');
@@ -515,6 +519,22 @@ document.addEventListener('DOMContentLoaded', () => {
             impostorCountInput.selectedIndex = 0;
         }
     });
+    
+    // Tournament integration: pre-fill player count if in tournament mode
+    const urlParams = new URLSearchParams(window.location.search);
+    const isTournament = urlParams.get('mode') === 'tournament';
+    if (isTournament) {
+        try {
+            const tournamentState = JSON.parse(localStorage.getItem('tournamentState'));
+            if (tournamentState && tournamentState.players && tournamentState.players.length) {
+                playerCountInput.value = tournamentState.players.length;
+                // Optionally, auto-start the game
+                setTimeout(() => {
+                    startGameBtn.click();
+                }, 300);
+            }
+        } catch (e) {}
+    }
     
     // Initial load
     loadPrompts();

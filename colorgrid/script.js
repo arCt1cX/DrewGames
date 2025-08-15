@@ -151,6 +151,27 @@ function init() {
     gotItButton.addEventListener('click', handleGotIt);
     
     resetGame();
+
+    // Tournament integration: pre-fill player count and names if in tournament mode
+    const urlParams = new URLSearchParams(window.location.search);
+    const isTournament = urlParams.get('mode') === 'tournament';
+    if (isTournament) {
+        try {
+            const tournamentState = JSON.parse(localStorage.getItem('tournamentState'));
+            if (tournamentState && tournamentState.players && tournamentState.players.length) {
+                // Remove all existing players
+                players = [];
+                playerInputsArea.innerHTML = '';
+                // Add the correct number of players
+                for (let i = 0; i < tournamentState.players.length; i++) {
+                    addPlayer();
+                    // Set name if possible
+                    const input = playerInputsArea.querySelectorAll('input')[i];
+                    if (input) input.value = tournamentState.players[i].name;
+                }
+            }
+        } catch (e) {}
+    }
 }
 
 // Update grid coordinate labels based on grid size
