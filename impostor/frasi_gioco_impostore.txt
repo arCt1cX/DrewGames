@@ -281,3 +281,97 @@ Una materia bella ma in cui avevi un professore pessimo | Una materia di scuola 
 L’esame universitario a cui avresti voluto un voto più alto | L’esame universitario che ti è piaciuto di più 
 L’orario in cui solitamente fai colazione | Il migliore orario per svegliarsi in un weekend tranquillo 
 Il migliore orario per andare a dormire quando non hai piani per la sera | L’orario in cui esci normalmente la sera per incontrare i tuoi amici
+Quanto riusciresti a sopravvivere in una foresta? | Scegli: 1 ora, 1 giorno, 1 mese o 1 anno
+Se potessi migliorare una tua caratteristica, quale sceglieresti? | Qual è la tua migliore caratteristica?
+La persona più responsabile nel gruppo? | La persona più brava a guidare nel gruppo?
+Il/la più ubriacone/a del gruppo? | Il/la peggiore a guidare nel gruppo
+Età in cui ricevere il primo cellulare | Spara un numero da 5 a 17
+Il peggior piatto che ti è stato servito a cena a casa di qualcuno | una combinazione di cibi che hai visto ma che non proveresti mai
+Se fossi re del tuo paese, qual è la prima legge che aggiungeresti? | una regola fondamentale da rispettare a casa tua
+La persona del gruppo che si sposerà per prima | la persona del gruppo che più probabilmente finirà in galera
+Se dovessi finire in galera, per quale reato sarebbe? | un reato che non dovrebbe essere considerato reato secondo te
+Il tuo frutto di bosco preferito? | Un frutto di bosco che non mangi mai
+Quale persona del gruppo sceglieresti come coinquilino | chi è il più bravo del gruppo a cucinare
+Un videogioco che non piace quasi a nessuno ma a te si | un videogioco a cui hai giocato un paio di volte e mai più toccato
+Il peggior periodo storico in cui viaggiare nel tempo accidentalmente | Il periodo storico più interessante in cui viaggiare nel tempo
+Se dovessi andare a un quiz show, quale faresti? | Il quiz show in tv a cui perderesti subito
+Quale è la massima lunghezza accettabile per un audio su whatsapp | Scegli un tempo: da 5 secondi a 5 minuti
+Quanti piegamenti credi di riuscire a fare di fila? | Spara un numero da 3 a 50
+Quanti tempo riesci a rimanere in plank? | Scegli un tempo: da 10 secondi a 5 minuti
+Se dovessi scegliere il numero dei tuoi follower su Instagram, quale sarebbe? | Il numero massimo di follower su Instagram della tua ragazza, dopo il quale cominciano ad essere troppi
+Di quale azienda / marca vorresti essere CEO? | Qual è una marca sopravvalutata?
+Un paese poco visitato che vorresti vedere | uno stato africano random
+La persona più famosa che hai visto dal vivo | Un personaggio famoso facile da riconoscere
+Se potessi passare un giorno con un personaggio famoso attuale, chi sceglieresti | Nomina un politico attuale molto famoso nel mondo
+Qual è l'abitudine peggiore che una persona del gruppo ha? | Qual è l'abitudine che una persona del gruppo ha e che vorresti avere anche tu?
+Qual è la tua parte del corpo di cui vai più fiero | Qual è il muscolo più forte del tuo corpo?
+Qual è un'attività manuale/pratica che vorresti essere capace di fare? | Un'attività manuale/pratica che pochissimi sanno fare
+Un posto della tua città che ti fa schifo | Un posto della tua città in cui non vai mai
+Qual è il tempo massimo che aspetteresti il tuo amico ritardatario sotto casa sua prima di andartene? | Range: da 1 minuto a 45 minuti
+Se potessi scegliere 2 persone famose che ti difendano in una rissa? | Nomina due lottatori di qualsiasi arte marziale di qualsiasi epoca
+Qual attore vorresti che interpretasse te nel tuo film autobiografico? | Un attore che ti piace molto
+Una parola con cui descriveresti il giocatore alla tua sinistra | Una cosa losca che il giocatore alla tua sinistra fa sempre
+In quale sport pensi di poter battere chiunque dei presenti | Uno sport che a pochi piace ma a te non dispiace
+Qual è la somma perfetta da lasciare di mancia al fattorino delle pizze? | Range: da 50 centesimi a 7€
+Chi è la persona tra i presenti che fa più spesso cose imbarazzanti in pubblico | La persona più tossicodipendente tra i presenti
+Quante persone vorresti al tuo matrimonio? | Spara un numero da 20 a 100
+Come intitoleresti un film sulla tua vita? | Pensa un titolo di un film
+Quale social non hai mai disattivato ma non usi mai? | Il social peggiore su cui passare il tempo
+Se fossi un artista musicale come ti chiameresti? | Un soprannome che ti è stato dato spesso
+Se dovessi vivere in una serie tv, quale sceglieresti? | Una serie tv a caso che hai visto
+La professoressa delle medie che non sopportavi | Una professoressa delle medie che avresti voluto anche al liceo
+Una professoressa del liceo che avresti voluto anche alle medie | la professoressa del liceo la cui materia era quella in cui eri più forte
+Un cartone che piaceva a tutti ma a te no | Un cartone animato da 6 su 10
+Se dovessi fare l'insegnante a scuola di una materia, quale sceglieresti? | Una materia in cui avresti voluto avere voti più alti a scuola
+In quale esame universitario hai incontrato il professore più antipatico di tutti? | L'esame universitario che ti ha messo più in difficoltà
+Se dovessi mollare tutto e iniziare un nuovo lavoro, quale proveresti? | Un lavoro non troppo difficile ma con un buono stipendio
+Una marca di vestiti che ti piace moltissimo | una marca di vestiti buona ma sopravvalutata
+Se potessi rubare una cosa/capacità/caratteristica al giocatore alla tua sinistra, cosa sceglieresti? | Scegli uno tra: intelligenza, forza fisica, simpatia 
+A che età hai scritto il tuo primo curriculum vitae? | Range di età: 14-25 anni
+La cosa peggiore che ti è successa durante un viaggio/vacanza | Inventa una cosa bruttissima che ti è successa durante un viaggio / vacanza
+Di quante lingue conosci almeno una parola? | Spara un numero da 4 a 12
+Se dovessi aggiungere una materia da insegnare nelle scuole, quale faresti? | Una materia scolastica in cui, se fosse esistita, avresti preso tutti 10
+Se ci fosse un'apocalisse zombie, in quale casa dei vostri amici ti rifugeresti? | Una casa di uno fra tutti i tuoi amici che scambieresti con la tua
+Se ci fosse un'apocalisse zombie, in quale luogo del mondo ti rifugeresti? | Una parte del mondo molto remota, ma che ti piacerebbe vedere
+In quale sera si festeggia ferragosto, quella del 14 o del 15? | 14 o 15?
+Se potessi rubare un piatto/pietanza a qualsiasi cucina straniera, quale sceglieresti? | Il piatto/pietanza straniera che mangi più spesso in assoluto
+Se potessi usare un solo integratore alimentare per il resto della tua vita, quale sceglieresti? | L'integratore alimentare che hai usato di più
+Il tuo esercizio preferito in palestra/nel tuo sport | L'esercizio in palestra/nel tuo sport in cui sei oggettivamente più forte
+Se dovessi scambiare lavoro/studi con una persona tra i presenti, quale sceglieresti? | Nomina uno dei presenti
+Qual è la regione più sottovalutata d'Italia | Scegli una tra: Basilicata, Umbria, Friuli Venezia Giulia
+Se dovessi cambiare la città in cui vivi, quale altra sceglieresti (in Italia) | Qual è la città italiana più sottovalutata
+Se dovessi eliminare una tra: Amatriciana, Carbonara, Cacio e Pepe, quale elimineresti? | Scegli una tra: amatriciana, Carbonara, Cacio e Pepe
+Qual è l'animale che ti fa più paura? | Qual è l'animale più pericoloso? 
+Chi dei presenti chiameresti per difenderti in una rissa? | Chi è la persona meno tranquilla tra i presenti?
+Qual è il museo migliore che hai visto in vita tua? | Nomina un museo
+Ti trasferiresti a vita in India per 10 milioni di euro? | Si o no?
+Se potessi ricevere 1 milioni per ogni kg di peso che ti viene aggiunto, quanti kg ti aggiungeresti? | Spara un numero da 10 a 60
+Un'applicazione che hai sul telefono e che sei sicuro che nessun altro dei presenti abbia | Un'applicazione sul telefono che non hai disinstallato ma che non usi mai
+Se aprissi una fattoria, qual è il primo animale che metteresti? | Nomina un animale da fattoria
+Qual è l'attività con cui passa il tempo libero la persona alla tua destra? | Qual è l'attività con cui passa il tempo libero la persona alla tua sinistra?
+Quale filosofo ti rappresenta? | Nomina un filosofo che ti ricordi da scuola
+Qual è la fermata più brutta della metropolitana della tua città? | Qual è una fermata della metropolitana della tua città in cui non scendi mai?
+Qual è la fermata della metropolitana della tua città in cui sei sceso o salito più spesso? | Qual è la fermata della metropolitana della tua città con più borseggiatori?
+Se dovessi mollare tutto e scegliere una nuova facoltà universitaria, quale sceglieresti? | Qual è la facoltà universitaria che da più lavoro secondo te
+Diventi ricco ma il tuo paese diventa una dittatura militare, accetti? | Si o no?
+Puoi imparare una lingua all'istante, quale scegli? | La lingua che si parla nello stato estero in cui ti vorresti trasferire (oltre all'inglese) 
+Il membro più idiota tra tutti i tuoi i parenti | Un parente che ti sta particolarmente simpatico o a cuore
+Se dovessi far fare un tuo esame universitario al giocatore alla tua destra, quale esame sceglieresti? | Quale tuo esame universitario il giocatore alla tua destra non supererebbe mai?
+Preferisci fare il bagno al mare, al lago o in piscina? | Rispondi: piscina
+Quale compagno di classe non sceglieresti mai per un lavoro di gruppo? | Nomina un tuo compagno di classe qualsiasi
+Se potessi scegliere un cocktail che in ogni bar è sempre gratis per te, quale sceglieresti? | Il cocktail più forte che hai mai bevuto
+Meglio il vino rosso, bianco o rosato? | Rispondi: bianco
+Il ristorante della tua città peggiore in cui sei stato | Un ristorante della tua città che piace sicuramente al giocatore alla tua destra
+Qual è il motore di ricerca che usi di più? | Rispondi: Google Chrome
+Escluso l'elefante, quali tre animali sceglieresti per difenderti in un combattimento? | Quali sono tre animali carnivori che non vorresti mai trovarti davanti?
+Se potessi scambiare la tua macchina con uno dei presenti, chi di loro sceglieresti? | Nomina una persona tra i presenti, oppure puoi dire "nessuno"
+Un rapper che a tutti piace ma te trovi inascoltabile | Un rapper di cui non ricordi neanche una canzone 
+Un hobby di uno dei presenti che non fa proprio per te | Un hobby di uno dei presenti che potendo faresti anche tu
+Il peggior masturbatore compulsivo tra i presenti | Il più propenso a lavorare in un circo tra i presenti
+Chi tra i presenti conosce più nomi di pornostar? | Chi tra i presenti è il più propenso ad essere un gay represso?
+La persona tra i presenti che ha più atteggiamenti omosessuali | Chi tra i presenti fa più abuso di alcol?
+Chi tra i presenti è il più propenso ad andare a lavorare per i cartelli della droga colombiani? | Chi tra i presenti fuma più frequentemente?
+Cos'è la cosa più piacevole da fumare? | Nomina una qualsiasi cosa che si fuma
+Chi tra i presenti ha la grafia peggiore da leggere? | Chi è il più ignorante tra i presenti?
+Quante volte vai a defecare (smerdare) al giorno? | Spara un numero da 0 a 5
+In un giorno, vai a cagare più volte di quanto ti masturbi? Si o no? | Si o no?
