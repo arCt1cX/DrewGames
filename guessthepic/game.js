@@ -110,6 +110,26 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('DOMContentLoaded', function() {
         updatePlayerCountOptions();
         
+        // Auto-fill tournament data if in tournament mode (after dropdown is ready)
+        if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
+            const tournamentPlayers = tournamentUtils.getTournamentPlayers();
+            if (tournamentPlayers.length > 0) {
+                // Set player count dropdown
+                playerCountSelect.value = tournamentPlayers.length;
+                // Update player inputs
+                updatePlayerInputs();
+                // Auto-fill player names
+                setTimeout(() => {
+                    for (let i = 0; i < tournamentPlayers.length; i++) {
+                        const input = document.getElementById(`player${i + 1}-name`);
+                        if (input) {
+                            input.value = tournamentPlayers[i].name;
+                        }
+                    }
+                }, 100);
+            }
+        }
+        
         // Update when language changes (triggered by main site's language toggle)
         window.addEventListener('popstate', updatePlayerCountOptions);
     });
@@ -164,27 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     async function initGame() {
         try {
-            // Auto-fill tournament data if in tournament mode
-            if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
-                const tournamentPlayers = tournamentUtils.getTournamentPlayers();
-                if (tournamentPlayers.length > 0) {
-                    // Set player count dropdown
-                    playerCountSelect.value = tournamentPlayers.length;
-                    // Update player inputs
-                    updatePlayerInputs();
-                    // Auto-fill player names
-                    setTimeout(() => {
-                        for (let i = 0; i < tournamentPlayers.length; i++) {
-                            const input = document.getElementById(`player${i + 1}-name`);
-                            if (input) {
-                                input.value = tournamentPlayers[i].name;
-                            }
-                        }
-                    }, 50);
-                }
-                tournamentUtils.addTournamentModeIndicator();
-            }
-            
             // Try to load categories from the file system
             const response = await fetch('categories.json');
             
