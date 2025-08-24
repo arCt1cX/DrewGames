@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 playerCountSelect.value = tournamentPlayers.length;
             }
         }
-        tournamentUtils.addTournamentModeIndicator();
     }
     
     // Game state

@@ -145,63 +145,6 @@ function autoFillTournamentData(options = {}) {
     }
 }
 
-/**
- * Add visual indicator that the game is in tournament mode
- * @param {string} targetSelector - CSS selector for where to add the indicator
- */
-function addTournamentModeIndicator(targetSelector = 'body') {
-    if (!isTournamentMode()) return;
-    
-    const target = document.querySelector(targetSelector);
-    if (!target) return;
-    
-    const indicator = document.createElement('div');
-    indicator.className = 'tournament-mode-indicator';
-    indicator.innerHTML = `
-        <div class="tournament-badge">
-            <span class="tournament-icon">🏆</span>
-            <span class="tournament-text">Tournament Mode</span>
-        </div>
-    `;
-    
-    // Add styles
-    const style = document.createElement('style');
-    style.textContent = `
-        .tournament-mode-indicator {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-        }
-        
-        .tournament-badge {
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            animation: tournamentPulse 2s infinite;
-        }
-        
-        .tournament-icon {
-            font-size: 14px;
-        }
-        
-        @keyframes tournamentPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-    `;
-    
-    document.head.appendChild(style);
-    target.appendChild(indicator);
-}
-
 // Export functions for use in other scripts
 window.tournamentUtils = {
     isTournamentMode,
@@ -210,6 +153,5 @@ window.tournamentUtils = {
     autoFillPlayerCount,
     autoFillPlayerNames,
     autoFillPlayerNamesBySelector,
-    autoFillTournamentData,
-    addTournamentModeIndicator
+    autoFillTournamentData
 };

@@ -50,13 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
         applyGameTranslations();
     }
     
-    // Auto-fill tournament data if in tournament mode
-    if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
-        tournamentUtils.autoFillPlayerCount(playerCountInput);
-        tournamentUtils.addTournamentModeIndicator();
-    }
-    
-    // Game State
+        // Auto-fill player count and names
+        tournamentUtils.autoFillPlayerCount('numPlayers');
+        tournamentUtils.autoFillPlayerNames('player', '', 8);    // Game State
     let gameState = {
         playerCount: 4,
         impostorCount: 1,

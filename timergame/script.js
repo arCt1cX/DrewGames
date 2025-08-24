@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 gameSettings.playerCount = tournamentPlayers.length;
             }
         }
-        tournamentUtils.addTournamentModeIndicator();
     }
     
     // Game State - 2 Player Mode

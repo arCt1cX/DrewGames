@@ -111,10 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Auto-fill tournament data if in tournament mode
             if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
-                // Auto-fill player count first
-                tournamentUtils.autoFillPlayerCount(playerCount);
-                // Add tournament mode indicator
-                tournamentUtils.addTournamentModeIndicator();
+                                // Auto-fill player count and names
+                tournamentUtils.autoFillPlayerCount('numPlayers');
+                tournamentUtils.autoFillPlayerNames('player', '', 8);
             }
             
             // Load categories

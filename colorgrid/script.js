@@ -128,7 +128,7 @@ function init() {
     
     // Auto-fill tournament data if in tournament mode
     if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
-        tournamentUtils.addTournamentModeIndicator();
+        // Tournament mode detected - auto-fill will happen when user sets players
     }
     
     // Check for language changes
