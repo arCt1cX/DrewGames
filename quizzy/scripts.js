@@ -1,17 +1,5 @@
 // Quizzy Game - Main JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    // Auto-fill tournament data if in tournament mode
-    if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
-        const tournamentPlayers = tournamentUtils.getTournamentPlayers();
-        if (tournamentPlayers.length > 0) {
-            // Set player count
-            const playerCountSelect = document.getElementById('player-count');
-            if (playerCountSelect) {
-                playerCountSelect.value = tournamentPlayers.length;
-            }
-        }
-    }
-    
     // Game state
     const gameState = {
         players: [],
@@ -190,19 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
             inputGroup.appendChild(label);
             inputGroup.appendChild(input);
             container.appendChild(inputGroup);
-        }
-        
-        // Auto-fill tournament player names after creating inputs
-        if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
-            setTimeout(() => {
-                const tournamentPlayers = tournamentUtils.getTournamentPlayers();
-                for (let i = 0; i < Math.min(count, tournamentPlayers.length); i++) {
-                    const input = document.getElementById(`player-${i+1}`);
-                    if (input && tournamentPlayers[i]) {
-                        input.value = tournamentPlayers[i].name;
-                    }
-                }
-            }, 50);
         }
     }
     

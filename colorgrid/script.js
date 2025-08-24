@@ -126,11 +126,6 @@ function init() {
     // Set default game mode (5x5)
     selectGameMode(5);
     
-    // Auto-fill tournament data if in tournament mode
-    if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
-        // Tournament mode detected - auto-fill will happen when user sets players
-    }
-    
     // Check for language changes
     setInterval(() => {
         const newLanguage = getLanguage();
@@ -248,27 +243,9 @@ function showGamePlay() {
     // Display the color word over the grid
     displayColorWord();
     
-    // Add players - use tournament players if available, otherwise default to 2
-    if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
-        const tournamentPlayers = tournamentUtils.getTournamentPlayers();
-        // Add each tournament player
-        for (let i = 0; i < tournamentPlayers.length; i++) {
-            addPlayer();
-            // Update the player name after creation
-            if (players[i]) {
-                players[i].name = tournamentPlayers[i].name;
-                // Update the label in the DOM
-                const playerLabel = playerInputsArea.children[i]?.querySelector('label');
-                if (playerLabel) {
-                    playerLabel.textContent = `${tournamentPlayers[i].name}: `;
-                }
-            }
-        }
-    } else {
-        // Add two players by default
-        addPlayer();
-        addPlayer();
-    }
+    // Add two players by default
+    addPlayer();
+    addPlayer();
 }
 
 // Generate the color grid
