@@ -105,6 +105,25 @@ document.addEventListener('DOMContentLoaded', () => {
         categories: []
     };
     
+    // Auto-fill tournament data if in tournament mode
+    if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
+        const tournamentPlayers = tournamentUtils.getTournamentPlayers();
+        if (tournamentPlayers.length > 0) {
+            // Auto-select player count based on tournament
+            const playerButtons = document.querySelectorAll('[data-players]');
+            playerButtons.forEach(btn => btn.classList.remove('selected'));
+            
+            // Find and select the appropriate button
+            const targetButton = document.querySelector(`[data-players="${tournamentPlayers.length}"]`);
+            if (targetButton) {
+                targetButton.classList.add('selected');
+                // Update game settings directly
+                gameSettings.playerCount = tournamentPlayers.length;
+            }
+        }
+        tournamentUtils.addTournamentModeIndicator();
+    }
+    
     // Game State - 2 Player Mode
     let gameState2p = {
         isGameStarted: false,

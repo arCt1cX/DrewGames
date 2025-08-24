@@ -109,6 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update UI with detected language
             updateUILanguage();
             
+            // Auto-fill tournament data if in tournament mode
+            if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
+                // Auto-fill player count first
+                tournamentUtils.autoFillPlayerCount(playerCount);
+                // Add tournament mode indicator
+                tournamentUtils.addTournamentModeIndicator();
+            }
+            
             // Load categories
             categories = await fetchCategories();
             console.log("Loaded categories:", categories.length);
@@ -397,6 +405,13 @@ document.addEventListener('DOMContentLoaded', () => {
             inputDiv.appendChild(label);
             inputDiv.appendChild(input);
             playerNamesContainer.appendChild(inputDiv);
+        }
+        
+        // Auto-fill tournament player names after creating inputs
+        if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
+            setTimeout(() => {
+                tournamentUtils.autoFillPlayerNames('player', 'Name', count);
+            }, 50); // Small delay to ensure DOM is ready
         }
     }
     

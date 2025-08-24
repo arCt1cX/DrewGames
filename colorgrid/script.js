@@ -126,6 +126,11 @@ function init() {
     // Set default game mode (5x5)
     selectGameMode(5);
     
+    // Auto-fill tournament data if in tournament mode
+    if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
+        tournamentUtils.addTournamentModeIndicator();
+    }
+    
     // Check for language changes
     setInterval(() => {
         const newLanguage = getLanguage();
@@ -243,9 +248,27 @@ function showGamePlay() {
     // Display the color word over the grid
     displayColorWord();
     
-    // Add two players by default
-    addPlayer();
-    addPlayer();
+    // Add players - use tournament players if available, otherwise default to 2
+    if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
+        const tournamentPlayers = tournamentUtils.getTournamentPlayers();
+        // Add each tournament player
+        for (let i = 0; i < tournamentPlayers.length; i++) {
+            addPlayer();
+            // Update the player name after creation
+            if (players[i]) {
+                players[i].name = tournamentPlayers[i].name;
+                // Update the label in the DOM
+                const playerLabel = playerInputsArea.children[i]?.querySelector('label');
+                if (playerLabel) {
+                    playerLabel.textContent = `${tournamentPlayers[i].name}: `;
+                }
+            }
+        }
+    } else {
+        // Add two players by default
+        addPlayer();
+        addPlayer();
+    }
 }
 
 // Generate the color grid
@@ -442,24 +465,5 @@ addPlayerButton.addEventListener('click', addPlayer);
 revealAnswerButton.addEventListener('click', revealAnswer);
 playAgainButton.addEventListener('click', resetGame);
 
-// Tournament mode detection
-document.addEventListener('DOMContentLoaded', () => {
-    // Tournament mode detection
-    const urlParams = new URLSearchParams(window.location.search);
-    const isTournament = urlParams.get('tournament') === 'true';
-    const gameNumber = urlParams.get('gameNumber');
-    const totalGames = urlParams.get('totalGames');
-    
-    if (isTournament) {
-        const returnButton = document.getElementById('tournamentReturn');
-        returnButton.classList.remove('hidden');
-        returnButton.innerHTML += ` (Game ${gameNumber}/${totalGames})`;
-        
-        returnButton.addEventListener('click', () => {
-            window.location.href = '../tournament/index.html?return=true';
-        });
-    }
-
-    // Initialize the game when page loads
-    init();
-});
+// Initialize the game when page loads
+document.addEventListener('DOMContentLoaded', init); 

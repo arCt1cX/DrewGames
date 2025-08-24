@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
         applyGameTranslations();
     }
     
+    // Auto-fill tournament data if in tournament mode
+    if (window.tournamentUtils && tournamentUtils.isTournamentMode()) {
+        tournamentUtils.autoFillPlayerCount(playerCountInput);
+        tournamentUtils.addTournamentModeIndicator();
+    }
+    
     // Game State
     let gameState = {
         playerCount: 4,
