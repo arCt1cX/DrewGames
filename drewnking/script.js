@@ -87,7 +87,7 @@ function startGame() {
     totalRoundsSpan.textContent = gameState.totalRounds;
     
     // Show game screen
-    showScreen('game');
+    showScreen('game-screen');
     
     // Show first phrase
     showNextPhrase();
@@ -131,7 +131,7 @@ function showNextPhrase() {
     
     // Check if game is over
     if (gameState.currentRound > gameState.totalRounds) {
-        showScreen('end');
+        showScreen('end-screen');
         return;
     }
     
@@ -174,7 +174,7 @@ function showScreen(screenId) {
 function resetGame() {
     gameState.currentRound = 0;
     gameState.usedPhrases = [];
-    showScreen('setup');
+    showScreen('setup-screen');
     generatePlayerInputs();
 }
 
