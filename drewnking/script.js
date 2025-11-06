@@ -153,17 +153,20 @@ function showNextPhrase() {
 }
 
 // Show screen
-function showScreen(screen) {
-    setupScreen.classList.remove('active');
-    gameScreen.classList.remove('active');
-    endScreen.classList.remove('active');
+function showScreen(screenId) {
+    // Hide all screens
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
     
-    if (screen === 'setup') {
-        setupScreen.classList.add('active');
-    } else if (screen === 'game') {
-        gameScreen.classList.add('active');
-    } else if (screen === 'end') {
-        endScreen.classList.add('active');
+    // Show the selected screen
+    document.getElementById(screenId).classList.add('active');
+    
+    // Add/remove game-active class to body based on screen
+    if (screenId === 'game-screen') {
+        document.body.classList.add('game-active');
+    } else {
+        document.body.classList.remove('game-active');
     }
 }
 

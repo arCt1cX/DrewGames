@@ -17,6 +17,10 @@ body {
         radial-gradient(circle at 80% 80%, rgba(123, 104, 238, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 40% 20%, rgba(71, 60, 139, 0.1) 0%, transparent 50%);
     padding: 20px;
+}
+
+/* Block scroll only when in game screen */
+body.game-active {
     overflow: hidden;
 }
 
@@ -274,11 +278,14 @@ body {
 @media (max-width: 768px) {
     body {
         padding: 10px;
-        overflow: hidden; /* Ensure no scroll on mobile */
     }
     
     .container {
         padding: 20px;
+    }
+    
+    /* Only when game is active */
+    body.game-active .container {
         height: 100vh;
         max-height: 100vh;
         display: flex;
@@ -301,7 +308,6 @@ body {
     
     #game-screen {
         overflow: hidden;
-        max-height: calc(100vh - 40px);
     }
 }
 
