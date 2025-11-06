@@ -1,6 +1,7 @@
 {
   "normal": {
-    "color": "#8B0000",
+    "color": "#473c8b",
+    "weight": 50,
     "phrases": [
       "{player} deve bere un sorso se si è mai pisciato addosso",
       "{player} beve se ha mai mentito a qualcuno qui presente",
@@ -16,11 +17,17 @@
       "{player} beve se ha mai pianto guardando un film",
       "Tutti bevete se avete mai mandato un messaggio alla persona sbagliata",
       "{player} deve bere se ha mai avuto una cotta per qualcuno qui",
-      "Tutti bevono se hanno mai fatto finta di essere malati per non uscire"
+      "Tutti bevono se hanno mai fatto finta di essere malati per non uscire",
+      "{player} beve se ha mai parlato male di qualcuno qui presente",
+      "Tutti bevete se avete mai spiato il telefono di qualcuno",
+      "{player} deve bere se ha mai fatto pipì in piscina",
+      "Tutti bevono se hanno mai rubato qualcosa ai genitori",
+      "{player} beve se ha mai fatto autogol nella vita"
     ]
   },
   "challenge": {
-    "color": "#FF4500",
+    "color": "#8B0000",
+    "weight": 20,
     "phrases": [
       "{player} deve fare 10 flessioni o bere 3 sorsi",
       "{player}, chiama un contatto a caso e digli 'ti amo' o bevi 2 sorsi",
@@ -33,11 +40,15 @@
       "{player}, recita una poesia improvvisata o bevi 2 sorsi",
       "{player} deve fare il verso di un animale, gli altri indovinano quale. Se sbagliano tutti, loro bevono",
       "Tutti devono dire una bugia convincente, chi viene scoperto beve",
-      "{player}, canta una canzone per 20 secondi o bevi 3 sorsi"
+      "{player}, canta una canzone per 20 secondi o bevi 3 sorsi",
+      "{player} deve raccontare la cosa più imbarazzante che ha fatto o bere 4 sorsi",
+      "Tutti devono fare un complimento sincero a {player} o bere",
+      "{player} deve mandare un messaggio imbarazzante a qualcuno o bere 3 sorsi"
     ]
   },
   "vote": {
     "color": "#1E90FF",
+    "weight": 20,
     "phrases": [
       "Chi tra voi è più probabile che diventi ricco? L'ultimo a indicare qualcuno beve 2 sorsi",
       "Chi tra voi bacia peggio? Votate, il vincitore beve",
@@ -48,22 +59,56 @@
       "Chi tra voi ha il peggior gusto musicale? Il più votato beve",
       "Chi tra voi è più probabile che diventi famoso? Il votato distribuisce 3 sorsi",
       "Chi tra voi è il più bugiardo? Il vincitore beve 2 sorsi",
-      "Chi tra voi è più probabile che si addormenti per primo stasera? Il votato beve"
+      "Chi tra voi è più probabile che si addormenti per primo stasera? Il votato beve",
+      "Chi tra voi ha fatto più cazzate nella vita? Il votato beve 2 sorsi",
+      "Chi tra voi è il più pettegolo? Il vincitore beve",
+      "Chi tra voi è più probabile che tradisca? Il votato beve 2 sorsi"
     ]
   },
   "rule": {
-    "color": "#FF1493",
-    "phrases": [
-      "{player} crea una nuova regola: ogni volta che qualcuno dice 'io' deve bere",
-      "Nuova regola: vietato dire parolacce, chi sbaglia beve",
-      "{player} decide: non si può usare il cellulare, chi viene beccato beve 2 sorsi",
-      "Nuova regola per tutti: vietato dire nomi propri, chi sbaglia beve",
-      "{player} stabilisce: ogni volta che qualcuno beve, deve fare un brindisi",
-      "Regola di gruppo: vietato indicare con le dita, chi sbaglia beve",
-      "{player} impone: si può parlare solo facendo domande per i prossimi 2 turni",
-      "Nuova regola: ogni volta che qualcuno ride, tutti bevono un sorso",
-      "{player} decide: vietato dire 'sì' o 'no', chi sbaglia beve 2 sorsi",
-      "Regola di gruppo: prima di bere bisogna toccarsi il naso, chi dimentica beve il doppio"
+    "color": "#228B22",
+    "weight": 10,
+    "rules": [
+      {
+        "start": "{player} crea una nuova regola: ogni volta che qualcuno dice 'io' deve bere",
+        "end": "La regola 'non dire io' è finita! Chi l'ha infranta beve 2 sorsi di penalità"
+      },
+      {
+        "start": "Nuova regola: vietato dire parolacce, chi sbaglia beve",
+        "end": "La regola 'vietato dire parolacce' è finita! Finalmente potete insultarvi liberamente"
+      },
+      {
+        "start": "{player} decide: non si può usare il cellulare, chi viene beccato beve 2 sorsi",
+        "end": "La regola 'vietato cellulare' è finita! Chi è stato beccato beve 3 sorsi di penalità"
+      },
+      {
+        "start": "Nuova regola per tutti: vietato dire nomi propri, chi sbaglia beve",
+        "end": "La regola 'vietato dire nomi' è finita! Chi ha sbagliato beve un sorso"
+      },
+      {
+        "start": "{player} stabilisce: ogni volta che qualcuno beve, deve fare un brindisi",
+        "end": "La regola dei brindisi è finita! Chi si è dimenticato beve 2 sorsi"
+      },
+      {
+        "start": "Regola di gruppo: vietato indicare con le dita, chi sbaglia beve",
+        "end": "La regola 'vietato indicare' è finita! Potete tornare a puntare il dito"
+      },
+      {
+        "start": "{player} impone: si può parlare solo facendo domande",
+        "end": "La regola delle domande è finita! Chi ha fatto affermazioni beve"
+      },
+      {
+        "start": "Nuova regola: ogni volta che qualcuno ride, tutti bevono un sorso",
+        "end": "La regola del ridere è finita! Spero abbiate bevuto molto"
+      },
+      {
+        "start": "{player} decide: vietato dire 'sì' o 'no', chi sbaglia beve 2 sorsi",
+        "end": "La regola 'vietato sì/no' è finita! Chi ha sbagliato beve 2 sorsi bonus"
+      },
+      {
+        "start": "Regola di gruppo: prima di bere bisogna toccarsi il naso, chi dimentica beve il doppio",
+        "end": "La regola del naso è finita! Chi si è dimenticato beve 3 sorsi"
+      }
     ]
   }
 }

@@ -5,7 +5,9 @@ let gameState = {
     currentRound: 0,
     phrases: {},
     usedPhrases: [],
-    allPhrases: []
+    allPhrases: [],
+    activeRules: [], // Track active rules with their end round
+    ruleEndQueue: [] // Queue of rule endings to show
 };
 
 // DOM Elements
@@ -29,19 +31,42 @@ async function loadPhrases() {
         const response = await fetch('phrases.json');
         gameState.phrases = await response.json();
         
-        // Create a flat array of all phrases with their categories
+        // Create a weighted array of all phrases
         gameState.allPhrases = [];
         for (const [category, data] of Object.entries(gameState.phrases)) {
-            data.phrases.forEach(phrase => {
-                gameState.allPhrases.push({
-                    text: phrase,
-                    category: category,
-                    color: data.color
+            const weight = data.weight || 10; // Default weight if not specified
+            
+            if (category === 'rule' && data.rules) {
+                // Handle rules separately (they have start/end)
+                data.rules.forEach(rule => {
+                    // Add the rule multiple times based on weight
+                    for (let i = 0; i < weight; i++) {
+                        gameState.allPhrases.push({
+                            text: rule.start,
+                            endText: rule.end,
+                            category: category,
+                            color: data.color,
+                            isRule: true
+                        });
+                    }
                 });
-            });
+            } else if (data.phrases) {
+                // Regular phrases
+                data.phrases.forEach(phrase => {
+                    // Add the phrase multiple times based on weight
+                    for (let i = 0; i < weight; i++) {
+                        gameState.allPhrases.push({
+                            text: phrase,
+                            category: category,
+                            color: data.color,
+                            isRule: false
+                        });
+                    }
+                });
+            }
         }
         
-        console.log('Frasi caricate:', gameState.allPhrases.length);
+        console.log('Frasi caricate:', gameState.allPhrases.length, 'entries (weighted)');
     } catch (error) {
         console.error('Errore nel caricamento delle frasi:', error);
         alert('Errore nel caricamento del gioco. Ricarica la pagina.');
@@ -138,9 +163,43 @@ function showNextPhrase() {
     // Update round counter
     currentRoundSpan.textContent = gameState.currentRound;
     
+    // Check if we need to show a rule ending first
+    if (gameState.ruleEndQueue.length > 0) {
+        const ruleEnd = gameState.ruleEndQueue.shift();
+        showRuleEnd(ruleEnd);
+        return;
+    }
+    
+    // Check for expired rules and queue their endings
+    gameState.activeRules = gameState.activeRules.filter(rule => {
+        if (rule.endRound === gameState.currentRound) {
+            gameState.ruleEndQueue.push(rule.endText);
+            return false; // Remove from active rules
+        }
+        return true;
+    });
+    
+    // If we just queued a rule ending, show it
+    if (gameState.ruleEndQueue.length > 0) {
+        const ruleEnd = gameState.ruleEndQueue.shift();
+        showRuleEnd(ruleEnd);
+        return;
+    }
+    
     // Get random phrase
     const phraseObj = getRandomPhrase();
     const finalText = replacePlaceholder(phraseObj.text);
+    
+    // If it's a rule, schedule its ending
+    if (phraseObj.isRule) {
+        const duration = Math.floor(Math.random() * 8) + 8; // Random 8-15 rounds
+        const endRound = gameState.currentRound + duration;
+        gameState.activeRules.push({
+            endRound: endRound,
+            endText: replacePlaceholder(phraseObj.endText)
+        });
+        console.log(`Regola attivata, finirà al round ${endRound}`);
+    }
     
     // Update phrase text with animation
     phraseText.classList.remove('phrase-animate');
@@ -150,6 +209,17 @@ function showNextPhrase() {
     
     // Update background color based on category
     phraseContainer.className = 'phrase-container ' + phraseObj.category;
+}
+
+// Show rule ending
+function showRuleEnd(endText) {
+    phraseText.classList.remove('phrase-animate');
+    void phraseText.offsetWidth;
+    phraseText.classList.add('phrase-animate');
+    phraseText.textContent = endText;
+    
+    // Use rule color but slightly different
+    phraseContainer.className = 'phrase-container rule';
 }
 
 // Show screen
@@ -174,6 +244,8 @@ function showScreen(screenId) {
 function resetGame() {
     gameState.currentRound = 0;
     gameState.usedPhrases = [];
+    gameState.activeRules = [];
+    gameState.ruleEndQueue = [];
     showScreen('setup-screen');
     generatePlayerInputs();
 }
