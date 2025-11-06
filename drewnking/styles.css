@@ -6,23 +6,29 @@
 }
 
 body {
-    background-color: #0a0a0a;
+    background-color: #000;
     color: #fff;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-image: 
-        radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 69, 0, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(255, 20, 147, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(71, 60, 139, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(123, 104, 238, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(71, 60, 139, 0.1) 0%, transparent 50%);
     padding: 20px;
+    overflow: hidden;
 }
 
 .container {
+    background: #1e1e1e;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
     width: 100%;
-    max-width: 600px;
-    min-height: 500px;
+    box-shadow: 0 8px 32px rgba(123, 104, 238, 0.3);
+    border: 2px solid #473c8b;
+    overflow: hidden;
 }
 
 /* Screens */
@@ -59,12 +65,8 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, #ff6b6b, #feca57, #ff6b6b);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient-shift 3s ease infinite;
+    color: #7b68ee;
+    text-shadow: 0 0 20px rgba(123, 104, 238, 0.6);
 }
 
 @keyframes gradient-shift {
@@ -77,13 +79,13 @@ body {
 }
 
 .warning {
-    color: #feca57;
+    color: #ff6b6b;
     font-size: 0.9rem;
     font-weight: 600;
     padding: 10px;
-    background-color: rgba(254, 202, 87, 0.1);
+    background-color: rgba(255, 107, 107, 0.1);
     border-radius: 8px;
-    border: 2px solid rgba(254, 202, 87, 0.3);
+    border: 2px solid rgba(255, 107, 107, 0.3);
 }
 
 /* Setup Form */
@@ -113,9 +115,9 @@ body {
     width: 100%;
     padding: 12px;
     font-size: 1rem;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid #473c8b;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #2d2d2d;
     color: #fff;
     transition: all 0.3s ease;
 }
@@ -123,8 +125,8 @@ body {
 .form-group select:focus,
 .form-group input:focus {
     outline: none;
-    border-color: #ff6b6b;
-    background-color: rgba(255, 255, 255, 0.15);
+    border-color: #7b68ee;
+    box-shadow: 0 0 15px rgba(123, 104, 238, 0.5);
 }
 
 .form-group input::placeholder {
@@ -153,15 +155,15 @@ body {
 }
 
 .primary-btn {
-    background: linear-gradient(45deg, #ff6b6b, #ee5a6f);
+    background: linear-gradient(45deg, #473c8b, #7b68ee);
     color: white;
     width: 100%;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.4);
 }
 
 .primary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+    box-shadow: 0 6px 20px rgba(123, 104, 238, 0.6);
 }
 
 .primary-btn:active {
@@ -173,12 +175,12 @@ body {
     text-align: center;
     font-size: 1.2rem;
     font-weight: 600;
-    color: #feca57;
+    color: #7b68ee;
     margin-bottom: 2rem;
     padding: 10px 20px;
-    background-color: rgba(254, 202, 87, 0.1);
+    background-color: rgba(123, 104, 238, 0.1);
     border-radius: 10px;
-    border: 2px solid rgba(254, 202, 87, 0.3);
+    border: 2px solid rgba(123, 104, 238, 0.3);
 }
 
 .phrase-container {
@@ -218,33 +220,33 @@ body {
 }
 
 .phrase-container.normal {
-    background: linear-gradient(135deg, #8B0000, #a01010);
+    background: linear-gradient(135deg, #473c8b, #7b68ee);
 }
 
 .phrase-container.challenge {
-    background: linear-gradient(135deg, #FF4500, #ff6020);
+    background: linear-gradient(135deg, #8B0000, #DC143C);
 }
 
 .phrase-container.vote {
-    background: linear-gradient(135deg, #1E90FF, #3ea0ff);
+    background: linear-gradient(135deg, #1E90FF, #4169E1);
 }
 
 .phrase-container.rule {
-    background: linear-gradient(135deg, #FF1493, #ff3aa8);
+    background: linear-gradient(135deg, #228B22, #32CD32);
 }
 
 .next-btn {
-    background: linear-gradient(45deg, #48dbfb, #0abde3);
+    background: linear-gradient(45deg, #473c8b, #7b68ee);
     color: white;
     width: 100%;
     font-size: 1.3rem;
     padding: 20px;
-    box-shadow: 0 4px 15px rgba(72, 219, 251, 0.4);
+    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.4);
 }
 
 .next-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(72, 219, 251, 0.6);
+    box-shadow: 0 6px 20px rgba(123, 104, 238, 0.6);
 }
 
 .next-btn:active {
@@ -255,36 +257,51 @@ body {
 .end-message {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: #48dbfb;
+    color: #7b68ee;
 }
 
 .reminder {
     font-size: 1rem;
-    color: #5f27cd;
+    color: #7b68ee;
     margin-bottom: 2rem;
     padding: 15px;
-    background-color: rgba(95, 39, 205, 0.1);
+    background-color: rgba(123, 104, 238, 0.1);
     border-radius: 10px;
-    border: 2px solid rgba(95, 39, 205, 0.3);
+    border: 2px solid rgba(123, 104, 238, 0.3);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .game-header h1 {
+    body {
+        padding: 10px;
+        overflow: hidden; /* Ensure no scroll on mobile */
+    }
+    
+    .container {
+        padding: 20px;
+        height: 100vh;
+        max-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    h1 {
         font-size: 2rem;
     }
-
-    #phrase-text {
+    
+    .phrase-text {
         font-size: 1.3rem;
     }
-
-    .setup-form {
-        padding: 1.5rem;
+    
+    .btn {
+        font-size: 16px;
+        padding: 12px;
     }
-
-    .phrase-container {
-        min-height: 250px;
-        padding: 2rem;
+    
+    #game-screen {
+        overflow: hidden;
+        max-height: calc(100vh - 40px);
     }
 }
 
@@ -315,6 +332,35 @@ body {
         font-size: 1.1rem;
         padding: 18px;
     }
+}
+
+/* Home Button */
+.home-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(71, 60, 139, 0.8);
+    color: white;
+    border: 1px solid #7b68ee;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: rgba(123, 104, 238, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(123, 104, 238, 0.3);
+}
+
+.home-icon {
+    font-size: 16px;
 }
 
 /* Animations for phrase changes */
