@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drewnking Game - Gioco alcolico per feste | DrewGames</title>
+    <meta name="description" content="Drewnking Game: il gioco alcolico definitivo per feste con amici! Sfide, votazioni e regole pazze. Da giocare responsabilmente!">
+    
+    <!-- Hreflang tags -->
+    <link rel="alternate" hreflang="it" href="https://www.partygamesdrew.com/drewnking/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.partygamesdrew.com/drewnking/" />
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-72Y5QND8E8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-72Y5QND8E8');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1877136537382240"
+     crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="../js/tournament-button.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://www.partygamesdrew.com/drewnking/">
+    <meta name="robots" content="index, follow">
+    
+    <style>
+        .home-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .home-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .home-icon {
+            margin-right: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='../'">
+        <span class="home-icon">⌂</span> Home
+    </button>
+    
+    <div class="container">
+        <!-- Setup Screen -->
+        <div id="setup-screen" class="screen active">
+            <div class="game-header">
+                <h1>🍺 Drewnking Game 🍺</h1>
+                <p class="warning">⚠️ Bevi responsabilmente! Solo per maggiorenni ⚠️</p>
+            </div>
+
+            <div class="setup-form">
+                <div class="form-group">
+                    <label for="player-count">Numero di Giocatori:</label>
+                    <select id="player-count">
+                        <option value="2">2 Giocatori</option>
+                        <option value="3">3 Giocatori</option>
+                        <option value="4" selected>4 Giocatori</option>
+                        <option value="5">5 Giocatori</option>
+                        <option value="6">6 Giocatori</option>
+                        <option value="7">7 Giocatori</option>
+                        <option value="8">8 Giocatori</option>
+                        <option value="9">9 Giocatori</option>
+                        <option value="10">10 Giocatori</option>
+                    </select>
+                </div>
+
+                <div id="player-names-container">
+                    <!-- Player name inputs will be generated here -->
+                </div>
+
+                <div class="form-group">
+                    <label for="rounds-count">Numero di Turni:</label>
+                    <select id="rounds-count">
+                        <option value="15">15 Turni</option>
+                        <option value="20" selected>20 Turni</option>
+                        <option value="25">25 Turni</option>
+                        <option value="30">30 Turni</option>
+                    </select>
+                </div>
+
+                <button id="start-game" class="btn primary-btn">Inizia il Gioco! 🎉</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="round-counter">
+                <span>Turno <span id="current-round">1</span> di <span id="total-rounds">20</span></span>
+            </div>
+
+            <div id="phrase-container" class="phrase-container">
+                <p id="phrase-text"></p>
+            </div>
+
+            <button id="next-phrase" class="btn next-btn">Prossima Frase ➜</button>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end-screen" class="screen">
+            <div class="game-header">
+                <h1>🎊 Fine del Gioco! 🎊</h1>
+                <p class="end-message">Spero vi siate divertiti! 🍻</p>
+                <p class="reminder">Ricordati di bere acqua e di tornare a casa in sicurezza! 💚</p>
+            </div>
+
+            <button id="play-again" class="btn primary-btn">Gioca Ancora 🔄</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

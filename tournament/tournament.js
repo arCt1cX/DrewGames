@@ -242,7 +242,7 @@ function resetTournament() {
         totalGames: 5,
         currentGame: 0,
         scores: {},
-        availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy', 'alphabetgame'],
+        availableGames: ['impostor', 'colorgrid', 'guessthepic', 'timergame', 'chainreaction', 'BluffMe', 'quizzy', 'alphabetgame', 'drewnking'],
         gameWeights: {},
         usedGames: [],
         doublePointsGames: [],

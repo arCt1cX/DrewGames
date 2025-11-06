@@ -239,6 +239,27 @@ const translations = {
                 'Vince chi forma per primo una linea di tre simboli'
             ]
         },
+        'drewnking': {
+            'title': 'Drewnking Game',
+            'catchphrase': 'Il gioco alcolico definitivo per feste! 🍻',
+            'description': 'Drewnking Game è il party game perfetto per serate pazze con gli amici! Sfide imbarazzanti, votazioni esilaranti e regole folli che renderanno la vostra festa indimenticabile. Da giocare responsabilmente!',
+            'players': '2-10 giocatori',
+            'time': '20-30 minuti',
+            'difficulty': 'Principiante',
+            'features': [
+                'Centinaia di frasi divertenti e scorrette',
+                '6 categorie diverse con colori unici',
+                'Personalizzazione nomi giocatori',
+                'Perfetto per feste e pre-serata'
+            ],
+            'instructions': [
+                'Inserite i nomi dei giocatori e il numero di turni',
+                'Ogni turno apparirà una frase sullo schermo',
+                'Le frasi possono essere sfide, votazioni, regole o semplici domande',
+                'Seguite le istruzioni della frase e divertitevi!',
+                'Solo per maggiorenni - bevete responsabilmente!'
+            ]
+        },
         'tournamentTitle': 'Modalità Torneo',
         'numberOfGames': 'Numero di Partite',
         'players': 'Giocatori',
@@ -496,6 +517,27 @@ const translations = {
                 'If you answer correctly, you capture the square with your symbol (X or O)',
                 'If you are wrong, the square remains free',
                 'The first to form a line of three symbols wins'
+            ]
+        },
+        'drewnking': {
+            'title': 'Drewnking Game',
+            'catchphrase': 'The ultimate drinking game for parties! 🍻',
+            'description': 'Drewnking Game is the perfect party game for crazy nights with friends! Embarrassing challenges, hilarious votes and wild rules that will make your party unforgettable. Play responsibly!',
+            'players': '2-10 players',
+            'time': '20-30 minutes',
+            'difficulty': 'Beginner',
+            'features': [
+                'Hundreds of fun and naughty phrases',
+                '6 different categories with unique colors',
+                'Player name customization',
+                'Perfect for parties and pre-gaming'
+            ],
+            'instructions': [
+                'Enter player names and number of rounds',
+                'Each round a phrase will appear on screen',
+                'Phrases can be challenges, votes, rules or simple questions',
+                'Follow the phrase instructions and have fun!',
+                'Adults only - drink responsibly!'
             ]
         },
         'tournamentTitle': 'Tournament Mode',

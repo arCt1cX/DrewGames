@@ -1,0 +1,69 @@
+{
+  "normal": {
+    "color": "#8B0000",
+    "phrases": [
+      "{player} deve bere un sorso se si è mai pisciato addosso",
+      "{player} beve se ha mai mentito a qualcuno qui presente",
+      "{player}, bevi se hai mai rubato qualcosa",
+      "{player} deve bere se ha mai baciato qualcuno di questo gruppo",
+      "Tutti bevono se hanno mai fatto l'autostop",
+      "Tutti bevete se siete mai stati fermati dalla polizia",
+      "Tutti bevono se hanno mai vomitato per colpa dell'alcool",
+      "{player} beve se ha mai tradito qualcuno",
+      "Tutti bevete se avete mai saltato la scuola",
+      "{player} deve bere se ha mai fatto qualcosa di illegale",
+      "Tutti bevono se hanno mai mentito sull'età",
+      "{player} beve se ha mai pianto guardando un film",
+      "Tutti bevete se avete mai mandato un messaggio alla persona sbagliata",
+      "{player} deve bere se ha mai avuto una cotta per qualcuno qui",
+      "Tutti bevono se hanno mai fatto finta di essere malati per non uscire"
+    ]
+  },
+  "challenge": {
+    "color": "#FF4500",
+    "phrases": [
+      "{player} deve fare 10 flessioni o bere 3 sorsi",
+      "{player}, chiama un contatto a caso e digli 'ti amo' o bevi 2 sorsi",
+      "{player} deve mostrare l'ultima foto nella galleria o bere",
+      "Tutti devono mostrare l'ultimo messaggio inviato o bere",
+      "{player}, fai un balletto di 30 secondi o bevi 3 sorsi",
+      "Tutti devono dire un segreto o bere 2 sorsi",
+      "{player} deve imitare qualcuno del gruppo, se nessuno indovina bevi tu",
+      "Tutti fate a gara di braccio di ferro, l'ultimo classificato beve 2 sorsi",
+      "{player}, recita una poesia improvvisata o bevi 2 sorsi",
+      "{player} deve fare il verso di un animale, gli altri indovinano quale. Se sbagliano tutti, loro bevono",
+      "Tutti devono dire una bugia convincente, chi viene scoperto beve",
+      "{player}, canta una canzone per 20 secondi o bevi 3 sorsi"
+    ]
+  },
+  "vote": {
+    "color": "#1E90FF",
+    "phrases": [
+      "Chi tra voi è più probabile che diventi ricco? L'ultimo a indicare qualcuno beve 2 sorsi",
+      "Chi tra voi bacia peggio? Votate, il vincitore beve",
+      "Chi tra voi ha la vita più noiosa? Il più votato beve",
+      "Chi tra voi è più probabile che finisca in galera? Il votato beve 2 sorsi",
+      "Chi tra voi è il più tirchio? Il vincitore beve",
+      "Chi tra voi si sposerebbe per primo? L'ultimo a votare beve",
+      "Chi tra voi ha il peggior gusto musicale? Il più votato beve",
+      "Chi tra voi è più probabile che diventi famoso? Il votato distribuisce 3 sorsi",
+      "Chi tra voi è il più bugiardo? Il vincitore beve 2 sorsi",
+      "Chi tra voi è più probabile che si addormenti per primo stasera? Il votato beve"
+    ]
+  },
+  "rule": {
+    "color": "#FF1493",
+    "phrases": [
+      "{player} crea una nuova regola: ogni volta che qualcuno dice 'io' deve bere",
+      "Nuova regola: vietato dire parolacce, chi sbaglia beve",
+      "{player} decide: non si può usare il cellulare, chi viene beccato beve 2 sorsi",
+      "Nuova regola per tutti: vietato dire nomi propri, chi sbaglia beve",
+      "{player} stabilisce: ogni volta che qualcuno beve, deve fare un brindisi",
+      "Regola di gruppo: vietato indicare con le dita, chi sbaglia beve",
+      "{player} impone: si può parlare solo facendo domande per i prossimi 2 turni",
+      "Nuova regola: ogni volta che qualcuno ride, tutti bevono un sorso",
+      "{player} decide: vietato dire 'sì' o 'no', chi sbaglia beve 2 sorsi",
+      "Regola di gruppo: prima di bere bisogna toccarsi il naso, chi dimentica beve il doppio"
+    ]
+  }
+}

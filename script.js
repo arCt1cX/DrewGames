@@ -508,6 +508,57 @@ document.addEventListener('DOMContentLoaded', () => {
                 <text x="55" y="74" font-size="3" fill="white">Film Topic</text>
                 <path d="M56,65 L56,70" stroke="white" stroke-width="0.5" stroke-dasharray="1 1" />
             </svg>`
+        },
+        {
+            id: "drewnking",
+            displayName: getTranslation('drewnking', 'title'),
+            catchphrase: getTranslation('drewnking', 'catchphrase'),
+            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                <!-- Shadow -->
+                <ellipse cx="40" cy="74" rx="25" ry="3" fill="rgba(0,0,0,0.3)" />
+                
+                <!-- Beer mug -->
+                <rect x="25" y="25" width="30" height="35" rx="2" fill="rgba(255,193,7,0.3)" stroke="white" stroke-width="2" />
+                <rect x="26" y="26" width="28" height="33" rx="1" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                
+                <!-- Beer foam -->
+                <ellipse cx="40" cy="25" rx="15" ry="4" fill="rgba(255,255,255,0.9)" stroke="white" stroke-width="1.5" />
+                <ellipse cx="35" cy="23" rx="6" ry="3" fill="rgba(255,255,255,0.7)" />
+                <ellipse cx="45" cy="23" rx="5" ry="3" fill="rgba(255,255,255,0.7)" />
+                <ellipse cx="40" cy="21" rx="4" ry="2.5" fill="rgba(255,255,255,0.8)" />
+                
+                <!-- Beer level -->
+                <rect x="27" y="35" width="26" height="20" fill="rgba(255,193,7,0.6)" />
+                <path d="M27,40 Q35,38 53,40" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none" />
+                
+                <!-- Bubbles -->
+                <circle cx="32" cy="50" r="1.5" fill="rgba(255,255,255,0.6)" />
+                <circle cx="38" cy="45" r="1" fill="rgba(255,255,255,0.5)" />
+                <circle cx="45" cy="48" r="1.2" fill="rgba(255,255,255,0.6)" />
+                <circle cx="48" cy="52" r="1" fill="rgba(255,255,255,0.5)" />
+                
+                <!-- Mug handle -->
+                <path d="M55,35 Q65,35 65,45 Q65,55 55,55" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
+                <path d="M55,37 Q62,37 62,45 Q62,53 55,53" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none" />
+                
+                <!-- Dice (for drinking game element) -->
+                <rect x="60" y="15" width="12" height="12" rx="2" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.5" transform="rotate(15 66 21)" />
+                <circle cx="63" cy="18" r="1" fill="white" />
+                <circle cx="69" cy="18" r="1" fill="white" />
+                <circle cx="63" cy="24" r="1" fill="white" />
+                <circle cx="69" cy="24" r="1" fill="white" />
+                <circle cx="66" cy="21" r="1" fill="white" />
+                
+                <!-- Warning sign -->
+                <circle cx="15" cy="20" r="8" fill="rgba(255,69,0,0.3)" stroke="#FF4500" stroke-width="1.5" />
+                <text x="15" y="25" font-size="10" fill="white" text-anchor="middle" font-weight="bold">18+</text>
+                
+                <!-- Party elements -->
+                <path d="M10,65 L12,60 L14,65" stroke="rgba(255,107,107,0.7)" stroke-width="1" fill="none" />
+                <path d="M68,65 L70,60 L72,65" stroke="rgba(255,107,107,0.7)" stroke-width="1" fill="none" />
+                <circle cx="8" cy="58" r="2" fill="rgba(255,193,7,0.6)" />
+                <circle cx="72" cy="58" r="2" fill="rgba(255,193,7,0.6)" />
+            </svg>`
         }
     ];
     
