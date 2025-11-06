@@ -24,6 +24,7 @@ const nextPhraseBtn = document.getElementById('next-phrase');
 const currentRoundSpan = document.getElementById('current-round');
 const totalRoundsSpan = document.getElementById('total-rounds');
 const playAgainBtn = document.getElementById('play-again');
+const phraseTypeLabel = document.getElementById('phrase-type-label');
 
 // Load phrases from JSON
 async function loadPhrases() {
@@ -190,6 +191,25 @@ function showNextPhrase() {
     const phraseObj = getRandomPhrase();
     const finalText = replacePlaceholder(phraseObj.text);
     
+    // Set the type label based on category
+    let typeLabel = '';
+    if (phraseObj.category === 'challenge') {
+        typeLabel = 'CHALLENGE!';
+    } else if (phraseObj.category === 'vote') {
+        typeLabel = 'VOTA!';
+    } else if (phraseObj.category === 'rule' && phraseObj.isRule) {
+        typeLabel = 'NUOVA REGOLA!';
+    }
+    
+    // Update type label
+    if (typeLabel) {
+        phraseTypeLabel.textContent = typeLabel;
+        phraseTypeLabel.classList.add('visible');
+    } else {
+        phraseTypeLabel.textContent = '';
+        phraseTypeLabel.classList.remove('visible');
+    }
+    
     // If it's a rule, schedule its ending
     if (phraseObj.isRule) {
         const duration = Math.floor(Math.random() * 8) + 8; // Random 8-15 rounds
@@ -217,6 +237,10 @@ function showRuleEnd(endText) {
     void phraseText.offsetWidth;
     phraseText.classList.add('phrase-animate');
     phraseText.textContent = endText;
+    
+    // Hide type label for rule endings
+    phraseTypeLabel.textContent = '';
+    phraseTypeLabel.classList.remove('visible');
     
     // Use rule color but slightly different
     phraseContainer.className = 'phrase-container rule';
