@@ -1,7 +1,7 @@
 {
   "normal": {
     "color": "#473c8b",
-    "weight": 50,
+    "weight": 45,
     "phrases": [
       "{player} deve bere un sorso se si è mai pisciato addosso",
       "{player}, bevi se hai mai rubato qualcosa",
@@ -73,7 +73,7 @@
   },
   "challenge": {
     "color": "#8B0000",
-    "weight": 30,
+    "weight": 25,
     "phrases": [
       "{player} deve fare 10 flessioni o bere 3 sorsi",
       "{player} deve mostrare l'ultima foto nella galleria o bere",
@@ -142,7 +142,7 @@
   },
   "vote": {
     "color": "#1E90FF",
-    "weight": 10,
+    "weight": 17,
     "phrases": [
       "Chi tra voi è più probabile che diventi ricco? Il giocatore meno votato beve 2 sorsi",
       "Chi tra voi ha la vita più noiosa? Il più votato beve",
@@ -185,7 +185,7 @@
   },
   "rule": {
     "color": "#228B22",
-    "weight": 10,
+    "weight": 13,
     "rules": [
       {
         "start": "Nuova regola per {player}: ogni volta che  dice 'io' deve bere",
