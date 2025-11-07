@@ -103,6 +103,60 @@
                     </select>
                 </div>
 
+                <div class="form-group custom-percentages-container">
+                    <div class="toggle-container">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="custom-percentages-toggle">
+                            <span>Personalizza Percentuali Categorie</span>
+                        </label>
+                    </div>
+                    
+                    <div id="percentages-controls" class="percentages-controls" style="display: none;">
+                        <p class="percentages-info">Imposta le percentuali per ogni categoria (totale deve essere 100%)</p>
+                        
+                        <div class="percentage-group">
+                            <label for="normal-percentage">
+                                <span class="category-dot" style="background-color: #9b59b6;"></span>
+                                Normali:
+                            </label>
+                            <input type="number" id="normal-percentage" min="0" max="100" value="45">
+                            <span class="percentage-symbol">%</span>
+                        </div>
+                        
+                        <div class="percentage-group">
+                            <label for="challenge-percentage">
+                                <span class="category-dot" style="background-color: #e74c3c;"></span>
+                                Sfide:
+                            </label>
+                            <input type="number" id="challenge-percentage" min="0" max="100" value="25">
+                            <span class="percentage-symbol">%</span>
+                        </div>
+                        
+                        <div class="percentage-group">
+                            <label for="vote-percentage">
+                                <span class="category-dot" style="background-color: #3498db;"></span>
+                                Votazioni:
+                            </label>
+                            <input type="number" id="vote-percentage" min="0" max="100" value="17">
+                            <span class="percentage-symbol">%</span>
+                        </div>
+                        
+                        <div class="percentage-group">
+                            <label for="rule-percentage">
+                                <span class="category-dot" style="background-color: #2ecc71;"></span>
+                                Regole:
+                            </label>
+                            <input type="number" id="rule-percentage" min="0" max="100" value="13">
+                            <span class="percentage-symbol">%</span>
+                        </div>
+                        
+                        <div class="percentage-total">
+                            Totale: <span id="percentage-total">100</span>%
+                            <span id="percentage-warning" class="percentage-warning" style="display: none;">⚠️ Deve essere 100%</span>
+                        </div>
+                    </div>
+                </div>
+
                 <button id="start-game" class="btn primary-btn">Inizia il Gioco! 🎉</button>
             </div>
         </div>

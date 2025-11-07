@@ -8,7 +8,9 @@ let gameState = {
     usedPhrases: [],
     allPhrases: [],
     activeRules: [], // Track active rules with their end round
-    ruleEndQueue: [] // Queue of rule endings to show
+    ruleEndQueue: [], // Queue of rule endings to show
+    customPercentages: false, // Track if custom percentages are enabled
+    categoryWeights: {} // Store custom weights
 };
 
 // DOM Elements
@@ -26,6 +28,14 @@ const currentRoundSpan = document.getElementById('current-round');
 const totalRoundsSpan = document.getElementById('total-rounds');
 const playAgainBtn = document.getElementById('play-again');
 const phraseTypeLabel = document.getElementById('phrase-type-label');
+const customPercentagesToggle = document.getElementById('custom-percentages-toggle');
+const percentagesControls = document.getElementById('percentages-controls');
+const normalPercentageInput = document.getElementById('normal-percentage');
+const challengePercentageInput = document.getElementById('challenge-percentage');
+const votePercentageInput = document.getElementById('vote-percentage');
+const rulePercentageInput = document.getElementById('rule-percentage');
+const percentageTotalSpan = document.getElementById('percentage-total');
+const percentageWarning = document.getElementById('percentage-warning');
 
 // Load phrases from JSON
 async function loadPhrases() {
@@ -33,10 +43,22 @@ async function loadPhrases() {
         const response = await fetch('phrases.json');
         gameState.phrases = await response.json();
         
+        // Determine weights to use
+        let categoryWeights = {};
+        if (gameState.customPercentages) {
+            // Use custom percentages
+            categoryWeights = gameState.categoryWeights;
+        } else {
+            // Use default weights from JSON
+            for (const [category, data] of Object.entries(gameState.phrases)) {
+                categoryWeights[category] = data.weight || 10;
+            }
+        }
+        
         // Create a weighted array of all phrases
         gameState.allPhrases = [];
         for (const [category, data] of Object.entries(gameState.phrases)) {
-            const weight = data.weight || 10; // Default weight if not specified
+            const weight = categoryWeights[category] || 10;
             
             if (category === 'rule' && data.rules) {
                 // Handle rules separately (they have start/end)
@@ -396,11 +418,71 @@ function resetGame() {
     });
 }
 
+// Toggle custom percentages
+function toggleCustomPercentages() {
+    const isChecked = customPercentagesToggle.checked;
+    percentagesControls.style.display = isChecked ? 'block' : 'none';
+    
+    if (isChecked) {
+        updatePercentageTotal();
+    }
+}
+
+// Update percentage total and validate
+function updatePercentageTotal() {
+    const normal = parseInt(normalPercentageInput.value) || 0;
+    const challenge = parseInt(challengePercentageInput.value) || 0;
+    const vote = parseInt(votePercentageInput.value) || 0;
+    const rule = parseInt(rulePercentageInput.value) || 0;
+    
+    const total = normal + challenge + vote + rule;
+    percentageTotalSpan.textContent = total;
+    
+    // Show warning if not 100%
+    if (total !== 100) {
+        percentageWarning.style.display = 'inline-block';
+        percentageTotalSpan.style.color = '#ff6b6b';
+        startGameBtn.disabled = true;
+        startGameBtn.style.opacity = '0.5';
+        startGameBtn.style.cursor = 'not-allowed';
+    } else {
+        percentageWarning.style.display = 'none';
+        percentageTotalSpan.style.color = '#2ecc71';
+        startGameBtn.disabled = false;
+        startGameBtn.style.opacity = '1';
+        startGameBtn.style.cursor = 'pointer';
+    }
+}
+
+// Save custom percentages
+function saveCustomPercentages() {
+    if (customPercentagesToggle.checked) {
+        gameState.customPercentages = true;
+        gameState.categoryWeights = {
+            normal: parseInt(normalPercentageInput.value) || 0,
+            challenge: parseInt(challengePercentageInput.value) || 0,
+            vote: parseInt(votePercentageInput.value) || 0,
+            rule: parseInt(rulePercentageInput.value) || 0
+        };
+    } else {
+        gameState.customPercentages = false;
+        gameState.categoryWeights = {};
+    }
+}
+
 // Event listeners
 playerCountSelect.addEventListener('change', generatePlayerInputs);
-startGameBtn.addEventListener('click', startGame);
+startGameBtn.addEventListener('click', () => {
+    saveCustomPercentages();
+    startGame();
+});
 nextPhraseBtn.addEventListener('click', showNextPhrase);
 playAgainBtn.addEventListener('click', resetGame);
+customPercentagesToggle.addEventListener('change', toggleCustomPercentages);
+normalPercentageInput.addEventListener('input', updatePercentageTotal);
+challengePercentageInput.addEventListener('input', updatePercentageTotal);
+votePercentageInput.addEventListener('input', updatePercentageTotal);
+rulePercentageInput.addEventListener('input', updatePercentageTotal);
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
