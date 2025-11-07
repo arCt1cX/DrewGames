@@ -106,8 +106,11 @@
                 <div class="form-group custom-percentages-container">
                     <div class="toggle-container">
                         <label class="toggle-label">
-                            <input type="checkbox" id="custom-percentages-toggle">
                             <span>Personalizza Percentuali Categorie</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="custom-percentages-toggle">
+                                <span class="toggle-slider"></span>
+                            </div>
                         </label>
                     </div>
                     
@@ -119,7 +122,7 @@
                                 <span class="category-dot" style="background-color: #9b59b6;"></span>
                                 Normali:
                             </label>
-                            <input type="number" id="normal-percentage" min="0" max="100" value="45">
+                            <input type="number" id="normal-percentage" min="0" max="100" value="35">
                             <span class="percentage-symbol">%</span>
                         </div>
                         
@@ -137,7 +140,7 @@
                                 <span class="category-dot" style="background-color: #3498db;"></span>
                                 Votazioni:
                             </label>
-                            <input type="number" id="vote-percentage" min="0" max="100" value="17">
+                            <input type="number" id="vote-percentage" min="0" max="100" value="20">
                             <span class="percentage-symbol">%</span>
                         </div>
                         
@@ -146,7 +149,7 @@
                                 <span class="category-dot" style="background-color: #2ecc71;"></span>
                                 Regole:
                             </label>
-                            <input type="number" id="rule-percentage" min="0" max="100" value="13">
+                            <input type="number" id="rule-percentage" min="0" max="100" value="20">
                             <span class="percentage-symbol">%</span>
                         </div>
                         

@@ -355,8 +355,40 @@ function showNextPhrase() {
     phraseText.classList.add('phrase-animate');
     phraseText.textContent = finalText;
     
+    // Auto-scale text if needed
+    autoScaleText();
+    
     // Update background color based on category
     phraseContainer.className = 'phrase-container ' + phraseObj.category;
+}
+
+// Auto-scale text to fit container
+function autoScaleText() {
+    const container = phraseContainer;
+    const text = phraseText;
+    
+    // Determine initial font size based on screen width
+    const isMobile = window.innerWidth <= 480;
+    const defaultFontSize = isMobile ? 1.1 : 1.5;
+    const minFontSize = isMobile ? 0.75 : 0.9;
+    
+    // Reset to default size
+    text.style.fontSize = defaultFontSize + 'rem';
+    
+    // Get available height (container height minus padding and label)
+    const containerHeight = container.clientHeight;
+    const typeLabel = phraseTypeLabel;
+    const labelHeight = typeLabel.classList.contains('visible') ? typeLabel.offsetHeight + 24 : 0; // 24px margin
+    const paddingVertical = isMobile ? 48 : 96; // Total vertical padding (24px or 48px each side)
+    const availableHeight = containerHeight - paddingVertical - labelHeight;
+    
+    // Check if text overflows and scale down if needed
+    let fontSize = defaultFontSize;
+    
+    while (text.scrollHeight > availableHeight && fontSize > minFontSize) {
+        fontSize -= 0.05;
+        text.style.fontSize = fontSize + 'rem';
+    }
 }
 
 // Show rule ending
@@ -365,6 +397,9 @@ function showRuleEnd(endText) {
     void phraseText.offsetWidth;
     phraseText.classList.add('phrase-animate');
     phraseText.textContent = endText;
+    
+    // Auto-scale text if needed
+    autoScaleText();
     
     // Hide type label for rule endings
     phraseTypeLabel.textContent = '';
