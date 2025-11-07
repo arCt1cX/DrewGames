@@ -50,12 +50,30 @@
       "Chi tra i presenti si è cagato nelle mutande dopo una scorreggia almeno una volta distribuisce due sorsi",
       "Ricevete tante penalità quante sigarette (normali o elettroniche) avete fumato nel corso della serata",
       "{player}, se hai già sbrattato in uno spazio pubblico aperto bevi",
-      "{player}, se hai almeno una volta hackerato qualcosa bevi 3 sorsi"
+      "{player}, se hai almeno una volta hackerato qualcosa bevi 3 sorsi",
+      "{player}, se hai mai chiuso gli occhi dalla paura davanti ad un film horror bevi",
+      "{player}, se oggi ti sei masturbato più di una volta bevi 3 sorsi",
+      "Chi è nato in un paese o città diverso da quello in cui state giocando beve un sorso",
+      "Il prossimo giocatore a ricevere una penalità ne distribuisce 2 ad altri giocatori",
+      "{player}, penalità massima se non hai mai fatto 100kg di panca piana",
+      "Se sei mai stato ad Amsterdam bevi un sorso",
+      "Ricevi 2 penalità se non hai la barba",
+      "Bevi 2 sorsi se hai mai cagato sangue",
+      "{player}, se hai un pacchetto di sigarette con te ricevi tante penalità quante sono le sigarette nel pacchetto. Se più di 5, penalità massima!",
+      "{player}, la prossima persona che guardi negli occhi riceve 2 penalità",
+      "{player}, puoi distribuire tante penalità quanti sono i tuoi zii",
+      "{player}, distribuisci tante penalità quante sono le 'e' nel tuo nome e ne ricevi tante quante sono le 'a'",
+      "{player}, distribuisci 2 penalità ad un giocatore meno muscoloso di te. Se non c'è, bevi 2 sorsi",
+      "Quelli che stanno fumando ricevono 3 penalità",
+      "Fino alla fine del gioco il primo giocatore a dire 'no' riceve la massima penalità",
+      "L'ultima persona ad essere andata in bagno riceve 2 penalità",
+      "{player}, dai 2 penalità al giocatore che conosci di più",
+      "{player}, sfida chi vuoi alla guerra dei pollici. Chi perde riceve 5 penalità"
     ]
   },
   "challenge": {
     "color": "#8B0000",
-    "weight": 20,
+    "weight": 30,
     "phrases": [
       "{player} deve fare 10 flessioni o bere 3 sorsi",
       "{player} deve mostrare l'ultima foto nella galleria o bere",
@@ -89,11 +107,11 @@
       "A turno ripetete 5 volte 'supercalifragilistichespiralidoso'. Chi sbaglia beve. Inizia il giocatore {player}",
       "A turno dite un meme, dopo aver ripetuto quello che è stato detto prima. Chi sbaglia beve. Inizia il giocatore {player}",
       "{player} dice un meme che conosce: i giocatori che non lo conoscono bevono. Se lo conoscono tutti beve {player}",
-      "Nominate una lettera a testa per creare una frase di J0k3r. Il primo che dice una lettera insensata o non sa più che lettera dire beve. Inizia il giocatore {player}",
-      "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. {player} imita cicciogamer89. Chi indovina distribuisce a 2 giocatori",
-      "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. {player} imita parenzo. Chi indovina distribuisce a 2 giocatori",
-      "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. {player} imita il king del vintage. Chi indovina distribuisce a 2 giocatori",
-      "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. {player} imita ken lee: l'influencer che esegue azioni a velocità supersonica. Chi indovina distribuisce a 2 giocatori",
+      "Nominate una parola a testa per creare una frase di J0k3r. Il primo che dice una parola insensata o non sa più che parola dire beve. Inizia il giocatore {player}",
+      "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. Imita cicciogamer89. Chi indovina distribuisce a 2 giocatori",
+      "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. Imita parenzo. Chi indovina distribuisce a 2 giocatori",
+      "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. Imita il king del vintage. Chi indovina distribuisce a 2 giocatori",
+      "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. Imita ken lee: l'influencer che esegue azioni a velocità supersonica. Chi indovina distribuisce a 2 giocatori",
       "ATTENZIONE: LEGGERE A MENTE. {player} mima un personaggio famoso. Il primo giocatore che indovina distribuisce da bere a 2 giocatori",
       "{player} inizia una frase meme a piacimento, il primo giocatore che la continua correttamente distribuisce 3 sorsi",
       "Sfida tra {player} e {player}: verranno letti brainrot (Skibidi, Sigma, Rizz, Gyatt, Fanum Tax), create entrambi la vostra top 5. Se almeno 3 elementi coincidono, tutti gli altri bevono, altrimenti bevete voi due",
@@ -114,12 +132,17 @@
       "{player}, nomina un sito pornografico. Se nessuno lo conosce, distribuisci 5 sorsi. Sennò ne bevi 2",
       "Personaggi della Zanzara: il primo che non ne trova più o ne ripete uno beve. Inizia {player}",
       "Tossici e barboni della vostra città: il primo che ne ripete uno o non ne trova più beve. Inizia {player}",
-      "Chi si muove è gay. Il primo a perdere beve 2 sorsi in maniera effeminata"
+      "Chi si muove è gay. Il primo a perdere beve 2 sorsi in maniera effeminata",
+      "{player}, distribuisci tante penalità quanti sono i soprannomi di {player} che riesci a dire",
+      "{player}, prova ad indovinare l'ora esatta. Se indovini, penalità massima per tutti gli altri giocatori",
+      "{player}, racconta una barzelletta o bevi due sorsi",
+      "{player}, fai il ballo del robot o bevi due sorsi",
+      "{player}, dì il compleanno di {player}. Se sbagli, deciderà quanti sorsi dovrai bere"
     ]
   },
   "vote": {
     "color": "#1E90FF",
-    "weight": 20,
+    "weight": 10,
     "phrases": [
       "Chi tra voi è più probabile che diventi ricco? Il giocatore meno votato beve 2 sorsi",
       "Chi tra voi ha la vita più noiosa? Il più votato beve",
@@ -151,7 +174,13 @@
       "Votate tutti il più imbecille tra i presenti: l'eletto distribuisce 5 sorsi",
       "Meglio bersi 15 birre o 8 negroni? Rispondete in contemporanea, chi è in minoranza beve",
       "Votate tutti il giocatore più propenso a finire immischiato con il cartello della droga messicano. L'eletto beve 2 sorsi",
-      "Votate il più propenso ad andare a ladyboy in Vietnam. L'eletto beve"
+      "Votate il più propenso ad andare a ladyboy in Vietnam. L'eletto beve",
+      "Meglio i piercing o i tatuaggi? Votate, chi è in minoranza beve 2 sorsi",
+      "Scegliete insieme il giocatore più stupido. Bevi coglione!",
+      "Votate se siete a favore della pena di morte o meno. La minoranza beve",
+      "{player}, dici il nome di una canzone. Se a qualcuno non piace bevi 2 sorsi",
+      "Meglio un giorno di sole o di neve? Chi è in minoranza riceve 2 penalità",
+      "Meglio scorreggiare ininterrottamente per tutta la vita o cagarsi addosso ogni volta? Chi è in minoranza riceve 2 penalità"
     ]
   },
   "rule": {
@@ -289,6 +318,22 @@
       {
         "start": "{player} è Germano Mosconi. Deve bestemmiare con accento veneto in ogni frase e beve ad ogni errore",
         "end": "STOP! {player} non deve più bestemmiare con accento veneto"
+      },
+      {
+        "start": "Gioco dello stronzo! {player} è lo stronzo: ogni volta che ci si rivolge a lui bisogna chiamarlo 'stronzo', pena 2 sorsi",
+        "end": "STOP! {player} non è più lo stronzo, potete chiamarlo normalmente"
+      },
+      {
+        "start": "{player}, scegli una parola che dovrà essere ripetuta alla fine di ogni frase da tutti i giocatori, pena 1 sorso",
+        "end": "STOP! Non si deve più dire la parola scelta alla fine di ogni frase"
+      },
+      {
+        "start": "{player} deve tenere le mani sulla testa fino a nuovo ordine, pena 2 sorsi",
+        "end": "STOP! {player} può abbassare le mani dalla testa"
+      },
+      {
+        "start": "Gioco della TROIA! {player} è la troia: ogni volta che ci si rivolge a lui bisogna chiamarlo 'troia', pena 1 sorso",
+        "end": "STOP! {player} non è più la troia, potete chiamarlo normalmente"
       }
     ]
   }

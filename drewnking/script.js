@@ -1,6 +1,7 @@
 // Game state
 let gameState = {
     players: [],
+    playerSelectionCount: {}, // Track how many times each player has been selected
     totalRounds: 20,
     currentRound: 0,
     phrases: {},
@@ -99,11 +100,13 @@ function startGame() {
     // Get player names
     const count = parseInt(playerCountSelect.value);
     gameState.players = [];
+    gameState.playerSelectionCount = {};
     
     for (let i = 1; i <= count; i++) {
         const input = document.getElementById(`player-${i}`);
         const name = input.value.trim() || `Giocatore ${i}`;
         gameState.players.push(name);
+        gameState.playerSelectionCount[name] = 0; // Initialize counter
     }
     
     // Get total rounds
@@ -145,34 +148,96 @@ function getRandomPhrase() {
     return selectedPhrase;
 }
 
+// Get a weighted random player (favors less-selected players)
+function getWeightedRandomPlayer(excludePlayers = []) {
+    // Get available players (not in exclude list)
+    const availablePlayers = gameState.players.filter(p => !excludePlayers.includes(p));
+    
+    if (availablePlayers.length === 0) {
+        // If all players excluded, use all players
+        return gameState.players[Math.floor(Math.random() * gameState.players.length)];
+    }
+    
+    // Find the minimum selection count among available players
+    const minCount = Math.min(...availablePlayers.map(p => gameState.playerSelectionCount[p]));
+    
+    // Players with the minimum count have higher weight
+    // Create a weighted pool where less-selected players appear more times
+    const weightedPool = [];
+    availablePlayers.forEach(player => {
+        const count = gameState.playerSelectionCount[player];
+        // Weight formula: players with minCount get 3x weight, others get decreasing weight
+        const weight = Math.max(1, 4 - (count - minCount));
+        for (let i = 0; i < weight; i++) {
+            weightedPool.push(player);
+        }
+    });
+    
+    // Select random from weighted pool
+    const selectedPlayer = weightedPool[Math.floor(Math.random() * weightedPool.length)];
+    gameState.playerSelectionCount[selectedPlayer]++;
+    
+    return selectedPlayer;
+}
+
 // Replace {player} with random player name
 function replacePlaceholder(text) {
     if (text.includes('{player}')) {
-        const randomPlayer = gameState.players[Math.floor(Math.random() * gameState.players.length)];
-        return text.replace('{player}', randomPlayer);
+        // Replace each {player} with a different random player
+        let result = text;
+        const usedPlayers = [];
+        
+        while (result.includes('{player}')) {
+            // Get a weighted random player not used yet in this phrase
+            const randomPlayer = getWeightedRandomPlayer(usedPlayers);
+            usedPlayers.push(randomPlayer);
+            
+            // Replace only the first occurrence
+            result = result.replace('{player}', randomPlayer);
+        }
+        
+        return result;
     }
     return text;
 }
 
 // Show next phrase
 function showNextPhrase() {
+    // Check if we need to show a rule ending first (without incrementing round)
+    if (gameState.ruleEndQueue.length > 0) {
+        const ruleEnd = gameState.ruleEndQueue.shift();
+        showRuleEnd(ruleEnd);
+        return;
+    }
+    
+    // Now increment the round
     gameState.currentRound++;
     
     // Check if game is over
     if (gameState.currentRound > gameState.totalRounds) {
+        // Before showing end screen, check if there are active rules to end
+        if (gameState.activeRules.length > 0) {
+            // Queue all remaining active rule endings
+            gameState.activeRules.forEach(rule => {
+                gameState.ruleEndQueue.push(rule.endText);
+            });
+            gameState.activeRules = [];
+            
+            // Show the first rule ending
+            if (gameState.ruleEndQueue.length > 0) {
+                const ruleEnd = gameState.ruleEndQueue.shift();
+                showRuleEnd(ruleEnd);
+                return;
+            }
+        }
+        
+        // No more rules to end, show end screen
         showScreen('end-screen');
         return;
     }
     
     // Update round counter
     currentRoundSpan.textContent = gameState.currentRound;
-    
-    // Check if we need to show a rule ending first
-    if (gameState.ruleEndQueue.length > 0) {
-        const ruleEnd = gameState.ruleEndQueue.shift();
-        showRuleEnd(ruleEnd);
-        return;
-    }
     
     // Check for expired rules and queue their endings
     gameState.activeRules = gameState.activeRules.filter(rule => {
@@ -183,9 +248,12 @@ function showNextPhrase() {
         return true;
     });
     
-    // If we just queued a rule ending, show it
+    // If we just queued a rule ending, show it (without consuming the round)
     if (gameState.ruleEndQueue.length > 0) {
         const ruleEnd = gameState.ruleEndQueue.shift();
+        // Decrement round since we're showing an end, not a new phrase
+        gameState.currentRound--;
+        currentRoundSpan.textContent = gameState.currentRound;
         showRuleEnd(ruleEnd);
         return;
     }
@@ -215,7 +283,7 @@ function showNextPhrase() {
     
     // If it's a rule, schedule its ending
     if (phraseObj.isRule) {
-        const duration = Math.floor(Math.random() * 8) + 8; // Random 8-15 rounds
+        const duration = Math.floor(Math.random() * 8) + 5; // Random 5-12 rounds
         const endRound = gameState.currentRound + duration;
         gameState.activeRules.push({
             endRound: endRound,
@@ -273,6 +341,7 @@ function resetGame() {
     gameState.usedPhrases = [];
     gameState.activeRules = [];
     gameState.ruleEndQueue = [];
+    gameState.playerSelectionCount = {};
     showScreen('setup-screen');
     generatePlayerInputs();
 }
