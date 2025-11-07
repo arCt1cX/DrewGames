@@ -39,7 +39,7 @@ async function loadPhrases() {
             
             if (category === 'rule' && data.rules) {
                 // Handle rules separately (they have start/end)
-                data.rules.forEach(rule => {
+                data.rules.forEach((rule, index) => {
                     // Add the rule multiple times based on weight
                     for (let i = 0; i < weight; i++) {
                         gameState.allPhrases.push({
@@ -47,20 +47,22 @@ async function loadPhrases() {
                             endText: rule.end,
                             category: category,
                             color: data.color,
-                            isRule: true
+                            isRule: true,
+                            uniqueId: `rule-${index}` // Unique identifier for tracking
                         });
                     }
                 });
             } else if (data.phrases) {
                 // Regular phrases
-                data.phrases.forEach(phrase => {
+                data.phrases.forEach((phrase, index) => {
                     // Add the phrase multiple times based on weight
                     for (let i = 0; i < weight; i++) {
                         gameState.allPhrases.push({
                             text: phrase,
                             category: category,
                             color: data.color,
-                            isRule: false
+                            isRule: false,
+                            uniqueId: `${category}-${index}` // Unique identifier for tracking
                         });
                     }
                 });
@@ -121,14 +123,15 @@ function startGame() {
 
 // Get random phrase
 function getRandomPhrase() {
-    // Filter out already used phrases
+    // Filter out already used phrases by unique ID
     const availablePhrases = gameState.allPhrases.filter(
-        phrase => !gameState.usedPhrases.includes(phrase.text)
+        phrase => !gameState.usedPhrases.includes(phrase.uniqueId)
     );
     
     // If all phrases used, reset
     if (availablePhrases.length === 0) {
         gameState.usedPhrases = [];
+        console.log('Tutte le frasi usate, reset dell\'array!');
         return getRandomPhrase();
     }
     
@@ -136,8 +139,8 @@ function getRandomPhrase() {
     const randomIndex = Math.floor(Math.random() * availablePhrases.length);
     const selectedPhrase = availablePhrases[randomIndex];
     
-    // Mark as used
-    gameState.usedPhrases.push(selectedPhrase.text);
+    // Mark as used by unique ID
+    gameState.usedPhrases.push(selectedPhrase.uniqueId);
     
     return selectedPhrase;
 }
