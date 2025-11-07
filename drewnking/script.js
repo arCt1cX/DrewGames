@@ -260,7 +260,42 @@ function showNextPhrase() {
     
     // Get random phrase
     const phraseObj = getRandomPhrase();
-    const finalText = replacePlaceholder(phraseObj.text);
+    
+    // For rules, we need to replace placeholders in both start and end with the SAME players
+    let finalText;
+    let finalEndText;
+    
+    if (phraseObj.isRule && (phraseObj.text.includes('{player}') || phraseObj.endText.includes('{player}'))) {
+        // Count how many {player} placeholders we need
+        const startMatches = (phraseObj.text.match(/{player}/g) || []).length;
+        const endMatches = (phraseObj.endText.match(/{player}/g) || []).length;
+        const totalMatches = Math.max(startMatches, endMatches);
+        
+        // Generate the same players for both start and end
+        const selectedPlayers = [];
+        for (let i = 0; i < totalMatches; i++) {
+            const player = getWeightedRandomPlayer(selectedPlayers);
+            selectedPlayers.push(player);
+        }
+        
+        // Replace placeholders in start text
+        finalText = phraseObj.text;
+        selectedPlayers.forEach(player => {
+            finalText = finalText.replace('{player}', player);
+        });
+        
+        // Replace placeholders in end text (reuse same players)
+        finalEndText = phraseObj.endText;
+        selectedPlayers.forEach(player => {
+            finalEndText = finalEndText.replace('{player}', player);
+        });
+    } else {
+        // Normal phrase or rule without placeholders
+        finalText = replacePlaceholder(phraseObj.text);
+        if (phraseObj.isRule) {
+            finalEndText = phraseObj.endText; // No placeholders to replace
+        }
+    }
     
     // Set the type label based on category
     let typeLabel = '';
@@ -287,7 +322,7 @@ function showNextPhrase() {
         const endRound = gameState.currentRound + duration;
         gameState.activeRules.push({
             endRound: endRound,
-            endText: replacePlaceholder(phraseObj.endText)
+            endText: finalEndText
         });
         console.log(`Regola attivata, finirà al round ${endRound}`);
     }

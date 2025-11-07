@@ -198,7 +198,8 @@ body.game-active {
     margin-bottom: 2rem;
     transition: all 0.3s ease;
     position: relative;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .phrase-type-label {
