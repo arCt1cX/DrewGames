@@ -12,7 +12,7 @@
       "{player} beve se ha mai pianto guardando un film",
       "Chi ha mandato un messaggio alla persona sbagliata beve",
       "{player} deve bere se ha mai avuto una cotta per qualcuno qui presente",
-      "Chi ha mai fatto finta di essere malato per non scire con gli amici beve",
+      "Chi ha mai fatto finta di essere malato per non uscire con gli amici beve",
       "{player} beve se ha mai parlato male di qualcuno qui presente",
       "Chi ha mai spiato il telefono di qualcuno beve",
       "{player} deve bere se ha mai fatto pipì in piscina",
@@ -292,8 +292,8 @@
         "end": "STOP! {player} non devi più parlare come Smegmolo"
       },
       {
-        "start": "{player}: ogni volta che Caracci va su X sei autorizzato a prenderlo a pizzoni in bocca. Inoltre, beve 3 sorsi a volta",
-        "end": "STOP! Moreo non può più prendere a pizzoni Caracci quando va su X"
+        "start": "{player}: ogni volta che {player} va su un social sei autorizzato a prenderlo a pizzoni in bocca. Inoltre, beve 3 sorsi a volta",
+        "end": "STOP! {player} non può più prendere a pizzoni quando va su un social"
       },
       {
         "start": "Fino a nuovo ordine, {player} deve esclamare 'iiiii' alla fine di ogni frase, pena 3 sorsi",

@@ -372,13 +372,28 @@ function showScreen(screenId) {
 
 // Reset game
 function resetGame() {
+    // Save current players
+    const savedPlayers = [...gameState.players];
+    
     gameState.currentRound = 0;
     gameState.usedPhrases = [];
     gameState.activeRules = [];
     gameState.ruleEndQueue = [];
     gameState.playerSelectionCount = {};
+    
     showScreen('setup-screen');
+    
+    // Restore player count
+    playerCountSelect.value = savedPlayers.length;
     generatePlayerInputs();
+    
+    // Restore player names
+    savedPlayers.forEach((name, index) => {
+        const input = document.getElementById(`player-${index + 1}`);
+        if (input) {
+            input.value = name;
+        }
+    });
 }
 
 // Event listeners
