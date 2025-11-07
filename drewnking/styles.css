@@ -395,7 +395,7 @@ body.game-active {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     max-width: 100%;
     word-wrap: break-word;
-    transition: font-size 0.3s ease;
+    transition: opacity 0.2s ease;
 }
 
 .phrase-container.normal {

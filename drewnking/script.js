@@ -352,11 +352,19 @@ function showNextPhrase() {
     // Update phrase text with animation
     phraseText.classList.remove('phrase-animate');
     void phraseText.offsetWidth; // Trigger reflow
-    phraseText.classList.add('phrase-animate');
+    
+    // Hide text while calculating size
+    phraseText.style.opacity = '0';
     phraseText.textContent = finalText;
     
     // Auto-scale text if needed
     autoScaleText();
+    
+    // Show text with animation after sizing is done
+    setTimeout(() => {
+        phraseText.style.opacity = '1';
+        phraseText.classList.add('phrase-animate');
+    }, 10);
     
     // Update background color based on category
     phraseContainer.className = 'phrase-container ' + phraseObj.category;
@@ -395,11 +403,19 @@ function autoScaleText() {
 function showRuleEnd(endText) {
     phraseText.classList.remove('phrase-animate');
     void phraseText.offsetWidth;
-    phraseText.classList.add('phrase-animate');
+    
+    // Hide text while calculating size
+    phraseText.style.opacity = '0';
     phraseText.textContent = endText;
     
     // Auto-scale text if needed
     autoScaleText();
+    
+    // Show text with animation after sizing is done
+    setTimeout(() => {
+        phraseText.style.opacity = '1';
+        phraseText.classList.add('phrase-animate');
+    }, 10);
     
     // Hide type label for rule endings
     phraseTypeLabel.textContent = '';
