@@ -335,7 +335,7 @@
     ]
   },
   "vote": {
-    "color": "#1E90FF",
+    "color": "#228B22",
     "weight": 17,
     "phrases": [
       "Votate il giocatore più ignorante di tutti. L'eletto distribuisce tanti sorsi quanti filosofi famosi riesce a nominare",
@@ -441,7 +441,7 @@
     ]
   },
   "rule": {
-    "color": "#228B22",
+    "color": "#FFD700",
     "weight": 13,
     "rules": [
       {

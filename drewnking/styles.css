@@ -407,11 +407,11 @@ body.game-active {
 }
 
 .phrase-container.vote {
-    background: linear-gradient(135deg, #1E90FF, #4169E1);
+    background: linear-gradient(135deg, #228B22, #32CD32);
 }
 
 .phrase-container.rule {
-    background: linear-gradient(135deg, #228B22, #32CD32);
+    background: linear-gradient(135deg, #FFD700, #FFA500);
 }
 
 .next-btn {
