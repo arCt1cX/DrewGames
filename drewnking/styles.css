@@ -560,8 +560,8 @@ body.game-active {
 /* Rules Badge - Minimal and Discrete */
 .rules-badge {
     position: fixed;
-    top: 20px;
-    right: 60px;
+    top: 40px;
+    right: 40px;
     background: linear-gradient(135deg, #FFD700, #FFA500);
     color: #000;
     width: 44px;

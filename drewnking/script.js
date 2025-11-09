@@ -531,8 +531,9 @@ function saveCustomPercentages() {
 
 // Event listeners
 playerCountSelect.addEventListener('change', generatePlayerInputs);
-startGameBtn.addEventListener('click', () => {
+startGameBtn.addEventListener('click', async () => {
     saveCustomPercentages();
+    await loadPhrases(); // Reload phrases with custom weights
     startGame();
 });
 nextPhraseBtn.addEventListener('click', showNextPhrase);
