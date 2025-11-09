@@ -702,8 +702,8 @@ body.game-active {
     .rules-badge {
         width: 40px;
         height: 40px;
-        top: 18px;
-        right: 55px;
+        top: 30px;
+        right: 40px;
     }
     
     .rules-badge svg {

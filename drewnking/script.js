@@ -149,7 +149,7 @@ function startGame() {
 // Get random phrase
 function getRandomPhrase() {
     // Filter out already used phrases by unique ID
-    const availablePhrases = gameState.allPhrases.filter(
+    let availablePhrases = gameState.allPhrases.filter(
         phrase => !gameState.usedPhrases.includes(phrase.uniqueId)
     );
     
@@ -158,6 +158,21 @@ function getRandomPhrase() {
         gameState.usedPhrases = [];
         console.log('Tutte le frasi usate, reset dell\'array!');
         return getRandomPhrase();
+    }
+    
+    // Check if we're near the end of the game (last 5 rounds)
+    const roundsRemaining = gameState.totalRounds - gameState.currentRound;
+    const minRuleDuration = 2; // Minimum rounds a rule lasts
+    
+    // If near the end and there are non-rule phrases available, filter out rules
+    if (roundsRemaining <= minRuleDuration) {
+        const nonRulePhrases = availablePhrases.filter(phrase => !phrase.isRule);
+        
+        // Only use non-rule phrases if they exist (so 100% rule config still works)
+        if (nonRulePhrases.length > 0) {
+            availablePhrases = nonRulePhrases;
+            console.log(`Ultimi ${roundsRemaining} turni: escluse le regole`);
+        }
     }
     
     // Get random phrase
