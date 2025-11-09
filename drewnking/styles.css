@@ -560,26 +560,48 @@ body.game-active {
 /* Rules Badge - Minimal and Discrete */
 .rules-badge {
     position: fixed;
-    top: 15px;
-    right: 15px;
+    top: 60px;
+    right: 20px;
     background: linear-gradient(135deg, #FFD700, #FFA500);
     color: #000;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 14px;
     cursor: pointer;
     z-index: 999;
     box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
     transition: all 0.3s ease;
 }
 
+.rules-badge svg {
+    width: 24px;
+    height: 24px;
+    fill: #000;
+}
+
+.rules-badge-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #e74c3c;
+    color: #fff;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 0 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
 .rules-badge:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     box-shadow: 0 6px 16px rgba(255, 215, 0, 0.6);
 }
 
@@ -678,11 +700,23 @@ body.game-active {
 /* Mobile adjustments */
 @media (max-width: 480px) {
     .rules-badge {
-        width: 32px;
-        height: 32px;
-        font-size: 12px;
-        top: 12px;
-        right: 12px;
+        width: 40px;
+        height: 40px;
+        top: 55px;
+        right: 15px;
+    }
+    
+    .rules-badge svg {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .rules-badge-count {
+        min-width: 16px;
+        height: 16px;
+        font-size: 10px;
+        top: -3px;
+        right: -3px;
     }
     
     .rules-panel {
