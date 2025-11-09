@@ -152,7 +152,43 @@
       "Quel cesso ambulante di {player} beve 1 sorso",
       "Chi è già stato negli Stati Uniti distribuisce 2 sorsi. Chi è stato in Africa ne distribuisce 3",
       "Quel barile di smegma di {player} distribuisce 2 sorsi",
-      "{player}, sei uno schifoso cavernicolo bastardo. Distribuisci 2 sorsi"
+      "{player}, sei uno schifoso cavernicolo bastardo. Distribuisci 2 sorsi",
+      "Chi voleva giocare a Picolo invece di Drewnking Game riceve 4 penalità... Vergogna!",
+      "{player}, ricevi tante penalità quante sono le belle tette nella stanza",
+      "Chi pesa più di 90 kg riceve 2 penalità...Ciccione...",
+      "{player}, se la tua età è un numero pari ricevi 2 penalità, se è dispari ne distribuisci 2",
+      "{player}, se fumi butta nella spazzatura una sigaretta intera oppure ricevi 2 sorsi",
+      "{player}, sei un drogato del cazzo. Bevi tanti sorsi quante canne ti sei fumato nell'ultima settimana",
+      "Chi ha mai tradito il proprio partner riceve 3 sorsi e la vergogna degli altri giocatori",
+      "Ricevi 1 sorso se la tua auto vale meno di 5000€. 2 sorsi se non hai neanche la macchina, poveraccio",
+      "Chi ha mai rubato qualcosa in un negozio distribuisce 3 sorsi da criminale quale è",
+      "Ricevi tanti sorsi quante volte sei stato bocciato a scuola. Se non sei mai stato bocciato distribuisci 2 sorsi, secchione del cazzo",
+      "Chi ha mai baciato qualcuno dello stesso sesso distribuisce 2 sorsi e un sorriso malizioso",
+      "{player}, se hai mai mandato foto di nudo non richieste a qualcuno bevi 3 sorsi, maniaco di merda",
+      "Chi ha mai bestemmiato in chiesa o in un luogo sacro beve 2 sorsi e va all'inferno",
+      "Quel fallito di {player} beve 3 sorsi perché ha dei gusti musicali pessimi",
+      "Chi si è fatto vomitare addosso da qualcuno riceve 2 sorsi per la traumatica esperienza",
+      "{player}, se hai mai pianto guardando un film bevi 1 sorso, femminuccia",
+      "Chi ha il conto in banca in rosso beve 2 sorsi e cerca di farsi prestare i soldi dagli altri giocatori",
+      "Ricevi tanti sorsi quanti followers su Instagram hai in meno rispetto alla media del gruppo",
+      "{player}, se non ti sei mai fatto una sega pensando a qualcuno dei presenti distribuisci 2 sorsi. Altrimenti bevi 3 sorsi, porco",
+      "Ricevi 2 sorsi se hai mai stalkerato qualcuno sui social",
+      "{player}, se vivi ancora coi tuoi genitori dopo i 25 anni bevi 2 sorsi, bamboccione",
+      "Chi non si è mai ubriacato fino a non ricordare la serata riceve 2 sorsi. Tocca rimediare!",
+      "Ricevi tanti sorsi quante volte hai detto 'domani inizio la dieta' nell'ultimo mese",
+      "{player}, se hai mai litigato su Facebook, X o Instagram per più di 3 commenti bevi 2 sorsi, disagiato",
+      "Chi ha un debito con qualcuno dei presenti beve 3 sorsi e lo salda entro fine serata",
+      "Ricevi 2 sorsi se hai mai fatto finta di essere malato per non andare al lavoro o a scuola",
+      "Chi ha fatto più di 2 lavori diversi nell'ultimo anno beve 1 sorso per ogni lavoro",
+      "Ricevi tanti sorsi quante sigarette hai fumato oggi. Se non fumi distribuisci 2 sorsi",
+      "{player}, se hai mai avuto un profilo fake sui social bevi 3 sorsi, viscido",
+      "Chi ha mai fatto la spia da piccolo riceve 2 sorsi da infame",
+      "Ricevi 1 sorso per ogni piercing che hai. 2 sorsi per ogni tatuaggio visibile",
+      "Chi ha la media voti più bassa del gruppo all'università o al liceo beve 3 sorsi da somaro",
+      "Ricevi 2 sorsi se hai mai dato buca a qualcuno per uscire con qualcun altro",
+      "{player}, distribuisci tanti sorsi quante rotture di coglioni hai fatto oggi agli altri giocatori",
+      "{player}, se il tuo peso ideale è almeno 10 kg in meno di quello attuale bevi 2 sorsi e smettila di mangiare",
+      "Chi ha mai baciato qualcuno per scommessa distribuisce 3 sorsi da venduto"
         ]
   },
   "challenge": {
@@ -198,11 +234,10 @@
       "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. Imita parenzo. Chi indovina distribuisce a 2 giocatori",
       "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. Imita il king del vintage. Chi indovina distribuisce a 2 giocatori",
       "ATTENZIONE: LEGGERE A MENTE SENZA FAR SENTIRE GLI ALTRI GIOCATORI. Imita ken lee: l'influencer che esegue azioni a velocità supersonica. Chi indovina distribuisce a 2 giocatori",
-      "ATTENZIONE: LEGGERE A MENTE. {player} mima un personaggio famoso. Il primo giocatore che indovina distribuisce da bere a 2 giocatori",
+      "ATTENZIONE: LEGGERE A MENTE. Mima un personaggio famoso. Il primo giocatore che indovina distribuisce da bere a 2 giocatori",
       "{player} inizia una frase meme a piacimento, il primo giocatore che la continua correttamente distribuisce 3 sorsi",
       "Sfida tra {player} e {player}: verranno letti brainrot (Skibidi, Sigma, Rizz, Gyatt, Fanum Tax), create entrambi la vostra top 5. Se almeno 3 elementi coincidono, tutti gli altri bevono, altrimenti bevete voi due",
       "{player} deve creare la sua top 5 dei seguenti drink (Spritz, Vodka Lemon, Gin Tonic, Mojito, Negroni, Margarita, Whisky Cola, Tequila). Se viene condivisa dalla maggioranza non beve nessuno, altrimenti bevi tu",
-      "{player}, recita una poesia del Poesie ad alta voce e con passionalità, altrimenti finisci il bicchiere",
       "Nominate a turno persone mongoloidi di palestra. Chi non ne trova più nessuna beve 2 sorsi. Inizia {player}",
       "Cantate a turno una frase della canzone: Padolo 4. Chi non ricorda come continua beve 1 sorso. Inizia {player}",
       "{player}: bestemmia la madonna, se ti rifiuti bestemmia gesù cristo",
@@ -331,7 +366,8 @@
       "Scrivete su un foglio i tuoi 5 animali preferiti. Poi leggeteli: ciascun giocatore distribuisce tanti sorsi quante sono le cose nella sua lista che sono presenti anche nelle liste altrui",
       "Scrivete su un foglio le 5 cose che fai tutti i giorni. Poi leggetele: ciascun giocatore distribuisce tanti sorsi quante sono le cose nella sua lista che nessun altro giocatore ha messo",
       "Scrivete su un foglio le 5 persone più idiote con cui avete mai avuto a che fare. Poi leggetele: ciascun giocatore distribuisce tanti sorsi quante sono le persone nella sua lista che sono presenti anche nelle liste altrui",
-      "Scrivete su un foglio le 5 marche di birra che ti piacciono. Poi leggetele: ciascun giocatore distribuisce tanti sorsi quante sono le cose nella sua lista che sono presenti anche nelle liste altrui"
+      "Scrivete su un foglio le 5 marche di birra che ti piacciono. Poi leggetele: ciascun giocatore distribuisce tanti sorsi quante sono le cose nella sua lista che sono presenti anche nelle liste altrui",
+      "A turno, ripetete 5 volte 'tre tigri contro tre tigri'. Chi sbaglia riceve 1 sorso, chi ci riesce ne distribuisce 2"
     ]
   },
   "vote": {
@@ -695,6 +731,10 @@
       {
         "start": "Momento 2012. Fino a nuovo ordine, ogni volta che {player} schiocca le dita, {player} deve ballare il Gangnam Style. 1 sorso ogni volta che si rifiuta",
         "end": "STOP! Non si deve più ballare il Gangnam Style quando {player} schiocca le dita"
+      },
+      {
+        "start": "{player} sei un ventriloquo. La mano è il tuo pupazzo, userai quella per parlare fino a nuovo ordine. Bevi 1 sorso ad ogni errore",
+        "end": "STOP! {player} non è più un ventriloquo, può parlare normalmente"
       }
     ]
   }

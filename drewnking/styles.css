@@ -556,3 +556,148 @@ body.game-active {
 .phrase-animate {
     animation: phraseSlideIn 0.4s ease;
 }
+
+/* Rules Badge - Minimal and Discrete */
+.rules-badge {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #000;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.rules-badge:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(255, 215, 0, 0.6);
+}
+
+.rules-badge:active {
+    transform: scale(0.95);
+}
+
+/* Rules Panel - Slide-in from right */
+.rules-panel {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100vh;
+    background: #1e1e1e;
+    border-left: 2px solid #FFD700;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.rules-panel.active {
+    right: 0;
+}
+
+.rules-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #FFD700;
+}
+
+.rules-panel-header h3 {
+    color: #FFD700;
+    font-size: 18px;
+    margin: 0;
+}
+
+.close-panel-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.close-panel-btn:hover {
+    color: #FFD700;
+}
+
+.rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rule-item {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid #FFD700;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.rule-item .rule-player {
+    color: #FFD700;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.rule-item .rule-text {
+    color: #fff;
+}
+
+.rules-list:empty::after {
+    content: "Nessuna regola attiva";
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    display: block;
+    padding: 20px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .rules-badge {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+        top: 12px;
+        right: 12px;
+    }
+    
+    .rules-panel {
+        width: 280px;
+        right: -300px;
+        padding: 15px;
+    }
+    
+    .rules-panel-header h3 {
+        font-size: 16px;
+    }
+    
+    .rule-item {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+

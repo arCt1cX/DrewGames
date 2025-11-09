@@ -122,7 +122,7 @@
                                 <span class="category-dot" style="background-color: #9b59b6;"></span>
                                 Normali:
                             </label>
-                            <input type="number" id="normal-percentage" min="0" max="100" value="35">
+                            <input type="number" id="normal-percentage" min="0" max="100" value="40">
                             <span class="percentage-symbol">%</span>
                         </div>
                         
@@ -131,7 +131,7 @@
                                 <span class="category-dot" style="background-color: #e74c3c;"></span>
                                 Sfide:
                             </label>
-                            <input type="number" id="challenge-percentage" min="0" max="100" value="25">
+                            <input type="number" id="challenge-percentage" min="0" max="100" value="20">
                             <span class="percentage-symbol">%</span>
                         </div>
                         
@@ -166,6 +166,22 @@
 
         <!-- Game Screen -->
         <div id="game-screen" class="screen">
+            <!-- Rules Badge -->
+            <div id="rules-badge" class="rules-badge" style="display: none;">
+                <span id="rules-count">0</span>
+            </div>
+            
+            <!-- Rules Panel -->
+            <div id="rules-panel" class="rules-panel">
+                <div class="rules-panel-header">
+                    <h3>Regole Attive</h3>
+                    <button id="close-rules-panel" class="close-panel-btn">✕</button>
+                </div>
+                <div id="rules-list" class="rules-list">
+                    <!-- Active rules will be listed here -->
+                </div>
+            </div>
+            
             <div class="round-counter">
                 <span>Turno <span id="current-round">1</span> di <span id="total-rounds">20</span></span>
             </div>

@@ -270,6 +270,9 @@ function showNextPhrase() {
         return true;
     });
     
+    // Update badge after filtering
+    updateRulesBadge();
+    
     // If we just queued a rule ending, show it (without consuming the round)
     if (gameState.ruleEndQueue.length > 0) {
         const ruleEnd = gameState.ruleEndQueue.shift();
@@ -344,9 +347,11 @@ function showNextPhrase() {
         const endRound = gameState.currentRound + duration;
         gameState.activeRules.push({
             endRound: endRound,
+            startText: finalText,
             endText: finalEndText
         });
         console.log(`Regola attivata, finirà al round ${endRound}`);
+        updateRulesBadge();
     }
     
     // Update phrase text with animation
@@ -454,6 +459,9 @@ function resetGame() {
     gameState.ruleEndQueue = [];
     gameState.playerSelectionCount = {};
     
+    // Update badge after reset
+    updateRulesBadge();
+    
     showScreen('setup-screen');
     
     // Restore player count
@@ -534,6 +542,63 @@ normalPercentageInput.addEventListener('input', updatePercentageTotal);
 challengePercentageInput.addEventListener('input', updatePercentageTotal);
 votePercentageInput.addEventListener('input', updatePercentageTotal);
 rulePercentageInput.addEventListener('input', updatePercentageTotal);
+
+// Rules Badge and Panel Management
+const rulesBadge = document.getElementById('rules-badge');
+const rulesPanel = document.getElementById('rules-panel');
+const closeRulesPanelBtn = document.getElementById('close-rules-panel');
+const rulesCountSpan = document.getElementById('rules-count');
+const rulesList = document.getElementById('rules-list');
+
+function updateRulesBadge() {
+    const activeCount = gameState.activeRules.length;
+    if (activeCount > 0) {
+        rulesBadge.style.display = 'flex';
+        rulesCountSpan.textContent = activeCount;
+    } else {
+        rulesBadge.style.display = 'none';
+        rulesPanel.classList.remove('active');
+    }
+}
+
+function updateRulesList() {
+    rulesList.innerHTML = '';
+    
+    gameState.activeRules.forEach((rule) => {
+        const ruleItem = document.createElement('div');
+        ruleItem.className = 'rule-item';
+        
+        const ruleText = document.createElement('div');
+        ruleText.className = 'rule-text';
+        ruleText.textContent = rule.startText || 'Regola attiva';
+        
+        ruleItem.appendChild(ruleText);
+        rulesList.appendChild(ruleItem);
+    });
+}
+
+function toggleRulesPanel() {
+    rulesPanel.classList.toggle('active');
+    if (rulesPanel.classList.contains('active')) {
+        updateRulesList();
+    }
+}
+
+function closeRulesPanel() {
+    rulesPanel.classList.remove('active');
+}
+
+rulesBadge.addEventListener('click', toggleRulesPanel);
+closeRulesPanelBtn.addEventListener('click', closeRulesPanel);
+
+// Close panel when clicking outside
+document.addEventListener('click', (e) => {
+    if (rulesPanel.classList.contains('active') && 
+        !rulesPanel.contains(e.target) && 
+        !rulesBadge.contains(e.target)) {
+        closeRulesPanel();
+    }
+});
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
