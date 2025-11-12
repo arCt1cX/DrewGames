@@ -13,6 +13,71 @@ let gameState = {
     categoryWeights: {} // Store custom weights
 };
 
+// Historical phrase tracking (persistent across sessions)
+const STORAGE_KEY = 'drewnking_phrase_history';
+let phraseHistory = {
+    seenPhrases: {}, // uniqueId: count of times seen
+    lastReset: Date.now()
+};
+
+// Load phrase history from localStorage
+function loadPhraseHistory() {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            phraseHistory = JSON.parse(stored);
+        }
+    } catch (error) {
+        console.error('Errore nel caricamento dello storico:', error);
+    }
+}
+
+// Save phrase history to localStorage
+function savePhraseHistory() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(phraseHistory));
+    } catch (error) {
+        console.error('Errore nel salvataggio dello storico:', error);
+    }
+}
+
+// Mark a phrase as seen
+function markPhraseAsSeen(uniqueId) {
+    if (!phraseHistory.seenPhrases[uniqueId]) {
+        phraseHistory.seenPhrases[uniqueId] = 0;
+    }
+    phraseHistory.seenPhrases[uniqueId]++;
+    savePhraseHistory();
+    
+    // Log for debugging
+    const totalSeen = Object.keys(phraseHistory.seenPhrases).length;
+    const totalUnique = new Set(gameState.allPhrases.map(p => p.uniqueId)).size;
+    console.log(`Frase vista: ${uniqueId} (${phraseHistory.seenPhrases[uniqueId]} volte) - Progresso: ${totalSeen}/${totalUnique}`);
+}
+
+// Get how many times a phrase has been seen
+function getPhraseSeen(uniqueId) {
+    return phraseHistory.seenPhrases[uniqueId] || 0;
+}
+
+// Reset history if all phrases have been seen
+function checkAndResetHistory() {
+    if (!gameState.allPhrases || gameState.allPhrases.length === 0) {
+        return; // Not ready yet
+    }
+    
+    const totalUniquePhrases = new Set(gameState.allPhrases.map(p => p.uniqueId)).size;
+    const seenUniquePhrases = Object.keys(phraseHistory.seenPhrases).length;
+    
+    // If we've seen all unique phrases at least once, reset the history
+    if (seenUniquePhrases >= totalUniquePhrases) {
+        console.log('🔄 Tutte le frasi viste almeno una volta! Reset dello storico...');
+        phraseHistory.seenPhrases = {};
+        phraseHistory.lastReset = Date.now();
+        savePhraseHistory();
+    }
+}
+
 // DOM Elements
 const setupScreen = document.getElementById('setup-screen');
 const gameScreen = document.getElementById('game-screen');
@@ -175,12 +240,39 @@ function getRandomPhrase() {
         }
     }
     
-    // Get random phrase
-    const randomIndex = Math.floor(Math.random() * availablePhrases.length);
-    const selectedPhrase = availablePhrases[randomIndex];
+    // Apply priority system based on historical usage
+    // Create weighted pool: never-seen phrases get added 10x, seen once 3x, seen multiple times 1x
+    const weightedPool = [];
+    availablePhrases.forEach(phrase => {
+        const seenCount = getPhraseSeen(phrase.uniqueId);
+        let weight;
+        
+        if (seenCount === 0) {
+            weight = 10; // Never seen: highest priority
+        } else if (seenCount === 1) {
+            weight = 3; // Seen once: medium priority
+        } else {
+            weight = 1; // Seen multiple times: lowest priority
+        }
+        
+        // Add phrase to pool based on weight
+        for (let i = 0; i < weight; i++) {
+            weightedPool.push(phrase);
+        }
+    });
     
-    // Mark as used by unique ID
+    // Get random phrase from weighted pool
+    const randomIndex = Math.floor(Math.random() * weightedPool.length);
+    const selectedPhrase = weightedPool[randomIndex];
+    
+    // Mark as used in current session
     gameState.usedPhrases.push(selectedPhrase.uniqueId);
+    
+    // Mark as seen in history
+    markPhraseAsSeen(selectedPhrase.uniqueId);
+    
+    // Check if we need to reset history
+    checkAndResetHistory();
     
     return selectedPhrase;
 }
@@ -618,6 +710,38 @@ document.addEventListener('click', (e) => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
+    loadPhraseHistory(); // Load historical data from localStorage
     await loadPhrases();
     generatePlayerInputs();
+    
+    // Debug helper - expose to console
+    window.drewnkingDebug = {
+        getHistory: () => phraseHistory,
+        resetHistory: () => {
+            phraseHistory.seenPhrases = {};
+            phraseHistory.lastReset = Date.now();
+            savePhraseHistory();
+            console.log('Storico resettato!');
+        },
+        getStats: () => {
+            const totalUnique = new Set(gameState.allPhrases.map(p => p.uniqueId)).size;
+            const totalSeen = Object.keys(phraseHistory.seenPhrases).length;
+            const neverSeen = totalUnique - totalSeen;
+            const seenOnce = Object.values(phraseHistory.seenPhrases).filter(c => c === 1).length;
+            const seenMultiple = Object.values(phraseHistory.seenPhrases).filter(c => c > 1).length;
+            
+            return {
+                totalUniquePhrases: totalUnique,
+                totalSeenPhrases: totalSeen,
+                neverSeen: neverSeen,
+                seenOnce: seenOnce,
+                seenMultipleTimes: seenMultiple,
+                lastReset: new Date(phraseHistory.lastReset).toLocaleString()
+            };
+        }
+    };
+    
+    console.log('🎮 Drewnking Game caricato!');
+    console.log('📊 Usa window.drewnkingDebug.getStats() per vedere le statistiche');
+    console.log('🔄 Usa window.drewnkingDebug.resetHistory() per resettare lo storico');
 });
