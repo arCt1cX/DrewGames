@@ -219,7 +219,14 @@
       "{player}, se spacci o hai mai spacciato bevi 3 sorsi",
       "{player}, se sei mai stato in Tunisia bevi 3 sorsi",
       "{player}, se sei mai stato in Marocco bevi 3 sorsi",
-      "{player}, se sei mai stato in Sudafrica bevi 3 sorsi"
+      "{player}, se sei mai stato in Sudafrica bevi 3 sorsi",
+      "{player} si scopa gli asini. Distribuisce 1 sorso",
+      "{player} è un prete omosessuale: beve 1 sorso",
+      "Chi è già andato nel dark web riceve 2 sorsi",
+      "Chi è già stato a casa di {player} riceve un sorso e canta 'Woooo Volevo te, pensavo solo a teeee'",
+      "Distribuisci 1 sorso se hai mai cagato in aereo. 2 se hai vomitato. 5 se ti sei segato",
+      "Distribuisci 1 sorso se hai mai cagato in treno. 2 se hai vomitato. 5 se ti sei segato",
+      "Parenzo buscettone…UUUUUUH. {player}, beviti un sorso va, pagliaccio"
         ]
   },
   "challenge": {
@@ -439,13 +446,45 @@
       "Il primo giocatore che urla con potenza 'ho rapito Aldo Moro' distribuisce 5 sorsi",
       "Culturisti e strongman famosi. A turno nominatene uno. Il giocatore che ne ripete uno o non ne trova più riceve 2 sorsi",
       "A turno, nominate una figura di merda di {player}. Chi non ne trova più una nuova beve 2 sorsi. Se {player} è quello che non ne trova più, finisce il bicchiere",
-      "{player}, offri uno shot ai tuoi amici. Se lo fai, distribuisci 8 sorsi. Se ti rifiuti, bevi 5 sorsi"
+      "{player}, offri uno shot ai tuoi amici. Se lo fai, distribuisci 8 sorsi. Se ti rifiuti, bevi 5 sorsi",
+      "Personaggi della classe del liceo di {player}. A turno nominatene uno. Il giocatore che ne ripete uno o non ne trova più riceve 2 sorsi. I compagni di classe del liceo di {player} sono esclusi da questo turno",
+      "Chi è mai andato in vacanza con {player} distribuisce 1 sorso",
+      "Cose che {player} ha nella sua stanza. A turno nominatene una. Il giocatore che non ne trova più o ne ripete una beve 2 sorsi. {player} è il giudice: non partecipa",
+      "{player}, bevi 1 sorso e lancia qualcosa in faccia a {player}, che distribuisce 2 sorsi se non riesce ad evitarla. {player} invece adora cazzi in abbondanti quantità e distribuisce 1 sorso",
+      "{player}, fai un SIUUUU con tanto di esultanza alla CR7 o bevi 4 sorsi",
+      "{player}, sei Primo Nero. Vai al bancone e cerca di convincere il barista a regalarti da bere, con accento africano. Se ci provi, distribuisci 5 sorsi. Se ci riesci, ne distribuisci 15. Se ti rifiuti, ne bevi 4",
+      "{player}, fai una domanda tecnica sul tuo lavoro. Il primo che la indovina distribuisce 3 sorsi. Se nessuno indovina, ne bevi 2. Se qualcuno indovina, ne distribuisci 1",
+      "{player}, scegli una droga e cercala su Google Immagini. Mostra una foto. Il primo giocatore che la indovina distribuisce 2 sorsi",
+      "{player}, scegli una pornostar e cercala su Google Immagini. Mostra una foto. Il primo giocatore che la indovina distribuisce 2 sorsi",
+      "{player}, scegli una discoteca della vostra città e cercala su Google Immagini. Mostra una foto. Il primo giocatore che la indovina distribuisce 2 sorsi",
+      "{player}, scegli un paese del terzo mondo e cercalo su Google Immagini. Mostra una foto. Il primo giocatore che la indovina distribuisce 2 sorsi",
+      "{player}, scegli un personaggio trash di nicchia e cercalo su Google Immagini. Mostra la foto. Il primo giocatore che la indovina distribuisce 2 sorsi",
+      "Rapper americani o inglesi. A turno nominatene uno. Il giocatore che non ne trova più o ne ripete uno beve 2 sorsi",
+      "Cose che caratterizzano gli afro-americani. A turno nominatene una. Il giocatore che non ne trova più o ne ripete una beve 2 sorsi",
+      "{player}, ripeti a memoria tutte le fermate della linea del treno della tua città. Se ci riesci, distribuisci 5 sorsi",
+      "{player} hai 3 secondi, se guardi il telefono perdi. Che giorno è oggi? Se perdi bevi 2 sorsi",
+      "{player}, sei l'operatore ecologico. Pulisci subito il tavolo e mettilo in ordine, altrimenti bevi 5 sorsi",
+      "Il prossimo giocatore a prendere il telefono beve 2 sorsi e tutti lo devono insultare in maniera omofoba. È escluso dal turno il proprietario del telefono usato per giocare"
     ]
   },
   "vote": {
     "color": "#228B22",
     "weight": 17,
     "phrases": [
+      "Votate il giocatore che fuma più sigarette. Provate tutti a indovinare il numero di sigarette nel suo pacchetto. Il/i giocatore/i che ci va più vicino distribuisce 2 sorsi",
+      "Votate il giocatore più forte in informatica. Cercate una domanda difficilissima di informatica, se risponde correttamente il nerd del cazzo distribuisce 3 sorsi",
+      "Votate il giocatore più forte in geografia. Cercate una bandiera o capitale difficilissima, se risponde correttamente il sapientone faccia di cazzo distribuisce 3 sorsi",
+      "Votate il giocatore più forte in matematica. Cercate una domanda difficilissima di matematica, se risponde correttamente quel disagiato mentale di una calcolatrice umana distribuisce 3 sorsi",
+      "Votate il giocatore più forte in storia. Cercate una data di un evento storico molto di nicchia, se indovina la data, l'Alberto Angela dei poveri distribuisce 3 sorsi",
+      "Votate il giocatore più forte in letteratura. Cercate l'opera minore di un autore noto, se indovina l'autore dell'opera, il letterato sfigato distribuisce 3 sorsi",
+      "Votate il giocatore più esperto di calcio. Cercate un calciatore o il logo di una squadra poco noti, se risponde correttamente distribuisce 3 sorsi",
+      "Votate il giocatore più esperto di droga. Chiedete a ChatGPT una domanda difficile a tema droghe pesanti, se risponde correttamente quel tossico magnato distribuisce 3 sorsi",
+      "Votate il giocatore più esperto di film. Fategli vedere uno screen da uno spezzone di un film, se indovina il film distribuisce 3 sorsi",
+      "Votate il giocatore più esperto di serie tv. Fategli vedere uno screen da uno spezzone di una serie tv, se indovina la serie distribuisce 3 sorsi",
+      "Votate il giocatore più esperto di social. Fategli vedere un personaggio trash di nicchia, se lo conosce distribuisce 3 sorsi",
+      "Votate il giocatore più propenso a lavorare in un circo. L'eletto distribuisce 2 sorsi",
+      "Votate il giocatore più ossessionato dalle MILF. L'eletto beve 2 sorsi e ne distribuisce 1",
+      "{player}, nomina un personaggio vostro conoscente al momento assente. A turno, ogni giocatore deve esprimere un pensiero su di lui/lei. Poi votate il più divertente, il vincitore distribuisce 2 sorsi",
       "A turno, dite un cibo generalmente apprezzato che a voi non piace. Se la maggioranza è in disaccordo con la tua opinione, bevi 1 sorso",
       "A turno, ogni giocatore dice una sua unpopular opinion. Gli altri votano. Se la maggioranza è in disaccordo, il giocatore beve 1 sorso",
       "Votate tutti il giocatore più ossessionato dalla pornografia. L'eletto prende una foto di una pornostar da Google. Il primo giocatore che indovina come si chiama distribuisce 4 sorsi",
@@ -557,12 +596,14 @@
       "Meglio Safari o Google Chrome? Votate, chi è in minoranza beve",
       "Classificate da migliore a peggiore questi succhi: pesca, ACE, mela. I giocatori che fanno un ranking identico ad almeno un giocatore si salvano, gli altri bevono 1 sorso",
       "Classificate caffè nero, caffè latte, cappuccino. I giocatori che fanno un ranking identico ad almeno un giocatore si salvano, gli altri bevono 1 sorso",
+      "Quale giocatore tra i presenti ha questa routine settimanale: Lunedì: Seghe. Martedì: Seghe. Mercoledì: seghe. Giovedì: seghe. Venerdì: seghe. Sabato: seghe. Domenica: riposo (con seghe). Votate, l'eletto beve 2 sorsi e ne distribuisce 2",
       "Birra rossa o birra bionda? Votate tutti contemporaneamente, chi è in minoranza beve",
       "Heineken o Peroni? Votate tutti contemporaneamente, chi è in minoranza beve",
       "Votate tutti il giocatore che fa più ridere quando balla. Il giocatore eletto deve ballare una canzone scelta da {player}. Tutti i giocatori devono imitarlo. Massima penalità per chi si rifiuta",
       "Via gli indiani dalle nostre città! I giocatori che non si sono fatti una doccia oggi ricevono 2 sorsi",
       "Classificate patatine, pop corn, noccioline. I giocatori che fanno un ranking identico ad almeno un giocatore si salvano, gli altri bevono 1 sorso",
       "Quale è più plausibile: la terra piatta o il falso sbarco sulla luna? Votate tutti contemporaneamente, chi è in minoranza beve",
+      "Meglio cash o carta di credito? Votate tutti contemporaneamente, chi è in minoranza beve",
       "Votate tutti un vostro conoscente / amico particolarmente coglionazzo non presente alla serata. NON LEGGERE, PRIMA VOTATE. {player} deve mandargli un messaggio su WhatsApp dicendogli che è un coglionazzo, altrimenti riceve 5 sorsi",
       "Meglio guidare un quad nel deserto di sabbia dell'Arabia o vedere l'aurora boreale in un campeggio nella foresta norvegese. Votate contemporaneamente, chi è in minoranza beve",
       "Classificate da migliore a peggiore: Monopoli, Risiko, Cluedo. I giocatori che fanno un ranking identico ad almeno un giocatore si salvano, gli altri bevono 1 sorso",
@@ -1034,6 +1075,34 @@
       {
         "start": "{player} è scimmiali, parla come lui fino a nuovo ordine. Beve 1 sorso ad ogni errore",
         "end": "STOP! {player} non deve più parlare come scimmiali"
+      },
+      {
+        "start": "{player} è Mike Tyson. Deve rimanere con la guardia alta da boxe fino a nuovo ordine. Beve 1 sorso ogni volta che abbassa la guardia",
+        "end": "STOP! {player} non è più Mike Tyson e può abbassare la guardia"
+      },
+      {
+        "start": "{player} è Sabrina Marchetti. In ogni frase che dice deve inserire un 'APORCODAUS', contorcendosi mentre lo dice. 1 sorso per ogni errore",
+        "end": "STOP! {player} non è più Sabrina Marchetti e non deve più dire 'APORCODAUS'"
+      },
+      {
+        "start": "Per 5 turni, tutti i giocatori devono fare silenzio a parte {player}, pena 1 sorso ogni parola. Il giocatore scelto invece è Fabio Caressa. Deve descrivere tutto quello che i giocatori fanno come se stesse facendo la telecronaca della finale dei mondiali. Se si rifiuta, massima penalità",
+        "end": "STOP! Tutti possono parlare di nuovo e {player} non è più Fabio Caressa"
+      },
+      {
+        "start": "{player} è Lele Adani. Deve parlare in spagnolo pessimo italianizzato fino a nuovo ordine. Beve 1 sorso ad ogni errore",
+        "end": "STOP! {player} non è più Lele Adani e può parlare italiano"
+      },
+      {
+        "start": "{player} deve fare una streak di mewing fino a fine partita. Se si rifiuta, beve 3 sorsi. Beve 1 sorso ogni volta che smette di fare mewing",
+        "end": "STOP! {player} può smettere di fare mewing"
+      },
+      {
+        "start": "parlate tutti in napoletano. Chi sbaglia beve 1 sorso",
+        "end": "STOP! Non si deve più parlare in napoletano"
+      },
+      {
+        "start": "{player}, devi imitare {player}. Se sbagli, bevi 1 sorso",
+        "end": "STOP! {player} non deve più imitare {player}"
       }
     ]
   }
