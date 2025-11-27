@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function startCategorySelection() {
         // Create player objects
         gameState.players = [];
-        const playerInputs = document.querySelectorAll('.player-name-input');
+        const playerInputs = document.querySelectorAll('#player-inputs .player-name-input');
 
         playerInputs.forEach((input, index) => {
             const name = input.value.trim() || `${getGameTranslation('playerNameLabel')} ${index + 1}`;
