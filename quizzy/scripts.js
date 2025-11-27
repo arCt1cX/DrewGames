@@ -1511,6 +1511,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Remove any existing bambino warning
+        const existingWarning = document.getElementById('bambino-game-warning');
         if (existingWarning) {
             existingWarning.remove();
         }
