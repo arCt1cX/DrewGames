@@ -1511,10 +1511,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Remove any existing bambino warning
-        const existingWarning = document.getElementById('bambino-game-warning');
         if (existingWarning) {
             existingWarning.remove();
         }
+
+        // Show question screen immediately
+        showScreen(screens.question);
 
         if (gameState.gameMode === 'ai') {
             generateAIQuestion(gameState.currentCategory, gameState.currentDifficulty)
