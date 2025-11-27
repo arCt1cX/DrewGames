@@ -5,8 +5,8 @@ let gameState = {
     totalRounds: 20,
     currentRound: 0,
     phrases: {},
-    usedPhrases: [],
-    allPhrases: [],
+    categorizedPhrases: {}, // New: Store phrases organized by category
+    usedPhrases: [], // Track phrases used in CURRENT session
     activeRules: [], // Track active rules with their end round
     ruleEndQueue: [], // Queue of rule endings to show
     customPercentages: false, // Track if custom percentages are enabled
@@ -26,6 +26,10 @@ function loadPhraseHistory() {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
             phraseHistory = JSON.parse(stored);
+            // Ensure seenPhrases exists
+            if (!phraseHistory.seenPhrases) {
+                phraseHistory.seenPhrases = {};
+            }
         }
     } catch (error) {
         console.error('Errore nel caricamento dello storico:', error);
@@ -48,34 +52,26 @@ function markPhraseAsSeen(uniqueId) {
     }
     phraseHistory.seenPhrases[uniqueId]++;
     savePhraseHistory();
-    
-    // Log for debugging
-    const totalSeen = Object.keys(phraseHistory.seenPhrases).length;
-    const totalUnique = new Set(gameState.allPhrases.map(p => p.uniqueId)).size;
-    console.log(`Frase vista: ${uniqueId} (${phraseHistory.seenPhrases[uniqueId]} volte) - Progresso: ${totalSeen}/${totalUnique}`);
 }
 
-// Get how many times a phrase has been seen
-function getPhraseSeen(uniqueId) {
-    return phraseHistory.seenPhrases[uniqueId] || 0;
+// Check if a phrase has been seen
+function isPhraseSeen(uniqueId) {
+    return !!phraseHistory.seenPhrases[uniqueId];
 }
 
-// Reset history if all phrases have been seen
-function checkAndResetHistory() {
-    if (!gameState.allPhrases || gameState.allPhrases.length === 0) {
-        return; // Not ready yet
-    }
-    
-    const totalUniquePhrases = new Set(gameState.allPhrases.map(p => p.uniqueId)).size;
-    const seenUniquePhrases = Object.keys(phraseHistory.seenPhrases).length;
-    
-    // If we've seen all unique phrases at least once, reset the history
-    if (seenUniquePhrases >= totalUniquePhrases) {
-        console.log('🔄 Tutte le frasi viste almeno una volta! Reset dello storico...');
-        phraseHistory.seenPhrases = {};
-        phraseHistory.lastReset = Date.now();
-        savePhraseHistory();
-    }
+// Reset history for a specific category
+function resetCategoryHistory(category) {
+    console.log(`🔄 Reset storico per categoria: ${category}`);
+
+    // Get all phrases in this category
+    const categoryPhrases = gameState.categorizedPhrases[category] || [];
+
+    // Remove them from seenPhrases
+    categoryPhrases.forEach(phrase => {
+        delete phraseHistory.seenPhrases[phrase.uniqueId];
+    });
+
+    savePhraseHistory();
 }
 
 // DOM Elements
@@ -107,57 +103,40 @@ async function loadPhrases() {
     try {
         const response = await fetch('phrases.json');
         gameState.phrases = await response.json();
-        
-        // Determine weights to use
-        let categoryWeights = {};
-        if (gameState.customPercentages) {
-            // Use custom percentages
-            categoryWeights = gameState.categoryWeights;
-        } else {
-            // Use default weights from JSON
-            for (const [category, data] of Object.entries(gameState.phrases)) {
-                categoryWeights[category] = data.weight || 10;
-            }
-        }
-        
-        // Create a weighted array of all phrases
-        gameState.allPhrases = [];
+
+        // Organize phrases by category
+        gameState.categorizedPhrases = {};
+
         for (const [category, data] of Object.entries(gameState.phrases)) {
-            const weight = categoryWeights[category] || 10;
-            
+            gameState.categorizedPhrases[category] = [];
+
             if (category === 'rule' && data.rules) {
-                // Handle rules separately (they have start/end)
+                // Handle rules
                 data.rules.forEach((rule, index) => {
-                    // Add the rule multiple times based on weight
-                    for (let i = 0; i < weight; i++) {
-                        gameState.allPhrases.push({
-                            text: rule.start,
-                            endText: rule.end,
-                            category: category,
-                            color: data.color,
-                            isRule: true,
-                            uniqueId: `rule-${index}` // Unique identifier for tracking
-                        });
-                    }
+                    gameState.categorizedPhrases[category].push({
+                        text: rule.start,
+                        endText: rule.end,
+                        category: category,
+                        color: data.color,
+                        isRule: true,
+                        uniqueId: `rule-${index}`
+                    });
                 });
             } else if (data.phrases) {
                 // Regular phrases
                 data.phrases.forEach((phrase, index) => {
-                    // Add the phrase multiple times based on weight
-                    for (let i = 0; i < weight; i++) {
-                        gameState.allPhrases.push({
-                            text: phrase,
-                            category: category,
-                            color: data.color,
-                            isRule: false,
-                            uniqueId: `${category}-${index}` // Unique identifier for tracking
-                        });
-                    }
+                    gameState.categorizedPhrases[category].push({
+                        text: phrase,
+                        category: category,
+                        color: data.color,
+                        isRule: false,
+                        uniqueId: `${category}-${index}`
+                    });
                 });
             }
         }
-        
-        console.log('Frasi caricate:', gameState.allPhrases.length, 'entries (weighted)');
+
+        console.log('Frasi caricate e categorizzate');
     } catch (error) {
         console.error('Errore nel caricamento delle frasi:', error);
         alert('Errore nel caricamento del gioco. Ricarica la pagina.');
@@ -168,7 +147,7 @@ async function loadPhrases() {
 function generatePlayerInputs() {
     const count = parseInt(playerCountSelect.value);
     playerNamesContainer.innerHTML = '';
-    
+
     for (let i = 1; i <= count; i++) {
         const div = document.createElement('div');
         div.className = 'player-input';
@@ -188,92 +167,115 @@ function startGame() {
     const count = parseInt(playerCountSelect.value);
     gameState.players = [];
     gameState.playerSelectionCount = {};
-    
+
     for (let i = 1; i <= count; i++) {
         const input = document.getElementById(`player-${i}`);
         const name = input.value.trim() || `Giocatore ${i}`;
         gameState.players.push(name);
         gameState.playerSelectionCount[name] = 0; // Initialize counter
     }
-    
+
     // Get total rounds
     gameState.totalRounds = parseInt(roundsCountSelect.value);
     gameState.currentRound = 0;
-    gameState.usedPhrases = [];
-    
+    gameState.usedPhrases = []; // Reset current session used phrases
+
     // Update UI
     totalRoundsSpan.textContent = gameState.totalRounds;
-    
+
     // Show game screen
     showScreen('game-screen');
-    
+
     // Show first phrase
     showNextPhrase();
 }
 
+// Select a category based on weights
+function selectCategory() {
+    let weights = {};
+
+    if (gameState.customPercentages) {
+        weights = gameState.categoryWeights;
+    } else {
+        // Use default weights from JSON
+        for (const [category, data] of Object.entries(gameState.phrases)) {
+            weights[category] = data.weight || 10;
+        }
+    }
+
+    // Calculate total weight
+    let totalWeight = 0;
+    for (const weight of Object.values(weights)) {
+        totalWeight += weight;
+    }
+
+    // Random selection
+    let random = Math.random() * totalWeight;
+
+    for (const [category, weight] of Object.entries(weights)) {
+        random -= weight;
+        if (random <= 0) {
+            return category;
+        }
+    }
+
+    // Fallback (should not happen)
+    return Object.keys(weights)[0];
+}
+
 // Get random phrase
 function getRandomPhrase() {
-    // Filter out already used phrases by unique ID
-    let availablePhrases = gameState.allPhrases.filter(
-        phrase => !gameState.usedPhrases.includes(phrase.uniqueId)
-    );
-    
-    // If all phrases used, reset
-    if (availablePhrases.length === 0) {
-        gameState.usedPhrases = [];
-        console.log('Tutte le frasi usate, reset dell\'array!');
-        return getRandomPhrase();
-    }
-    
-    // Check if we're near the end of the game (last 5 rounds)
+    // 1. Select Category
+    let category = selectCategory();
+
+    // Special handling for end of game rules
     const roundsRemaining = gameState.totalRounds - gameState.currentRound;
-    const minRuleDuration = 2; // Minimum rounds a rule lasts
-    
-    // If near the end and there are non-rule phrases available, filter out rules
-    if (roundsRemaining <= minRuleDuration) {
-        const nonRulePhrases = availablePhrases.filter(phrase => !phrase.isRule);
-        
-        // Only use non-rule phrases if they exist (so 100% rule config still works)
-        if (nonRulePhrases.length > 0) {
-            availablePhrases = nonRulePhrases;
-            console.log(`Ultimi ${roundsRemaining} turni: escluse le regole`);
+    const minRuleDuration = 2;
+
+    // If we picked 'rule' but not enough rounds left, force pick another category
+    if (category === 'rule' && roundsRemaining <= minRuleDuration) {
+        // Create weights excluding 'rule'
+        const otherCategories = Object.keys(gameState.categorizedPhrases).filter(c => c !== 'rule');
+        if (otherCategories.length > 0) {
+            category = otherCategories[Math.floor(Math.random() * otherCategories.length)];
+            console.log(`Ultimi turni: cambio da rule a ${category}`);
         }
     }
-    
-    // Apply priority system based on historical usage
-    // Create weighted pool: never-seen phrases get added 10x, seen once 3x, seen multiple times 1x
-    const weightedPool = [];
-    availablePhrases.forEach(phrase => {
-        const seenCount = getPhraseSeen(phrase.uniqueId);
-        let weight;
-        
-        if (seenCount === 0) {
-            weight = 10; // Never seen: highest priority
-        } else if (seenCount === 1) {
-            weight = 3; // Seen once: medium priority
-        } else {
-            weight = 1; // Seen multiple times: lowest priority
+
+    const categoryPhrases = gameState.categorizedPhrases[category];
+
+    // 2. Filter for UNSEEN phrases in this category
+    // We filter out phrases that are EITHER in global history OR used in current session
+    let availablePhrases = categoryPhrases.filter(phrase =>
+        !isPhraseSeen(phrase.uniqueId) && !gameState.usedPhrases.includes(phrase.uniqueId)
+    );
+
+    // 3. If no unseen phrases, reset history for this category
+    if (availablePhrases.length === 0) {
+        console.log(`Tutte le frasi di ${category} viste! Reset categoria.`);
+        resetCategoryHistory(category);
+
+        // After reset, available phrases are all phrases in category EXCEPT those used in current session
+        // (We still want to avoid repeats in the SAME session if possible)
+        availablePhrases = categoryPhrases.filter(phrase =>
+            !gameState.usedPhrases.includes(phrase.uniqueId)
+        );
+
+        // If STILL empty (meaning we used ALL phrases of this category in THIS session alone),
+        // then we just have to allow repeats from current session.
+        if (availablePhrases.length === 0) {
+            console.log(`Tutte le frasi di ${category} usate in questa sessione! Riuso.`);
+            availablePhrases = categoryPhrases;
         }
-        
-        // Add phrase to pool based on weight
-        for (let i = 0; i < weight; i++) {
-            weightedPool.push(phrase);
-        }
-    });
-    
-    // Get random phrase from weighted pool
-    const randomIndex = Math.floor(Math.random() * weightedPool.length);
-    const selectedPhrase = weightedPool[randomIndex];
-    
-    // Mark as used in current session
+    }
+
+    // 4. Pick random phrase
+    const selectedPhrase = availablePhrases[Math.floor(Math.random() * availablePhrases.length)];
+
+    // 5. Update state
     gameState.usedPhrases.push(selectedPhrase.uniqueId);
-    
-    // Mark as seen in history
     markPhraseAsSeen(selectedPhrase.uniqueId);
-    
-    // Check if we need to reset history
-    checkAndResetHistory();
-    
+
     return selectedPhrase;
 }
 
@@ -281,15 +283,15 @@ function getRandomPhrase() {
 function getWeightedRandomPlayer(excludePlayers = []) {
     // Get available players (not in exclude list)
     const availablePlayers = gameState.players.filter(p => !excludePlayers.includes(p));
-    
+
     if (availablePlayers.length === 0) {
         // If all players excluded, use all players
         return gameState.players[Math.floor(Math.random() * gameState.players.length)];
     }
-    
+
     // Find the minimum selection count among available players
     const minCount = Math.min(...availablePlayers.map(p => gameState.playerSelectionCount[p]));
-    
+
     // Players with the minimum count have higher weight
     // Create a weighted pool where less-selected players appear more times
     const weightedPool = [];
@@ -301,11 +303,11 @@ function getWeightedRandomPlayer(excludePlayers = []) {
             weightedPool.push(player);
         }
     });
-    
+
     // Select random from weighted pool
     const selectedPlayer = weightedPool[Math.floor(Math.random() * weightedPool.length)];
     gameState.playerSelectionCount[selectedPlayer]++;
-    
+
     return selectedPlayer;
 }
 
@@ -315,16 +317,16 @@ function replacePlaceholder(text) {
         // Replace each {player} with a different random player
         let result = text;
         const usedPlayers = [];
-        
+
         while (result.includes('{player}')) {
             // Get a weighted random player not used yet in this phrase
             const randomPlayer = getWeightedRandomPlayer(usedPlayers);
             usedPlayers.push(randomPlayer);
-            
+
             // Replace only the first occurrence
             result = result.replace('{player}', randomPlayer);
         }
-        
+
         return result;
     }
     return text;
@@ -338,10 +340,10 @@ function showNextPhrase() {
         showRuleEnd(ruleEnd);
         return;
     }
-    
+
     // Now increment the round
     gameState.currentRound++;
-    
+
     // Check if game is over
     if (gameState.currentRound > gameState.totalRounds) {
         // Before showing end screen, check if there are active rules to end
@@ -351,7 +353,7 @@ function showNextPhrase() {
                 gameState.ruleEndQueue.push(rule.endText);
             });
             gameState.activeRules = [];
-            
+
             // Show the first rule ending
             if (gameState.ruleEndQueue.length > 0) {
                 const ruleEnd = gameState.ruleEndQueue.shift();
@@ -359,15 +361,15 @@ function showNextPhrase() {
                 return;
             }
         }
-        
+
         // No more rules to end, show end screen
         showScreen('end-screen');
         return;
     }
-    
+
     // Update round counter
     currentRoundSpan.textContent = gameState.currentRound;
-    
+
     // Check for expired rules and queue their endings
     gameState.activeRules = gameState.activeRules.filter(rule => {
         if (rule.endRound === gameState.currentRound) {
@@ -376,10 +378,10 @@ function showNextPhrase() {
         }
         return true;
     });
-    
+
     // Update badge after filtering
     updateRulesBadge();
-    
+
     // If we just queued a rule ending, show it (without consuming the round)
     if (gameState.ruleEndQueue.length > 0) {
         const ruleEnd = gameState.ruleEndQueue.shift();
@@ -389,33 +391,33 @@ function showNextPhrase() {
         showRuleEnd(ruleEnd);
         return;
     }
-    
+
     // Get random phrase
     const phraseObj = getRandomPhrase();
-    
+
     // For rules, we need to replace placeholders in both start and end with the SAME players
     let finalText;
     let finalEndText;
-    
+
     if (phraseObj.isRule && (phraseObj.text.includes('{player}') || phraseObj.endText.includes('{player}'))) {
         // Count how many {player} placeholders we need
         const startMatches = (phraseObj.text.match(/{player}/g) || []).length;
         const endMatches = (phraseObj.endText.match(/{player}/g) || []).length;
         const totalMatches = Math.max(startMatches, endMatches);
-        
+
         // Generate the same players for both start and end
         const selectedPlayers = [];
         for (let i = 0; i < totalMatches; i++) {
             const player = getWeightedRandomPlayer(selectedPlayers);
             selectedPlayers.push(player);
         }
-        
+
         // Replace placeholders in start text
         finalText = phraseObj.text;
         selectedPlayers.forEach(player => {
             finalText = finalText.replace('{player}', player);
         });
-        
+
         // Replace placeholders in end text (reuse same players)
         finalEndText = phraseObj.endText;
         selectedPlayers.forEach(player => {
@@ -428,7 +430,7 @@ function showNextPhrase() {
             finalEndText = phraseObj.endText; // No placeholders to replace
         }
     }
-    
+
     // Set the type label based on category
     let typeLabel = '';
     if (phraseObj.category === 'challenge') {
@@ -438,7 +440,7 @@ function showNextPhrase() {
     } else if (phraseObj.category === 'rule' && phraseObj.isRule) {
         typeLabel = 'NUOVA REGOLA!';
     }
-    
+
     // Update type label
     if (typeLabel) {
         phraseTypeLabel.textContent = typeLabel;
@@ -447,7 +449,7 @@ function showNextPhrase() {
         phraseTypeLabel.textContent = '';
         phraseTypeLabel.classList.remove('visible');
     }
-    
+
     // If it's a rule, schedule its ending
     if (phraseObj.isRule) {
         const duration = Math.floor(Math.random() * 8) + 5; // Random 5-12 rounds
@@ -460,24 +462,24 @@ function showNextPhrase() {
         console.log(`Regola attivata, finirà al round ${endRound}`);
         updateRulesBadge();
     }
-    
+
     // Update phrase text with animation
     phraseText.classList.remove('phrase-animate');
     void phraseText.offsetWidth; // Trigger reflow
-    
+
     // Hide text while calculating size
     phraseText.style.opacity = '0';
     phraseText.textContent = finalText;
-    
+
     // Auto-scale text if needed
     autoScaleText();
-    
+
     // Show text with animation after sizing is done
     setTimeout(() => {
         phraseText.style.opacity = '1';
         phraseText.classList.add('phrase-animate');
     }, 10);
-    
+
     // Update background color based on category
     phraseContainer.className = 'phrase-container ' + phraseObj.category;
 }
@@ -486,25 +488,25 @@ function showNextPhrase() {
 function autoScaleText() {
     const container = phraseContainer;
     const text = phraseText;
-    
+
     // Determine initial font size based on screen width
     const isMobile = window.innerWidth <= 480;
     const defaultFontSize = isMobile ? 1.1 : 1.5;
     const minFontSize = isMobile ? 0.75 : 0.9;
-    
+
     // Reset to default size
     text.style.fontSize = defaultFontSize + 'rem';
-    
+
     // Get available height (container height minus padding and label)
     const containerHeight = container.clientHeight;
     const typeLabel = phraseTypeLabel;
     const labelHeight = typeLabel.classList.contains('visible') ? typeLabel.offsetHeight + 24 : 0; // 24px margin
     const paddingVertical = isMobile ? 48 : 96; // Total vertical padding (24px or 48px each side)
     const availableHeight = containerHeight - paddingVertical - labelHeight;
-    
+
     // Check if text overflows and scale down if needed
     let fontSize = defaultFontSize;
-    
+
     while (text.scrollHeight > availableHeight && fontSize > minFontSize) {
         fontSize -= 0.05;
         text.style.fontSize = fontSize + 'rem';
@@ -515,24 +517,24 @@ function autoScaleText() {
 function showRuleEnd(endText) {
     phraseText.classList.remove('phrase-animate');
     void phraseText.offsetWidth;
-    
+
     // Hide text while calculating size
     phraseText.style.opacity = '0';
     phraseText.textContent = endText;
-    
+
     // Auto-scale text if needed
     autoScaleText();
-    
+
     // Show text with animation after sizing is done
     setTimeout(() => {
         phraseText.style.opacity = '1';
         phraseText.classList.add('phrase-animate');
     }, 10);
-    
+
     // Hide type label for rule endings
     phraseTypeLabel.textContent = '';
     phraseTypeLabel.classList.remove('visible');
-    
+
     // Use rule color but slightly different
     phraseContainer.className = 'phrase-container rule';
 }
@@ -543,10 +545,10 @@ function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
     });
-    
+
     // Show the selected screen
     document.getElementById(screenId).classList.add('active');
-    
+
     // Add/remove game-active class to body based on screen
     if (screenId === 'game-screen') {
         document.body.classList.add('game-active');
@@ -559,22 +561,22 @@ function showScreen(screenId) {
 function resetGame() {
     // Save current players
     const savedPlayers = [...gameState.players];
-    
+
     gameState.currentRound = 0;
     gameState.usedPhrases = [];
     gameState.activeRules = [];
     gameState.ruleEndQueue = [];
     gameState.playerSelectionCount = {};
-    
+
     // Update badge after reset
     updateRulesBadge();
-    
+
     showScreen('setup-screen');
-    
+
     // Restore player count
     playerCountSelect.value = savedPlayers.length;
     generatePlayerInputs();
-    
+
     // Restore player names
     savedPlayers.forEach((name, index) => {
         const input = document.getElementById(`player-${index + 1}`);
@@ -588,7 +590,7 @@ function resetGame() {
 function toggleCustomPercentages() {
     const isChecked = customPercentagesToggle.checked;
     percentagesControls.style.display = isChecked ? 'block' : 'none';
-    
+
     if (isChecked) {
         updatePercentageTotal();
     }
@@ -600,10 +602,10 @@ function updatePercentageTotal() {
     const challenge = parseInt(challengePercentageInput.value) || 0;
     const vote = parseInt(votePercentageInput.value) || 0;
     const rule = parseInt(rulePercentageInput.value) || 0;
-    
+
     const total = normal + challenge + vote + rule;
     percentageTotalSpan.textContent = total;
-    
+
     // Show warning if not 100%
     if (total !== 100) {
         percentageWarning.style.display = 'inline-block';
@@ -671,15 +673,15 @@ function updateRulesBadge() {
 
 function updateRulesList() {
     rulesList.innerHTML = '';
-    
+
     gameState.activeRules.forEach((rule) => {
         const ruleItem = document.createElement('div');
         ruleItem.className = 'rule-item';
-        
+
         const ruleText = document.createElement('div');
         ruleText.className = 'rule-text';
         ruleText.textContent = rule.startText || 'Regola attiva';
-        
+
         ruleItem.appendChild(ruleText);
         rulesList.appendChild(ruleItem);
     });
@@ -701,8 +703,8 @@ closeRulesPanelBtn.addEventListener('click', closeRulesPanel);
 
 // Close panel when clicking outside
 document.addEventListener('click', (e) => {
-    if (rulesPanel.classList.contains('active') && 
-        !rulesPanel.contains(e.target) && 
+    if (rulesPanel.classList.contains('active') &&
+        !rulesPanel.contains(e.target) &&
         !rulesBadge.contains(e.target)) {
         closeRulesPanel();
     }
@@ -713,7 +715,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadPhraseHistory(); // Load historical data from localStorage
     await loadPhrases();
     generatePlayerInputs();
-    
+
     // Debug helper - expose to console
     window.drewnkingDebug = {
         getHistory: () => phraseHistory,
@@ -729,7 +731,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const neverSeen = totalUnique - totalSeen;
             const seenOnce = Object.values(phraseHistory.seenPhrases).filter(c => c === 1).length;
             const seenMultiple = Object.values(phraseHistory.seenPhrases).filter(c => c > 1).length;
-            
+
             return {
                 totalUniquePhrases: totalUnique,
                 totalSeenPhrases: totalSeen,
@@ -740,7 +742,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
         }
     };
-    
+
     console.log('🎮 Drewnking Game caricato!');
     console.log('📊 Usa window.drewnkingDebug.getStats() per vedere le statistiche');
     console.log('🔄 Usa window.drewnkingDebug.resetHistory() per resettare lo storico');
