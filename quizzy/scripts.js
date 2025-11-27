@@ -1488,22 +1488,29 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Show a question to the current player
+    // Show a question to the current player
     function showQuestion() {
-        // Get a random question
-        const question = getRandomQuestion();
-        if (!question) {
-            alert('Error: No questions available for this category and difficulty.');
-            return;
+        // Update question display elements initially
+        const currentCategoryEl = document.getElementById('current-category');
+        const currentDifficultyEl = document.getElementById('current-difficulty');
+        const questionTextEl = document.getElementById('question-text');
+        const answerButtons = document.getElementById('answer-buttons');
+        const timerDisplay = document.getElementById('timer-display');
+
+        // Reset state
+        answerButtons.innerHTML = '';
+        questionTextEl.textContent = '';
+        if (timerDisplay) timerDisplay.textContent = gameState.timeLeft;
+
+        if (currentCategoryEl) {
+            currentCategoryEl.textContent = getGameTranslation('categories', gameState.currentCategory) || gameState.currentCategory;
         }
 
-        gameState.currentQuestion = question;
+        if (currentDifficultyEl) {
+            currentDifficultyEl.textContent = getGameTranslation(gameState.currentDifficulty);
+        }
 
-        // Update question display
-        document.getElementById('current-category').textContent = getGameTranslation('categories', gameState.currentCategory) || gameState.currentCategory;
-        document.getElementById('current-difficulty').textContent = getGameTranslation(gameState.currentDifficulty);
-        document.getElementById('question-text').textContent = question.question;
-
-        // Remove any existing bambino warning before generating new answer buttons
+        // Remove any existing bambino warning
         const existingWarning = document.getElementById('bambino-game-warning');
         if (existingWarning) {
             existingWarning.remove();
@@ -1527,35 +1534,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         } else {
             // Standard logic
-            let questionPool = [];
-            if (gameState.questions[gameState.currentCategory] &&
-                gameState.questions[gameState.currentCategory][gameState.currentDifficulty]) {
-                questionPool = gameState.questions[gameState.currentCategory][gameState.currentDifficulty];
+            const question = getRandomQuestion();
+            if (!question) {
+                alert('Error: No questions available for this category and difficulty.');
+                return;
             }
 
-            // Filter out shown questions
-            const availableQuestions = questionPool.filter(q => {
-                const qId = q.id || q.question;
-                return !gameState.shownQuestions[qId];
-            });
+            gameState.currentQuestion = question;
 
-            let question;
-            if (availableQuestions.length > 0) {
-                const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-                question = availableQuestions[randomIndex];
-            } else {
-                // If all questions shown, reset or pick random
-                const randomIndex = Math.floor(Math.random() * questionPool.length);
-                question = questionPool[randomIndex];
-            }
-
-            // Mark as shown
-            const qId = question.id || question.question;
-            gameState.shownQuestions[qId] = true;
-
+            // Display standard question
             displayQuestion(question);
         }
     }
+
+
 
     function displayQuestion(question) {
         gameState.currentQuestion = question;
