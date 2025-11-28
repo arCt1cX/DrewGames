@@ -1096,6 +1096,12 @@ document.addEventListener('DOMContentLoaded', function () {
             resultScreen.classList.add('shock-round');
         }
 
+        // If AI mode, skip validation and go straight to showQuestion
+        if (gameState.gameMode === 'ai') {
+            showQuestion();
+            return;
+        }
+
         // Check for valid category and difficulty before proceeding
         if (!gameState.currentCategory || !gameState.currentDifficulty) {
             console.error("Missing category or difficulty:",
