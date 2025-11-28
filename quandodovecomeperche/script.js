@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             **METODO DI CREAZIONE (OBBLIGATORIO):**
             1. Scegli una PAROLA DA INDOVINARE (Oggetto, Mestiere, Luogo).
             2. Costruisci una **STORIA UNICA** seguendo RIGOROSAMENTE questa struttura sequenziale:
-               `[QUANDO succede] +[DOVE succede] + [COME succede / descrizione fisica] + [PERCHÉ succede / scopo]`
+               "[QUANDO succede] + [DOVE succede] + [COME succede/descrizione fisica] + [PERCHÉ succede/scopo]"
             3. Spezza la frase esattamente in questi 4 componenti.
             
             **ESEMPIO PERFETTO (TOMBOLA):**
