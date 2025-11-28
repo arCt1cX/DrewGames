@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Generate AI Question
     async function generateAIQuestion() {
         state.isLoading = true;
-        ui.statusMessage.textContent = "Generazione domanda in corso...";
+        // ui.statusMessage.textContent = "Generazione domanda in corso..."; // Removed as requested
 
         const examples = `
             Esempi dello stile richiesto (enigmistico, metaforico, arguto):
@@ -285,6 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ui.guessInput.disabled = true;
         ui.submitBtn.disabled = true;
 
+        const modalTitle = document.querySelector('#solution-modal h2');
+        const modalContent = document.querySelector('.modal-content');
+
         if (won) {
             // Calculate score based on clues used
             // 0 clues revealed (impossible) -> 0
@@ -298,6 +301,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ui.statusMessage.textContent = `ESATTO! +${points} punti`;
             ui.statusMessage.style.color = '#4caf50';
 
+            // Success Modal Style
+            modalTitle.textContent = "GRANDIOSO! 🎉";
+            modalTitle.style.color = "#4caf50";
+            ui.solutionText.innerHTML = `Hai indovinato:<br><strong style="font-size: 1.5em; color: #fff;">${state.currentQuestion.answer}</strong>`;
+
             // Reveal all clues
             state.clueOrder.forEach(type => {
                 ui.clues[type].querySelector('.clue-content').textContent = state.currentQuestion[type];
@@ -305,15 +313,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         } else {
-            ui.statusMessage.textContent = `Tempo scaduto! Era: ${state.currentQuestion.answer}`;
+            ui.statusMessage.textContent = `Tempo scaduto!`;
             ui.statusMessage.style.color = '#f44336';
+
+            // Failure Modal Style
+            modalTitle.textContent = "PECCATO! 😔";
+            modalTitle.style.color = "#f44336";
+            ui.solutionText.innerHTML = `La risposta era:<br><strong style="font-size: 1.5em; color: #fff;">${state.currentQuestion.answer}</strong>`;
         }
 
-        // Show solution modal after a delay
+        // Show solution modal immediately (reduced delay from 1500 to 500ms)
         setTimeout(() => {
-            ui.solutionText.textContent = state.currentQuestion.answer;
             ui.solutionModal.classList.remove('hidden');
-        }, 1500);
+        }, 500);
     }
 
     // Modal Actions
