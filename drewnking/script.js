@@ -917,4 +917,4 @@ if (aiUI.submitBtn) {
 // I will attach `triggerAIChallenge` to the window or a global object so `showNextPhrase` can call it.
 window.triggerAIChallenge = triggerAIChallenge;
 
-});
+

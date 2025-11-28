@@ -146,6 +146,7 @@ h1 {
     font-size: 2rem;
     margin-bottom: 10px;
     background: linear-gradient(90deg, #fff, #aaa);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -466,5 +467,3 @@ h1 {
         font-size: 1.5rem;
     }
 }
-
-```
