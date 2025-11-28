@@ -86,19 +86,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ${examples}
             
             **ORDINE TASSATIVO:**
-            1. **SCEGLI UNA RISPOSTA CONCRETA**: Deve essere un OGGETTO fisico (es. forbici, pallone), un MESTIERE (es. idraulico), un LUOGO famoso o un PERSONAGGIO.
-            2. **VIETATO**: Concetti astratti (es. imperfezione, amore, tempo), sentimenti, o cose poetiche.
-            3. **STILE**:
-               - **QUANDO**: Un momento specifico o una condizione (es. "Quando fa freddo").
-               - **DOVE**: Un luogo fisico reale (es. "Sulla testa").
-               - **COME**: Una caratteristica fisica o un modo di fare (es. "Di lana").
-               - **PERCHÉ**: La funzione pratica o il motivo logico (es. "Per non gelarsi le orecchie").
-               - **RISPOSTA**: Cappello.
+            1. **ANALIZZA GLI ESEMPI**: Nota che gli indizi NON sono mai di 1-2 parole. Sono FRASEGGI, descrizioni argute.
+               - NO: "Al tramonto" (Troppo breve/banale)
+               - SÌ: "Dopo un lungo viaggio da Parigi" (Racconta una storia)
             
-            **ERRORI DA EVITARE (SE LI FAI SEI BOCCIATO):**
-            - NO frasi poetiche o drammatiche (es. "nell'ora più buia", "tra le pieghe del tempo").
-            - NO associazioni mentali contorte.
-            - NO risposte astratte come "lettera" intesa come messaggio spirituale (se è una lettera, scrivi "nella cassetta della posta").
+            2. **STILE OBBLIGATORIO**:
+               - **QUANDO**: Descrivi una situazione o un momento con una frase (es. "Mentre sta seduto", "Dopo una grande nevicata").
+               - **DOVE**: Un contesto specifico, non generico (es. "Stesa davanti a me", "In mezzo a due bottoni").
+               - **COME**: Una descrizione fisica o metaforica articolata (es. "Sbiadita dagli anni", "Con le mani entrambe occupate").
+               - **PERCHÉ**: La ragione arguta o il fine ultimo (es. "Per apparecchiare uso sempre la stessa!", "Per fare da naso al pupazzo di neve!").
+            
+            3. **LOGICA**:
+               - La risposta deve essere un OGGETTO, MESTIERE o LUOGO.
+               - Gli indizi devono essere coerenti. Se dici "tramonto" per "pannello solare" sbagli, perché il pannello lavora di giorno! Usa la logica.
             
             Formatta la risposta SOLO come JSON valido:
             {
