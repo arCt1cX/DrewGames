@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Quando Dove Come Perché - DrewGames</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <button class="home-button" onclick="window.location.href='../'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        Home
+    </button>
+
+    <div id="app">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="logo-container">
+                <div class="qdcp-logo">
+                    <span>Q</span><span>D</span><span>C</span><span>P</span>
+                </div>
+            </div>
+            <h1>Quando Dove Come Perché</h1>
+            <p class="subtitle">Indovina l'evento dai 4 indizi!</p>
+
+            <div class="instructions">
+                <h3>Come si gioca:</h3>
+                <ul>
+                    <li>Verranno svelati 4 indizi uno alla volta:</li>
+                    <li><strong>Quando</strong> è successo?</li>
+                    <li><strong>Dove</strong> è successo?</li>
+                    <li><strong>Come</strong> è successo?</li>
+                    <li><strong>Perché</strong> è successo?</li>
+                    <li>Indovina la risposta prima che finiscano gli indizi!</li>
+                </ul>
+            </div>
+
+            <button id="start-btn" class="btn primary-btn">Inizia Partita</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="score-box">
+                    <span class="label">Punteggio</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="progress-box">
+                    <span id="current-question">1</span>/<span id="total-questions">10</span>
+                </div>
+            </div>
+
+            <div class="clues-container">
+                <div class="clue-card" id="clue-quando">
+                    <div class="clue-label">QUANDO</div>
+                    <div class="clue-content">???</div>
+                </div>
+                <div class="clue-card" id="clue-dove">
+                    <div class="clue-label">DOVE</div>
+                    <div class="clue-content">???</div>
+                </div>
+                <div class="clue-card" id="clue-come">
+                    <div class="clue-label">COME</div>
+                    <div class="clue-content">???</div>
+                </div>
+                <div class="clue-card" id="clue-perche">
+                    <div class="clue-label">PERCHÉ</div>
+                    <div class="clue-content">???</div>
+                </div>
+            </div>
+
+            <div class="guess-container">
+                <input type="text" id="guess-input" placeholder="Scrivi la tua risposta..." autocomplete="off">
+                <button id="submit-guess-btn" class="btn primary-btn">Invia</button>
+            </div>
+
+            <div class="controls">
+                <div id="timer-bar-container">
+                    <div id="timer-bar"></div>
+                </div>
+                <p id="status-message" class="status-message"></p>
+                <button id="skip-btn" class="btn secondary-btn">Salta Indizio</button>
+            </div>
+
+            <!-- Solution Modal -->
+            <div id="solution-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h2>La risposta è:</h2>
+                    <div id="solution-text" class="solution-text"></div>
+                    <div class="modal-actions">
+                        <button id="correct-btn" class="btn success-btn">Indovinato (+1)</button>
+                        <button id="wrong-btn" class="btn danger-btn">Sbagliato (0)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="screen">
+            <h2>Partita Finita!</h2>
+            <div class="final-score">
+                <span id="final-score-display">0</span>
+                <span class="total">punti</span>
+            </div>
+            <p id="feedback-text">Ottimo lavoro!</p>
+            <button id="restart-btn" class="btn primary-btn">Gioca Ancora</button>
+            <button id="menu-btn" class="btn secondary-btn" onclick="window.location.href='../'">Menu
+                Principale</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

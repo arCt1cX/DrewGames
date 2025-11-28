@@ -4,7 +4,7 @@ const translations = {
         // Meta data
         'pageTitle': 'DrewGames - Giochi da fare con gli amici offline',
         'pageDescription': 'DrewGames: una collezione di giochi divertenti da fare con gli amici offline. Scopri giochi interattivi come Impostor, ColorGrid, GuessThePic e molti altri!',
-        
+
         // Common elements across all pages
         'home': 'Home',
         'play': 'Gioca',
@@ -16,7 +16,7 @@ const translations = {
         'subtitle': 'Giochi da fare con gli amici offline 🎉',
         'buyMeCoffee': 'Buy me a coffee',
         'italianOnly': 'Solo Italiano',
-        
+
         // Navigation Items
         'navHome': 'Home',
         'navGames': 'Giochi',
@@ -26,7 +26,7 @@ const translations = {
         'navTerms': 'Termini di Servizio',
         'navCookies': 'Cookie Policy',
         'navTournament': 'Modalità Torneo',
-        
+
         // Games Catalog Page
         'gamesPageTitle': 'La Collezione Completa dei Giochi',
         'gamesIntro': 'Benvenuti nella nostra collezione completa di giochi! Qui puoi esplorare ogni gioco nel dettaglio, imparare come si gioca e scoprire suggerimenti per rendere l\'esperienza ancora più divertente. Tutti i nostri giochi sono progettati per essere giocati con amici offline, senza bisogno di internet dopo il caricamento iniziale.',
@@ -42,7 +42,7 @@ const translations = {
         'advanced': 'Avanzato',
         'minutes': 'minuti',
         'players': 'giocatori',
-        
+
         // Game titles and descriptions
         'impostor': {
             'title': 'Impostor',
@@ -260,6 +260,27 @@ const translations = {
                 'Solo per maggiorenni - bevete responsabilmente!'
             ]
         },
+        'quandodovecomeperche': {
+            'title': 'Quando Dove Come Perché',
+            'catchphrase': 'Indovina l\'evento dai 4 indizi!',
+            'description': 'Un gioco di deduzione ispirato a "Reazione a Catena". Vengono svelati 4 indizi (Quando, Dove, Come, Perché) e devi indovinare l\'evento, il personaggio o l\'oggetto misterioso prima che finiscano!',
+            'players': '1+ giocatori',
+            'time': '5-10 minuti',
+            'difficulty': 'Intermedio',
+            'features': [
+                '4 indizi progressivi per ogni round',
+                'Sfida la tua cultura generale',
+                'Gioca da solo o sfida gli amici',
+                'Perfetto per allenare la mente'
+            ],
+            'instructions': [
+                'Verranno mostrati 4 indizi coperti',
+                'Svela gli indizi uno alla volta: Quando, Dove, Come, Perché',
+                'Cerca di indovinare la risposta con il minor numero di indizi possibile',
+                'Premi "Mostra Soluzione" per verificare la tua risposta',
+                'Segna se hai indovinato o sbagliato per tenere il punteggio'
+            ]
+        },
         'tournamentTitle': 'Modalità Torneo',
         'numberOfGames': 'Numero di Partite',
         'players': 'Giocatori',
@@ -284,7 +305,7 @@ const translations = {
         // Meta data
         'pageTitle': 'DrewGames - Games to play with friends offline',
         'pageDescription': 'DrewGames: a collection of fun games to play with friends offline. Discover interactive games like Impostor, ColorGrid, GuessThePic and many more!',
-        
+
         // Common elements across all pages
         'home': 'Home',
         'play': 'Play',
@@ -296,7 +317,7 @@ const translations = {
         'subtitle': 'Games to play with friends offline 🎉',
         'buyMeCoffee': 'Buy me a coffee',
         'italianOnly': 'Italian Only',
-        
+
         // Navigation Items
         'navHome': 'Home',
         'navGames': 'Games',
@@ -306,7 +327,7 @@ const translations = {
         'navTerms': 'Terms of Service',
         'navCookies': 'Cookie Policy',
         'navTournament': 'Tournament Mode',
-        
+
         // Games Catalog Page
         'gamesPageTitle': 'The Complete Collection of Games',
         'gamesIntro': 'Welcome to our complete collection of games! Here you can explore each game in detail, learn how to play, and discover tips to make the experience even more fun. All our games are designed to be played with friends offline, with no need for internet after the initial loading.',
@@ -322,7 +343,7 @@ const translations = {
         'advanced': 'Advanced',
         'minutes': 'minutes',
         'players': 'players',
-        
+
         // Game titles and descriptions
         'impostor': {
             'title': 'Impostor',
@@ -540,6 +561,27 @@ const translations = {
                 'Adults only - drink responsibly!'
             ]
         },
+        'quandodovecomeperche': {
+            'title': 'When Where How Why',
+            'catchphrase': 'Guess the event from 4 clues!',
+            'description': 'A deduction game inspired by "Chain Reaction". 4 clues are revealed (When, Where, How, Why) and you have to guess the mystery event, person, or object before they run out!',
+            'players': '1+ players',
+            'time': '5-10 minutes',
+            'difficulty': 'Intermediate',
+            'features': [
+                '4 progressive clues per round',
+                'Challenge your general knowledge',
+                'Play solo or challenge friends',
+                'Perfect for brain training'
+            ],
+            'instructions': [
+                '4 covered clues will be shown',
+                'Reveal clues one by one: When, Where, How, Why',
+                'Try to guess the answer with as few clues as possible',
+                'Press "Show Solution" to check your answer',
+                'Mark if you guessed correctly or wrong to keep score'
+            ]
+        },
         'tournamentTitle': 'Tournament Mode',
         'numberOfGames': 'Number of Games',
         'players': 'Players',
@@ -592,17 +634,17 @@ function getUserLanguage() {
         localStorage.setItem('lang', urlLang);
         return urlLang;
     }
-    
+
     // Check if a language is stored in localStorage
     const storedLang = localStorage.getItem('lang');
     if (storedLang) {
         return storedLang;
     }
-    
+
     // If no stored preference, try to detect based on browser language
     const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
     console.log('Detected browser language:', browserLang);
-    
+
     // More specific check for Italian language
     if (browserLang === 'it' || browserLang === 'it-it' || browserLang.startsWith('it-')) {
         localStorage.setItem('lang', 'it');
@@ -628,7 +670,7 @@ function toggleLanguage() {
     const currentLang = getUserLanguage();
     const newLang = currentLang === 'it' ? 'en' : 'it';
     setUserLanguage(newLang);
-    
+
     // Update URL if needed
     const url = new URL(window.location.href);
     url.searchParams.set('lang', newLang);
@@ -638,7 +680,7 @@ function toggleLanguage() {
 // Function to get a translation
 function getTranslation(key, subKey = null) {
     const lang = getUserLanguage();
-    
+
     if (subKey) {
         // For nested translations like game titles/descriptions
         if (translations[lang][key] && translations[lang][key][subKey]) {
@@ -669,7 +711,7 @@ function setFlagIcon() {
     if (currentFlag) {
         const lang = getUserLanguage();
         currentFlag.innerHTML = flagSVGs[lang];
-        
+
         // Set aria-label for accessibility
         const languageToggle = document.getElementById('languageToggle');
         if (languageToggle) {
@@ -689,21 +731,21 @@ function applyTranslations() {
     console.log('- navigator.userLanguage:', navigator.userLanguage);
     console.log('- document.documentElement.lang:', document.documentElement.lang);
     console.log('- Selected language:', getUserLanguage());
-    
+
     const lang = getUserLanguage();
     document.documentElement.lang = lang;
-    
+
     // Update meta tags if they exist
     const pageTitle = document.getElementById('pageTitle');
     if (pageTitle) {
         document.title = getTranslation('pageTitle');
     }
-    
+
     const pageDescription = document.getElementById('pageDescription');
     if (pageDescription) {
         pageDescription.setAttribute('content', getTranslation('pageDescription'));
     }
-    
+
     // Handle language toggle - only show on main page
     const languageToggle = document.getElementById('languageToggle');
     if (languageToggle) {

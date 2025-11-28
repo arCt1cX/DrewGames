@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Apply initial language based on user preference
     applyTranslations();
-    
+
     // Language toggle is now handled in applyTranslations() function in lang.js
-    
+
     // Update page content with current language
     document.getElementById('tagline').textContent = getTranslation('tagline');
     document.getElementById('subtitle').textContent = getTranslation('subtitle');
     document.getElementById('copyright').textContent = getTranslation('copyright');
-    
+
     // Update page title and description
     document.title = getTranslation('pageTitle');
     const metaDesc = document.getElementById('pageDescription');
     if (metaDesc) {
         metaDesc.setAttribute('content', getTranslation('pageDescription'));
     }
-    
+
     // Games array with additional catchphrase information and display names
     const games = [
         {
@@ -559,32 +559,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 <circle cx="8" cy="58" r="2" fill="rgba(255,193,7,0.6)" />
                 <circle cx="72" cy="58" r="2" fill="rgba(255,193,7,0.6)" />
             </svg>`
+        },
+        {
+            id: "quandodovecomeperche",
+            displayName: getTranslation('quandodovecomeperche', 'title'),
+            catchphrase: getTranslation('quandodovecomeperche', 'catchphrase'),
+            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                <!-- Shadow -->
+                <ellipse cx="40" cy="74" rx="30" ry="3" fill="rgba(0,0,0,0.3)" />
+                
+                <!-- Four cards layout -->
+                <g transform="translate(0, -5)">
+                    <!-- Top Left Card (Quando) -->
+                    <rect x="20" y="15" width="18" height="24" rx="2" fill="rgba(255, 107, 107, 0.2)" stroke="#ff6b6b" stroke-width="1.5" />
+                    <text x="29" y="30" font-size="10" fill="#ff6b6b" text-anchor="middle" font-weight="bold">Q</text>
+                    
+                    <!-- Top Right Card (Dove) -->
+                    <rect x="42" y="15" width="18" height="24" rx="2" fill="rgba(78, 205, 196, 0.2)" stroke="#4ecdc4" stroke-width="1.5" />
+                    <text x="51" y="30" font-size="10" fill="#4ecdc4" text-anchor="middle" font-weight="bold">D</text>
+                    
+                    <!-- Bottom Left Card (Come) -->
+                    <rect x="20" y="43" width="18" height="24" rx="2" fill="rgba(255, 230, 109, 0.2)" stroke="#ffe66d" stroke-width="1.5" />
+                    <text x="29" y="58" font-size="10" fill="#ffe66d" text-anchor="middle" font-weight="bold">C</text>
+                    
+                    <!-- Bottom Right Card (Perché) -->
+                    <rect x="42" y="43" width="18" height="24" rx="2" fill="rgba(26, 83, 92, 0.2)" stroke="#1a535c" stroke-width="1.5" />
+                    <text x="51" y="58" font-size="10" fill="#1a535c" text-anchor="middle" font-weight="bold">P</text>
+                </g>
+                
+                <!-- Central Question Mark -->
+                <circle cx="40" cy="36" r="8" fill="#2a2a40" stroke="white" stroke-width="2" />
+                <text x="40" y="40" font-size="10" fill="white" text-anchor="middle" font-weight="bold">?</text>
+            </svg>`
         }
     ];
-    
+
     // Select the container element
     const gamesContainer = document.getElementById('gamesContainer');
-    
+
     // Function to capitalize first letter and handle formatting
     const formatGameName = (name) => {
         // Convert camelCase or snake_case to space-separated words
         const formatted = name
             .replace(/([A-Z])/g, ' $1') // Handle camelCase
             .replace(/_/g, ' '); // Handle snake_case
-        
+
         // Capitalize the first letter of each word
         return formatted
             .split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
     };
-    
+
     // Gradient classes for variety
     const gradientClasses = [
         'gradient-1', 'gradient-2', 'gradient-3', 'gradient-4',
         'gradient-5', 'gradient-6', 'gradient-7', 'gradient-8'
     ];
-    
+
     // Add CSS for icon styling
     const style = document.createElement('style');
     style.textContent = `
@@ -679,56 +711,56 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
-    
+
     // Create and append game cards
     games.forEach((game, index) => {
         // Create card element
         const card = document.createElement('div');
         card.className = `game-card ${gradientClasses[index % gradientClasses.length]}`;
-        
+
         // Create content container
         const contentContainer = document.createElement('div');
         contentContainer.className = 'card-content';
-        
+
         // Create game title using the display name if available, otherwise format the ID
         const title = document.createElement('h3');
         title.textContent = game.displayName || formatGameName(game.id);
-        
+
         // Create catchphrase
         const catchphrase = document.createElement('p');
         catchphrase.className = 'game-catchphrase';
         catchphrase.textContent = game.catchphrase;
-        
+
         // Create play button as a button element
         const playButton = document.createElement('button');
         playButton.className = 'play-button';
         playButton.textContent = getTranslation('play');
-        
+
         // Folder name mapping for case sensitivity issues
         const folderNameMap = {
             'bluffme': 'BluffMe',
             // Add any other case-sensitive folder mappings here if needed
         };
-        
+
         // Add click event for navigation
         playButton.addEventListener('click', () => {
             // Use folder name mapping if available, otherwise use game.id
             const folderName = folderNameMap[game.id] || game.id;
             window.location.href = `${folderName}/index.html`;
         });
-        
+
         // Add title, catchphrase and button to content container
         contentContainer.appendChild(title);
         contentContainer.appendChild(catchphrase);
         contentContainer.appendChild(playButton);
-        
+
         // Create icon container and add SVG
         const iconContainer = document.createElement('div');
         iconContainer.className = 'game-icon-container';
         iconContainer.innerHTML = game.iconSvg;
         const iconElement = iconContainer.querySelector('svg');
         iconElement.classList.add('game-icon');
-        
+
         // Add "Italian only" text for guessthepic game
         if (game.id === "guessthepic") {
             const italianOnlyText = document.createElement('div');
@@ -736,40 +768,40 @@ document.addEventListener('DOMContentLoaded', () => {
             italianOnlyText.textContent = getTranslation('italianOnly');
             iconContainer.appendChild(italianOnlyText);
         }
-        
+
         // Append content and icon containers to card
         card.appendChild(contentContainer);
         card.appendChild(iconContainer);
-        
+
         // Append card to container
         gamesContainer.appendChild(card);
     });
-    
+
     // Add "Coming Soon" card
     const comingSoonCard = document.createElement('div');
     comingSoonCard.className = 'game-card coming-soon-card';
-    
+
     // Create content container
     const comingSoonContentContainer = document.createElement('div');
     comingSoonContentContainer.className = 'card-content';
-    
+
     const comingSoonTitle = document.createElement('h3');
     comingSoonTitle.textContent = getTranslation('comingSoon');
-    
+
     const comingSoonCatchphrase = document.createElement('p');
     comingSoonCatchphrase.className = 'game-catchphrase';
     comingSoonCatchphrase.textContent = getTranslation('newGamesComingSoon');
-    
+
     // Create icon for Coming Soon card
     const comingSoonIconContainer = document.createElement('div');
     comingSoonIconContainer.className = 'game-icon-container';
-    
+
     // Append elements to containers
     comingSoonContentContainer.appendChild(comingSoonTitle);
     comingSoonContentContainer.appendChild(comingSoonCatchphrase);
     comingSoonCard.appendChild(comingSoonContentContainer);
     comingSoonCard.appendChild(comingSoonIconContainer);
-    
+
     // Append Coming Soon card to container
     gamesContainer.appendChild(comingSoonCard);
 
@@ -821,16 +853,16 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     // Update navigation text based on language
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // Navigation will be updated when translations are applied
         if (typeof applyTranslations === 'function') {
             const originalApply = applyTranslations;
-            applyTranslations = function() {
+            applyTranslations = function () {
                 originalApply();
                 updateNavigationText();
             };
         }
-        
+
         function updateNavigationText() {
             if (typeof getTranslation === 'function') {
                 document.getElementById('nav-home').textContent = getTranslation('navHome') || 'Home';
