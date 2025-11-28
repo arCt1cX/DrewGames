@@ -307,6 +307,43 @@ body.game-active {
     }
 }
 
+/* AI Challenge Settings */
+.ai-settings {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(0, 210, 255, 0.05);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 210, 255, 0.2);
+}
+
+.ai-info {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.ai-info a {
+    color: #00d2ff;
+    text-decoration: none;
+}
+
+.ai-info a:hover {
+    text-decoration: underline;
+}
+
+.setting-group {
+    margin-bottom: 1.5rem;
+}
+
+.custom-option {
+    background-color: rgba(123, 104, 238, 0.05);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid rgba(123, 104, 238, 0.2);
+}
+
+
 /* Buttons */
 .btn {
     padding: 15px 30px;

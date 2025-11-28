@@ -21,6 +21,35 @@ let phraseHistory = {
     lastReset: Date.now()
 };
 
+// AI Challenge Settings (persistent across sessions)
+const AI_SETTINGS_KEY = 'drewnking_ai_settings';
+let aiSettings = {
+    enabled: false,
+    apiKey: ''
+};
+
+// Load AI settings from localStorage
+function loadAISettings() {
+    try {
+        const stored = localStorage.getItem(AI_SETTINGS_KEY);
+        if (stored) {
+            aiSettings = JSON.parse(stored);
+        }
+    } catch (error) {
+        console.error('Errore nel caricamento impostazioni AI:', error);
+    }
+}
+
+// Save AI settings to localStorage
+function saveAISettings() {
+    try {
+        localStorage.setItem(AI_SETTINGS_KEY, JSON.stringify(aiSettings));
+    } catch (error) {
+        console.error('Errore nel salvataggio impostazioni AI:', error);
+    }
+}
+
+
 // Load phrase history from localStorage
 function loadPhraseHistory() {
     try {
@@ -98,6 +127,10 @@ const votePercentageInput = document.getElementById('vote-percentage');
 const rulePercentageInput = document.getElementById('rule-percentage');
 const percentageTotalSpan = document.getElementById('percentage-total');
 const percentageWarning = document.getElementById('percentage-warning');
+const aiChallengeToggle = document.getElementById('ai-challenge-toggle');
+const aiSettingsContainer = document.getElementById('ai-settings');
+const aiApiKeyInput = document.getElementById('ai-api-key');
+
 
 // Load phrases from JSON
 async function loadPhrases() {
@@ -499,7 +532,9 @@ function showNextPhrase() {
         aiChance = 1.0;
     }
 
-    const shouldTriggerAI = phraseObj.category === 'vote' &&
+    const shouldTriggerAI = aiSettings.enabled &&
+        aiSettings.apiKey &&
+        phraseObj.category === 'vote' &&
         voteKeywords.some(keyword => finalText.includes(keyword)) &&
         Math.random() < aiChance;
 
@@ -681,6 +716,25 @@ challengePercentageInput.addEventListener('input', updatePercentageTotal);
 votePercentageInput.addEventListener('input', updatePercentageTotal);
 rulePercentageInput.addEventListener('input', updatePercentageTotal);
 
+// Toggle AI Challenge settings visibility
+function toggleAISettings() {
+    const isChecked = aiChallengeToggle.checked;
+    aiSettingsContainer.style.display = isChecked ? 'block' : 'none';
+    aiSettings.enabled = isChecked;
+    saveAISettings();
+}
+
+// Save AI API Key
+function saveAIAPIKey() {
+    aiSettings.apiKey = aiApiKeyInput.value.trim();
+    saveAISettings();
+}
+
+// AI Challenge event listeners
+aiChallengeToggle.addEventListener('change', toggleAISettings);
+aiApiKeyInput.addEventListener('input', saveAIAPIKey);
+
+
 // Rules Badge and Panel Management
 const rulesBadge = document.getElementById('rules-badge');
 const rulesPanel = document.getElementById('rules-panel');
@@ -741,8 +795,19 @@ document.addEventListener('click', (e) => {
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     loadPhraseHistory(); // Load historical data from localStorage
+    loadAISettings(); // Load AI settings from localStorage
     await loadPhrases();
     generatePlayerInputs();
+
+    // Restore AI settings UI state
+    if (aiSettings.enabled) {
+        aiChallengeToggle.checked = true;
+        aiSettingsContainer.style.display = 'block';
+    }
+    if (aiSettings.apiKey) {
+        aiApiKeyInput.value = aiSettings.apiKey;
+    }
+
 
     // Debug helper - expose to console
     window.drewnkingDebug = {
@@ -776,7 +841,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('🔄 Usa window.drewnkingDebug.resetHistory() per resettare lo storico');
 });
 // AI Challenge Logic
-const AI_KEY = 'AIzaSyDyu6SGakr-3fXvdSlni65BavGky1LX8As';
 const AI_CHANCE = 0.15; // 15% chance
 
 const aiUI = {
@@ -819,7 +883,7 @@ async function triggerAIChallenge(phraseText) {
                 Rispondi SOLO con il testo della sfida. Sii ironico e tagliente.
             `;
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AI_KEY}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
@@ -863,7 +927,7 @@ async function submitDefense() {
                 }
             `;
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AI_KEY}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
