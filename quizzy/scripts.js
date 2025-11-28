@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
         isShockRound: false, // Flag for shock round
         hardModeActive: false, // Flag for hard mode
         shownQuestions: {}, // Track already shown questions
-        apiKey: localStorage.getItem('quizzy_api_key') || null // Store API key
+        apiKey: localStorage.getItem('quizzy_api_key') || null, // Store API key
+        aiQuestionHistory: [] // Track AI generated questions to avoid repetition
     };
 
     // DOM Elements
@@ -1590,12 +1591,14 @@ document.addEventListener('DOMContentLoaded', function () {
         startTimer();
     }
 
-    async function generateAIQuestion(category, difficulty) {
+    async function generateAIQuestion(category, difficulty, retryCount = 0) {
         const loadingEl = document.getElementById('ai-loading');
         const questionText = document.getElementById('question-text');
 
-        loadingEl.classList.remove('hidden');
-        questionText.classList.add('hidden');
+        if (retryCount === 0) {
+            loadingEl.classList.remove('hidden');
+            questionText.classList.add('hidden');
+        }
 
         let difficultyPrompt = "";
         if (difficulty === 'bambino') {
@@ -1604,13 +1607,28 @@ document.addEventListener('DOMContentLoaded', function () {
             difficultyPrompt = `Difficoltà: "${difficulty}" (su scala: bambino, facile, medio, esperto, laureato).`;
         }
 
+        // Add history to prompt to avoid repetition
+        let historyPrompt = "";
+        if (gameState.aiQuestionHistory && gameState.aiQuestionHistory.length > 0) {
+            // Get last 20 questions for this category to keep prompt size manageable
+            const categoryHistory = gameState.aiQuestionHistory
+                .filter(q => q.category === category)
+                .slice(-20)
+                .map(q => q.question);
+
+            if (categoryHistory.length > 0) {
+                historyPrompt = `NON ripetere nessuna di queste domande già fatte: ${JSON.stringify(categoryHistory)}.`;
+            }
+        }
+
         const prompt = `Genera una domanda a risposta multipla (4 opzioni) in italiano.
         Argomento: "${category}".
         ${difficultyPrompt}
+        ${historyPrompt}
         
         REGOLE IMPORTANTI:
         1. La domanda deve essere BREVE (max 20 parole).
-        2. Le risposte devono essere BREVI (max 5-6 parole).
+        2. Le risposte devono essere BREVI (max 10 parole).
         3. Tutte le 4 risposte devono avere LUNGHEZZA SIMILE. Non fare la risposta corretta molto più lunga delle altre.
         4. Se l'argomento è specifico, assicurati che la risposta sia corretta.
         
@@ -1634,12 +1652,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
             });
 
+            if (response.status === 429) {
+                console.warn(`Rate limit hit (429). Retrying... Attempt ${retryCount + 1}`);
+                if (retryCount < 3) {
+                    // Exponential backoff: 2s, 4s, 8s
+                    const waitTime = Math.pow(2, retryCount + 1) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                    return generateAIQuestion(category, difficulty, retryCount + 1);
+                } else {
+                    throw new Error("Rate limit exceeded after retries");
+                }
+            }
+
+            if (!response.ok) {
+                throw new Error(`API Error: ${response.status}`);
+            }
+
             const data = await response.json();
+
+            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                throw new Error("Invalid API response structure");
+            }
+
             const text = data.candidates[0].content.parts[0].text;
 
             // Clean markdown if present
             const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim();
             const questionData = JSON.parse(jsonStr);
+
+            // Save to history
+            if (!gameState.aiQuestionHistory) gameState.aiQuestionHistory = [];
+            gameState.aiQuestionHistory.push({
+                category: category,
+                question: questionData.question
+            });
 
             loadingEl.classList.add('hidden');
             questionText.classList.remove('hidden');
@@ -1647,8 +1693,13 @@ document.addEventListener('DOMContentLoaded', function () {
             return questionData;
 
         } catch (error) {
-            loadingEl.classList.add('hidden');
-            questionText.classList.remove('hidden');
+            console.error("AI Generation Error:", error);
+
+            // If we've exhausted retries or hit another error, show fallback but clean up UI first
+            if (retryCount === 0) { // Only handle UI cleanup on the initial call stack
+                loadingEl.classList.add('hidden');
+                questionText.classList.remove('hidden');
+            }
             throw error;
         }
     }
