@@ -1680,6 +1680,18 @@ document.addEventListener('DOMContentLoaded', function () {
             const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim();
             const questionData = JSON.parse(jsonStr);
 
+            // Shuffle answers to avoid "A" bias (LLMs tend to put correct answer first)
+            const correctAnswer = questionData.answers[questionData.correctIndex];
+
+            // Fisher-Yates shuffle
+            for (let i = questionData.answers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [questionData.answers[i], questionData.answers[j]] = [questionData.answers[j], questionData.answers[i]];
+            }
+
+            // Update correctIndex to match new position
+            questionData.correctIndex = questionData.answers.indexOf(correctAnswer);
+
             // Save to history
             if (!gameState.aiQuestionHistory) gameState.aiQuestionHistory = [];
             gameState.aiQuestionHistory.push({
