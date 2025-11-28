@@ -219,35 +219,36 @@
             <div id="phrase-container" class="phrase-container">
                 <div class="phrase-type-label" id="phrase-type-label"></div>
                 <p id="phrase-text"></p>
+            </div>
 
-                <!-- AI Challenge Container -->
-                <div id="ai-challenge-container" class="ai-challenge-container" style="display: none;">
-                    <div class="ai-header">
-                        <span class="ai-icon">🤖</span>
-                        <h3>SFIDA IA: L'Appello</h3>
+            <!-- AI Challenge Container -->
+            <div id="ai-challenge-container" class="ai-challenge-container" style="display: none;">
+                <div class="ai-header">
+                    <span class="ai-icon">🤖</span>
+                    <h3>SFIDA IA: L'Appello</h3>
+                </div>
+                <div class="ai-content">
+                    <p id="ai-challenge-text">Caricamento sfida...</p>
+
+                    <div id="ai-actions" class="ai-actions">
+                        <button id="ai-accept-btn" class="btn ai-btn-accept">Accetta Sfida</button>
+                        <button id="ai-refuse-btn" class="btn ai-btn-refuse">Rifiuta</button>
                     </div>
-                    <div class="ai-content">
-                        <p id="ai-challenge-text">Caricamento sfida...</p>
 
-                        <div id="ai-actions" class="ai-actions">
-                            <button id="ai-accept-btn" class="btn ai-btn-accept">Accetta Sfida</button>
-                            <button id="ai-refuse-btn" class="btn ai-btn-refuse">Rifiuta</button>
-                        </div>
+                    <div id="ai-input-area" class="ai-input-area" style="display: none;">
+                        <textarea id="ai-defense-input" placeholder="Scrivi la tua difesa qui... (Sii convincente!)"
+                            rows="4"></textarea>
+                        <button id="ai-submit-btn" class="btn ai-btn-submit">Invia Difesa</button>
+                    </div>
 
-                        <div id="ai-input-area" class="ai-input-area" style="display: none;">
-                            <textarea id="ai-defense-input" placeholder="Scrivi la tua difesa qui... (Sii convincente!)"
-                                rows="4"></textarea>
-                            <button id="ai-submit-btn" class="btn ai-btn-submit">Invia Difesa</button>
-                        </div>
-
-                        <div id="ai-verdict-area" class="ai-verdict-area" style="display: none;">
-                            <h4 id="ai-verdict-title">VERDETTO</h4>
-                            <p id="ai-verdict-text"></p>
-                            <p id="ai-penalty-text"></p>
-                        </div>
+                    <div id="ai-verdict-area" class="ai-verdict-area" style="display: none;">
+                        <h4 id="ai-verdict-title">VERDETTO</h4>
+                        <p id="ai-verdict-text"></p>
+                        <p id="ai-penalty-text"></p>
                     </div>
                 </div>
             </div>
+
 
             <button id="next-phrase" class="btn next-btn">Prossima Frase ➜</button>
         </div>

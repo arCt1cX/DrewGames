@@ -783,7 +783,9 @@ body.game-active {
 
 /* AI Challenge Styles */
 .ai-challenge-container {
-    margin-top: 20px;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 600px;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     border: 2px solid #00d2ff;
     border-radius: 15px;
