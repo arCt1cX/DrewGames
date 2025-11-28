@@ -1631,6 +1631,7 @@ document.addEventListener('DOMContentLoaded', function () {
         2. Le risposte devono essere BREVI (max 10 parole).
         3. Tutte le 4 risposte devono avere LUNGHEZZA SIMILE. Non fare la risposta corretta molto più lunga delle altre.
         4. Se l'argomento è specifico, assicurati che la risposta sia corretta.
+        5. CRUCIALE: Le 3 risposte sbagliate devono essere PLAUSIBILI (pertinenti alla categoria) ma SBAGLIATE per la domanda specifica. Esempio: se chiedi "chi attacca ad area" in Clash Royale, metti carte che NON attaccano ad area (es: Arcieri), non mettere "Pikachu" o cose a caso.
         
         Rispondi SOLO con un JSON valido in questo formato:
         {
