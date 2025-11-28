@@ -19,9 +19,9 @@ body {
     padding: 20px;
 }
 
-/* Block scroll only when in game screen */
+/* Allow scroll when in game screen if content exceeds viewport */
 body.game-active {
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .container {
@@ -32,7 +32,7 @@ body.game-active {
     width: 100%;
     box-shadow: 0 8px 32px rgba(123, 104, 238, 0.3);
     border: 2px solid #473c8b;
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* Screens */
@@ -505,8 +505,7 @@ body.game-active {
 
     /* Only when game is active */
     body.game-active .container {
-        height: 100vh;
-        max-height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -526,7 +525,7 @@ body.game-active {
     }
 
     #game-screen {
-        overflow: hidden;
+        overflow: visible;
     }
 }
 
