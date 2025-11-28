@@ -163,14 +163,20 @@ document.addEventListener('DOMContentLoaded', () => {
         ui.statusMessage.textContent = '';
         ui.timerBar.style.width = '100%';
         ui.timerBar.parentElement.style.display = 'block'; // Show timer bar
+        ui.skipBtn.textContent = "Salta Indizio"; // Reset button text
+        ui.skipBtn.classList.remove('danger-btn');
+        ui.skipBtn.classList.add('secondary-btn');
 
         clearInterval(state.timer);
     }
 
     function revealNextClue() {
         if (state.currentClueIndex >= 4) {
-            // All clues revealed, no timer, just wait for answer
+            // All clues revealed
             ui.timerBar.parentElement.style.display = 'none'; // Hide timer bar
+            ui.skipBtn.textContent = "Rinuncia"; // Change button text
+            ui.skipBtn.classList.remove('secondary-btn');
+            ui.skipBtn.classList.add('danger-btn');
             return;
         }
 
@@ -190,6 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
             startTimer();
         } else {
             ui.timerBar.parentElement.style.display = 'none';
+            ui.skipBtn.textContent = "Rinuncia";
+            ui.skipBtn.classList.remove('secondary-btn');
+            ui.skipBtn.classList.add('danger-btn');
         }
     }
 
@@ -232,6 +241,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const userGuess = ui.guessInput.value.trim().toLowerCase();
         if (!userGuess) return;
 
+        // Clear input immediately
+        ui.guessInput.value = '';
+        ui.guessInput.focus(); // Keep focus
+
         const correctAnswers = state.currentQuestion.accepted_answers.map(a => a.toLowerCase());
 
         // Fuzzy matching could be improved, but simple includes/equals for now
@@ -240,9 +253,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCorrect) {
             endRound(true);
         } else {
-            ui.guessInput.classList.add('shake');
-            setTimeout(() => ui.guessInput.classList.remove('shake'), 500);
             ui.statusMessage.textContent = "Non è corretto, riprova!";
+
+            // Reset timer on WRONG GUESS (as requested: "quando invio la parola")
+            if (state.currentClueIndex < 4) {
+                state.timeLeft = state.timePerClue;
+                updateTimerBar();
+                startTimer();
+            }
         }
     }
 
@@ -251,11 +269,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') checkAnswer();
     });
 
-    // Skip Clue
+    // Skip/Give Up Clue
     ui.skipBtn.addEventListener('click', () => {
         if (state.isGameOver) return;
-        clearInterval(state.timer);
-        revealNextClue();
+
+        if (state.currentClueIndex >= 4) {
+            // "Rinuncia" behavior
+            endRound(false);
+        } else {
+            // "Salta Indizio" behavior
+            clearInterval(state.timer);
+            revealNextClue();
+        }
     });
 
     // End Round

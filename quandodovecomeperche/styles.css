@@ -30,20 +30,26 @@ body {
 }
 
 .home-button {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
+    border: none;
+    border-radius: 5px;
     padding: 8px 12px;
-    border-radius: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 5px;
-    cursor: pointer;
-    z-index: 100;
-    backdrop-filter: blur(5px);
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 #app {
@@ -55,6 +61,10 @@ body {
     max-width: 600px;
     margin: 0 auto;
     width: 100%;
+    /* Ensure content fits on mobile with keyboard open */
+    min-height: 100vh;
+    padding-top: 60px;
+    /* Space for home button */
 }
 
 .screen {
@@ -408,22 +418,53 @@ h1 {
 @media (max-width: 480px) {
     .clues-container {
         grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .clue-card {
-        min-height: 100px;
+        min-height: 80px;
         flex-direction: row;
         justify-content: flex-start;
         gap: 15px;
         text-align: left;
+        padding: 10px;
     }
 
     .clue-label {
         margin-bottom: 0;
-        min-width: 70px;
+        min-width: 60px;
+        font-size: 0.9rem;
     }
 
     .clue-content {
         text-align: left;
+        font-size: 0.95rem;
+    }
+
+    .guess-container {
+        flex-direction: column;
+    }
+
+    #guess-input {
+        font-size: 16px;
+        /* Prevent zoom on iOS */
+        padding: 12px;
+    }
+
+    #submit-guess-btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .qdcp-logo span {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
     }
 }
+
+```
