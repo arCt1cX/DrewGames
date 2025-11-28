@@ -97,13 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
             - Frase: "Dieci ore al giorno (QUANDO), seduto in cabina (DOVE), con un braccio abbronzato (COME), per trasportare il cemento (PERCHÉ)."
             - RISPOSTA: Camionista
             
-            **REGOLE:**
-            - La frase deve scorrere naturale, come un racconto.
-            - **QUANDO**: Deve essere un momento temporale o una condizione (es. "Dopo aver mangiato").
-            - **DOVE**: Deve essere un luogo fisico (es. "Sul divano").
-            - **COME**: Deve essere un dettaglio visivo o un'azione (es. "Con la pancia piena").
-            - **PERCHÉ**: Deve essere la motivazione o l'effetto (es. "Per fare un riposino").
-            - RISPOSTA: Pennichella.
+            **ANTI-ESEMPI (SE SCRIVI COSE COSÌ BANALI SEI BOCCIATO):**
+            - ❌ "Ogni mattina (QUANDO), nel panificio (DOVE), con farina ovunque (COME), per preparare la colazione (PERCHÉ) -> Fornaio"
+              *PERCHÉ È SBAGLIATO:* "Preparare la colazione" è generico! Il fornaio fa il PANE. E "ogni mattina" è noioso.
+              *CORRETTO:* "Mentre la città dorme ancora (QUANDO), davanti al forno ardente (DOVE), sporco di farina fino ai gomiti (COME), per darci il nostro pane quotidiano (PERCHÉ)!"
+            
+            - ❌ "Davanti allo specchio (DOVE)... per iniziare la giornata (PERCHÉ) -> Parrucchiere"
+              *PERCHÉ È SBAGLIATO:* Chiunque sta davanti allo specchio! Il parrucchiere sta DIETRO la poltrona.
+              *CORRETTO:* "Con le forbici in mano (COME)... per darci un taglio netto col passato (PERCHÉ)!"
+
+            **REGOLE D'ORO PER NON SBAGLIARE:**
+            1. **SPECIFICITÀ ASSOLUTA**: Il "PERCHÉ" deve essere l'indizio che toglie ogni dubbio. Non dire "per lavorare", dì "per aggiustare il lavandino" (Idraulico).
+            2. **NIENTE BANALITÀ**: Evita "Ogni mattina", "A casa", "Al lavoro". Usa "All'alba", "Tra le mura domestiche", "In ufficio tra mille scartoffie".
+            3. **LA RISPOSTA DEVE ESSERE L'UNICA POSSIBILE**: Se leggo la tua storia, non devo poter rispondere "Mamma" se la risposta è "Parrucchiere".
             
             Formatta la risposta SOLO come JSON valido:
             {
