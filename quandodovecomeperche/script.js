@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Game State
     const state = {
         currentQuestion: null,
+        currentRound: 0,
         score: 0,
         revealedClues: {
             quando: false,
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start Game
     document.getElementById('start-btn').addEventListener('click', () => {
         state.score = 0;
+        state.currentRound = 0;
         ui.score.textContent = '0';
         showScreen('game');
         startNewRound();
@@ -128,6 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start New Round
     async function startNewRound() {
+        // Increment round counter
+        state.currentRound++;
+        ui.currentQuestionNum.textContent = state.currentRound;
+
         resetUI();
 
         const question = await generateAIQuestion();
@@ -222,17 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const percentage = (state.timeLeft / state.timePerClue) * 100;
         ui.timerBar.style.width = `${percentage}%`;
     }
-
-    // Reset timer on input
-    ui.guessInput.addEventListener('input', () => {
-        if (!state.isGameOver && state.currentClueIndex < 4) {
-            // Reset timer to full
-            state.timeLeft = state.timePerClue;
-            updateTimerBar();
-            // Restart interval to ensure full second count
-            startTimer();
-        }
-    });
 
     // Check Answer
     function checkAnswer() {
