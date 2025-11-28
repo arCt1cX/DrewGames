@@ -747,3 +747,132 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('📊 Usa window.drewnkingDebug.getStats() per vedere le statistiche');
     console.log('🔄 Usa window.drewnkingDebug.resetHistory() per resettare lo storico');
 });
+// AI Challenge Logic
+const AI_KEY = 'AIzaSyDyu6SGakr-3fXvdSlni65BavGky1LX8As';
+const AI_CHANCE = 0.15; // 15% chance
+
+const aiUI = {
+    container: document.getElementById('ai-challenge-container'),
+    text: document.getElementById('ai-challenge-text'),
+    actions: document.getElementById('ai-actions'),
+    acceptBtn: document.getElementById('ai-accept-btn'),
+    refuseBtn: document.getElementById('ai-refuse-btn'),
+    inputArea: document.getElementById('ai-input-area'),
+    defenseInput: document.getElementById('ai-defense-input'),
+    submitBtn: document.getElementById('ai-submit-btn'),
+    verdictArea: document.getElementById('ai-verdict-area'),
+    verdictText: document.getElementById('ai-verdict-text'),
+    penaltyText: document.getElementById('ai-penalty-text')
+};
+
+let currentAIChallenge = null;
+
+async function triggerAIChallenge(phraseText) {
+    aiUI.container.style.display = 'block';
+    aiUI.text.textContent = "L'IA sta analizzando l'accusa...";
+    aiUI.actions.style.display = 'none';
+    aiUI.inputArea.style.display = 'none';
+    aiUI.verdictArea.style.display = 'none';
+
+    try {
+        const prompt = `
+            Sei un Giudice Supremo in un gioco alcolico.
+            È stata pescata questa carta "Votazione": "${phraseText}".
+            I giocatori hanno appena votato una "vittima".
+            
+            Il tuo compito:
+            Genera una sfida breve e cattiva per la vittima per permetterle di "difendersi" o "scagionarsi".
+            Deve essere una richiesta di SCRIVERE qualcosa (una scusa, una frase, una bugia).
+            
+            Esempio:
+            Carta: "Il più tirchio beve"
+            Sfida: "Scrivi qui sotto l'ultima volta che hai offerto qualcosa a qualcuno. Se non mi convinci, bevi doppio."
+            
+            Rispondi SOLO con il testo della sfida. Sii ironico e tagliente.
+        `;
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AI_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+
+        const data = await response.json();
+        const challengeText = data.candidates[0].content.parts[0].text;
+
+        aiUI.text.textContent = challengeText;
+        aiUI.actions.style.display = 'flex';
+        currentAIChallenge = challengeText;
+
+    } catch (error) {
+        console.error("AI Error:", error);
+        aiUI.container.style.display = 'none'; // Hide if error
+    }
+}
+
+async function submitDefense() {
+    const defense = aiUI.defenseInput.value.trim();
+    if (!defense) return;
+
+    aiUI.inputArea.style.display = 'none';
+    aiUI.text.textContent = "Giudizio in corso...";
+
+    try {
+        const prompt = `
+            Sei un Giudice Supremo in un gioco alcolico.
+            Sfida: "${currentAIChallenge}"
+            Difesa dell'imputato: "${defense}"
+            
+            Valuta la difesa da 1 a 10.
+            Se voto < 6: FALLITO (Bevi doppio).
+            Se voto >= 6: SUPERATO (Bevi metà o nulla).
+            
+            Rispondi in JSON:
+            {
+                "verdict": "Un commento breve e cattivo sulla difesa",
+                "penalty": "Bevi 2 sorsi" (o altro in base al voto),
+                "success": true/false
+            }
+        `;
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AI_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+
+        const data = await response.json();
+        const text = data.candidates[0].content.parts[0].text;
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        const result = JSON.parse(jsonMatch ? jsonMatch[0] : text);
+
+        aiUI.text.style.display = 'none';
+        aiUI.verdictArea.style.display = 'block';
+        aiUI.verdictText.textContent = result.verdict;
+        aiUI.penaltyText.textContent = result.penalty;
+        aiUI.penaltyText.style.color = result.success ? '#4caf50' : '#f44336';
+
+    } catch (error) {
+        console.error("AI Judgment Error:", error);
+        aiUI.text.textContent = "Errore nel giudizio. Bevi per sicurezza.";
+    }
+}
+
+// Event Listeners
+aiUI.acceptBtn.addEventListener('click', () => {
+    aiUI.actions.style.display = 'none';
+    aiUI.inputArea.style.display = 'block';
+    aiUI.defenseInput.value = '';
+    aiUI.defenseInput.focus();
+});
+
+aiUI.refuseBtn.addEventListener('click', () => {
+    aiUI.container.style.display = 'none';
+});
+
+aiUI.submitBtn.addEventListener('click', submitDefense);
+
+// Modify showPhrase to trigger AI
+const originalShowPhrase = showPhrase; // Backup original if needed, or just modify inline logic
+// Note: Since showPhrase is likely defined above, we need to inject the call there.
+// Instead of rewriting the whole file, I'll assume I can find where showPhrase is and edit it.

@@ -134,8 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             const text = data.candidates[0].content.parts[0].text;
 
-            // Clean markdown if present
-            const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim();
+            // Clean markdown and extract JSON
+            const jsonMatch = text.match(/\{[\s\S]*\}/);
+            if (!jsonMatch) {
+                throw new Error("Nessun JSON valido trovato nella risposta");
+            }
+            const jsonStr = jsonMatch[0];
             return JSON.parse(jsonStr);
 
         } catch (error) {

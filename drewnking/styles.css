@@ -12,7 +12,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: 
+    background-image:
         radial-gradient(circle at 20% 50%, rgba(71, 60, 139, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(123, 104, 238, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 40% 20%, rgba(71, 60, 139, 0.1) 0%, transparent 50%);
@@ -53,6 +53,7 @@ body.game-active {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -74,9 +75,12 @@ body.game-active {
 }
 
 @keyframes gradient-shift {
-    0%, 100% {
+
+    0%,
+    100% {
         background-position: 0% center;
     }
+
     50% {
         background-position: 100% center;
     }
@@ -212,16 +216,16 @@ body.game-active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-switch input:checked + .toggle-slider {
+.toggle-switch input:checked+.toggle-slider {
     background-color: #7b68ee;
     border-color: #7b68ee;
 }
 
-.toggle-switch input:checked + .toggle-slider:before {
+.toggle-switch input:checked+.toggle-slider:before {
     transform: translateX(24px);
 }
 
-.toggle-switch input:focus + .toggle-slider {
+.toggle-switch input:focus+.toggle-slider {
     box-shadow: 0 0 8px rgba(123, 104, 238, 0.6);
 }
 
@@ -292,9 +296,12 @@ body.game-active {
 }
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 1;
     }
+
     50% {
         opacity: 0.5;
     }
@@ -454,11 +461,11 @@ body.game-active {
     body {
         padding: 10px;
     }
-    
+
     .container {
         padding: 20px;
     }
-    
+
     /* Only when game is active */
     body.game-active .container {
         height: 100vh;
@@ -467,20 +474,20 @@ body.game-active {
         flex-direction: column;
         justify-content: center;
     }
-    
+
     h1 {
         font-size: 2rem;
     }
-    
+
     .phrase-text {
         font-size: 1.3rem;
     }
-    
+
     .btn {
         font-size: 16px;
         padding: 12px;
     }
-    
+
     #game-screen {
         overflow: hidden;
     }
@@ -547,6 +554,7 @@ body.game-active {
         opacity: 0;
         transform: translateX(50px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -705,12 +713,12 @@ body.game-active {
         top: 30px;
         right: 40px;
     }
-    
+
     .rules-badge svg {
         width: 22px;
         height: 22px;
     }
-    
+
     .rules-badge-count {
         min-width: 16px;
         height: 16px;
@@ -718,20 +726,172 @@ body.game-active {
         top: -3px;
         right: -3px;
     }
-    
+
     .rules-panel {
         width: 280px;
         right: -300px;
         padding: 15px;
     }
-    
+
     .rules-panel-header h3 {
         font-size: 16px;
     }
-    
+
     .rule-item {
         font-size: 12px;
         padding: 10px;
     }
 }
 
+
+/* AI Challenge Styles */
+.ai-challenge-container {
+    margin-top: 20px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid #00d2ff;
+    border-radius: 15px;
+    padding: 15px;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+    animation: slideUp 0.5s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-challenge-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #00d2ff, #ff00de, #00d2ff);
+    background-size: 200% 100%;
+    animation: rainbowBorder 2s linear infinite;
+}
+
+@keyframes rainbowBorder {
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ai-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.ai-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    animation: pulse 2s infinite;
+}
+
+.ai-header h3 {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    color: #00d2ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+}
+
+.ai-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+}
+
+.ai-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.ai-btn-accept {
+    background: linear-gradient(45deg, #00d2ff, #007aff);
+    border: none;
+    color: white;
+    font-weight: bold;
+    flex: 1;
+}
+
+.ai-btn-refuse {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #aaa;
+    flex: 1;
+}
+
+.ai-input-area textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #00d2ff;
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+.ai-input-area textarea:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+}
+
+.ai-btn-submit {
+    width: 100%;
+    background: #00d2ff;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.ai-verdict-area {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+#ai-verdict-title {
+    margin: 0 0 10px 0;
+    color: #ff00de;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+}
+
+#ai-verdict-text {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+#ai-penalty-text {
+    font-weight: bold;
+    color: #00d2ff;
+    font-size: 1.1rem;
+}
