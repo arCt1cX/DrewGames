@@ -92,14 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
                - COME: Indizio chiave che inizia a chiarire.
                - PERCHÉ: L'indizio finale che rende la risposta quasi ovvia (il "regalo").
             
-            2. **LOGICA FERREA**:
-               - Evita associazioni senza senso (es. leoni con pecorelle se non c'è un proverbio specifico).
-               - Usa doppi sensi, modi di dire e associazioni laterali intelligenti.
-               - La risposta deve "cliccare" perfettamente quando si leggono tutti e 4 gli indizi.
+            2. **LOGICA FERREA (IMPORTANTE)**:
+               - **VIETATO** usare associazioni surreali, oniriche o senza senso (es. NO "antenna che balla il tip tap", NO "uova che guardano il calendario").
+               - Ogni indizio deve avere una giustificazione razionale o basarsi su un modo di dire *comune*.
+               - Se usi una metafora, deve essere immediatamente comprensibile una volta svelata la soluzione.
+               - Chiediti per ogni indizio: "Se lo leggessi al contrario, capirei il nesso?" Se la risposta è no, CAMBIALO.
             
             3. **STILE**:
                - Usa frasi brevi e incisive.
-               - Sii ironico e arguto.
+               - Sii ironico e arguto, ma CONCRETO.
                - NON essere didascalico (es. NO "Quando è il 1900", SI "Quando il secolo era bambino").
             
             Formatta la risposta SOLO come JSON valido:
