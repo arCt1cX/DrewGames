@@ -11,7 +11,8 @@ let gameState = {
     ruleEndQueue: [], // Queue of rule endings to show
     customPercentages: false, // Track if custom percentages are enabled
     categoryWeights: {}, // Store custom weights
-    aiChallengeOccurred: false // Track if AI challenge has happened
+    selectedAIChallengeCards: [], // uniqueIds of the 2 cards selected by AI for challenges
+    aiChallengesTriggered: 0 // Count how many AI challenges have been shown (max 2)
 };
 
 // Historical phrase tracking (persistent across sessions)
@@ -220,9 +221,83 @@ function startGame() {
     // Show game screen
     showScreen('game-screen');
 
+    // Select AI challenge cards if enabled
+    if (aiSettings.enabled && aiSettings.apiKey) {
+        selectAIChallengeCards();
+    }
+
     // Show first phrase
     showNextPhrase();
 }
+
+// Select 2 vote cards for AI challenges using AI
+async function selectAIChallengeCards() {
+    if (!gameState.categorizedPhrases.vote) {
+        console.log('No vote cards available for AI selection');
+        return;
+    }
+
+    const voteCards = gameState.categorizedPhrases.vote;
+
+    // Create a list of all vote card texts with their uniqueIds
+    const cardList = voteCards.map((card, index) => {
+        return `${index + 1}. ${card.text}`;
+    }).join('\n');
+
+    try {
+        const prompt = `
+            Sei un giudice di un gioco alcolico. Ti viene fornita una lista di carte "Votazione".
+            
+            Il tuo compito:
+            Scegli le 2 carte che ritieni PIÙ OFFENSIVE, IMBARAZZANTI o INSULTANTI dal punto di vista dei giocatori.
+            Considera domande su temi sensibili, imbarazzanti, o che mettono in difficoltà i giocatori.
+            
+            Lista delle carte:
+            ${cardList}
+            
+            Rispondi SOLO con un JSON nel formato:
+            {
+                "selected": [numero1, numero2],
+                "reason": "breve spiegazione del perché hai scelto queste 2"
+            }
+            
+            Dove numero1 e numero2 sono i numeri delle carte che hai scelto (1-based index).
+        `;
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+
+        const data = await response.json();
+        const text = data.candidates[0].content.parts[0].text;
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        const result = JSON.parse(jsonMatch ? jsonMatch[0] : text);
+
+        // Convert 1-based indices to uniqueIds
+        gameState.selectedAIChallengeCards = result.selected.map(index => {
+            return voteCards[index - 1].uniqueId;
+        });
+
+        console.log('🤖 AI ha selezionato le carte per le sfide:', result.reason);
+        console.log('Carte selezionate:', gameState.selectedAIChallengeCards);
+
+    } catch (error) {
+        console.error('Errore nella selezione AI delle carte:', error);
+        // Fallback: select 2 random vote cards
+        const randomIndices = [];
+        while (randomIndices.length < 2 && randomIndices.length < voteCards.length) {
+            const randomIndex = Math.floor(Math.random() * voteCards.length);
+            if (!randomIndices.includes(randomIndex)) {
+                randomIndices.push(randomIndex);
+            }
+        }
+        gameState.selectedAIChallengeCards = randomIndices.map(i => voteCards[i].uniqueId);
+        console.log('Fallback: carte selezionate casualmente');
+    }
+}
+
 
 // Select a category based on weights
 function selectCategory() {
@@ -522,24 +597,14 @@ function showNextPhrase() {
         if (aiText) aiText.style.display = 'block';
     }
 
-    // Trigger AI Challenge for 'vote' category with specific keywords
-    // Keywords that imply a person is being voted for:
-    const voteKeywords = ['Votate il giocatore', 'Votate tutti il giocatore', 'Chi tra voi', 'Chi è', 'Chi ha'];
-
-    let aiChance = 0.15;
-    // Force AI if it hasn't happened yet and we are in the last 25% of the game
-    if (!gameState.aiChallengeOccurred && gameState.currentRound > gameState.totalRounds * 0.75) {
-        aiChance = 1.0;
-    }
-
+    // Trigger AI Challenge if this card was selected by AI
     const shouldTriggerAI = aiSettings.enabled &&
         aiSettings.apiKey &&
-        phraseObj.category === 'vote' &&
-        voteKeywords.some(keyword => finalText.includes(keyword)) &&
-        Math.random() < aiChance;
+        gameState.aiChallengesTriggered < 2 &&
+        gameState.selectedAIChallengeCards.includes(phraseObj.uniqueId);
 
     if (shouldTriggerAI && window.triggerAIChallenge) {
-        gameState.aiChallengeOccurred = true;
+        gameState.aiChallengesTriggered++;
         window.triggerAIChallenge(finalText);
     }
 
