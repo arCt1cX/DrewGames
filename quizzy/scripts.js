@@ -1597,9 +1597,22 @@ document.addEventListener('DOMContentLoaded', function () {
         loadingEl.classList.remove('hidden');
         questionText.classList.add('hidden');
 
+        let difficultyPrompt = "";
+        if (difficulty === 'bambino') {
+            difficultyPrompt = "Livello: BAMBINO (5-6 anni). Usa un linguaggio semplicissimo, domande dirette e ovvie. Niente parole difficili.";
+        } else {
+            difficultyPrompt = `Difficoltà: "${difficulty}" (su scala: bambino, facile, medio, esperto, laureato).`;
+        }
+
         const prompt = `Genera una domanda a risposta multipla (4 opzioni) in italiano.
         Argomento: "${category}".
-        Difficoltà: "${difficulty}" (su scala: bambino, facile, medio, esperto, laureato).
+        ${difficultyPrompt}
+        
+        REGOLE IMPORTANTI:
+        1. La domanda deve essere BREVE (max 20 parole).
+        2. Le risposte devono essere BREVI (max 5-6 parole).
+        3. Tutte le 4 risposte devono avere LUNGHEZZA SIMILE. Non fare la risposta corretta molto più lunga delle altre.
+        4. Se l'argomento è specifico, assicurati che la risposta sia corretta.
         
         Rispondi SOLO con un JSON valido in questo formato:
         {
