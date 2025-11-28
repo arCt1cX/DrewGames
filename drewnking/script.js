@@ -10,7 +10,8 @@ let gameState = {
     activeRules: [], // Track active rules with their end round
     ruleEndQueue: [], // Queue of rule endings to show
     customPercentages: false, // Track if custom percentages are enabled
-    categoryWeights: {} // Store custom weights
+    categoryWeights: {}, // Store custom weights
+    aiChallengeOccurred: false // Track if AI challenge has happened
 };
 
 // Historical phrase tracking (persistent across sessions)
@@ -480,6 +481,33 @@ function showNextPhrase() {
         phraseText.classList.add('phrase-animate');
     }, 10);
 
+    // Reset AI UI
+    const aiContainer = document.getElementById('ai-challenge-container');
+    if (aiContainer) {
+        aiContainer.style.display = 'none';
+        const aiText = document.getElementById('ai-challenge-text');
+        if (aiText) aiText.style.display = 'block';
+    }
+
+    // Trigger AI Challenge for 'vote' category with specific keywords
+    // Keywords that imply a person is being voted for:
+    const voteKeywords = ['Votate il giocatore', 'Votate tutti il giocatore', 'Chi tra voi', 'Chi è', 'Chi ha'];
+
+    let aiChance = 0.15;
+    // Force AI if it hasn't happened yet and we are in the last 25% of the game
+    if (!gameState.aiChallengeOccurred && gameState.currentRound > gameState.totalRounds * 0.75) {
+        aiChance = 1.0;
+    }
+
+    const shouldTriggerAI = phraseObj.category === 'vote' &&
+        voteKeywords.some(keyword => finalText.includes(keyword)) &&
+        Math.random() < aiChance;
+
+    if (shouldTriggerAI && window.triggerAIChallenge) {
+        gameState.aiChallengeOccurred = true;
+        window.triggerAIChallenge(finalText);
+    }
+
     // Update background color based on category
     phraseContainer.className = 'phrase-container ' + phraseObj.category;
 }
@@ -776,20 +804,20 @@ async function triggerAIChallenge(phraseText) {
 
     try {
         const prompt = `
-            Sei un Giudice Supremo in un gioco alcolico.
-            È stata pescata questa carta "Votazione": "${phraseText}".
-            I giocatori hanno appena votato una "vittima".
-            
-            Il tuo compito:
-            Genera una sfida breve e cattiva per la vittima per permetterle di "difendersi" o "scagionarsi".
-            Deve essere una richiesta di SCRIVERE qualcosa (una scusa, una frase, una bugia).
-            
-            Esempio:
-            Carta: "Il più tirchio beve"
-            Sfida: "Scrivi qui sotto l'ultima volta che hai offerto qualcosa a qualcuno. Se non mi convinci, bevi doppio."
-            
-            Rispondi SOLO con il testo della sfida. Sii ironico e tagliente.
-        `;
+                Sei un Giudice Supremo in un gioco alcolico.
+                È stata pescata questa carta "Votazione": "${phraseText}".
+                I giocatori hanno appena votato una "vittima".
+                
+                Il tuo compito:
+                Genera una sfida breve e cattiva per la vittima per permetterle di "difendersi" o "scagionarsi".
+                Deve essere una richiesta di SCRIVERE qualcosa (una scusa, una frase, una bugia).
+                
+                Esempio:
+                Carta: "Il più tirchio beve"
+                Sfida: "Scrivi qui sotto l'ultima volta che hai offerto qualcosa a qualcuno. Se non mi convinci, bevi doppio."
+                
+                Rispondi SOLO con il testo della sfida. Sii ironico e tagliente.
+            `;
 
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AI_KEY}`, {
             method: 'POST',
@@ -819,21 +847,21 @@ async function submitDefense() {
 
     try {
         const prompt = `
-            Sei un Giudice Supremo in un gioco alcolico.
-            Sfida: "${currentAIChallenge}"
-            Difesa dell'imputato: "${defense}"
-            
-            Valuta la difesa da 1 a 10.
-            Se voto < 6: FALLITO (Bevi doppio).
-            Se voto >= 6: SUPERATO (Bevi metà o nulla).
-            
-            Rispondi in JSON:
-            {
-                "verdict": "Un commento breve e cattivo sulla difesa",
-                "penalty": "Bevi 2 sorsi" (o altro in base al voto),
-                "success": true/false
-            }
-        `;
+                Sei un Giudice Supremo in un gioco alcolico.
+                Sfida: "${currentAIChallenge}"
+                Difesa dell'imputato: "${defense}"
+                
+                Valuta la difesa da 1 a 10.
+                Se voto < 6: FALLITO (Bevi doppio).
+                Se voto >= 6: SUPERATO (Bevi metà o nulla).
+                
+                Rispondi in JSON:
+                {
+                    "verdict": "Un commento breve e cattivo sulla difesa",
+                    "penalty": "Bevi 2 sorsi" (o altro in base al voto),
+                    "success": true/false
+                }
+            `;
 
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AI_KEY}`, {
             method: 'POST',
@@ -858,21 +886,35 @@ async function submitDefense() {
     }
 }
 
-// Event Listeners
-aiUI.acceptBtn.addEventListener('click', () => {
-    aiUI.actions.style.display = 'none';
-    aiUI.inputArea.style.display = 'block';
-    aiUI.defenseInput.value = '';
-    aiUI.defenseInput.focus();
+// Event Listeners for AI
+if (aiUI.acceptBtn) {
+    aiUI.acceptBtn.addEventListener('click', () => {
+        aiUI.actions.style.display = 'none';
+        aiUI.inputArea.style.display = 'block';
+        aiUI.defenseInput.value = '';
+        aiUI.defenseInput.focus();
+    });
+}
+
+
+if (aiUI.refuseBtn) {
+    aiUI.refuseBtn.addEventListener('click', () => {
+        aiUI.container.style.display = 'none';
+    });
+}
+
+if (aiUI.submitBtn) {
+    aiUI.submitBtn.addEventListener('click', submitDefense);
+}
+
+// Override showNextPhrase to include AI trigger check
+// We can't easily override showNextPhrase because it calls showNextPhrase recursively or via events.
+// Instead, we should modify the showNextPhrase function definition itself in the file.
+// But since I am appending here, I can't modify the function above easily without replacing the whole file.
+// Wait, the user said "showPhrase is not defined". That's because I tried to access it outside.
+// The best way is to modify the `showNextPhrase` function in the main body to call `triggerAIChallenge`.
+// I will do that in a separate step. Here I just define the functions and attach listeners.
+// I will attach `triggerAIChallenge` to the window or a global object so `showNextPhrase` can call it.
+window.triggerAIChallenge = triggerAIChallenge;
+
 });
-
-aiUI.refuseBtn.addEventListener('click', () => {
-    aiUI.container.style.display = 'none';
-});
-
-aiUI.submitBtn.addEventListener('click', submitDefense);
-
-// Modify showPhrase to trigger AI
-const originalShowPhrase = showPhrase; // Backup original if needed, or just modify inline logic
-// Note: Since showPhrase is likely defined above, we need to inject the call there.
-// Instead of rewriting the whole file, I'll assume I can find where showPhrase is and edit it.
