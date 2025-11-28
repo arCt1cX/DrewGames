@@ -907,6 +907,11 @@ body.game-active {
     color: #000;
     font-weight: bold;
     text-transform: uppercase;
+    display: block;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .ai-verdict-area {
