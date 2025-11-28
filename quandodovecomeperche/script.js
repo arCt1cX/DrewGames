@@ -81,24 +81,29 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         const prompt = `
-            Sei un autore di "Reazione a Catena". Devi creare un indovinello "Quando, Dove, Come, Perché".
+            Sei un autore di "Reazione a Catena". Il tuo compito è creare un indovinello PERFETTO basato su una STORIA COERENTE.
             
-            ${examples}
+            **METODO DI CREAZIONE (OBBLIGATORIO):**
+            1. Scegli una PAROLA DA INDOVINARE (Oggetto, Mestiere, Luogo).
+            2. Costruisci una **STORIA UNICA** seguendo RIGOROSAMENTE questa struttura sequenziale:
+               `[QUANDO succede] +[DOVE succede] + [COME succede / descrizione fisica] + [PERCHÉ succede / scopo]`
+            3. Spezza la frase esattamente in questi 4 componenti.
             
-            **ORDINE TASSATIVO:**
-            1. **ANALIZZA GLI ESEMPI**: Nota che gli indizi NON sono mai di 1-2 parole. Sono FRASEGGI, descrizioni argute.
-               - NO: "Al tramonto" (Troppo breve/banale)
-               - SÌ: "Dopo un lungo viaggio da Parigi" (Racconta una storia)
+            **ESEMPIO PERFETTO (TOMBOLA):**
+            - Frase: "La notte di Natale (QUANDO), attorno a un tavolo (DOVE), con dei fagioli in mano (COME), per fare cinquina (PERCHÉ)!"
+            - RISPOSTA: Tombola
             
-            2. **STILE OBBLIGATORIO**:
-               - **QUANDO**: Descrivi una situazione o un momento con una frase (es. "Mentre sta seduto", "Dopo una grande nevicata").
-               - **DOVE**: Un contesto specifico, non generico (es. "Stesa davanti a me", "In mezzo a due bottoni").
-               - **COME**: Una descrizione fisica o metaforica articolata (es. "Sbiadita dagli anni", "Con le mani entrambe occupate").
-               - **PERCHÉ**: La ragione arguta o il fine ultimo (es. "Per apparecchiare uso sempre la stessa!", "Per fare da naso al pupazzo di neve!").
+            **ESEMPIO PERFETTO (CAMIONISTA):**
+            - Frase: "Dieci ore al giorno (QUANDO), seduto in cabina (DOVE), con un braccio abbronzato (COME), per trasportare il cemento (PERCHÉ)."
+            - RISPOSTA: Camionista
             
-            3. **LOGICA**:
-               - La risposta deve essere un OGGETTO, MESTIERE o LUOGO.
-               - Gli indizi devono essere coerenti. Se dici "tramonto" per "pannello solare" sbagli, perché il pannello lavora di giorno! Usa la logica.
+            **REGOLE:**
+            - La frase deve scorrere naturale, come un racconto.
+            - **QUANDO**: Deve essere un momento temporale o una condizione (es. "Dopo aver mangiato").
+            - **DOVE**: Deve essere un luogo fisico (es. "Sul divano").
+            - **COME**: Deve essere un dettaglio visivo o un'azione (es. "Con la pancia piena").
+            - **PERCHÉ**: Deve essere la motivazione o l'effetto (es. "Per fare un riposino").
+            - RISPOSTA: Pennichella.
             
             Formatta la risposta SOLO come JSON valido:
             {
