@@ -601,7 +601,13 @@ function showNextPhrase() {
         phraseObj.category === 'vote' &&
         gameState.aiSelectedCards.includes(phraseObj.uniqueId);
 
+    // Debug logging
+    if (phraseObj.category === 'vote') {
+        console.log('Vote card:', phraseObj.uniqueId, 'Selected cards:', gameState.aiSelectedCards, 'Match:', gameState.aiSelectedCards.includes(phraseObj.uniqueId));
+    }
+
     if (shouldTriggerAI && window.triggerAIChallenge) {
+        console.log('🎯 Triggering AI challenge for:', phraseObj.uniqueId);
         window.triggerAIChallenge(finalText);
     }
 
