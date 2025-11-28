@@ -81,27 +81,24 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         const prompt = `
-            Sei un autore esperto del programma TV "Reazione a Catena". Devi creare un indovinello "Quando, Dove, Come, Perché" di alta qualità.
+            Sei un autore di "Reazione a Catena". Devi creare un indovinello "Quando, Dove, Come, Perché".
             
             ${examples}
             
-            REGOLE FONDAMENTALI:
-            1. **PROGRESSIONE**: 
-               - QUANDO: Molto vago, metaforico, difficile.
-               - DOVE: Ancora vago, ma aggiunge contesto.
-               - COME: Indizio chiave che inizia a chiarire.
-               - PERCHÉ: L'indizio finale che rende la risposta quasi ovvia (il "regalo").
-            
-            2. **LOGICA FERREA (IMPORTANTE)**:
-               - **VIETATO** usare associazioni surreali, oniriche o senza senso (es. NO "antenna che balla il tip tap", NO "uova che guardano il calendario").
-               - Ogni indizio deve avere una giustificazione razionale o basarsi su un modo di dire *comune*.
-               - Se usi una metafora, deve essere immediatamente comprensibile una volta svelata la soluzione.
-               - Chiediti per ogni indizio: "Se lo leggessi al contrario, capirei il nesso?" Se la risposta è no, CAMBIALO.
-            
+            **ORDINE TASSATIVO:**
+            1. **SCEGLI UNA RISPOSTA CONCRETA**: Deve essere un OGGETTO fisico (es. forbici, pallone), un MESTIERE (es. idraulico), un LUOGO famoso o un PERSONAGGIO.
+            2. **VIETATO**: Concetti astratti (es. imperfezione, amore, tempo), sentimenti, o cose poetiche.
             3. **STILE**:
-               - Usa frasi brevi e incisive.
-               - Sii ironico e arguto, ma CONCRETO.
-               - NON essere didascalico (es. NO "Quando è il 1900", SI "Quando il secolo era bambino").
+               - **QUANDO**: Un momento specifico o una condizione (es. "Quando fa freddo").
+               - **DOVE**: Un luogo fisico reale (es. "Sulla testa").
+               - **COME**: Una caratteristica fisica o un modo di fare (es. "Di lana").
+               - **PERCHÉ**: La funzione pratica o il motivo logico (es. "Per non gelarsi le orecchie").
+               - **RISPOSTA**: Cappello.
+            
+            **ERRORI DA EVITARE (SE LI FAI SEI BOCCIATO):**
+            - NO frasi poetiche o drammatiche (es. "nell'ora più buia", "tra le pieghe del tempo").
+            - NO associazioni mentali contorte.
+            - NO risposte astratte come "lettera" intesa come messaggio spirituale (se è una lettera, scrivi "nella cassetta della posta").
             
             Formatta la risposta SOLO come JSON valido:
             {
