@@ -81,15 +81,26 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         const prompt = `
-            Genera un indovinello nello stile di "Reazione a Catena" (gioco "Quando, Dove, Come, Perché").
+            Sei un autore esperto del programma TV "Reazione a Catena". Devi creare un indovinello "Quando, Dove, Come, Perché" di alta qualità.
             
             ${examples}
             
-            REGOLE:
-            - Usa uno stile enigmistico, ironico e metaforico come negli esempi.
-            - NON essere didascalico o enciclopedico.
-            - Gli indizi devono sembrare slegati ma portare univocamente alla soluzione.
-            - La risposta può essere un oggetto, un mestiere, un personaggio, un luogo o un concetto.
+            REGOLE FONDAMENTALI:
+            1. **PROGRESSIONE**: 
+               - QUANDO: Molto vago, metaforico, difficile.
+               - DOVE: Ancora vago, ma aggiunge contesto.
+               - COME: Indizio chiave che inizia a chiarire.
+               - PERCHÉ: L'indizio finale che rende la risposta quasi ovvia (il "regalo").
+            
+            2. **LOGICA FERREA**:
+               - Evita associazioni senza senso (es. leoni con pecorelle se non c'è un proverbio specifico).
+               - Usa doppi sensi, modi di dire e associazioni laterali intelligenti.
+               - La risposta deve "cliccare" perfettamente quando si leggono tutti e 4 gli indizi.
+            
+            3. **STILE**:
+               - Usa frasi brevi e incisive.
+               - Sii ironico e arguto.
+               - NON essere didascalico (es. NO "Quando è il 1900", SI "Quando il secolo era bambino").
             
             Formatta la risposta SOLO come JSON valido:
             {
