@@ -11,8 +11,7 @@ let gameState = {
     ruleEndQueue: [], // Queue of rule endings to show
     customPercentages: false, // Track if custom percentages are enabled
     categoryWeights: {}, // Store custom weights
-    aiSelectedCards: [], // Store card IDs selected by AI for challenges
-    gameDeck: [] // Pre-generated deck of cards for the current game
+    aiSelectedCards: [] // Store card IDs selected by AI for challenges
 };
 
 // Historical phrase tracking (persistent across sessions)
@@ -197,32 +196,30 @@ function generatePlayerInputs() {
 }
 
 // AI Card Selection - Select 2 most insulting vote cards
-// AI Card Selection - Select 2 most insulting vote cards from the active deck
 async function selectAIChallengeCards() {
-    // Get vote cards from the pre-generated deck
-    const deckVoteCards = gameState.gameDeck.filter(card => card.category === 'vote');
+    // Get all vote cards
+    const voteCards = gameState.categorizedPhrases['vote'] || [];
 
-    if (deckVoteCards.length < 2) {
-        console.warn('Not enough vote cards in deck for AI selection');
+    if (voteCards.length < 2) {
+        console.warn('Not enough vote cards for AI selection');
         return;
     }
 
-    // Create numbered list of vote cards in the deck
-    const cardsList = deckVoteCards.map((card, index) => {
-        return `${index + 1}. ${card.processedText}`;
+    // Create numbered list of all vote cards
+    const cardsList = voteCards.map((card, index) => {
+        return `${index + 1}. ${card.text}`;
     }).join('\n');
 
     const prompt = `
         Sei un giudice in un gioco alcolico chiamato "Drewnking".
-        Ecco le carte "Votazione" che usciranno in questa partita:
+        Ecco tutte le carte "Votazione" del gioco:
 
         ${cardsList}
 
         Il tuo compito: scegli i 2 NUMERI delle carte più SCORRETTE, INSULTANTI, OFFENSIVE o CATTIVE.
-        Dai PRIORITÀ ASSOLUTA alle carte che colpiscono una SINGOLA persona (es. "Chi è il più...", "Votate il giocatore...").
-        Evita se possibile le votazioni di gruppo, a meno che non siano molto cattive.
+        Quelle che ti sembrano più imbarazzanti o pesanti per i giocatori.
         
-        Rispondi SOLO con 2 numeri separati da virgola, senza spazi (esempio: "1,3").
+        Rispondi SOLO con 2 numeri separati da virgola, senza spazi (esempio: "5,12" oppure "1,23").
         NON aggiungere altro testo, solo i due numeri.
     `;
 
@@ -242,15 +239,15 @@ async function selectAIChallengeCards() {
         const data = await response.json();
         const responseText = data.candidates[0].content.parts[0].text.trim();
 
-        // Parse response (expected format: "1,3")
+        // Parse response (expected format: "5,12")
         const numbers = responseText.split(',').map(n => parseInt(n.trim()));
 
-        if (numbers.length === 2 && numbers.every(n => n > 0 && n <= deckVoteCards.length)) {
+        if (numbers.length === 2 && numbers.every(n => n > 0 && n <= voteCards.length)) {
             // Convert to 0-based indices and get uniqueIds
-            const selectedCards = numbers.map(n => deckVoteCards[n - 1].uniqueId);
+            const selectedCards = numbers.map(n => voteCards[n - 1].uniqueId);
             gameState.aiSelectedCards = selectedCards;
 
-            console.log('🤖 IA ha selezionato le carte dal mazzo:', numbers, selectedCards);
+            console.log('🤖 IA ha selezionato le carte:', numbers, selectedCards);
         } else {
             console.error('IA response invalid:', responseText);
         }
@@ -278,9 +275,6 @@ async function startGame() {
     gameState.currentRound = 0;
     gameState.usedPhrases = []; // Reset current session used phrases
     gameState.aiSelectedCards = []; // Reset AI selection
-
-    // Generate the game deck
-    generateGameDeck();
 
 
     // Update UI
@@ -437,556 +431,511 @@ function replacePlaceholder(text) {
             usedPlayers.push(randomPlayer);
 
             // Replace only the first occurrence
-            return result;
+            result = result.replace('{player}', randomPlayer);
         }
-        return text;
+
+        return result;
+    }
+    return text;
+}
+
+// Show next phrase
+function showNextPhrase() {
+    // Check if we need to show a rule ending first (without incrementing round)
+    if (gameState.ruleEndQueue.length > 0) {
+        const ruleEnd = gameState.ruleEndQueue.shift();
+        showRuleEnd(ruleEnd);
+        return;
     }
 
-    // Generate the entire deck of cards for the game
-    function generateGameDeck() {
-        gameState.gameDeck = [];
+    // Now increment the round
+    gameState.currentRound++;
 
-        // Generate as many cards as total rounds
-        for (let i = 0; i < gameState.totalRounds; i++) {
-            // Use existing random logic to pick a card
-            const phraseObj = getRandomPhrase();
-
-            // Process placeholders immediately to fix players for the whole game
-            let finalText = phraseObj.text;
-            let finalEndText = phraseObj.endText;
-
-            if (phraseObj.text.includes('{player}') || (phraseObj.isRule && phraseObj.endText && phraseObj.endText.includes('{player}'))) {
-                const startMatches = (phraseObj.text.match(/{player}/g) || []).length;
-                const endMatches = (phraseObj.isRule && phraseObj.endText) ? (phraseObj.endText.match(/{player}/g) || []).length : 0;
-                const totalMatches = Math.max(startMatches, endMatches);
-
-                const selectedPlayers = [];
-                for (let j = 0; j < totalMatches; j++) {
-                    const player = getWeightedRandomPlayer(selectedPlayers);
-                    selectedPlayers.push(player);
-                }
-
-                // Replace in text
-                let playerIndex = 0;
-                finalText = phraseObj.text.replace(/{player}/g, () => selectedPlayers[playerIndex++]);
-
-                // Replace in endText if rule
-                if (phraseObj.isRule && phraseObj.endText) {
-                    playerIndex = 0;
-                    finalEndText = phraseObj.endText.replace(/{player}/g, () => selectedPlayers[playerIndex++]);
-                }
-            }
-
-            // Create a complete card object for the deck
-            const card = {
-                ...phraseObj,
-                processedText: finalText,
-                processedEndText: finalEndText
-            };
-
-            gameState.gameDeck.push(card);
-        }
-
-        console.log('🃏 Mazzo generato:', gameState.gameDeck.length, 'carte');
-    }
-
-    // Show next phrase
-    function showNextPhrase() {
-        // Check if we need to show a rule ending first (without incrementing round)
-        if (gameState.ruleEndQueue.length > 0) {
-            const ruleEnd = gameState.ruleEndQueue.shift();
-            showRuleEnd(ruleEnd);
-            return;
-        }
-
-        // Now increment the round
-        gameState.currentRound++;
-
-        // Check if game is over
-        if (gameState.currentRound > gameState.totalRounds) {
-            // Before showing end screen, check if there are active rules to end
-            if (gameState.activeRules.length > 0) {
-                // Queue all remaining active rule endings
-                gameState.activeRules.forEach(rule => {
-                    gameState.ruleEndQueue.push(rule.endText);
-                });
-                gameState.activeRules = [];
-
-                // Show the first rule ending
-                if (gameState.ruleEndQueue.length > 0) {
-                    const ruleEnd = gameState.ruleEndQueue.shift();
-                    showRuleEnd(ruleEnd);
-                    return;
-                }
-            }
-
-            // No more rules to end, show end screen
-            showScreen('end-screen');
-            return;
-        }
-
-        // Update round counter
-        currentRoundSpan.textContent = gameState.currentRound;
-
-        // Check for expired rules and queue their endings
-        gameState.activeRules = gameState.activeRules.filter(rule => {
-            if (rule.endRound === gameState.currentRound) {
+    // Check if game is over
+    if (gameState.currentRound > gameState.totalRounds) {
+        // Before showing end screen, check if there are active rules to end
+        if (gameState.activeRules.length > 0) {
+            // Queue all remaining active rule endings
+            gameState.activeRules.forEach(rule => {
                 gameState.ruleEndQueue.push(rule.endText);
-                return false; // Remove from active rules
+            });
+            gameState.activeRules = [];
+
+            // Show the first rule ending
+            if (gameState.ruleEndQueue.length > 0) {
+                const ruleEnd = gameState.ruleEndQueue.shift();
+                showRuleEnd(ruleEnd);
+                return;
             }
-            return true;
+        }
+
+        // No more rules to end, show end screen
+        showScreen('end-screen');
+        return;
+    }
+
+    // Update round counter
+    currentRoundSpan.textContent = gameState.currentRound;
+
+    // Check for expired rules and queue their endings
+    gameState.activeRules = gameState.activeRules.filter(rule => {
+        if (rule.endRound === gameState.currentRound) {
+            gameState.ruleEndQueue.push(rule.endText);
+            return false; // Remove from active rules
+        }
+        return true;
+    });
+
+    // Update badge after filtering
+    updateRulesBadge();
+
+    // If we just queued a rule ending, show it (without consuming the round)
+    if (gameState.ruleEndQueue.length > 0) {
+        const ruleEnd = gameState.ruleEndQueue.shift();
+        // Decrement round since we're showing an end, not a new phrase
+        gameState.currentRound--;
+        currentRoundSpan.textContent = gameState.currentRound;
+        showRuleEnd(ruleEnd);
+        return;
+    }
+
+    // Get random phrase
+    const phraseObj = getRandomPhrase();
+
+    // For rules, we need to replace placeholders in both start and end with the SAME players
+    let finalText;
+    let finalEndText;
+
+    if (phraseObj.isRule && (phraseObj.text.includes('{player}') || phraseObj.endText.includes('{player}'))) {
+        // Count how many {player} placeholders we need
+        const startMatches = (phraseObj.text.match(/{player}/g) || []).length;
+        const endMatches = (phraseObj.endText.match(/{player}/g) || []).length;
+        const totalMatches = Math.max(startMatches, endMatches);
+
+        // Generate the same players for both start and end
+        const selectedPlayers = [];
+        for (let i = 0; i < totalMatches; i++) {
+            const player = getWeightedRandomPlayer(selectedPlayers);
+            selectedPlayers.push(player);
+        }
+
+        // Replace placeholders in start text
+        finalText = phraseObj.text;
+        selectedPlayers.forEach(player => {
+            finalText = finalText.replace('{player}', player);
         });
 
-        // Update badge after filtering
-        updateRulesBadge();
-
-        // If we just queued a rule ending, show it (without consuming the round)
-        if (gameState.ruleEndQueue.length > 0) {
-            const ruleEnd = gameState.ruleEndQueue.shift();
-            // Decrement round since we're showing an end, not a new phrase
-            gameState.currentRound--;
-            currentRoundSpan.textContent = gameState.currentRound;
-            showRuleEnd(ruleEnd);
-            return;
-        }
-
-        // Get random phrase
-        const phraseObj = getRandomPhrase();
-
-        // For rules, we need to replace placeholders in both start and end with the SAME players
-        let finalText;
-        let finalEndText;
-
-        if (phraseObj.isRule && (phraseObj.text.includes('{player}') || phraseObj.endText.includes('{player}'))) {
-            // Count how many {player} placeholders we need
-            const startMatches = (phraseObj.text.match(/{player}/g) || []).length;
-            const endMatches = (phraseObj.endText.match(/{player}/g) || []).length;
-            const totalMatches = Math.max(startMatches, endMatches);
-
-            // Generate the same players for both start and end
-            const selectedPlayers = [];
-            for (let i = 0; i < totalMatches; i++) {
-                const player = getWeightedRandomPlayer(selectedPlayers);
-                selectedPlayers.push(player);
-            }
-
-            // Replace placeholders in start text
-            finalText = phraseObj.text;
-            selectedPlayers.forEach(player => {
-                finalText = finalText.replace('{player}', player);
-            });
-
-            // Replace placeholders in end text (reuse same players)
-            finalEndText = phraseObj.endText;
-            selectedPlayers.forEach(player => {
-                finalEndText = finalEndText.replace('{player}', player);
-            });
-        } else {
-            // Normal phrase or rule without placeholders
-            finalText = replacePlaceholder(phraseObj.text);
-            if (phraseObj.isRule) {
-                finalEndText = phraseObj.endText; // No placeholders to replace
-            }
-        }
-
-        // Set the type label based on category
-        let typeLabel = '';
-        if (phraseObj.category === 'challenge') {
-            typeLabel = 'CHALLENGE!';
-        } else if (phraseObj.category === 'vote') {
-            typeLabel = 'VOTA!';
-        } else if (phraseObj.category === 'rule' && phraseObj.isRule) {
-            typeLabel = 'NUOVA REGOLA!';
-        }
-
-        // Update type label
-        if (typeLabel) {
-            phraseTypeLabel.textContent = typeLabel;
-            phraseTypeLabel.classList.add('visible');
-        } else {
-            phraseTypeLabel.textContent = '';
-            phraseTypeLabel.classList.remove('visible');
-        }
-
-        // If it's a rule, schedule its ending
+        // Replace placeholders in end text (reuse same players)
+        finalEndText = phraseObj.endText;
+        selectedPlayers.forEach(player => {
+            finalEndText = finalEndText.replace('{player}', player);
+        });
+    } else {
+        // Normal phrase or rule without placeholders
+        finalText = replacePlaceholder(phraseObj.text);
         if (phraseObj.isRule) {
-            const duration = Math.floor(Math.random() * 8) + 5; // Random 5-12 rounds
-            const endRound = gameState.currentRound + duration;
-            gameState.activeRules.push({
-                endRound: endRound,
-                startText: finalText,
-                endText: finalEndText
-            });
-            console.log(`Regola attivata, finirà al round ${endRound}`);
-            updateRulesBadge();
-        }
-
-        // Update phrase text with animation
-        phraseText.classList.remove('phrase-animate');
-        void phraseText.offsetWidth; // Trigger reflow
-
-        // Hide text while calculating size
-        phraseText.style.opacity = '0';
-        phraseText.textContent = finalText;
-
-        // Auto-scale text if needed
-        autoScaleText();
-
-        // Show text with animation after sizing is done
-        setTimeout(() => {
-            phraseText.style.opacity = '1';
-            phraseText.classList.add('phrase-animate');
-        }, 10);
-
-        // Reset AI UI
-        const aiContainer = document.getElementById('ai-challenge-container');
-        if (aiContainer) {
-            aiContainer.style.display = 'none';
-            const aiText = document.getElementById('ai-challenge-text');
-            if (aiText) aiText.style.display = 'block';
-        }
-
-        // Trigger AI Challenge for pre-selected vote cards
-        const shouldTriggerAI = aiSettings.enabled &&
-            aiSettings.apiKey &&
-            phraseObj.category === 'vote' &&
-            gameState.aiSelectedCards.includes(phraseObj.uniqueId);
-
-        // Debug logging
-        if (phraseObj.category === 'vote') {
-            console.log('Vote card:', phraseObj.uniqueId, 'Selected cards:', gameState.aiSelectedCards, 'Match:', gameState.aiSelectedCards.includes(phraseObj.uniqueId));
-        }
-
-        if (shouldTriggerAI && window.triggerAIChallenge) {
-            console.log('🎯 Triggering AI challenge for:', phraseObj.uniqueId);
-            window.triggerAIChallenge(finalText);
-        }
-
-        // Update background color based on category
-        phraseContainer.className = 'phrase-container ' + phraseObj.category;
-    }
-
-    // Auto-scale text to fit container
-    function autoScaleText() {
-        const container = phraseContainer;
-        const text = phraseText;
-
-        // Determine initial font size based on screen width
-        const isMobile = window.innerWidth <= 480;
-        const defaultFontSize = isMobile ? 1.1 : 1.5;
-        const minFontSize = isMobile ? 0.75 : 0.9;
-
-        // Reset to default size
-        text.style.fontSize = defaultFontSize + 'rem';
-
-        // Get available height (container height minus padding and label)
-        const containerHeight = container.clientHeight;
-        const typeLabel = phraseTypeLabel;
-        const labelHeight = typeLabel.classList.contains('visible') ? typeLabel.offsetHeight + 24 : 0; // 24px margin
-        const paddingVertical = isMobile ? 48 : 96; // Total vertical padding (24px or 48px each side)
-        const availableHeight = containerHeight - paddingVertical - labelHeight;
-
-        // Check if text overflows and scale down if needed
-        let fontSize = defaultFontSize;
-
-        while (text.scrollHeight > availableHeight && fontSize > minFontSize) {
-            fontSize -= 0.05;
-            text.style.fontSize = fontSize + 'rem';
+            finalEndText = phraseObj.endText; // No placeholders to replace
         }
     }
 
-    // Show rule ending
-    function showRuleEnd(endText) {
-        phraseText.classList.remove('phrase-animate');
-        void phraseText.offsetWidth;
+    // Set the type label based on category
+    let typeLabel = '';
+    if (phraseObj.category === 'challenge') {
+        typeLabel = 'CHALLENGE!';
+    } else if (phraseObj.category === 'vote') {
+        typeLabel = 'VOTA!';
+    } else if (phraseObj.category === 'rule' && phraseObj.isRule) {
+        typeLabel = 'NUOVA REGOLA!';
+    }
 
-        // Hide text while calculating size
-        phraseText.style.opacity = '0';
-        phraseText.textContent = endText;
-
-        // Auto-scale text if needed
-        autoScaleText();
-
-        // Show text with animation after sizing is done
-        setTimeout(() => {
-            phraseText.style.opacity = '1';
-            phraseText.classList.add('phrase-animate');
-        }, 10);
-
-        // Hide type label for rule endings
+    // Update type label
+    if (typeLabel) {
+        phraseTypeLabel.textContent = typeLabel;
+        phraseTypeLabel.classList.add('visible');
+    } else {
         phraseTypeLabel.textContent = '';
         phraseTypeLabel.classList.remove('visible');
-
-        // Use rule color but slightly different
-        phraseContainer.className = 'phrase-container rule';
     }
 
-    // Show screen
-    function showScreen(screenId) {
-        // Hide all screens
-        document.querySelectorAll('.screen').forEach(screen => {
-            screen.classList.remove('active');
+    // If it's a rule, schedule its ending
+    if (phraseObj.isRule) {
+        const duration = Math.floor(Math.random() * 8) + 5; // Random 5-12 rounds
+        const endRound = gameState.currentRound + duration;
+        gameState.activeRules.push({
+            endRound: endRound,
+            startText: finalText,
+            endText: finalEndText
         });
-
-        // Show the selected screen
-        document.getElementById(screenId).classList.add('active');
-
-        // Add/remove game-active class to body based on screen
-        if (screenId === 'game-screen') {
-            document.body.classList.add('game-active');
-        } else {
-            document.body.classList.remove('game-active');
-        }
-    }
-
-    // Reset game
-    function resetGame() {
-        // Save current players
-        const savedPlayers = [...gameState.players];
-
-        gameState.currentRound = 0;
-        gameState.usedPhrases = [];
-        gameState.activeRules = [];
-        gameState.ruleEndQueue = [];
-        gameState.playerSelectionCount = {};
-
-        // Update badge after reset
+        console.log(`Regola attivata, finirà al round ${endRound}`);
         updateRulesBadge();
-
-        showScreen('setup-screen');
-
-        // Restore player count
-        playerCountSelect.value = savedPlayers.length;
-        generatePlayerInputs();
-
-        // Restore player names
-        savedPlayers.forEach((name, index) => {
-            const input = document.getElementById(`player-${index + 1}`);
-            if (input) {
-                input.value = name;
-            }
-        });
     }
 
-    // Toggle custom percentages
-    function toggleCustomPercentages() {
-        const isChecked = customPercentagesToggle.checked;
-        percentagesControls.style.display = isChecked ? 'block' : 'none';
+    // Update phrase text with animation
+    phraseText.classList.remove('phrase-animate');
+    void phraseText.offsetWidth; // Trigger reflow
 
-        if (isChecked) {
-            updatePercentageTotal();
-        }
+    // Hide text while calculating size
+    phraseText.style.opacity = '0';
+    phraseText.textContent = finalText;
+
+    // Auto-scale text if needed
+    autoScaleText();
+
+    // Show text with animation after sizing is done
+    setTimeout(() => {
+        phraseText.style.opacity = '1';
+        phraseText.classList.add('phrase-animate');
+    }, 10);
+
+    // Reset AI UI
+    const aiContainer = document.getElementById('ai-challenge-container');
+    if (aiContainer) {
+        aiContainer.style.display = 'none';
+        const aiText = document.getElementById('ai-challenge-text');
+        if (aiText) aiText.style.display = 'block';
     }
 
-    // Update percentage total and validate
-    function updatePercentageTotal() {
-        const normal = parseInt(normalPercentageInput.value) || 0;
-        const challenge = parseInt(challengePercentageInput.value) || 0;
-        const vote = parseInt(votePercentageInput.value) || 0;
-        const rule = parseInt(rulePercentageInput.value) || 0;
+    // Trigger AI Challenge for pre-selected vote cards
+    const shouldTriggerAI = aiSettings.enabled &&
+        aiSettings.apiKey &&
+        phraseObj.category === 'vote' &&
+        gameState.aiSelectedCards.includes(phraseObj.uniqueId);
 
-        const total = normal + challenge + vote + rule;
-        percentageTotalSpan.textContent = total;
-
-        // Show warning if not 100%
-        if (total !== 100) {
-            percentageWarning.style.display = 'inline-block';
-            percentageTotalSpan.style.color = '#ff6b6b';
-            startGameBtn.disabled = true;
-            startGameBtn.style.opacity = '0.5';
-            startGameBtn.style.cursor = 'not-allowed';
-        } else {
-            percentageWarning.style.display = 'none';
-            percentageTotalSpan.style.color = '#2ecc71';
-            startGameBtn.disabled = false;
-            startGameBtn.style.opacity = '1';
-            startGameBtn.style.cursor = 'pointer';
-        }
+    // Debug logging
+    if (phraseObj.category === 'vote') {
+        console.log('Vote card:', phraseObj.uniqueId, 'Selected cards:', gameState.aiSelectedCards, 'Match:', gameState.aiSelectedCards.includes(phraseObj.uniqueId));
     }
 
-    // Save custom percentages
-    function saveCustomPercentages() {
-        if (customPercentagesToggle.checked) {
-            gameState.customPercentages = true;
-            gameState.categoryWeights = {
-                normal: parseInt(normalPercentageInput.value) || 0,
-                challenge: parseInt(challengePercentageInput.value) || 0,
-                vote: parseInt(votePercentageInput.value) || 0,
-                rule: parseInt(rulePercentageInput.value) || 0
-            };
-        } else {
-            gameState.customPercentages = false;
-            gameState.categoryWeights = {};
-        }
+    if (shouldTriggerAI && window.triggerAIChallenge) {
+        console.log('🎯 Triggering AI challenge for:', phraseObj.uniqueId);
+        window.triggerAIChallenge(finalText);
     }
 
-    // Event listeners
-    playerCountSelect.addEventListener('change', generatePlayerInputs);
-    startGameBtn.addEventListener('click', async () => {
-        saveCustomPercentages();
-        await loadPhrases(); // Reload phrases with custom weights
-        startGame();
+    // Update background color based on category
+    phraseContainer.className = 'phrase-container ' + phraseObj.category;
+}
+
+// Auto-scale text to fit container
+function autoScaleText() {
+    const container = phraseContainer;
+    const text = phraseText;
+
+    // Determine initial font size based on screen width
+    const isMobile = window.innerWidth <= 480;
+    const defaultFontSize = isMobile ? 1.1 : 1.5;
+    const minFontSize = isMobile ? 0.75 : 0.9;
+
+    // Reset to default size
+    text.style.fontSize = defaultFontSize + 'rem';
+
+    // Get available height (container height minus padding and label)
+    const containerHeight = container.clientHeight;
+    const typeLabel = phraseTypeLabel;
+    const labelHeight = typeLabel.classList.contains('visible') ? typeLabel.offsetHeight + 24 : 0; // 24px margin
+    const paddingVertical = isMobile ? 48 : 96; // Total vertical padding (24px or 48px each side)
+    const availableHeight = containerHeight - paddingVertical - labelHeight;
+
+    // Check if text overflows and scale down if needed
+    let fontSize = defaultFontSize;
+
+    while (text.scrollHeight > availableHeight && fontSize > minFontSize) {
+        fontSize -= 0.05;
+        text.style.fontSize = fontSize + 'rem';
+    }
+}
+
+// Show rule ending
+function showRuleEnd(endText) {
+    phraseText.classList.remove('phrase-animate');
+    void phraseText.offsetWidth;
+
+    // Hide text while calculating size
+    phraseText.style.opacity = '0';
+    phraseText.textContent = endText;
+
+    // Auto-scale text if needed
+    autoScaleText();
+
+    // Show text with animation after sizing is done
+    setTimeout(() => {
+        phraseText.style.opacity = '1';
+        phraseText.classList.add('phrase-animate');
+    }, 10);
+
+    // Hide type label for rule endings
+    phraseTypeLabel.textContent = '';
+    phraseTypeLabel.classList.remove('visible');
+
+    // Use rule color but slightly different
+    phraseContainer.className = 'phrase-container rule';
+}
+
+// Show screen
+function showScreen(screenId) {
+    // Hide all screens
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
     });
-    nextPhraseBtn.addEventListener('click', showNextPhrase);
-    playAgainBtn.addEventListener('click', resetGame);
-    customPercentagesToggle.addEventListener('change', toggleCustomPercentages);
-    normalPercentageInput.addEventListener('input', updatePercentageTotal);
-    challengePercentageInput.addEventListener('input', updatePercentageTotal);
-    votePercentageInput.addEventListener('input', updatePercentageTotal);
-    rulePercentageInput.addEventListener('input', updatePercentageTotal);
 
-    // Toggle AI Challenge settings visibility
-    function toggleAISettings() {
-        const isChecked = aiChallengeToggle.checked;
-        aiSettingsContainer.style.display = isChecked ? 'block' : 'none';
-        aiSettings.enabled = isChecked;
-        saveAISettings();
+    // Show the selected screen
+    document.getElementById(screenId).classList.add('active');
+
+    // Add/remove game-active class to body based on screen
+    if (screenId === 'game-screen') {
+        document.body.classList.add('game-active');
+    } else {
+        document.body.classList.remove('game-active');
     }
+}
 
-    // Save AI API Key
-    function saveAIAPIKey() {
-        aiSettings.apiKey = aiApiKeyInput.value.trim();
-        saveAISettings();
-    }
+// Reset game
+function resetGame() {
+    // Save current players
+    const savedPlayers = [...gameState.players];
 
-    // AI Challenge event listeners
-    aiChallengeToggle.addEventListener('change', toggleAISettings);
-    aiApiKeyInput.addEventListener('input', saveAIAPIKey);
+    gameState.currentRound = 0;
+    gameState.usedPhrases = [];
+    gameState.activeRules = [];
+    gameState.ruleEndQueue = [];
+    gameState.playerSelectionCount = {};
 
+    // Update badge after reset
+    updateRulesBadge();
 
-    // Rules Badge and Panel Management
-    const rulesBadge = document.getElementById('rules-badge');
-    const rulesPanel = document.getElementById('rules-panel');
-    const closeRulesPanelBtn = document.getElementById('close-rules-panel');
-    const rulesCountSpan = document.getElementById('rules-count');
-    const rulesList = document.getElementById('rules-list');
+    showScreen('setup-screen');
 
-    function updateRulesBadge() {
-        const activeCount = gameState.activeRules.length;
-        if (activeCount > 0) {
-            rulesBadge.style.display = 'flex';
-            rulesCountSpan.textContent = activeCount;
-        } else {
-            rulesBadge.style.display = 'none';
-            rulesPanel.classList.remove('active');
+    // Restore player count
+    playerCountSelect.value = savedPlayers.length;
+    generatePlayerInputs();
+
+    // Restore player names
+    savedPlayers.forEach((name, index) => {
+        const input = document.getElementById(`player-${index + 1}`);
+        if (input) {
+            input.value = name;
         }
+    });
+}
+
+// Toggle custom percentages
+function toggleCustomPercentages() {
+    const isChecked = customPercentagesToggle.checked;
+    percentagesControls.style.display = isChecked ? 'block' : 'none';
+
+    if (isChecked) {
+        updatePercentageTotal();
     }
+}
 
-    function updateRulesList() {
-        rulesList.innerHTML = '';
+// Update percentage total and validate
+function updatePercentageTotal() {
+    const normal = parseInt(normalPercentageInput.value) || 0;
+    const challenge = parseInt(challengePercentageInput.value) || 0;
+    const vote = parseInt(votePercentageInput.value) || 0;
+    const rule = parseInt(rulePercentageInput.value) || 0;
 
-        gameState.activeRules.forEach((rule) => {
-            const ruleItem = document.createElement('div');
-            ruleItem.className = 'rule-item';
+    const total = normal + challenge + vote + rule;
+    percentageTotalSpan.textContent = total;
 
-            const ruleText = document.createElement('div');
-            ruleText.className = 'rule-text';
-            ruleText.textContent = rule.startText || 'Regola attiva';
-
-            ruleItem.appendChild(ruleText);
-            rulesList.appendChild(ruleItem);
-        });
+    // Show warning if not 100%
+    if (total !== 100) {
+        percentageWarning.style.display = 'inline-block';
+        percentageTotalSpan.style.color = '#ff6b6b';
+        startGameBtn.disabled = true;
+        startGameBtn.style.opacity = '0.5';
+        startGameBtn.style.cursor = 'not-allowed';
+    } else {
+        percentageWarning.style.display = 'none';
+        percentageTotalSpan.style.color = '#2ecc71';
+        startGameBtn.disabled = false;
+        startGameBtn.style.opacity = '1';
+        startGameBtn.style.cursor = 'pointer';
     }
+}
 
-    function toggleRulesPanel() {
-        rulesPanel.classList.toggle('active');
-        if (rulesPanel.classList.contains('active')) {
-            updateRulesList();
-        }
+// Save custom percentages
+function saveCustomPercentages() {
+    if (customPercentagesToggle.checked) {
+        gameState.customPercentages = true;
+        gameState.categoryWeights = {
+            normal: parseInt(normalPercentageInput.value) || 0,
+            challenge: parseInt(challengePercentageInput.value) || 0,
+            vote: parseInt(votePercentageInput.value) || 0,
+            rule: parseInt(rulePercentageInput.value) || 0
+        };
+    } else {
+        gameState.customPercentages = false;
+        gameState.categoryWeights = {};
     }
+}
 
-    function closeRulesPanel() {
+// Event listeners
+playerCountSelect.addEventListener('change', generatePlayerInputs);
+startGameBtn.addEventListener('click', async () => {
+    saveCustomPercentages();
+    await loadPhrases(); // Reload phrases with custom weights
+    startGame();
+});
+nextPhraseBtn.addEventListener('click', showNextPhrase);
+playAgainBtn.addEventListener('click', resetGame);
+customPercentagesToggle.addEventListener('change', toggleCustomPercentages);
+normalPercentageInput.addEventListener('input', updatePercentageTotal);
+challengePercentageInput.addEventListener('input', updatePercentageTotal);
+votePercentageInput.addEventListener('input', updatePercentageTotal);
+rulePercentageInput.addEventListener('input', updatePercentageTotal);
+
+// Toggle AI Challenge settings visibility
+function toggleAISettings() {
+    const isChecked = aiChallengeToggle.checked;
+    aiSettingsContainer.style.display = isChecked ? 'block' : 'none';
+    aiSettings.enabled = isChecked;
+    saveAISettings();
+}
+
+// Save AI API Key
+function saveAIAPIKey() {
+    aiSettings.apiKey = aiApiKeyInput.value.trim();
+    saveAISettings();
+}
+
+// AI Challenge event listeners
+aiChallengeToggle.addEventListener('change', toggleAISettings);
+aiApiKeyInput.addEventListener('input', saveAIAPIKey);
+
+
+// Rules Badge and Panel Management
+const rulesBadge = document.getElementById('rules-badge');
+const rulesPanel = document.getElementById('rules-panel');
+const closeRulesPanelBtn = document.getElementById('close-rules-panel');
+const rulesCountSpan = document.getElementById('rules-count');
+const rulesList = document.getElementById('rules-list');
+
+function updateRulesBadge() {
+    const activeCount = gameState.activeRules.length;
+    if (activeCount > 0) {
+        rulesBadge.style.display = 'flex';
+        rulesCountSpan.textContent = activeCount;
+    } else {
+        rulesBadge.style.display = 'none';
         rulesPanel.classList.remove('active');
     }
+}
 
-    rulesBadge.addEventListener('click', toggleRulesPanel);
-    closeRulesPanelBtn.addEventListener('click', closeRulesPanel);
+function updateRulesList() {
+    rulesList.innerHTML = '';
 
-    // Close panel when clicking outside
-    document.addEventListener('click', (e) => {
-        if (rulesPanel.classList.contains('active') &&
-            !rulesPanel.contains(e.target) &&
-            !rulesBadge.contains(e.target)) {
-            closeRulesPanel();
-        }
+    gameState.activeRules.forEach((rule) => {
+        const ruleItem = document.createElement('div');
+        ruleItem.className = 'rule-item';
+
+        const ruleText = document.createElement('div');
+        ruleText.className = 'rule-text';
+        ruleText.textContent = rule.startText || 'Regola attiva';
+
+        ruleItem.appendChild(ruleText);
+        rulesList.appendChild(ruleItem);
     });
+}
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', async () => {
-        loadPhraseHistory(); // Load historical data from localStorage
-        loadAISettings(); // Load AI settings from localStorage
-        await loadPhrases();
-        generatePlayerInputs();
+function toggleRulesPanel() {
+    rulesPanel.classList.toggle('active');
+    if (rulesPanel.classList.contains('active')) {
+        updateRulesList();
+    }
+}
 
-        // Restore AI settings UI state
-        if (aiSettings.enabled) {
-            aiChallengeToggle.checked = true;
-            aiSettingsContainer.style.display = 'block';
+function closeRulesPanel() {
+    rulesPanel.classList.remove('active');
+}
+
+rulesBadge.addEventListener('click', toggleRulesPanel);
+closeRulesPanelBtn.addEventListener('click', closeRulesPanel);
+
+// Close panel when clicking outside
+document.addEventListener('click', (e) => {
+    if (rulesPanel.classList.contains('active') &&
+        !rulesPanel.contains(e.target) &&
+        !rulesBadge.contains(e.target)) {
+        closeRulesPanel();
+    }
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', async () => {
+    loadPhraseHistory(); // Load historical data from localStorage
+    loadAISettings(); // Load AI settings from localStorage
+    await loadPhrases();
+    generatePlayerInputs();
+
+    // Restore AI settings UI state
+    if (aiSettings.enabled) {
+        aiChallengeToggle.checked = true;
+        aiSettingsContainer.style.display = 'block';
+    }
+    if (aiSettings.apiKey) {
+        aiApiKeyInput.value = aiSettings.apiKey;
+    }
+
+
+    // Debug helper - expose to console
+    window.drewnkingDebug = {
+        getHistory: () => phraseHistory,
+        resetHistory: () => {
+            phraseHistory.seenPhrases = {};
+            phraseHistory.lastReset = Date.now();
+            savePhraseHistory();
+            console.log('Storico resettato!');
+        },
+        getStats: () => {
+            const totalUnique = new Set(gameState.allPhrases.map(p => p.uniqueId)).size;
+            const totalSeen = Object.keys(phraseHistory.seenPhrases).length;
+            const neverSeen = totalUnique - totalSeen;
+            const seenOnce = Object.values(phraseHistory.seenPhrases).filter(c => c === 1).length;
+            const seenMultiple = Object.values(phraseHistory.seenPhrases).filter(c => c > 1).length;
+
+            return {
+                totalUniquePhrases: totalUnique,
+                totalSeenPhrases: totalSeen,
+                neverSeen: neverSeen,
+                seenOnce: seenOnce,
+                seenMultipleTimes: seenMultiple,
+                lastReset: new Date(phraseHistory.lastReset).toLocaleString()
+            };
         }
-        if (aiSettings.apiKey) {
-            aiApiKeyInput.value = aiSettings.apiKey;
-        }
-
-
-        // Debug helper - expose to console
-        window.drewnkingDebug = {
-            getHistory: () => phraseHistory,
-            resetHistory: () => {
-                phraseHistory.seenPhrases = {};
-                phraseHistory.lastReset = Date.now();
-                savePhraseHistory();
-                console.log('Storico resettato!');
-            },
-            getStats: () => {
-                const totalUnique = new Set(gameState.allPhrases.map(p => p.uniqueId)).size;
-                const totalSeen = Object.keys(phraseHistory.seenPhrases).length;
-                const neverSeen = totalUnique - totalSeen;
-                const seenOnce = Object.values(phraseHistory.seenPhrases).filter(c => c === 1).length;
-                const seenMultiple = Object.values(phraseHistory.seenPhrases).filter(c => c > 1).length;
-
-                return {
-                    totalUniquePhrases: totalUnique,
-                    totalSeenPhrases: totalSeen,
-                    neverSeen: neverSeen,
-                    seenOnce: seenOnce,
-                    seenMultipleTimes: seenMultiple,
-                    lastReset: new Date(phraseHistory.lastReset).toLocaleString()
-                };
-            }
-        };
-
-        console.log('🎮 Drewnking Game caricato!');
-        console.log('📊 Usa window.drewnkingDebug.getStats() per vedere le statistiche');
-        console.log('🔄 Usa window.drewnkingDebug.resetHistory() per resettare lo storico');
-    });
-    // AI Challenge Logic
-    const AI_CHANCE = 0.15; // 15% chance
-
-    const aiUI = {
-        container: document.getElementById('ai-challenge-container'),
-        text: document.getElementById('ai-challenge-text'),
-        actions: document.getElementById('ai-actions'),
-        acceptBtn: document.getElementById('ai-accept-btn'),
-        refuseBtn: document.getElementById('ai-refuse-btn'),
-        inputArea: document.getElementById('ai-input-area'),
-        defenseInput: document.getElementById('ai-defense-input'),
-        submitBtn: document.getElementById('ai-submit-btn'),
-        verdictArea: document.getElementById('ai-verdict-area'),
-        verdictText: document.getElementById('ai-verdict-text'),
-        penaltyText: document.getElementById('ai-penalty-text')
     };
 
-    let currentAIChallenge = null;
+    console.log('🎮 Drewnking Game caricato!');
+    console.log('📊 Usa window.drewnkingDebug.getStats() per vedere le statistiche');
+    console.log('🔄 Usa window.drewnkingDebug.resetHistory() per resettare lo storico');
+});
+// AI Challenge Logic
+const AI_CHANCE = 0.15; // 15% chance
 
-    async function triggerAIChallenge(phraseText) {
-        aiUI.container.style.display = 'block';
-        aiUI.text.textContent = "L'IA sta analizzando l'accusa...";
-        aiUI.actions.style.display = 'none';
-        aiUI.inputArea.style.display = 'none';
-        aiUI.verdictArea.style.display = 'none';
+const aiUI = {
+    container: document.getElementById('ai-challenge-container'),
+    text: document.getElementById('ai-challenge-text'),
+    actions: document.getElementById('ai-actions'),
+    acceptBtn: document.getElementById('ai-accept-btn'),
+    refuseBtn: document.getElementById('ai-refuse-btn'),
+    inputArea: document.getElementById('ai-input-area'),
+    defenseInput: document.getElementById('ai-defense-input'),
+    submitBtn: document.getElementById('ai-submit-btn'),
+    verdictArea: document.getElementById('ai-verdict-area'),
+    verdictText: document.getElementById('ai-verdict-text'),
+    penaltyText: document.getElementById('ai-penalty-text')
+};
 
-        try {
-            const prompt = `
+let currentAIChallenge = null;
+
+async function triggerAIChallenge(phraseText) {
+    aiUI.container.style.display = 'block';
+    aiUI.text.textContent = "L'IA sta analizzando l'accusa...";
+    aiUI.actions.style.display = 'none';
+    aiUI.inputArea.style.display = 'none';
+    aiUI.verdictArea.style.display = 'none';
+
+    try {
+        const prompt = `
             Sei un Giudice Supremo in un gioco alcolico.
             È stata pescata questa carta "Votazione": "${phraseText}".
             
@@ -1011,34 +960,34 @@ function replacePlaceholder(text) {
             Rispondi SOLO con il testo della sfida. Sii ironico e tagliente.
         `;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-            });
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
 
-            const data = await response.json();
-            const challengeText = data.candidates[0].content.parts[0].text;
+        const data = await response.json();
+        const challengeText = data.candidates[0].content.parts[0].text;
 
-            aiUI.text.textContent = challengeText;
-            aiUI.actions.style.display = 'flex';
-            currentAIChallenge = challengeText;
+        aiUI.text.textContent = challengeText;
+        aiUI.actions.style.display = 'flex';
+        currentAIChallenge = challengeText;
 
-        } catch (error) {
-            console.error("AI Error:", error);
-            aiUI.container.style.display = 'none'; // Hide if error
-        }
+    } catch (error) {
+        console.error("AI Error:", error);
+        aiUI.container.style.display = 'none'; // Hide if error
     }
+}
 
-    async function submitDefense() {
-        const defense = aiUI.defenseInput.value.trim();
-        if (!defense) return;
+async function submitDefense() {
+    const defense = aiUI.defenseInput.value.trim();
+    if (!defense) return;
 
-        aiUI.inputArea.style.display = 'none';
-        aiUI.text.textContent = "Giudizio in corso...";
+    aiUI.inputArea.style.display = 'none';
+    aiUI.text.textContent = "Giudizio in corso...";
 
-        try {
-            const prompt = `
+    try {
+        const prompt = `
                 Sei un Giudice Supremo in un gioco alcolico.
                 Sfida: "${currentAIChallenge}"
                 Difesa dell'imputato: "${defense}"
@@ -1055,60 +1004,58 @@ function replacePlaceholder(text) {
                 }
             `;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-            });
-
-            const data = await response.json();
-            const text = data.candidates[0].content.parts[0].text;
-            const jsonMatch = text.match(/\{[\s\S]*\}/);
-            const result = JSON.parse(jsonMatch ? jsonMatch[0] : text);
-
-            aiUI.text.style.display = 'none';
-            aiUI.verdictArea.style.display = 'block';
-            aiUI.verdictText.textContent = result.verdict;
-            aiUI.penaltyText.textContent = result.penalty;
-            aiUI.penaltyText.style.color = result.success ? '#4caf50' : '#f44336';
-
-        } catch (error) {
-            console.error("AI Judgment Error:", error);
-            aiUI.text.textContent = "Errore nel giudizio. Bevi per sicurezza.";
-        }
-    }
-
-    // Event Listeners for AI
-    if (aiUI.acceptBtn) {
-        aiUI.acceptBtn.addEventListener('click', () => {
-            aiUI.actions.style.display = 'none';
-            aiUI.inputArea.style.display = 'block';
-            aiUI.defenseInput.value = '';
-            aiUI.defenseInput.focus();
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
         });
+
+        const data = await response.json();
+        const text = data.candidates[0].content.parts[0].text;
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        const result = JSON.parse(jsonMatch ? jsonMatch[0] : text);
+
+        aiUI.text.style.display = 'none';
+        aiUI.verdictArea.style.display = 'block';
+        aiUI.verdictText.textContent = result.verdict;
+        aiUI.penaltyText.textContent = result.penalty;
+        aiUI.penaltyText.style.color = result.success ? '#4caf50' : '#f44336';
+
+    } catch (error) {
+        console.error("AI Judgment Error:", error);
+        aiUI.text.textContent = "Errore nel giudizio. Bevi per sicurezza.";
     }
+}
+
+// Event Listeners for AI
+if (aiUI.acceptBtn) {
+    aiUI.acceptBtn.addEventListener('click', () => {
+        aiUI.actions.style.display = 'none';
+        aiUI.inputArea.style.display = 'block';
+        aiUI.defenseInput.value = '';
+        aiUI.defenseInput.focus();
+    });
+}
 
 
-    if (aiUI.refuseBtn) {
-        aiUI.refuseBtn.addEventListener('click', () => {
-            aiUI.container.style.display = 'none';
-        });
-    }
+if (aiUI.refuseBtn) {
+    aiUI.refuseBtn.addEventListener('click', () => {
+        aiUI.container.style.display = 'none';
+    });
+}
 
-    if (aiUI.submitBtn) {
-        aiUI.submitBtn.addEventListener('click', submitDefense);
-    }
+if (aiUI.submitBtn) {
+    aiUI.submitBtn.addEventListener('click', submitDefense);
+}
 
-    // Override showNextPhrase to include AI trigger check
-    // We can't easily override showNextPhrase because it calls showNextPhrase recursively or via events.
-    // Instead, we should modify the showNextPhrase function definition itself in the file.
-    // But since I am appending here, I can't modify the function above easily without replacing the whole file.
-    // Wait, the user said "showPhrase is not defined". That's because I tried to access it outside.
-    // The best way is to modify the `showNextPhrase` function in the main body to call `triggerAIChallenge`.
-    // I will do that in a separate step. Here I just define the functions and attach listeners.
-    // I will attach `triggerAIChallenge` to the window or a global object so `showNextPhrase` can call it.
-    window.triggerAIChallenge = triggerAIChallenge;
-    window.triggerAIChallenge = triggerAIChallenge;
-};
+// Override showNextPhrase to include AI trigger check
+// We can't easily override showNextPhrase because it calls showNextPhrase recursively or via events.
+// Instead, we should modify the showNextPhrase function definition itself in the file.
+// But since I am appending here, I can't modify the function above easily without replacing the whole file.
+// Wait, the user said "showPhrase is not defined". That's because I tried to access it outside.
+// The best way is to modify the `showNextPhrase` function in the main body to call `triggerAIChallenge`.
+// I will do that in a separate step. Here I just define the functions and attach listeners.
+// I will attach `triggerAIChallenge` to the window or a global object so `showNextPhrase` can call it.
+window.triggerAIChallenge = triggerAIChallenge;
 
 
