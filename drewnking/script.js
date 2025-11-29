@@ -286,6 +286,12 @@ async function startGame() {
     // Show game screen
     showScreen('game-screen');
 
+    // Hide rules panel to prevent flash
+    const rulesPanel = document.getElementById('rules-panel');
+    if (rulesPanel) {
+        rulesPanel.classList.remove('active');
+    }
+
     // Generate the deck for this game
     generateGameDeck();
 
