@@ -985,6 +985,8 @@ async function triggerAIChallenge(phraseText) {
             NIENTE POESIE, NIENTE TEMI, NIENTE COSE LUNGHE.
             Devono scrivere una frase veloce, una scusa patetica, un insulto di rimando o una bugia.
             
+            IMPORTANTE: Sii TELEGRAFICO. Massimo 2 frasi per l'insulto e 1 frase per la sfida. Non scrivere papiri, la gente è ubriaca e non legge.
+            
             Esempio 1:
             Carta: "Chi è il più tirchio beve"
             Risposta: "Brutto ebreo di merda, hai le braccine corte eh? Scrivi qui sotto l'ultima volta che hai offerto qualcosa, se non è convincente ti spacchi il fegato."
@@ -993,7 +995,7 @@ async function triggerAIChallenge(phraseText) {
             Carta: "Chi ha la faccia più da culo"
             Risposta: "Guardati allo specchio, sembri un aborto mancato. Scrivi un insulto migliore di questo rivolto a chi ti ha votato. Se non fa ridere, bevi tutto."
             
-            Rispondi SOLO con il testo (insulto + sfida). Sii BREVE, DIRETTO e TOSSICO.
+            Rispondi SOLO con il testo (insulto + sfida). Sii BREVE (max 80-100 parole totali), DIRETTO e TOSSICO.
         `;
 
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
@@ -1027,6 +1029,7 @@ async function submitDefense() {
                 Sei un Giudice Ubriaco e Corruttibile.
                 Sfida: "${currentAIChallenge}"
                 Difesa dell'imputato: "${defense}"
+                Carta Originale: "${phraseText}" (Questa carta indica la penalità base, es. "bevi 2 sorsi").
                 
                 Valuta la difesa.
                 
@@ -1041,15 +1044,15 @@ async function submitDefense() {
                 - 50% ti piace e lo PROMUOVI.
                 - 50% ti irrita e lo BOCCI malamente.
                 
-                Se la difesa è noiosa, banale o moralista: BOCCIALA e insultalo.
-                Se invece ti piace per uno dei motivi sopra: PROMUOVILO.
-                
-                Rispondi in JSON:
+                PENALITÀ (Basata sulla Carta Originale):
+                - Se PROMOSSO: "0 sorsi" (o "1 sorso" se vuoi essere stronzo ma buono).
+                - Se BOCCIATO: "Raddoppia la penalità" oppure "Aggiungi 2 sorsi alla penalità base".
+                NON inventare penalità a caso (tipo "bevi un bicchiere intero"), basati su quella della carta.
                 
                 Rispondi in JSON:
                 {
-                    "verdict": "Un commento breve e cattivo sulla difesa",
-                    "penalty": "Bevi 2 sorsi" (o altro in base al voto),
+                    "verdict": "Un commento BREVISSIMO (max 1 frase) e cattivo sulla difesa",
+                    "penalty": "La penalità calcolata (es. '0 sorsi', 'Raddoppia', 'Bevi 3 sorsi')",
                     "success": true/false
                 }
             `;
