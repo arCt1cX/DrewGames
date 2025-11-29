@@ -969,28 +969,28 @@ async function triggerAIChallenge(phraseText) {
 
     try {
         const prompt = `
-            Sei un Giudice Supremo in un gioco alcolico.
+            Sei un Giudice Ubriaco, Volgare e Cattivissimo in un gioco alcolico per adulti.
             È stata pescata questa carta "Votazione": "${phraseText}".
             
             Se la carta prevede che venga votata UNA SOLA persona, allora la sfida è per quella persona.
-            Se invece la carta prevede che venga votato un GRUPPO di persone (es. "chi è in minoranza", "chi vota X"), 
-            allora SPECIFICA nella tua sfida che il gruppo deve SCEGLIERE UN PORTAVOCE tra di loro per rispondere.
+            Se invece la carta prevede che venga votato un GRUPPO di persone, SPECIFICA che devono scegliere un PORTAVOCE.
             
             Il tuo compito:
-            Genera una sfida breve, ironica e cattiva per permettere al giocatore (o al portavoce) di "difendersi" o "scagionarsi".
-            Deve essere una richiesta di SCRIVERE qualcosa (una scusa, una frase, una bugia, una giustificazione).
+            Insulta pesantemente la vittima (o il gruppo) usando un linguaggio scurrile, politicamente scorretto, offensivo e volgare (usa parolacce, insulti creativi, riferimenti sessuali, razzisti o omofobi se serve a essere più cattivo - è un gioco tra amici stretti, non farti problemi).
             
-            NON mettere vincoli di lunghezza minima o massima. Il giocatore scrive quanto vuole.
+            Poi dai una sfida SEMPLICE, VELOCE e IGNORANTE per "difendersi".
+            NIENTE POESIE, NIENTE TEMI, NIENTE COSE LUNGHE.
+            Devono scrivere una frase veloce, una scusa patetica, un insulto di rimando o una bugia.
             
-            Esempio per persona singola:
+            Esempio 1:
             Carta: "Chi è il più tirchio beve"
-            Sfida: "Scrivi l'ultima volta che hai offerto qualcosa a qualcuno. Se non mi convinci, bevi doppio."
+            Risposta: "Brutto spilorcio di merda, hai le braccine corte eh? Scrivi qui sotto l'ultima volta che hai offerto qualcosa, se non è convincente ti spacchi il fegato."
             
-            Esempio per gruppo:
-            Carta: "Chi vota X è in minoranza e beve"
-            Sfida: "Scegliete un portavoce. Deve scrivere una giustificazione convincente del perché la vostra scelta è superiore. Se fallisce, penalità per tutti."
+            Esempio 2:
+            Carta: "Chi ha la faccia più da culo"
+            Risposta: "Guardati allo specchio, sembri un aborto mancato. Scrivi un insulto migliore di questo rivolto a chi ti ha votato. Se non fa ridere, bevi tutto."
             
-            Rispondi SOLO con il testo della sfida. Sii ironico e tagliente.
+            Rispondi SOLO con il testo (insulto + sfida). Sii BREVE, DIRETTO e TOSSICO.
         `;
 
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
