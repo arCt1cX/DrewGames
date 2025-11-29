@@ -987,6 +987,8 @@ async function triggerAIChallenge(phraseText) {
             
             IMPORTANTE: Sii TELEGRAFICO. Massimo 2 frasi per l'insulto e 1 frase per la sfida. Non scrivere papiri, la gente è ubriaca e non legge.
             
+            IMPORTANTE: Usa SEMPRE il maschile generico ("il giocatore", "lui", "frocio", "coglione"). NON usare mai "o/a", "lo/la" o asterischi. Il soggetto è "il giocatore".
+            
             Esempio 1:
             Carta: "Chi è il più tirchio beve"
             Risposta: "Brutto ebreo di merda, hai le braccine corte eh? Scrivi qui sotto l'ultima volta che hai offerto qualcosa, se non è convincente ti spacchi il fegato."
@@ -1057,11 +1059,31 @@ async function submitDefense() {
                 }
             `;
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
+        // Retry logic for 500 errors
+        let response;
+        let retries = 2;
+
+        while (retries >= 0) {
+            try {
+                response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${aiSettings.apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+
+                if (response.ok) break;
+
+                // If 500 error, throw to catch block but check retries
+                if (response.status >= 500) {
+                    throw new Error(`Server Error ${response.status}`);
+                }
+            } catch (e) {
+                if (retries === 0) throw e;
+                console.warn(`AI Error, retrying... (${retries} left)`);
+                retries--;
+                await new Promise(r => setTimeout(r, 1000)); // Wait 1s
+            }
+        }
 
         const data = await response.json();
         const text = data.candidates[0].content.parts[0].text;
@@ -1076,7 +1098,16 @@ async function submitDefense() {
 
     } catch (error) {
         console.error("AI Judgment Error:", error);
-        aiUI.text.textContent = "Errore nel giudizio. Bevi per sicurezza.";
+        aiUI.text.textContent = "L'IA è troppo ubriaca per giudicare. Bevi 1 sorso per simpatia.";
+
+        // Show verdict area anyway after error
+        setTimeout(() => {
+            aiUI.text.style.display = 'none';
+            aiUI.verdictArea.style.display = 'block';
+            aiUI.verdictText.textContent = "Errore di connessione (IA in coma etilico)";
+            aiUI.penaltyText.textContent = "Bevi 1 sorso";
+            aiUI.penaltyText.style.color = '#f44336';
+        }, 2000);
     }
 }
 
