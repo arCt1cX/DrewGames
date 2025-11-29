@@ -1109,6 +1109,6 @@ function replacePlaceholder(text) {
     // I will attach `triggerAIChallenge` to the window or a global object so `showNextPhrase` can call it.
     window.triggerAIChallenge = triggerAIChallenge;
     window.triggerAIChallenge = triggerAIChallenge;
-});
+};
 
 
