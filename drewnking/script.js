@@ -11,7 +11,8 @@ let gameState = {
     ruleEndQueue: [], // Queue of rule endings to show
     customPercentages: false, // Track if custom percentages are enabled
     categoryWeights: {}, // Store custom weights
-    aiSelectedCards: [] // Store card IDs selected by AI for challenges
+    aiSelectedCards: [], // Store card IDs selected by AI for challenges
+    gameDeck: [] // Pre-generated deck of cards for the current game
 };
 
 // Historical phrase tracking (persistent across sessions)
@@ -195,32 +196,34 @@ function generatePlayerInputs() {
     }
 }
 
-// AI Card Selection - Select 2 most insulting vote cards
+// AI Card Selection - Select 2 most insulting vote cards from the GAME DECK
 async function selectAIChallengeCards() {
-    // Get all vote cards
-    const voteCards = gameState.categorizedPhrases['vote'] || [];
+    // Get vote cards present in the CURRENT GAME DECK
+    const voteCards = gameState.gameDeck.filter(card => card.category === 'vote');
 
     if (voteCards.length < 2) {
-        console.warn('Not enough vote cards for AI selection');
+        console.warn('Not enough vote cards in this game deck for AI selection');
         return;
     }
 
-    // Create numbered list of all vote cards
+    // Create numbered list of vote cards
     const cardsList = voteCards.map((card, index) => {
         return `${index + 1}. ${card.text}`;
     }).join('\n');
 
     const prompt = `
         Sei un giudice in un gioco alcolico chiamato "Drewnking".
-        Ecco tutte le carte "Votazione" del gioco:
+        Ecco le carte "Votazione" che usciranno in questa partita:
 
         ${cardsList}
 
-        Il tuo compito: scegli i 2 NUMERI delle carte più SCORRETTE, INSULTANTI, OFFENSIVE o CATTIVE.
-        Quelle che ti sembrano più imbarazzanti o pesanti per i giocatori.
+        Il tuo compito: scegli i 2 NUMERI delle carte più SCORRETTE, INSULTANTI o CATTIVE.
         
-        Rispondi SOLO con 2 numeri separati da virgola, senza spazi (esempio: "5,12" oppure "1,23").
-        NON aggiungere altro testo, solo i due numeri.
+        IMPORTANTE: Dai priorità assoluta alle carte che richiedono di votare UNA SOLA PERSONA (es. "Chi è il più...", "Chi ha...").
+        Evita se possibile le carte che coinvolgono gruppi o minoranze, a meno che non siano molto divertenti.
+        
+        Rispondi SOLO con 2 numeri separati da virgola, senza spazi (esempio: "1,3").
+        NON aggiungere altro testo.
     `;
 
     try {
@@ -239,7 +242,7 @@ async function selectAIChallengeCards() {
         const data = await response.json();
         const responseText = data.candidates[0].content.parts[0].text.trim();
 
-        // Parse response (expected format: "5,12")
+        // Parse response
         const numbers = responseText.split(',').map(n => parseInt(n.trim()));
 
         if (numbers.length === 2 && numbers.every(n => n > 0 && n <= voteCards.length)) {
@@ -247,7 +250,7 @@ async function selectAIChallengeCards() {
             const selectedCards = numbers.map(n => voteCards[n - 1].uniqueId);
             gameState.aiSelectedCards = selectedCards;
 
-            console.log('🤖 IA ha selezionato le carte:', numbers, selectedCards);
+            console.log('🤖 IA ha selezionato le carte dal deck:', numbers, selectedCards);
         } else {
             console.error('IA response invalid:', responseText);
         }
@@ -282,6 +285,9 @@ async function startGame() {
 
     // Show game screen
     showScreen('game-screen');
+
+    // Generate the deck for this game
+    generateGameDeck();
 
     // If AI is enabled, select challenge cards before starting
     if (aiSettings.enabled && aiSettings.apiKey) {
@@ -330,60 +336,76 @@ function selectCategory() {
     return Object.keys(weights)[0];
 }
 
-// Get random phrase
-function getRandomPhrase() {
-    // 1. Select Category
-    let category = selectCategory();
+// Generate the game deck at the start
+function generateGameDeck() {
+    gameState.gameDeck = [];
+    const deckUsedPhrases = []; // Track phrases used in this deck to avoid duplicates
 
-    // Special handling for end of game rules
-    const roundsRemaining = gameState.totalRounds - gameState.currentRound;
-    const minRuleDuration = 2;
+    console.log(`🎴 Generazione deck per ${gameState.totalRounds} round...`);
 
-    // If we picked 'rule' but not enough rounds left, force pick another category
-    if (category === 'rule' && roundsRemaining <= minRuleDuration) {
-        // Create weights excluding 'rule'
-        const otherCategories = Object.keys(gameState.categorizedPhrases).filter(c => c !== 'rule');
-        if (otherCategories.length > 0) {
-            category = otherCategories[Math.floor(Math.random() * otherCategories.length)];
-            console.log(`Ultimi turni: cambio da rule a ${category}`);
+    for (let i = 0; i < gameState.totalRounds; i++) {
+        // 1. Select Category
+        let category = selectCategory();
+
+        // Special handling for end of game rules
+        const roundsRemaining = gameState.totalRounds - i;
+        const minRuleDuration = 2;
+
+        // If we picked 'rule' but not enough rounds left, force pick another category
+        if (category === 'rule' && roundsRemaining <= minRuleDuration) {
+            const otherCategories = Object.keys(gameState.categorizedPhrases).filter(c => c !== 'rule');
+            if (otherCategories.length > 0) {
+                category = otherCategories[Math.floor(Math.random() * otherCategories.length)];
+            }
+        }
+
+        // 2. Pick a phrase for this category
+        const phrase = pickPhraseForDeck(category, deckUsedPhrases);
+
+        if (phrase) {
+            gameState.gameDeck.push(phrase);
+            deckUsedPhrases.push(phrase.uniqueId);
+        } else {
+            console.error(`Impossibile trovare una frase per la categoria ${category}`);
         }
     }
 
+    console.log('✅ Deck generato:', gameState.gameDeck);
+}
+
+// Pick a phrase for the deck (without updating global history yet)
+function pickPhraseForDeck(category, deckUsedPhrases) {
     const categoryPhrases = gameState.categorizedPhrases[category];
 
-    // 2. Filter for UNSEEN phrases in this category
-    // We filter out phrases that are EITHER in global history OR used in current session
+    // Filter out phrases that are EITHER in global history OR used in current deck
     let availablePhrases = categoryPhrases.filter(phrase =>
-        !isPhraseSeen(phrase.uniqueId) && !gameState.usedPhrases.includes(phrase.uniqueId)
+        !isPhraseSeen(phrase.uniqueId) && !deckUsedPhrases.includes(phrase.uniqueId)
     );
 
-    // 3. If no unseen phrases, reset history for this category
+    // If no unseen phrases, reset history for this category
     if (availablePhrases.length === 0) {
         console.log(`Tutte le frasi di ${category} viste! Reset categoria.`);
         resetCategoryHistory(category);
 
-        // After reset, available phrases are all phrases in category EXCEPT those used in current session
-        // (We still want to avoid repeats in the SAME session if possible)
+        // After reset, available phrases are all phrases in category EXCEPT those used in current deck
         availablePhrases = categoryPhrases.filter(phrase =>
-            !gameState.usedPhrases.includes(phrase.uniqueId)
+            !deckUsedPhrases.includes(phrase.uniqueId)
         );
 
-        // If STILL empty (meaning we used ALL phrases of this category in THIS session alone),
-        // then we just have to allow repeats from current session.
+        // If STILL empty (meaning we used ALL phrases of this category in THIS deck alone),
+        // then we just have to allow repeats from current deck.
         if (availablePhrases.length === 0) {
-            console.log(`Tutte le frasi di ${category} usate in questa sessione! Riuso.`);
+            console.log(`Tutte le frasi di ${category} usate in questo deck! Riuso.`);
             availablePhrases = categoryPhrases;
         }
     }
 
-    // 4. Pick random phrase
-    const selectedPhrase = availablePhrases[Math.floor(Math.random() * availablePhrases.length)];
+    // Pick random phrase
+    if (availablePhrases.length > 0) {
+        return availablePhrases[Math.floor(Math.random() * availablePhrases.length)];
+    }
 
-    // 5. Update state
-    gameState.usedPhrases.push(selectedPhrase.uniqueId);
-    markPhraseAsSeen(selectedPhrase.uniqueId);
-
-    return selectedPhrase;
+    return null;
 }
 
 // Get a weighted random player (favors less-selected players)
@@ -499,8 +521,19 @@ function showNextPhrase() {
         return;
     }
 
-    // Get random phrase
-    const phraseObj = getRandomPhrase();
+    // Get next phrase from deck
+    let phraseObj;
+    if (gameState.gameDeck && gameState.gameDeck.length > 0) {
+        phraseObj = gameState.gameDeck.shift();
+
+        // Update history since we are now showing this phrase
+        gameState.usedPhrases.push(phraseObj.uniqueId);
+        markPhraseAsSeen(phraseObj.uniqueId);
+    } else {
+        // Fallback if deck is empty (should not happen)
+        console.warn('Deck vuoto! Generazione frase casuale fallback.');
+        phraseObj = getRandomPhrase();
+    }
 
     // For rules, we need to replace placeholders in both start and end with the SAME players
     let finalText;
