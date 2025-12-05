@@ -560,7 +560,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 <circle cx="72" cy="58" r="2" fill="rgba(255,193,7,0.6)" />
             </svg>`
         },
-
+        {
+            id: "hottakes",
+            displayName: getTranslation('hottakes', 'title'),
+            catchphrase: getTranslation('hottakes', 'catchphrase'),
+            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                <!-- Shadow -->
+                <ellipse cx="40" cy="74" rx="30" ry="3" fill="rgba(0,0,0,0.3)" />
+                
+                <!-- Flame icon -->
+                <path d="M40,10 C40,10 25,35 25,50 C25,60 32,68 40,68 C48,68 55,60 55,50 C55,35 40,10 40,10 Z" fill="rgba(255, 69, 0, 0.2)" stroke="#ff4500" stroke-width="2" />
+                <path d="M40,20 C40,20 30,40 30,50 C30,56 34,60 40,60 C46,60 50,56 50,50 C50,40 40,20 40,20 Z" fill="rgba(255, 140, 0, 0.4)" stroke="#ff8c00" stroke-width="1.5" />
+                
+                <!-- Chat bubble / Opinion -->
+                <path d="M55,25 L70,25 L70,45 L55,45 L50,50 L55,40 Z" fill="rgba(255,255,255,0.1)" stroke="white" stroke-width="1.5" />
+                <text x="62" y="38" font-size="12" fill="white" text-anchor="middle" font-weight="bold">!</text>
+            </svg>`
+        },
     ];
 
     // Select the container element

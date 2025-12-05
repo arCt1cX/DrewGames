@@ -260,7 +260,27 @@ const translations = {
                 'Solo per maggiorenni - bevete responsabilmente!'
             ]
         },
-
+        'hottakes': {
+            'title': 'Hot Takes',
+            'catchphrase': 'Opinioni controverse e dibattiti infuocati!',
+            'description': 'Hot Takes è il gioco dove le opinioni contano! Scrivi la tua opinione più controversa su un argomento e lascia che gli altri indovinino di chi è. Preparati a difendere le tue idee!',
+            'players': '3-10 giocatori',
+            'time': '15-20 minuti',
+            'difficulty': 'Principiante',
+            'features': [
+                'Centinaia di argomenti diversi',
+                'Modalità anonima per il massimo divertimento',
+                'Perfetto per rompere il ghiaccio',
+                'Scatena dibattiti esilaranti'
+            ],
+            'instructions': [
+                'Viene mostrato un argomento (es. "Pizza con ananas")',
+                'A turno, ogni giocatore scrive la sua opinione (Hot Take)',
+                'Il gioco ne estrae una a caso',
+                'Gli altri devono indovinare chi l\'ha scritta',
+                'Si discute e si ride!'
+            ]
+        },
         'tournamentTitle': 'Modalità Torneo',
         'numberOfGames': 'Numero di Partite',
         'players': 'Giocatori',
@@ -539,6 +559,28 @@ const translations = {
                 'Phrases can be challenges, votes, rules or simple questions',
                 'Follow the phrase instructions and have fun!',
                 'Adults only - drink responsibly!'
+            ]
+        },
+
+        'hottakes': {
+            'title': 'Hot Takes',
+            'catchphrase': 'Controversial opinions and fiery debates!',
+            'description': 'Hot Takes is the game where opinions matter! Write your most controversial opinion on a topic and let others guess who wrote it. Get ready to defend your ideas!',
+            'players': '3-10 players',
+            'time': '15-20 minutes',
+            'difficulty': 'Beginner',
+            'features': [
+                'Hundreds of different topics',
+                'Anonymous mode for maximum fun',
+                'Perfect icebreaker',
+                'Sparks hilarious debates'
+            ],
+            'instructions': [
+                'A topic is shown (e.g. "Pineapple on pizza")',
+                'Taking turns, each player writes their opinion (Hot Take)',
+                'The game randomly picks one',
+                'Others must guess who wrote it',
+                'Discuss and laugh!'
             ]
         },
 
