@@ -6,8 +6,8 @@
     --background-color: #1a1a1a;
     --card-bg: #2d2d2d;
     --text-color: #ffffff;
-    --accent-color: #ffd700;
-    /* Gold */
+    --accent-color: #9370db;
+    /* MediumPurple */
 }
 
 * {
@@ -65,7 +65,7 @@ body {
 h1 {
     font-size: 2.5rem;
     color: var(--primary-color);
-    text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
     margin-bottom: 10px;
 }
 
@@ -146,7 +146,7 @@ input:focus,
 textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+    box-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
 }
 
 .player-input {
@@ -172,11 +172,11 @@ textarea:focus {
 .primary-btn {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
 }
 
 .primary-btn:hover {
-    box-shadow: 0 6px 20px rgba(255, 69, 0, 0.6);
+    box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
     transform: translateY(-2px);
 }
 
