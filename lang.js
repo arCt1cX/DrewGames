@@ -260,27 +260,7 @@ const translations = {
                 'Solo per maggiorenni - bevete responsabilmente!'
             ]
         },
-        'quandodovecomeperche': {
-            'title': 'Quando Dove Come Perché',
-            'catchphrase': 'Indovina l\'evento dai 4 indizi!',
-            'description': 'Un gioco di deduzione ispirato a "Reazione a Catena". Vengono svelati 4 indizi (Quando, Dove, Come, Perché) e devi indovinare l\'evento, il personaggio o l\'oggetto misterioso prima che finiscano!',
-            'players': '1+ giocatori',
-            'time': '5-10 minuti',
-            'difficulty': 'Intermedio',
-            'features': [
-                '4 indizi progressivi per ogni round',
-                'Sfida la tua cultura generale',
-                'Gioca da solo o sfida gli amici',
-                'Perfetto per allenare la mente'
-            ],
-            'instructions': [
-                'Verranno mostrati 4 indizi coperti',
-                'Svela gli indizi uno alla volta: Quando, Dove, Come, Perché',
-                'Cerca di indovinare la risposta con il minor numero di indizi possibile',
-                'Premi "Mostra Soluzione" per verificare la tua risposta',
-                'Segna se hai indovinato o sbagliato per tenere il punteggio'
-            ]
-        },
+
         'tournamentTitle': 'Modalità Torneo',
         'numberOfGames': 'Numero di Partite',
         'players': 'Giocatori',
@@ -561,27 +541,7 @@ const translations = {
                 'Adults only - drink responsibly!'
             ]
         },
-        'quandodovecomeperche': {
-            'title': 'When Where How Why',
-            'catchphrase': 'Guess the event from 4 clues!',
-            'description': 'A deduction game inspired by "Chain Reaction". 4 clues are revealed (When, Where, How, Why) and you have to guess the mystery event, person, or object before they run out!',
-            'players': '1+ players',
-            'time': '5-10 minutes',
-            'difficulty': 'Intermediate',
-            'features': [
-                '4 progressive clues per round',
-                'Challenge your general knowledge',
-                'Play solo or challenge friends',
-                'Perfect for brain training'
-            ],
-            'instructions': [
-                '4 covered clues will be shown',
-                'Reveal clues one by one: When, Where, How, Why',
-                'Try to guess the answer with as few clues as possible',
-                'Press "Show Solution" to check your answer',
-                'Mark if you guessed correctly or wrong to keep score'
-            ]
-        },
+
         'tournamentTitle': 'Tournament Mode',
         'numberOfGames': 'Number of Games',
         'players': 'Players',

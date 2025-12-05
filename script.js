@@ -560,38 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <circle cx="72" cy="58" r="2" fill="rgba(255,193,7,0.6)" />
             </svg>`
         },
-        {
-            id: "quandodovecomeperche",
-            displayName: getTranslation('quandodovecomeperche', 'title'),
-            catchphrase: getTranslation('quandodovecomeperche', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
-                <!-- Shadow -->
-                <ellipse cx="40" cy="74" rx="30" ry="3" fill="rgba(0,0,0,0.3)" />
-                
-                <!-- Four cards layout -->
-                <g transform="translate(0, -5)">
-                    <!-- Top Left Card (Quando) -->
-                    <rect x="20" y="15" width="18" height="24" rx="2" fill="rgba(255, 107, 107, 0.2)" stroke="#ff6b6b" stroke-width="1.5" />
-                    <text x="29" y="30" font-size="10" fill="#ff6b6b" text-anchor="middle" font-weight="bold">Q</text>
-                    
-                    <!-- Top Right Card (Dove) -->
-                    <rect x="42" y="15" width="18" height="24" rx="2" fill="rgba(78, 205, 196, 0.2)" stroke="#4ecdc4" stroke-width="1.5" />
-                    <text x="51" y="30" font-size="10" fill="#4ecdc4" text-anchor="middle" font-weight="bold">D</text>
-                    
-                    <!-- Bottom Left Card (Come) -->
-                    <rect x="20" y="43" width="18" height="24" rx="2" fill="rgba(255, 230, 109, 0.2)" stroke="#ffe66d" stroke-width="1.5" />
-                    <text x="29" y="58" font-size="10" fill="#ffe66d" text-anchor="middle" font-weight="bold">C</text>
-                    
-                    <!-- Bottom Right Card (Perché) -->
-                    <rect x="42" y="43" width="18" height="24" rx="2" fill="rgba(26, 83, 92, 0.2)" stroke="#1a535c" stroke-width="1.5" />
-                    <text x="51" y="58" font-size="10" fill="#1a535c" text-anchor="middle" font-weight="bold">P</text>
-                </g>
-                
-                <!-- Central Question Mark -->
-                <circle cx="40" cy="36" r="8" fill="#2a2a40" stroke="white" stroke-width="2" />
-                <text x="40" y="40" font-size="10" fill="white" text-anchor="middle" font-weight="bold">?</text>
-            </svg>`
-        }
+
     ];
 
     // Select the container element
