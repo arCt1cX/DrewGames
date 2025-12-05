@@ -30,6 +30,8 @@ const authorDisplay = document.getElementById('author-display');
 const authorNameSpan = document.getElementById('author-name');
 const nextRoundBtn = document.getElementById('next-round');
 
+const rerollCategoryBtn = document.getElementById('reroll-category');
+
 // Load Categories
 async function loadCategories() {
     try {
@@ -100,6 +102,13 @@ function pickCategory() {
     showScreen('input-screen');
 }
 
+// Reroll Category
+function rerollCategory() {
+    const randomIndex = Math.floor(Math.random() * gameState.categories.length);
+    gameState.currentCategory = gameState.categories[randomIndex];
+    currentCategoryDisplay.textContent = gameState.currentCategory;
+}
+
 // Show Player Input Screen
 function showPlayerInputScreen() {
     const currentPlayer = gameState.players[gameState.currentPlayerIndex];
@@ -109,6 +118,13 @@ function showPlayerInputScreen() {
     inputArea.style.display = 'none';
     revealInputBtn.style.display = 'block';
     hotTakeInput.value = '';
+
+    // Show/Hide reroll button: only show for first player
+    if (gameState.currentPlayerIndex === 0) {
+        rerollCategoryBtn.style.display = 'block';
+    } else {
+        rerollCategoryBtn.style.display = 'none';
+    }
 }
 
 // Reveal Input Area (Player confirms they are holding the phone)
@@ -182,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     submitTakeBtn.addEventListener('click', submitHotTake);
     revealAuthorBtn.addEventListener('click', revealAuthor);
     nextRoundBtn.addEventListener('click', startRound);
+    rerollCategoryBtn.addEventListener('click', rerollCategory);
 
     // Handle tournament mode return if needed
     const urlParams = new URLSearchParams(window.location.search);

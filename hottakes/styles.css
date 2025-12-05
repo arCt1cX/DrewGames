@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #ff4500;
-    /* Orange-Red for "Hot" */
-    --secondary-color: #ff8c00;
-    /* Dark Orange */
+    --primary-color: #8a2be2;
+    /* BlueViolet */
+    --secondary-color: #4b0082;
+    /* Indigo */
     --background-color: #1a1a1a;
     --card-bg: #2d2d2d;
     --text-color: #ffffff;
@@ -78,6 +78,28 @@ h2 {
 .subtitle {
     font-size: 1.1rem;
     color: #ccc;
+}
+
+.category-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.btn-icon:hover {
+    transform: rotate(180deg);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .category-display {
