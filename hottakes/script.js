@@ -2,6 +2,7 @@
 const gameState = {
     players: [],
     categories: [],
+    availableCategories: [], // Track unused categories
     currentCategory: '',
     playerInputs: {}, // { playerName: "hot take" }
     currentPlayerIndex: 0,
@@ -38,6 +39,7 @@ async function loadCategories() {
         const response = await fetch('categories.txt');
         const text = await response.text();
         gameState.categories = text.split('\n').filter(line => line.trim() !== '');
+        gameState.availableCategories = [...gameState.categories]; // Initialize available pool
         console.log(`Loaded ${gameState.categories.length} categories.`);
     } catch (error) {
         console.error('Error loading categories:', error);
@@ -89,8 +91,17 @@ function startRound() {
 }
 
 function pickCategory() {
-    const randomIndex = Math.floor(Math.random() * gameState.categories.length);
-    gameState.currentCategory = gameState.categories[randomIndex];
+    // Reset pool if empty
+    if (gameState.availableCategories.length === 0) {
+        gameState.availableCategories = [...gameState.categories];
+        console.log('Pool reset!');
+    }
+
+    const randomIndex = Math.floor(Math.random() * gameState.availableCategories.length);
+    gameState.currentCategory = gameState.availableCategories[randomIndex];
+
+    // Remove selected category from pool
+    gameState.availableCategories.splice(randomIndex, 1);
 
     // Reset state for new round
     gameState.playerInputs = {};
@@ -104,8 +115,17 @@ function pickCategory() {
 
 // Reroll Category
 function rerollCategory() {
-    const randomIndex = Math.floor(Math.random() * gameState.categories.length);
-    gameState.currentCategory = gameState.categories[randomIndex];
+    // Reset pool if empty
+    if (gameState.availableCategories.length === 0) {
+        gameState.availableCategories = [...gameState.categories];
+    }
+
+    const randomIndex = Math.floor(Math.random() * gameState.availableCategories.length);
+    gameState.currentCategory = gameState.availableCategories[randomIndex];
+
+    // Remove selected category from pool
+    gameState.availableCategories.splice(randomIndex, 1);
+
     currentCategoryDisplay.textContent = gameState.currentCategory;
 }
 
