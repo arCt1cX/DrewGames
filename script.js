@@ -17,12 +17,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Games array with additional catchphrase information and display names
-    const games = [
-        {
-            id: "impostor",
-            displayName: getTranslation('impostor', 'title'),
+    // ...
+});
+
+// Toast Notification System
+function showToast(message, type = 'info') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+
+    let icon = 'ℹ️';
+    if (type === 'success') icon = '✅';
+    if (type === 'error') icon = '❌';
+    if (type === 'warning') icon = '⚠️';
+
+    toast.innerHTML = `<span class="toast-icon">${icon}</span><span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.classList.add('toast-out');
+        toast.addEventListener('animationend', () => {
+            toast.remove();
+            if (container.children.length === 0) {
+                container.remove();
+            }
+        });
+    }, 3000);
+}
+
+// Override default alert
+window.alert = function (message) {
+    showToast(message, 'info');
+};
+{
+    id: "impostor",
+        displayName: getTranslation('impostor', 'title'),
             catchphrase: getTranslation('impostor', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                                <!-- Shadow element -->
                 <ellipse cx="40" cy="72" rx="30" ry="3" fill="rgba(0,0,0,0.2)" />
 
@@ -84,12 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <path d="M45,38 C42,42 39,39 40,36" stroke="white" stroke-width="1" />
                 <path d="M40,36 L32,28" stroke="white" stroke-width="1" stroke-linecap="round" />
             </svg>`
-        },
-        {
-            id: "colorgrid",
-            displayName: getTranslation('colorgrid', 'title'),
+},
+{
+    id: "colorgrid",
+        displayName: getTranslation('colorgrid', 'title'),
             catchphrase: getTranslation('colorgrid', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="1.5">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="1.5">
                 <!-- Grid shadow -->
                 <rect x="17" y="17" width="50" height="50" rx="4" fill="rgba(0,0,0,0.2)" />
                 
@@ -134,12 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <circle cx="20" cy="20" r="3" stroke="white" fill="none" />
                 <path d="M22,18 L18,22 M18,18 L22,22" stroke="white" stroke-width="0.8" />
             </svg>`
-        },
-        {
-            id: "chainreaction",
-            displayName: getTranslation('chainreaction', 'title'),
+},
+{
+    id: "chainreaction",
+        displayName: getTranslation('chainreaction', 'title'),
             catchphrase: getTranslation('chainreaction', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                 <!-- Shadow -->
                 <ellipse cx="40" cy="72" rx="30" ry="3" fill="rgba(0,0,0,0.2)" />
                 
@@ -195,12 +234,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <path d="M62,65 C62,64 68,64 68,65" stroke="white" stroke-width="0.8" />
                 <path d="M62,65 C62,66 68,66 68,65" stroke="white" stroke-width="0.8" />
             </svg>`
-        },
-        {
-            id: "timergame",
-            displayName: getTranslation('timergame', 'title'),
+},
+{
+    id: "timergame",
+        displayName: getTranslation('timergame', 'title'),
             catchphrase: getTranslation('timergame', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                 <!-- Shadow -->
                 <ellipse cx="40" cy="45" rx="28" ry="5" fill="rgba(0,0,0,0.15)" />
                 
@@ -262,12 +301,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <path d="M21,45 C17,44 18,38 22,38 C26,38 27,44 23,45 L22,49 Z" fill="rgba(255,255,255,0.1)" stroke="white" stroke-width="0.8" />
                 <text x="22" y="42" font-size="4" fill="white" text-anchor="middle" font-family="Arial, sans-serif">Dubito!</text>
             </svg>`
-        },
-        {
-            id: "alphabetgame",
-            displayName: getTranslation('alphabetgame', 'title'),
+},
+{
+    id: "alphabetgame",
+        displayName: getTranslation('alphabetgame', 'title'),
             catchphrase: getTranslation('alphabetgame', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                 <!-- Shadow -->
                 <rect x="10" y="69" width="60" height="4" rx="2" fill="rgba(0,0,0,0.2)" />
                 
@@ -323,12 +362,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <path d="M30,57 L50,57" stroke="rgba(255,255,255,0.8)" stroke-width="0.8" stroke-linecap="round" />
                 <text x="40" y="55" font-size="6" fill="white" text-anchor="middle" font-family="Arial, sans-serif">CATEGORIA</text>
             </svg>`
-        },
-        {
-            id: "bluffme",
-            displayName: getTranslation('bluffme', 'title'),
+},
+{
+    id: "bluffme",
+        displayName: getTranslation('bluffme', 'title'),
             catchphrase: getTranslation('bluffme', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                 <!-- Shadow -->
                 <ellipse cx="40" cy="72" rx="30" ry="3" fill="rgba(0,0,0,0.2)" />
                 
@@ -364,12 +403,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <path d="M21,45 C17,44 18,38 22,38 C26,38 27,44 23,45 L22,49 Z" fill="rgba(255,255,255,0.1)" stroke="white" stroke-width="0.8" />
                 <text x="22" y="42" font-size="4" fill="white" text-anchor="middle" font-family="Arial, sans-serif">Dubito!</text>
             </svg>`
-        },
-        {
-            id: "quizzy",
-            displayName: getTranslation('quizzy', 'title'),
+},
+{
+    id: "quizzy",
+        displayName: getTranslation('quizzy', 'title'),
             catchphrase: getTranslation('quizzy', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                 <!-- Shadow -->
                 <ellipse cx="40" cy="72" rx="30" ry="3" fill="rgba(0,0,0,0.2)" />
                 
@@ -410,12 +449,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <text x="75" cy="55" y="55" font-size="8" fill="rgba(255,255,255,0.15)" text-anchor="middle" font-weight="bold" font-family="Arial, sans-serif">?</text>
                 <text x="60" cy="52" y="52" font-size="12" fill="rgba(255,255,255,0.1)" text-anchor="middle" font-weight="bold" font-family="Arial, sans-serif">?</text>
             </svg>`
-        },
-        {
-            id: "guessthepic",
-            displayName: getTranslation('guessthepic', 'title'),
+},
+{
+    id: "guessthepic",
+        displayName: getTranslation('guessthepic', 'title'),
             catchphrase: getTranslation('guessthepic', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                 <!-- Shadow -->
                 <rect x="17" y="17" width="38" height="38" rx="2" fill="rgba(0,0,0,0.2)" />
                 
@@ -445,12 +484,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <text x="28" y="38" font-size="5" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="Arial, sans-serif">?</text>
                 <text x="39" y="28" font-size="6" fill="rgba(255,255,255,0.6)" text-anchor="middle" font-family="Arial, sans-serif">?</text>
             </svg>`
-        },
-        {
-            id: "tictactopics",
-            displayName: getTranslation('tictactopics', 'title'),
+},
+{
+    id: "tictactopics",
+        displayName: getTranslation('tictactopics', 'title'),
             catchphrase: getTranslation('tictactopics', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="1.5">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="1.5">
                 <!-- Light background glow -->
                 <circle cx="40" cy="40" r="30" fill="rgba(123,104,238,0.1)" />
                 
@@ -508,12 +547,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <text x="55" y="74" font-size="3" fill="white">Film Topic</text>
                 <path d="M56,65 L56,70" stroke="white" stroke-width="0.5" stroke-dasharray="1 1" />
             </svg>`
-        },
-        {
-            id: "drewnking",
-            displayName: getTranslation('drewnking', 'title'),
+},
+{
+    id: "drewnking",
+        displayName: getTranslation('drewnking', 'title'),
             catchphrase: getTranslation('drewnking', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                 <!-- Shadow -->
                 <ellipse cx="40" cy="74" rx="25" ry="3" fill="rgba(0,0,0,0.3)" />
                 
@@ -559,12 +598,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <circle cx="8" cy="58" r="2" fill="rgba(255,193,7,0.6)" />
                 <circle cx="72" cy="58" r="2" fill="rgba(255,193,7,0.6)" />
             </svg>`
-        },
-        {
-            id: "hottakes",
-            displayName: getTranslation('hottakes', 'title'),
+},
+{
+    id: "hottakes",
+        displayName: getTranslation('hottakes', 'title'),
             catchphrase: getTranslation('hottakes', 'catchphrase'),
-            iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
+                iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="2">
                 <!-- Shadow -->
                 <ellipse cx="40" cy="74" rx="30" ry="3" fill="rgba(0,0,0,0.3)" />
                 
@@ -576,35 +615,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 <path d="M55,25 L70,25 L70,45 L55,45 L50,50 L55,40 Z" fill="rgba(255,255,255,0.1)" stroke="white" stroke-width="1.5" />
                 <text x="62" y="38" font-size="12" fill="white" text-anchor="middle" font-weight="bold">!</text>
             </svg>`
-        },
+},
     ];
 
-    // Select the container element
-    const gamesContainer = document.getElementById('gamesContainer');
+// Select the container element
+const gamesContainer = document.getElementById('gamesContainer');
 
-    // Function to capitalize first letter and handle formatting
-    const formatGameName = (name) => {
-        // Convert camelCase or snake_case to space-separated words
-        const formatted = name
-            .replace(/([A-Z])/g, ' $1') // Handle camelCase
-            .replace(/_/g, ' '); // Handle snake_case
+// Function to capitalize first letter and handle formatting
+const formatGameName = (name) => {
+    // Convert camelCase or snake_case to space-separated words
+    const formatted = name
+        .replace(/([A-Z])/g, ' $1') // Handle camelCase
+        .replace(/_/g, ' '); // Handle snake_case
 
-        // Capitalize the first letter of each word
-        return formatted
-            .split(' ')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    };
+    // Capitalize the first letter of each word
+    return formatted
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+};
 
-    // Gradient classes for variety
-    const gradientClasses = [
-        'gradient-1', 'gradient-2', 'gradient-3', 'gradient-4',
-        'gradient-5', 'gradient-6', 'gradient-7', 'gradient-8'
-    ];
+// Gradient classes for variety
+const gradientClasses = [
+    'gradient-1', 'gradient-2', 'gradient-3', 'gradient-4',
+    'gradient-5', 'gradient-6', 'gradient-7', 'gradient-8'
+];
 
-    // Add CSS for icon styling
-    const style = document.createElement('style');
-    style.textContent = `
+// Add CSS for icon styling
+const style = document.createElement('style');
+style.textContent = `
         /* Create a flexbox layout for content and icon */
         .game-card {
             display: flex;
@@ -695,104 +734,104 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     `;
-    document.head.appendChild(style);
+document.head.appendChild(style);
 
-    // Create and append game cards
-    games.forEach((game, index) => {
-        // Create card element
-        const card = document.createElement('div');
-        card.className = `game-card ${gradientClasses[index % gradientClasses.length]}`;
-
-        // Create content container
-        const contentContainer = document.createElement('div');
-        contentContainer.className = 'card-content';
-
-        // Create game title using the display name if available, otherwise format the ID
-        const title = document.createElement('h3');
-        title.textContent = game.displayName || formatGameName(game.id);
-
-        // Create catchphrase
-        const catchphrase = document.createElement('p');
-        catchphrase.className = 'game-catchphrase';
-        catchphrase.textContent = game.catchphrase;
-
-        // Create play button as a button element
-        const playButton = document.createElement('button');
-        playButton.className = 'play-button';
-        playButton.textContent = getTranslation('play');
-
-        // Folder name mapping for case sensitivity issues
-        const folderNameMap = {
-            'bluffme': 'BluffMe',
-            // Add any other case-sensitive folder mappings here if needed
-        };
-
-        // Add click event for navigation
-        playButton.addEventListener('click', () => {
-            // Use folder name mapping if available, otherwise use game.id
-            const folderName = folderNameMap[game.id] || game.id;
-            window.location.href = `${folderName}/index.html`;
-        });
-
-        // Add title, catchphrase and button to content container
-        contentContainer.appendChild(title);
-        contentContainer.appendChild(catchphrase);
-        contentContainer.appendChild(playButton);
-
-        // Create icon container and add SVG
-        const iconContainer = document.createElement('div');
-        iconContainer.className = 'game-icon-container';
-        iconContainer.innerHTML = game.iconSvg;
-        const iconElement = iconContainer.querySelector('svg');
-        iconElement.classList.add('game-icon');
-
-        // Add "Italian only" text for guessthepic game
-        if (game.id === "guessthepic") {
-            const italianOnlyText = document.createElement('div');
-            italianOnlyText.className = 'italian-only-text';
-            italianOnlyText.textContent = getTranslation('italianOnly');
-            iconContainer.appendChild(italianOnlyText);
-        }
-
-        // Append content and icon containers to card
-        card.appendChild(contentContainer);
-        card.appendChild(iconContainer);
-
-        // Append card to container
-        gamesContainer.appendChild(card);
-    });
-
-    // Add "Coming Soon" card
-    const comingSoonCard = document.createElement('div');
-    comingSoonCard.className = 'game-card coming-soon-card';
+// Create and append game cards
+games.forEach((game, index) => {
+    // Create card element
+    const card = document.createElement('div');
+    card.className = `game-card ${gradientClasses[index % gradientClasses.length]}`;
 
     // Create content container
-    const comingSoonContentContainer = document.createElement('div');
-    comingSoonContentContainer.className = 'card-content';
+    const contentContainer = document.createElement('div');
+    contentContainer.className = 'card-content';
 
-    const comingSoonTitle = document.createElement('h3');
-    comingSoonTitle.textContent = getTranslation('comingSoon');
+    // Create game title using the display name if available, otherwise format the ID
+    const title = document.createElement('h3');
+    title.textContent = game.displayName || formatGameName(game.id);
 
-    const comingSoonCatchphrase = document.createElement('p');
-    comingSoonCatchphrase.className = 'game-catchphrase';
-    comingSoonCatchphrase.textContent = getTranslation('newGamesComingSoon');
+    // Create catchphrase
+    const catchphrase = document.createElement('p');
+    catchphrase.className = 'game-catchphrase';
+    catchphrase.textContent = game.catchphrase;
 
-    // Create icon for Coming Soon card
-    const comingSoonIconContainer = document.createElement('div');
-    comingSoonIconContainer.className = 'game-icon-container';
+    // Create play button as a button element
+    const playButton = document.createElement('button');
+    playButton.className = 'play-button';
+    playButton.textContent = getTranslation('play');
 
-    // Append elements to containers
-    comingSoonContentContainer.appendChild(comingSoonTitle);
-    comingSoonContentContainer.appendChild(comingSoonCatchphrase);
-    comingSoonCard.appendChild(comingSoonContentContainer);
-    comingSoonCard.appendChild(comingSoonIconContainer);
+    // Folder name mapping for case sensitivity issues
+    const folderNameMap = {
+        'bluffme': 'BluffMe',
+        // Add any other case-sensitive folder mappings here if needed
+    };
 
-    // Append Coming Soon card to container
-    gamesContainer.appendChild(comingSoonCard);
+    // Add click event for navigation
+    playButton.addEventListener('click', () => {
+        // Use folder name mapping if available, otherwise use game.id
+        const folderName = folderNameMap[game.id] || game.id;
+        window.location.href = `${folderName}/index.html`;
+    });
 
-    // Add CSS for Italian only text
-    const styleElement = document.querySelector('style');
-    styleElement.textContent += `
+    // Add title, catchphrase and button to content container
+    contentContainer.appendChild(title);
+    contentContainer.appendChild(catchphrase);
+    contentContainer.appendChild(playButton);
+
+    // Create icon container and add SVG
+    const iconContainer = document.createElement('div');
+    iconContainer.className = 'game-icon-container';
+    iconContainer.innerHTML = game.iconSvg;
+    const iconElement = iconContainer.querySelector('svg');
+    iconElement.classList.add('game-icon');
+
+    // Add "Italian only" text for guessthepic game
+    if (game.id === "guessthepic") {
+        const italianOnlyText = document.createElement('div');
+        italianOnlyText.className = 'italian-only-text';
+        italianOnlyText.textContent = getTranslation('italianOnly');
+        iconContainer.appendChild(italianOnlyText);
+    }
+
+    // Append content and icon containers to card
+    card.appendChild(contentContainer);
+    card.appendChild(iconContainer);
+
+    // Append card to container
+    gamesContainer.appendChild(card);
+});
+
+// Add "Coming Soon" card
+const comingSoonCard = document.createElement('div');
+comingSoonCard.className = 'game-card coming-soon-card';
+
+// Create content container
+const comingSoonContentContainer = document.createElement('div');
+comingSoonContentContainer.className = 'card-content';
+
+const comingSoonTitle = document.createElement('h3');
+comingSoonTitle.textContent = getTranslation('comingSoon');
+
+const comingSoonCatchphrase = document.createElement('p');
+comingSoonCatchphrase.className = 'game-catchphrase';
+comingSoonCatchphrase.textContent = getTranslation('newGamesComingSoon');
+
+// Create icon for Coming Soon card
+const comingSoonIconContainer = document.createElement('div');
+comingSoonIconContainer.className = 'game-icon-container';
+
+// Append elements to containers
+comingSoonContentContainer.appendChild(comingSoonTitle);
+comingSoonContentContainer.appendChild(comingSoonCatchphrase);
+comingSoonCard.appendChild(comingSoonContentContainer);
+comingSoonCard.appendChild(comingSoonIconContainer);
+
+// Append Coming Soon card to container
+gamesContainer.appendChild(comingSoonCard);
+
+// Add CSS for Italian only text
+const styleElement = document.querySelector('style');
+styleElement.textContent += `
         .game-icon-container {
             display: flex;
             flex-direction: column;
@@ -837,27 +876,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
 
-    // Update navigation text based on language
-    document.addEventListener('DOMContentLoaded', function () {
-        // Navigation will be updated when translations are applied
-        if (typeof applyTranslations === 'function') {
-            const originalApply = applyTranslations;
-            applyTranslations = function () {
-                originalApply();
-                updateNavigationText();
-            };
-        }
+// Update navigation text based on language
+document.addEventListener('DOMContentLoaded', function () {
+    // Navigation will be updated when translations are applied
+    if (typeof applyTranslations === 'function') {
+        const originalApply = applyTranslations;
+        applyTranslations = function () {
+            originalApply();
+            updateNavigationText();
+        };
+    }
 
-        function updateNavigationText() {
-            if (typeof getTranslation === 'function') {
-                document.getElementById('nav-home').textContent = getTranslation('navHome') || 'Home';
-                document.getElementById('nav-games').textContent = getTranslation('navGames') || 'Games';
-                document.getElementById('nav-about').textContent = getTranslation('navAbout') || 'About Us';
-                document.getElementById('legal-header').textContent = getTranslation('navLegalHeader') || 'Legal';
-                document.getElementById('nav-privacy').textContent = getTranslation('navPrivacy') || 'Privacy Policy';
-                document.getElementById('nav-terms').textContent = getTranslation('navTerms') || 'Terms of Service';
-                document.getElementById('nav-cookies').textContent = getTranslation('navCookies') || 'Cookie Policy';
-            }
+    function updateNavigationText() {
+        if (typeof getTranslation === 'function') {
+            document.getElementById('nav-home').textContent = getTranslation('navHome') || 'Home';
+            document.getElementById('nav-games').textContent = getTranslation('navGames') || 'Games';
+            document.getElementById('nav-about').textContent = getTranslation('navAbout') || 'About Us';
+            document.getElementById('legal-header').textContent = getTranslation('navLegalHeader') || 'Legal';
+            document.getElementById('nav-privacy').textContent = getTranslation('navPrivacy') || 'Privacy Policy';
+            document.getElementById('nav-terms').textContent = getTranslation('navTerms') || 'Terms of Service';
+            document.getElementById('nav-cookies').textContent = getTranslation('navCookies') || 'Cookie Policy';
         }
-    });
+    }
+});
 }); 

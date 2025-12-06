@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 // For individual mode, the flow continues in the button callback of showRandomCategoriesScreen
             } else {
-                alert(getGameTranslation('selectAtLeastOne'));
+                showToast(getGameTranslation('selectAtLeastOne'), 'warning');
             }
         });
 
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     startGame();
                 }
             } else {
-                alert("Inserisci entrambe le categorie!");
+                showToast("Inserisci entrambe le categorie!", 'warning');
             }
         });
 
