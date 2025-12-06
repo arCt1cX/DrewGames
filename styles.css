@@ -7,29 +7,13 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a0b2e);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite,
-        pageFadeIn 0.6s ease-out forwards;
+    background-color: #000;
     color: #fff;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     padding: 0 20px;
-}
-
-@keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+    animation: pageFadeIn 0.6s ease-out forwards;
 }
 
 @keyframes pageFadeIn {
@@ -98,26 +82,23 @@ h2 {
 /* Game Card */
 .game-card {
     position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    background-size: 200% 200%;
+    animation: gradientAnimation 5s ease infinite;
     border-radius: 20px;
     padding: 1.5rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 220px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
 }
 
 .game-card:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(128, 0, 255, 0.5);
 }
 
 .game-card:before {
@@ -154,28 +135,27 @@ h2 {
 }
 
 .play-button {
-    background: linear-gradient(90deg, #7b68ee, #473c8b);
+    background-color: rgba(255, 255, 255, 0.2);
     color: white;
     border: none;
-    padding: 0.8rem 0;
-    border-radius: 12px;
+    padding: 0.7rem 0;
+    border-radius: 10px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
     display: block;
     text-align: center;
     text-decoration: none;
     z-index: 10;
-    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.4);
+    /* Keep this to ensure it's clickable */
 }
 
 .play-button:hover {
-    background: linear-gradient(90deg, #8a75ff, #564ab1);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(123, 104, 238, 0.6);
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 
 .play-button:active {
