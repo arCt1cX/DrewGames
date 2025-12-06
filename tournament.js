@@ -40,7 +40,7 @@ function selectRandomGame() {
     });
 
     if (validGames.length === 0) {
-        showToast('No valid games available for current player count!', 'error');
+        alert('No valid games available for current player count!');
         return null;
     }
 

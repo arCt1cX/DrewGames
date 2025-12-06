@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const errorMsg = lang === 'it'
                 ? 'Errore nel caricamento dei prompt. Ricarica la pagina per riprovare.'
                 : 'Error loading prompts. Reload the page to try again.';
-            showToast(errorMsg, 'error');
+            alert(errorMsg);
         }
     }
 

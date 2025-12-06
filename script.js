@@ -17,47 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Games array with additional catchphrase information and display names
-    // ...
-});
-
-// Toast Notification System
-function showToast(message, type = 'info') {
-    let container = document.getElementById('toast-container');
-    if (!container) {
-        container = document.createElement('div');
-        container.id = 'toast-container';
-        document.body.appendChild(container);
-    }
-
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-
-    let icon = 'ℹ️';
-    if (type === 'success') icon = '✅';
-    if (type === 'error') icon = '❌';
-    if (type === 'warning') icon = '⚠️';
-
-    toast.innerHTML = `<span class="toast-icon">${icon}</span><span>${message}</span>`;
-
-    container.appendChild(toast);
-
-    // Remove after 3 seconds
-    setTimeout(() => {
-        toast.classList.add('toast-out');
-        toast.addEventListener('animationend', () => {
-            toast.remove();
-            if (container.children.length === 0) {
-                container.remove();
-            }
-        });
-    }, 3000);
-}
-
-// Override default alert
-window.alert = function (message) {
-    showToast(message, 'info');
-};
-document.addEventListener('DOMContentLoaded', () => {
     const games = [
         {
             id: "impostor",

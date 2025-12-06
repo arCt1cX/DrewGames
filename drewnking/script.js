@@ -174,7 +174,7 @@ async function loadPhrases() {
         console.log('Frasi caricate e categorizzate');
     } catch (error) {
         console.error('Errore nel caricamento delle frasi:', error);
-        showToast('Errore nel caricamento del gioco. Ricarica la pagina.', 'error');
+        alert('Errore nel caricamento del gioco. Ricarica la pagina.');
     }
 }
 

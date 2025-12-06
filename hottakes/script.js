@@ -158,7 +158,7 @@ function revealInputArea() {
 function submitHotTake() {
     const take = hotTakeInput.value.trim();
     if (!take) {
-        showToast('Scrivi qualcosa!', 'warning');
+        alert('Scrivi qualcosa!');
         return;
     }
 

@@ -220,7 +220,7 @@ async function startGame() {
     // Only proceed if data is loaded
     if (gameState.filmsAndSeries.length === 0) {
         console.error(`Cannot start game: data for ${gameState.selectedTopic} not loaded`);
-        showToast("Could not load data for the selected topic. Please try again.", 'error');
+        alert("Could not load data for the selected topic. Please try again.");
         return;
     }
 
@@ -552,7 +552,7 @@ function selectRandomCategories() {
 
     if (!validSetFound) {
         console.error("Failed to find valid category combinations after", MAX_ATTEMPTS, "attempts");
-        showToast("Unable to generate a valid game board. Please try again.", 'error');
+        alert("Unable to generate a valid game board. Please try again.");
         return;
     } else {
         console.log("Found valid category combinations after", attempts, "attempts");
@@ -585,7 +585,7 @@ function validateAllCellsHaveCombinations(showAlert = true) {
 
     if (!allValid && showAlert) {
         console.error("Game board contains empty cells. Try generating a new board.");
-        showToast("Some cells have no valid combinations. Please start a new game.", 'warning');
+        alert("Some cells have no valid combinations. Please start a new game.");
     }
 
     return allValid;
