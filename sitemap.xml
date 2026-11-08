@@ -35,6 +35,15 @@
   
   <!-- Games -->
   <url>
+    <loc>https://www.partygamesdrew.com/scaleserpenti/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.partygamesdrew.com/scaleserpenti/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.partygamesdrew.com/scaleserpenti/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.partygamesdrew.com/scaleserpenti/"/>
+  </url>
+  <url>
     <loc>https://www.partygamesdrew.com/yahtzee/</loc>
     <lastmod>2026-06-14</lastmod>
     <changefreq>monthly</changefreq>

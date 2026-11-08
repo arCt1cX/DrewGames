@@ -288,6 +288,7 @@
             'impostor': 'impostor.png',
             'taboo': 'taboo.png',
             'yahtzee': 'yahtzee.png',
+            'scaleserpenti': 'scaleserpenti.svg',
             'mrdrew': 'mrdrew.png',
             'fakedrew': 'fakedrew.svg',
             'hottakes': 'hottakes.png',

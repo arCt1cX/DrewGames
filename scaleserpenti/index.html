@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0810">
+    <!-- Dynamic meta tags based on browser language -->
+    <script>
+        const preferredLang = navigator.language || navigator.userLanguage;
+        const isItalian = preferredLang && (preferredLang.startsWith('it') || preferredLang === 'it');
+        if (isItalian) {
+            document.write('<title>Scale &amp; Serpenti Party - Il gioco da tavolo pazzo | DrewGames</title>');
+            document.write('<meta name="description" content="Scale e Serpenti con 200 caselle, tabellone sempre diverso, potenziamenti, imprevisti, portali, burroni e missili! Il gioco da tavolo pazzo da fare con gli amici.">');
+        } else {
+            document.write('<title>Snakes &amp; Ladders Party - The crazy board game | DrewGames</title>');
+            document.write('<meta name="description" content="Snakes and Ladders with 200 squares, a new board every game, power-ups, surprises, portals, cliffs and missiles! The crazy board game to play with friends.">');
+        }
+    </script>
+    <link rel="alternate" hreflang="en" href="https://www.partygamesdrew.com/scaleserpenti/?lang=en" />
+    <link rel="alternate" hreflang="it" href="https://www.partygamesdrew.com/scaleserpenti/?lang=it" />
+    <link rel="alternate" hreflang="x-default" href="https://www.partygamesdrew.com/scaleserpenti/" />
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5KN33WJ3');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="../dg-ui.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="../js/tournament-button.js" defer></script>
+    <link rel="canonical" href="https://www.partygamesdrew.com/scaleserpenti/">
+    <meta name="robots" content="index, follow">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1877136537382240"
+        crossorigin="anonymous"></script>
+</head>
+
+<body data-game-id="scaleserpenti">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KN33WJ3" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <button class="home-button" onclick="window.location.href='../'">
+        <svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span id="homeText">Home</span>
+    </button>
+    <button id="languageToggle" class="language-toggle" onclick="toggleLanguage()">EN</button>
+
+    <div class="container">
+        <div id="game-title">
+            <h1 id="gameTitle">Scale &amp; Serpenti Party</h1>
+        </div>
+
+        <!-- Setup Screen -->
+        <div id="setup-screen" class="game-screen active">
+            <h2 id="setupTitle">Impostazioni del Gioco</h2>
+            <div class="form-group">
+                <label for="player-count" id="playerCountLabel">Numero di Giocatori:</label>
+                <select id="player-count">
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+            </div>
+            <div id="player-names-container"></div>
+            <div class="form-group">
+                <label for="board-size" id="boardSizeLabel">Lunghezza del tabellone:</label>
+                <select id="board-size">
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200" selected>200</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="density" id="densityLabel">Caselle speciali:</label>
+                <select id="density">
+                    <option value="few" id="densityFew">Poche</option>
+                    <option value="normal" id="densityNormal" selected>Normali</option>
+                    <option value="many" id="densityMany">Tante</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bounce" id="bounceLabel">Arrivo esatto:</label>
+                <select id="bounce">
+                    <option value="on" id="bounceOn">Sì</option>
+                    <option value="off" id="bounceOff" selected>No</option>
+                </select>
+            </div>
+            <button id="start-game" class="btn primary-btn">Inizia Gioco</button>
+            <button id="rules-btn" class="btn ghost-btn">Regole</button>
+        </div>
+
+        <!-- Play Screen -->
+        <div id="play-screen" class="game-screen">
+            <div class="top-row">
+                <div class="player-strip" id="player-strip"></div>
+                <button class="icon-btn" id="legend-btn" aria-label="?">?</button>
+                <button class="icon-btn" id="view-btn" aria-label="view"></button>
+            </div>
+            <div class="board-wrap" id="board-wrap">
+                <div class="board" id="board">
+                    <div class="board-grid" id="board-grid"></div>
+                    <svg class="board-art" id="board-art" preserveAspectRatio="none"></svg>
+                    <div class="tokens" id="tokens"></div>
+                </div>
+            </div>
+            <div class="toast" id="toast"></div>
+            <div class="panel" id="panel">
+                <div class="panel-head">
+                    <div class="turn-name" id="turn-name"></div>
+                    <div class="status-tags" id="status-tags"></div>
+                </div>
+                <div class="items-row" id="items-row"></div>
+                <div class="log" id="log"></div>
+                <div class="roll-row">
+                    <div class="dice-box" id="dice-box"></div>
+                    <button id="roll-btn" class="btn primary-btn roll-btn">Tira</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameover-screen" class="game-screen">
+            <div class="reveal-header">
+                <h2 id="gameOverTitle">Partita Finita!</h2>
+                <p class="subtitle-text" id="winnerTitle">Vince...</p>
+                <p class="winner-name" id="winner-name"></p>
+            </div>
+            <h3 class="standings-title" id="finalStandingsTitle">Classifica Finale</h3>
+            <div id="final-standings" class="standings-box"></div>
+            <button id="play-again" class="btn primary-btn">Gioca di Nuovo</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-card" id="modal-card"></div>
+    </div>
+
+    <script src="../lang.js"></script>
+    <script src="translations.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

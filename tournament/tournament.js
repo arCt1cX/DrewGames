@@ -17,7 +17,8 @@ const gameDisplayNames = {
         'fakedrew': 'Fake Drew',
         'tictactopics': 'TicTacTopics',
         'taboo': 'Taboo',
-        'yahtzee': 'Yahtzee'
+        'yahtzee': 'Yahtzee',
+        'scaleserpenti': 'Snakes & Ladders Party'
     },
     it: {
         'impostor': 'Impostor',
@@ -36,7 +37,8 @@ const gameDisplayNames = {
         'fakedrew': 'Fake Drew',
         'tictactopics': 'TicTacTopics',
         'taboo': 'Taboo',
-        'yahtzee': 'Yahtzee'
+        'yahtzee': 'Yahtzee',
+        'scaleserpenti': 'Scale & Serpenti Party'
     }
 };
 
@@ -209,6 +211,10 @@ function startTournament() {
     // Taboo runs in free-for-all mode, which needs at least 3 players
     if (playerCount >= 3) {
         tournamentState.availableGames.push('taboo');
+    }
+    // Scale & Serpenti Party supports 2-8 players
+    if (playerCount >= 2 && playerCount <= 8) {
+        tournamentState.availableGames.push('scaleserpenti');
     }
     // Fake Drew needs at least 3 players (one of them is the Fake Artist)
     if (playerCount >= 3) {

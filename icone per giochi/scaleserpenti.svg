@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" fill="none">
+  <defs>
+    <linearGradient id="ssBoard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a2b6b"/>
+      <stop offset="1" stop-color="#1d1638"/>
+    </linearGradient>
+    <linearGradient id="ssSnake" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6be37f"/>
+      <stop offset="1" stop-color="#2a9e4a"/>
+    </linearGradient>
+    <filter id="ssShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <!-- Board (tilted) -->
+  <g transform="rotate(-6 200 150)" filter="url(#ssShadow)">
+    <rect x="80" y="40" width="240" height="220" rx="18" fill="url(#ssBoard)" stroke="#8a78ff" stroke-width="3"/>
+    <g opacity="0.9">
+      <rect x="92" y="52" width="43" height="38" rx="5" fill="#4a3a85"/>
+      <rect x="181" y="52" width="43" height="38" rx="5" fill="#4a3a85"/>
+      <rect x="270" y="52" width="38" height="38" rx="5" fill="#f4a52b"/>
+      <rect x="136" y="93" width="43" height="38" rx="5" fill="#2f72d9"/>
+      <rect x="225" y="93" width="43" height="38" rx="5" fill="#4a3a85"/>
+      <rect x="92" y="134" width="43" height="38" rx="5" fill="#4a3a85"/>
+      <rect x="181" y="134" width="43" height="38" rx="5" fill="#e07a16"/>
+      <rect x="270" y="134" width="38" height="38" rx="5" fill="#4a3a85"/>
+      <rect x="136" y="175" width="43" height="38" rx="5" fill="#b03fd1"/>
+      <rect x="225" y="175" width="43" height="38" rx="5" fill="#4a3a85"/>
+      <rect x="92" y="216" width="43" height="32" rx="5" fill="#2f9e5f"/>
+      <rect x="181" y="216" width="43" height="32" rx="5" fill="#4a3a85"/>
+      <rect x="270" y="216" width="38" height="32" rx="5" fill="#4a3a85"/>
+    </g>
+    <!-- checkered finish -->
+    <path d="M270 52h10v10h-10zM290 52h10v10h-10zM280 62h10v10h-10zM300 62h8v10h-8zM270 72h10v10h-10zM290 72h10v10h-10zM280 82h10v8h-10z" fill="#3a2400" opacity="0.55"/>
+    <!-- bolt on power-up -->
+    <path d="M160 99 148 116h9l-2 11 13-17h-9z" fill="#fff6a8"/>
+    <!-- question mark on surprise -->
+    <text x="202" y="163" font-size="26" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Arial, sans-serif">?</text>
+  </g>
+
+  <!-- Ladder -->
+  <g transform="rotate(28 150 150)">
+    <path d="M135 70v170M165 70v170" stroke="#1a1028" stroke-width="13" stroke-linecap="round"/>
+    <path d="M135 92h30M135 120h30M135 148h30M135 176h30M135 204h30M135 228h30" stroke="#1a1028" stroke-width="10" stroke-linecap="round"/>
+    <path d="M135 92h30M135 120h30M135 148h30M135 176h30M135 204h30M135 228h30" stroke="#f2c37c" stroke-width="6" stroke-linecap="round"/>
+    <path d="M135 70v170M165 70v170" stroke="#c9843f" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <!-- Snake -->
+  <path d="M300 70c-40 6-62 30-40 56s20 52-24 62-58 34-34 58" stroke="#1a1028" stroke-width="27" stroke-linecap="round"/>
+  <path d="M300 70c-40 6-62 30-40 56s20 52-24 62-58 34-34 58" stroke="url(#ssSnake)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M286 76c-30 8-44 28-26 50s16 50-24 62" stroke="#c6ff9a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 11"/>
+  <!-- Head -->
+  <ellipse cx="312" cy="68" rx="25" ry="19" fill="#1a1028" transform="rotate(-12 312 68)"/>
+  <ellipse cx="312" cy="68" rx="21" ry="15" fill="#4fcf68" transform="rotate(-12 312 68)"/>
+  <circle cx="318" cy="58" r="6" fill="#fff"/><circle cx="320" cy="58" r="3" fill="#111"/>
+  <circle cx="324" cy="73" r="6" fill="#fff"/><circle cx="326" cy="73" r="3" fill="#111"/>
+  <path d="M332 70l16-4m0 0 6-6m-6 6 7 3" stroke="#ff3b4d" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Pawns -->
+  <circle cx="112" cy="232" r="15" fill="#ff5d73" stroke="#fff" stroke-width="4"/>
+  <circle cx="338" cy="214" r="15" fill="#3ec7ff" stroke="#fff" stroke-width="4"/>
+
+  <!-- Die -->
+  <g transform="rotate(14 336 248)">
+    <rect x="312" y="224" width="48" height="48" rx="11" fill="#fff" stroke="#1a1028" stroke-width="3"/>
+    <circle cx="325" cy="237" r="4.5" fill="#2a2a3a"/><circle cx="347" cy="237" r="4.5" fill="#2a2a3a"/>
+    <circle cx="336" cy="248" r="4.5" fill="#2a2a3a"/>
+    <circle cx="325" cy="259" r="4.5" fill="#2a2a3a"/><circle cx="347" cy="259" r="4.5" fill="#2a2a3a"/>
+  </g>
+</svg>
