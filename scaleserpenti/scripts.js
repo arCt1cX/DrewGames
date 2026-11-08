@@ -342,14 +342,29 @@ document.addEventListener('DOMContentLoaded', () => {
             if (c === N) type = 'finish';
             if (c === 1) type = 'start';
             let inner = `<span class="num">${c}</span>`;
-            if (type === 'finish') inner += `<span class="badge t-finish">${icon('flag')}</span>`;
-            else if (type === 'start') inner += `<span class="badge t-start"><b>${t.startLabel}</b></span>`;
-            else if (type !== 'normal') inner += `<span class="badge t-${type}">${icon(type)}</span>`;
+            if (type !== 'normal') inner += `<span class="art">${squareArt(type, t)}</span>`;
             if (traps[c] !== undefined) inner += `<span class="trap-mark" style="--pc:${players[traps[c]].color}">${icon('trap')}</span>`;
             const alt = (col + row) % 2 ? ' alt' : '';
-            html += `<div class="cell${alt}" data-c="${c}" style="grid-column:${col + 1};grid-row:${row + 1}">${inner}</div>`;
+            const sp = type !== 'normal' ? ` sp s-${type}` : '';
+            html += `<div class="cell${alt}${sp}" data-c="${c}" style="grid-column:${col + 1};grid-row:${row + 1}">${inner}</div>`;
         }
         gridEl.innerHTML = html;
+    }
+
+    // Artwork printed on special squares (flat "ink on paper" style)
+    function squareArt(type, t) {
+        const sv = inner => `<svg viewBox="0 0 40 40" aria-hidden="true">${inner}</svg>`;
+        const ink = 'stroke="#3b2410" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"';
+        switch (type) {
+            case 'power': return sv(`<path d="M23.5 4 9 22.5h9.2L15.6 36 31 16.5h-9.4z" fill="#f2b81c" ${ink}/><path d="M21 8.5 13 19" stroke="#fff3b0" stroke-width="1.6" stroke-linecap="round"/>`);
+            case 'event': return sv(`<circle cx="20" cy="20" r="14.5" fill="#f08a2c" ${ink}/><path d="M15.3 15.4a4.9 4.9 0 1 1 7 4.4c-1.5.7-2.3 1.7-2.3 3.3v1" fill="none" stroke="#fff8ea" stroke-width="3.4" stroke-linecap="round"/><circle cx="20" cy="29" r="2.1" fill="#fff8ea"/>`);
+            case 'swap': return sv(`<path d="M7 14h20.5l-4.5-4.5M7 14l0 0" fill="none" stroke="#3b2410" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14h20.5l-4.5-4.5" fill="none" stroke="#1fa58f" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M33 26H12.5l4.5 4.5" fill="none" stroke="#3b2410" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M33 26H12.5l4.5 4.5" fill="none" stroke="#e0566b" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>`);
+            case 'teleport': return sv(`<circle cx="20" cy="20" r="15" fill="#3a1d5e" ${ink}/><g class="spin"><path d="M20 20c0-2 2.5-2.4 3.6-.9 1.6 2.1-.2 5.4-3.6 5.4-4.2 0-6.6-4.6-4.6-8.4 2.4-4.6 9.4-5 12.6-.6 3.6 5-.2 12.8-8 12.8" fill="none" stroke="#e7a6ff" stroke-width="2.4" stroke-linecap="round"/></g><circle cx="20" cy="20" r="15" fill="none" stroke="#b25ae6" stroke-width="1.6" stroke-dasharray="2 3"/>`);
+            case 'cliff': return sv(`<path d="M5 21 9 13l5 2 4-6 5 3 5-3 4 6 4 4-3 6 2 5-7 1-5-3-6 4-5-4-6-2z" fill="#4a2a12" ${ink}/><path d="M9 21l3-5 5 1.5 3.5-4.5 4 2.5 4.5-2 3 4.5 2.5 3-2.5 4 1 3.5-5 .5-4-2.5-5 3-3.5-3-4.5-1.5z" fill="#120804"/><path d="M5 21 1.5 19M35 19l3.5-2M14 34l-1 4M27 34l1 4" stroke="#3b2410" stroke-width="1.2" stroke-linecap="round"/>`);
+            case 'start': return sv(`<path d="M6 25h21l-5-5M27 25l-5 5" fill="none" stroke="#2a8a4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="20" y="18" text-anchor="middle" font-family="Bricolage Grotesque, Arial, sans-serif" font-weight="800" font-size="11" fill="#2a8a4f">${esc(t.startLabel)}</text>`);
+            case 'finish': return sv(`<path d="M11 36V5" stroke="#3b2410" stroke-width="2.4" stroke-linecap="round"/><path d="M12 6h20v13H12z" fill="#fff8ea" ${ink}/><path d="M12 6h5v4.3h-5zM22 6h5v4.3h-5zM17 10.3h5v4.4h-5zM27 10.3h5v4.4h-5zM12 14.7h5V19h-5zM22 14.7h5V19h-5z" fill="#2b1a0c"/>`);
+        }
+        return '';
     }
 
     function renderArt() {
@@ -448,21 +463,26 @@ document.addEventListener('DOMContentLoaded', () => {
         players.forEach((p, i) => (groups[p.pos] = groups[p.pos] || []).push(i));
         if (tokensEl.children.length !== players.length) {
             tokensEl.innerHTML = players.map((p, i) =>
-                `<div class="token" data-i="${i}" style="--pc:${p.color}"><span>${esc(tokenLabel(i))}</span></div>`).join('');
+                `<div class="token" data-i="${i}" style="--pc:${p.color}"><div class="pawn">${pawnSvg(p.color)}</div></div>`).join('');
         }
         players.forEach((p, i) => {
             const el = tokensEl.children[i];
             const g = groups[p.pos];
             const k = g.length, idx = g.indexOf(i);
             const { x, y } = cellXY(p.pos);
+            // Pawns sharing a square stand side by side (two rows if many)
             let ox = 0, oy = 0;
             if (k > 1) {
-                const ang = (idx / k) * Math.PI * 2 - Math.PI / 2;
-                const r = k > 3 ? 2.2 : 1.8;
-                ox = Math.cos(ang) * r; oy = Math.sin(ang) * r;
+                const perRow = k <= 3 ? k : Math.ceil(k / 2);
+                const row = Math.floor(idx / perRow), colI = idx % perRow;
+                const inRow = row === 0 ? perRow : k - perRow;
+                const sp = perRow >= 4 ? 2.1 : 2.6;
+                ox = (colI - (inRow - 1) / 2) * sp;
+                oy = k <= 3 ? (colI % 2 ? 0.9 : -0.3) : (row === 0 ? -1.3 : 1.5) * CELL_H / 10;
             }
             el.style.left = ((x + ox) / 100 * 100) + '%';
             el.style.top = ((y + oy) / H * 100) + '%';
+            el.style.zIndex = String(10 + Math.round((y + oy) * 4) + (i === current ? 1 : 0));
             el.classList.toggle('crowd', k > 1);
             el.classList.toggle('current', i === current);
             if (highlight === i) { el.classList.remove('hop'); void el.offsetWidth; el.classList.add('hop'); }
@@ -470,6 +490,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function tokenEl(i) { return tokensEl.children[i]; }
+
+    // Classic board-game pawn in the player's colour
+    function pawnSvg(color, cls = 'pawn-svg') {
+        return `<svg class="${cls}" viewBox="0 0 40 60" aria-hidden="true">` +
+            `<ellipse cx="20" cy="55.6" rx="15.5" ry="3.8" fill="rgba(40,22,6,.32)"/>` +
+            `<g stroke="rgba(30,16,4,.6)" stroke-width="1.3" stroke-linejoin="round">` +
+            `<path d="M5.5 52.4c0-4.2 3.2-6.4 7.6-7.4L15.7 31h8.6l2.6 14c4.4 1 7.6 3.2 7.6 7.4 0 1.7-6.5 3-14.5 3S5.5 54.1 5.5 52.4z" fill="${color}"/>` +
+            `<ellipse cx="20" cy="29.6" rx="8.4" ry="2.9" fill="${color}"/>` +
+            `<circle cx="20" cy="16.5" r="10" fill="${color}"/></g>` +
+            `<path d="M9.4 50.6c.6-2.6 2.6-3.8 4.8-4.4l2.1-12.6h2L16.9 46.9c-2.3.8-4 2-4.5 4.3z" fill="rgba(255,255,255,.4)"/>` +
+            `<path d="M27.2 45.6c3.2.9 4.9 2.7 5 5.3-1.1.6-2.3 1-3.5 1.3.1-2.5-.9-4.3-2.7-5.4z" fill="rgba(0,0,0,.2)"/>` +
+            `<path d="M23.5 7.3a10 10 0 0 1 0 18.4a12 12 0 0 0 0-18.4z" fill="rgba(0,0,0,.16)"/>` +
+            `<ellipse cx="16.3" cy="12.4" rx="3.6" ry="3" fill="rgba(255,255,255,.55)"/>` +
+            `</svg>`;
+    }
 
     // Initial of the name, or the player number when two players share it
     function tokenLabel(i) {
@@ -1003,7 +1038,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (o.dice) html += `<div class="face-grid">${[1, 2, 3, 4, 5, 6].map(v => `<button class="face-btn" data-v="${v}">${dieSvg(v)}</button>`).join('')}</div>`;
             const buttons = o.buttons || [{ label: t.ok, value: true }];
             html += `<div class="card-buttons ${buttons.length > 2 ? 'stack' : ''}">` + buttons.map((b, i) =>
-                `<button class="btn ${b.cls === 'ghost' ? 'ghost-btn' : b.cls === 'player' ? 'player-btn' : 'primary-btn'} card-btn" data-b="${i}" ${b.color ? `style="--pc:${b.color}"` : ''}>${b.icon ? icon(b.icon) : ''}${b.dot ? `<i class="dot" style="background:${b.color}"></i>` : ''}<span>${esc(b.label)}</span>${b.extra ? `<em>${b.extra}</em>` : ''}</button>`).join('') + '</div>';
+                `<button class="btn ${b.cls === 'ghost' ? 'ghost-btn' : b.cls === 'player' ? 'player-btn' : 'primary-btn'} card-btn" data-b="${i}" ${b.color ? `style="--pc:${b.color}"` : ''}>${b.icon ? icon(b.icon) : ''}${b.dot ? pawnSvg(b.color, 'mini-pawn') : ''}<span>${esc(b.label)}</span>${b.extra ? `<em>${b.extra}</em>` : ''}</button>`).join('') + '</div>';
             modalCard.innerHTML = html;
             modalCard.className = 'modal-card' + (o.wide ? ' wide' : '');
             modalEl.classList.add('open');
@@ -1035,7 +1070,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let body = `<div class="legend">`;
         body += `<h4>${esc(t.legendRules)}</h4><ul class="lg-rules">${t.rules.map(r => `<li>${esc(r)}</li>`).join('')}</ul>`;
         body += `<h4>${esc(t.legendTiles)}</h4>`;
-        tiles.forEach(k => body += row(tileIcon[k] || k, t.tiles[k].name, fmt(t.tiles[k].desc, { x: TRAP_BACK }), 'tile-' + k));
+        const printed = ['power', 'event', 'swap', 'teleport', 'cliff', 'finish'];
+        tiles.forEach(k => {
+            const desc = fmt(t.tiles[k].desc, { x: TRAP_BACK });
+            if (printed.includes(k)) body += `<div class="lg-row"><div class="lg-ic lg-art s-${k}">${squareArt(k, t)}</div><div><b>${esc(t.tiles[k].name)}</b><span>${esc(desc)}</span></div></div>`;
+            else body += row(tileIcon[k] || k, t.tiles[k].name, desc, 'tile-' + k);
+        });
         body += `<h4>${esc(t.legendItems)}</h4>`;
         Object.keys(ITEM_WEIGHTS).forEach(k => {
             const it = { type: k, v: 'X' };
@@ -1081,7 +1121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ranking = players.map((p, i) => i).sort((a, b) => players[b].pos - players[a].pos);
         stripEl.innerHTML = players.map((p, i) => `
             <div class="chip ${i === current ? 'current' : ''}" style="--pc:${p.color}">
-                <span class="chip-dot">${esc(tokenLabel(i))}</span>
+                <span class="chip-pawn">${pawnSvg(p.color, 'mini-pawn')}</span>
                 <span class="chip-name">${esc(p.name)}</span>
                 <span class="chip-pos">${p.pos}</span>
                 ${ranking[0] === i && p.pos > 1 ? '<span class="chip-crown"></span>' : ''}
@@ -1095,7 +1135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const t = T();
         const p = players[current];
         if (!p) return;
-        turnNameEl.innerHTML = `<i class="dot" style="background:${p.color}"></i>${esc(fmt(t.turnOf, { name: p.name }))}`;
+        turnNameEl.innerHTML = `${pawnSvg(p.color, 'mini-pawn')}${esc(fmt(t.turnOf, { name: p.name }))}`;
         turnNameEl.style.setProperty('--pc', p.color);
         const tags = [];
         if (p.nextBonus > 0) tags.push(['good', fmt(t.tagBonus, { x: p.nextBonus })]);
@@ -1241,7 +1281,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const order = players.map((p, i) => i).sort((a, b) => (b === winner) - (a === winner) || players[b].pos - players[a].pos);
         $('final-standings').innerHTML = order.map((i, r) => `
             <div class="standings-row ${i === winner ? 'leader' : ''}" style="--pc:${players[i].color}">
-                <span class="rank-name"><i class="dot" style="background:${players[i].color}"></i>${r + 1}. ${esc(players[i].name)}</span>
+                <span class="rank-name">${pawnSvg(players[i].color, 'mini-pawn')}${r + 1}. ${esc(players[i].name)}</span>
                 <span class="rank-score">${esc(fmt(t.cellShort, { c: players[i].pos }))}</span>
             </div>`).join('');
         showScreen('gameover');
