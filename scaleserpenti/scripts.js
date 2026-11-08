@@ -239,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateBoard() {
         ROWS = N / COLS;
+        CELL_H = 10;
         missileBack = Math.max(6, Math.round(N / 20));
         const scale = N / 200;
         const used = new Set([1, N]);
@@ -319,42 +320,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================================================
     // Board rendering
     // ===================================================================
+    // Cell geometry in SVG units: cells are 10 wide and CELL_H tall, so the
+    // board can stretch to fill its container (cells needn't be square).
+    let CELL_H = 10;
     function cellXY(c) {
         const idx = c - 1;
         const rb = Math.floor(idx / COLS);
         let col = idx % COLS;
         if (rb % 2 === 1) col = COLS - 1 - col;
         const row = ROWS - 1 - rb;
-        return { col, row, x: (col + 0.5) * 10, y: (row + 0.5) * 10 };
+        return { col, row, x: (col + 0.5) * 10, y: (row + 0.5) * CELL_H };
     }
 
     function renderBoard() {
         const t = T();
-        boardEl.style.aspectRatio = `${COLS} / ${ROWS}`;
         gridEl.style.gridTemplateRows = `repeat(${ROWS}, 1fr)`;
         let html = '';
         for (let c = 1; c <= N; c++) {
             const { col, row } = cellXY(c);
-            const rb = rowOf(c);
-            const hue = (265 + rb * 23) % 360;
-            const light = (col + row) % 2 === 0 ? 24 : 29;
             let type = cells[c].type;
             if (c === N) type = 'finish';
             if (c === 1) type = 'start';
             let inner = `<span class="num">${c}</span>`;
-            if (type === 'finish') inner += icon('flag', 'cell-ic');
-            else if (type === 'start') inner += `<span class="start-lbl">${t.startLabel}</span>`;
-            else if (type !== 'normal') inner += icon(type, 'cell-ic');
+            if (type === 'finish') inner += `<span class="badge t-finish">${icon('flag')}</span>`;
+            else if (type === 'start') inner += `<span class="badge t-start"><b>${t.startLabel}</b></span>`;
+            else if (type !== 'normal') inner += `<span class="badge t-${type}">${icon(type)}</span>`;
             if (traps[c] !== undefined) inner += `<span class="trap-mark" style="--pc:${players[traps[c]].color}">${icon('trap')}</span>`;
-            html += `<div class="cell t-${type}" data-c="${c}" style="grid-column:${col + 1};grid-row:${row + 1};--h:${hue};--l:${light}%">${inner}</div>`;
+            const alt = (col + row) % 2 ? ' alt' : '';
+            html += `<div class="cell${alt}" data-c="${c}" style="grid-column:${col + 1};grid-row:${row + 1}">${inner}</div>`;
         }
         gridEl.innerHTML = html;
     }
 
     function renderArt() {
-        const H = ROWS * 10;
-        artEl.setAttribute('viewBox', `0 0 100 ${H}`);
+        const H = ROWS * CELL_H;
+        artEl.setAttribute('viewBox', `0 0 100 ${H.toFixed(3)}`);
         let out = '';
+        const OUT = 'rgba(52,30,10,.6)';
         // Ladders
         ladders.forEach(l => {
             const a = cellXY(l.from), b = cellXY(l.to);
@@ -369,9 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cx = ax + (bx - ax) * s, cy = ay + (by - ay) * s;
                 rungs += `M${(cx - px * w).toFixed(2)} ${(cy - py * w).toFixed(2)} L${(cx + px * w).toFixed(2)} ${(cy + py * w).toFixed(2)} `;
             }
-            out += `<g class="ladder"><path d="${rails} ${rungs}" stroke="rgba(8,5,14,.75)" stroke-width="2" fill="none" stroke-linecap="round"/>` +
-                `<path d="${rungs}" stroke="#f2c37c" stroke-width="0.9" fill="none" stroke-linecap="round"/>` +
-                `<path d="${rails}" stroke="#c9843f" stroke-width="1.15" fill="none" stroke-linecap="round"/></g>`;
+            out += `<g class="ladder"><path d="${rails} ${rungs}" stroke="${OUT}" stroke-width="1.9" fill="none" stroke-linecap="round"/>` +
+                `<path d="${rungs}" stroke="#e0a55c" stroke-width="0.9" fill="none" stroke-linecap="round"/>` +
+                `<path d="${rails}" stroke="#a8652a" stroke-width="1.15" fill="none" stroke-linecap="round"/></g>`;
         });
         // Snakes
         snakes.forEach(s => {
@@ -379,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy);
             const ux = dx / L, uy = dy / L, px = -uy, py = ux;
             const waves = Math.max(1.5, L / 15);
-            const amp = Math.min(3.6, 1.6 + L / 35);
+            const amp = Math.min(3.4, 1.5 + L / 35);
             const ph = s.from % 2 ? 1 : -1;
             const pts = [];
             const NP = 56;
@@ -394,35 +396,46 @@ document.addEventListener('DOMContentLoaded', () => {
             const CH = 7;
             for (let i = 0; i < NP; i += CH) {
                 const t = i / NP;
-                const w = 3.1 * (1 - t * 0.72);
+                const w = 2.5 * (1 - t * 0.7);
                 const d = seg(i, Math.min(NP, i + CH));
-                outline += `<path d="${d}" stroke="rgba(8,5,14,.7)" stroke-width="${(w + 0.9).toFixed(2)}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+                outline += `<path d="${d}" stroke="${OUT}" stroke-width="${(w + 0.8).toFixed(2)}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
                 body += `<path d="${d}" stroke="${s.color[0]}" stroke-width="${w.toFixed(2)}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
             }
-            const pattern = `<path d="${seg(3, Math.round(NP * 0.8))}" stroke="${s.color[1]}" stroke-width="0.85" stroke-dasharray="0.4 2.6" fill="none" stroke-linecap="round"/>`;
-            const ang = Math.atan2(pts[0][1] - pts[2][1], pts[0][0] - pts[2][0]) * 180 / Math.PI;
-            const head = `<g transform="translate(${a.x.toFixed(2)} ${a.y.toFixed(2)}) rotate(${ang.toFixed(1)})">` +
-                `<path d="M3.6 0 L5.4 0 M5.4 0 L6.3 -0.8 M5.4 0 L6.3 0.8" stroke="#ff3b4d" stroke-width="0.45" stroke-linecap="round" fill="none"/>` +
-                `<ellipse cx="0.6" cy="0" rx="3.4" ry="2.6" fill="rgba(8,5,14,.7)"/>` +
-                `<ellipse cx="0.6" cy="0" rx="3" ry="2.2" fill="${s.color[0]}"/>` +
-                `<circle cx="1.6" cy="-1.05" r="0.75" fill="#fff"/><circle cx="1.6" cy="1.05" r="0.75" fill="#fff"/>` +
-                `<circle cx="1.85" cy="-1.05" r="0.38" fill="#111"/><circle cx="1.85" cy="1.05" r="0.38" fill="#111"/></g>`;
-            out += `<g class="snake">${outline}${body}${pattern}${head}</g>`;
+            const pattern = `<path d="${seg(4, Math.round(NP * 0.8))}" stroke="${s.color[1]}" stroke-width="0.75" stroke-dasharray="0.35 2.3" fill="none" stroke-linecap="round"/>`;
+            // Head: a smooth teardrop that grows out of the neck. Its outline is
+            // drawn together with the body's outline (under every fill), so
+            // there is no seam between neck and head.
+            const ang = Math.atan2(pts[0][1] - pts[3][1], pts[0][0] - pts[3][0]) * 180 / Math.PI;
+            const tf = `translate(${a.x.toFixed(2)} ${a.y.toFixed(2)}) rotate(${ang.toFixed(1)})`;
+            const headPath = 'M-1.6 -1.2 C-0.3 -1.65 1.3 -1.75 2.05 -1 Q2.6 -0.45 2.6 0 Q2.6 0.45 2.05 1 C1.3 1.75 -0.3 1.65 -1.6 1.2 Z';
+            const tongue = `<g transform="${tf}"><path d="M2.4 0 L3.6 0 M3.6 0 L4.2 -0.55 M3.6 0 L4.2 0.55" stroke="#e8283c" stroke-width="0.32" stroke-linecap="round" fill="none"/></g>`;
+            const headOutline = `<g transform="${tf}"><path d="${headPath}" fill="${OUT}" stroke="${OUT}" stroke-width="0.8" stroke-linejoin="round"/></g>`;
+            const headFill = `<g transform="${tf}"><path d="${headPath}" fill="${s.color[0]}"/>` +
+                `<circle cx="1.15" cy="-0.72" r="0.48" fill="#fff"/><circle cx="1.15" cy="0.72" r="0.48" fill="#fff"/>` +
+                `<circle cx="1.3" cy="-0.72" r="0.26" fill="#111"/><circle cx="1.3" cy="0.72" r="0.26" fill="#111"/>` +
+                `<circle cx="2.25" cy="-0.32" r="0.09" fill="${OUT}"/><circle cx="2.25" cy="0.32" r="0.09" fill="${OUT}"/></g>`;
+            out += `<g class="snake">${tongue}${outline}${headOutline}${body}${pattern}${headFill}</g>`;
         });
         artEl.innerHTML = out;
     }
 
+    // The board always fills the container: full width, and at least the
+    // full height (taller boards scroll). In "Tutto" view it fits exactly.
     function layoutBoard() {
         const t = T();
         viewBtn.textContent = fitMode ? t.viewZoom : t.viewAll;
         boardWrap.classList.toggle('fit', fitMode);
-        if (fitMode) {
-            const w = Math.min(boardWrap.clientWidth - 4, (boardWrap.clientHeight - 4) * COLS / ROWS);
-            boardEl.style.width = Math.max(120, w) + 'px';
-        } else {
-            boardEl.style.width = '';
-        }
-        boardEl.style.setProperty('--cell', (boardEl.clientWidth / COLS) + 'px');
+        boardEl.style.width = '100%';
+        const W = boardEl.clientWidth || boardWrap.clientWidth;
+        const Hw = boardWrap.clientHeight;
+        const cw = W / COLS;
+        const ch = fitMode ? Hw / ROWS : Math.max(cw, Hw / ROWS);
+        boardEl.style.height = (ch * ROWS) + 'px';
+        CELL_H = 10 * ch / cw;
+        boardEl.style.setProperty('--cell', Math.min(cw, ch) + 'px');
+        boardEl.style.setProperty('--cellw', cw + 'px');
+        renderArt();
+        renderTokens();
     }
     window.addEventListener('resize', () => { if (screens.play.classList.contains('active')) layoutBoard(); });
 
@@ -430,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tokens
     // ===================================================================
     function renderTokens(highlight) {
-        const H = ROWS * 10;
+        const H = ROWS * CELL_H;
         const groups = {};
         players.forEach((p, i) => (groups[p.pos] = groups[p.pos] || []).push(i));
         if (tokensEl.children.length !== players.length) {
@@ -445,12 +458,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let ox = 0, oy = 0;
             if (k > 1) {
                 const ang = (idx / k) * Math.PI * 2 - Math.PI / 2;
-                const r = k > 3 ? 2.6 : 2.2;
+                const r = k > 3 ? 2.2 : 1.8;
                 ox = Math.cos(ang) * r; oy = Math.sin(ang) * r;
             }
             el.style.left = ((x + ox) / 100 * 100) + '%';
             el.style.top = ((y + oy) / H * 100) + '%';
-            el.classList.toggle('crowd', k > 2);
+            el.classList.toggle('crowd', k > 1);
             el.classList.toggle('current', i === current);
             if (highlight === i) { el.classList.remove('hop'); void el.offsetWidth; el.classList.add('hop'); }
         });
@@ -469,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function followToken(i, smooth = true) {
         if (fitMode || !players[i]) return;
         const { y } = cellXY(players[i].pos);
-        const ty = boardEl.offsetTop + (y / (ROWS * 10)) * boardEl.clientHeight;
+        const ty = boardEl.offsetTop + (y / (ROWS * CELL_H)) * boardEl.clientHeight;
         const mid = boardWrap.scrollTop + boardWrap.clientHeight / 2;
         if (!smooth || Math.abs(ty - mid) > boardWrap.clientHeight * 0.18) {
             boardWrap.scrollTo({ top: ty - boardWrap.clientHeight / 2, behavior: smooth ? 'smooth' : 'auto' });
@@ -788,7 +801,7 @@ document.addEventListener('DOMContentLoaded', () => {
         boardEl.appendChild(m);
         const ax = parseFloat(a.style.left), ay = parseFloat(a.style.top);
         const bx = parseFloat(b.style.left), by = parseFloat(b.style.top);
-        const ang = Math.atan2((by - ay) * ROWS / COLS, bx - ax) * 180 / Math.PI;
+        const ang = Math.atan2((by - ay) * boardEl.clientHeight, (bx - ax) * boardEl.clientWidth) * 180 / Math.PI;
         m.style.left = ax + '%'; m.style.top = ay + '%';
         m.style.transform = `translate(-50%,-50%) rotate(${ang}deg)`;
         followToken(to);
