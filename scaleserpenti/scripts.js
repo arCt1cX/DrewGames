@@ -511,13 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `</svg>`;
     }
 
-    // Initial of the name, or the player number when two players share it
-    function tokenLabel(i) {
-        const ini = n => n.trim().charAt(0).toUpperCase();
-        const mine = ini(players[i].name);
-        const dup = players.some((q, j) => j !== i && ini(q.name) === mine);
-        return dup ? String(i + 1) : mine;
-    }
 
     function followToken(i, smooth = true) {
         if (fitMode || !players[i]) return;
