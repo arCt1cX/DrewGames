@@ -117,13 +117,13 @@ const translations = {
         'scaleserpenti': {
             'title': 'Scale & Serpenti Party',
             'catchphrase': 'Scale, serpenti, missili e burroni: vince chi sopravvive!',
-            'description': 'Il classico Scale e Serpenti, ma fuori di testa. Il tabellone fino a 200 caselle è diverso a ogni partita e, oltre a scale e serpenti, è pieno di caselle speciali: potenziamenti da tenere nello zaino (missile che colpisce il primo, scudo, telecomando, dado truccato, trappole…), imprevisti positivi e negativi, portali che ti teletrasportano, caselle scambio e un burrone che ti rispedisce alla partenza!',
+            'description': 'Il classico Scale e Serpenti, ma fuori di testa. Il tabellone fino a 120 caselle è diverso a ogni partita e, oltre a scale e serpenti, è pieno di caselle speciali: potenziamenti da tenere nello zaino (missile che colpisce il primo, scudo, telecomando, dado truccato, trappole…), imprevisti positivi e negativi, portali che ti teletrasportano, caselle scambio e un burrone che ti rispedisce alla partenza!',
             'players': '2-8 giocatori',
             'time': '15-30 minuti',
             'difficulty': 'Facile',
             'features': [
                 'Tabellone generato a caso: ogni partita è diversa',
-                'Da 100 a 200 caselle, con scorrimento automatico',
+                'Da 80 a 120 caselle, sempre ben visibili anche da telefono',
                 '8 potenziamenti da collezionare e 18 imprevisti',
                 'Portali, scambi, trappole e il temibile burrone'
             ],
@@ -579,13 +579,13 @@ const translations = {
         'scaleserpenti': {
             'title': 'Snakes & Ladders Party',
             'catchphrase': 'Ladders, snakes, missiles and cliffs: last one standing wins!',
-            'description': 'Classic Snakes and Ladders, gone wild. The board, up to 200 squares, is different every game and on top of snakes and ladders it is full of special squares: power-ups to keep in your bag (a missile that hits the leader, shield, remote, loaded die, traps…), good and bad surprises, portals that teleport you, swap squares and a cliff that sends you back to the start!',
+            'description': 'Classic Snakes and Ladders, gone wild. The board, up to 120 squares, is different every game and on top of snakes and ladders it is full of special squares: power-ups to keep in your bag (a missile that hits the leader, shield, remote, loaded die, traps…), good and bad surprises, portals that teleport you, swap squares and a cliff that sends you back to the start!',
             'players': '2-8 players',
             'time': '15-30 minutes',
             'difficulty': 'Easy',
             'features': [
                 'Randomly generated board: every game is different',
-                '100 to 200 squares, with automatic scrolling',
+                '80 to 120 squares, easy to see even on a phone',
                 '8 power-ups to collect and 18 surprises',
                 'Portals, swaps, traps and the dreaded cliff'
             ],

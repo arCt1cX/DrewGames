@@ -83,7 +83,7 @@ body.playing #game-title h1 { font-size: 1.05rem; padding: 0 90px; white-space: 
 .board-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(10, 1fr); }
 .cell { position: relative; background: #f6e8c9; box-shadow: inset -1px -1px 0 rgba(120,78,36,.28); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; }
 .cell.alt { background: #ecd7ad; }
-.cell .num { position: absolute; top: 2px; left: 3px; font-size: max(7px, calc(var(--cell) * .24)); line-height: 1; font-weight: 700; color: #8a6036; font-family: var(--ui); pointer-events: none; }
+.cell .num { position: absolute; top: 2px; left: 3px; font-size: max(8px, calc(var(--cell) * .26)); line-height: 1; font-weight: 800; color: #14100a; font-family: var(--ui); pointer-events: none; }
 
 /* special squares: tinted square with a thin printed frame + flat artwork */
 .cell.sp::before { content: ''; position: absolute; inset: 5%; border-radius: 12%; border: 1.5px solid var(--sc); background: var(--tint); box-shadow: inset 0 0 0 2px rgba(255,250,238,.75), inset 0 0 0 3px color-mix(in srgb, var(--sc) 35%, transparent); pointer-events: none; }
@@ -98,7 +98,7 @@ body.playing #game-title h1 { font-size: 1.05rem; padding: 0 90px; white-space: 
 .cell .art { position: relative; width: min(58%, calc(var(--cell) * .58)); height: min(58%, calc(var(--cell) * .58)); transform: translate(6%, 12%); pointer-events: none; }
 .cell .art svg { width: 100%; height: 100%; display: block; overflow: visible; }
 .cell .art .spin { transform-origin: 20px 20px; animation: spin 7s linear infinite; }
-.cell.sp .num { z-index: 1; top: 9%; left: 11%; color: color-mix(in srgb, var(--sc) 70%, #3b2410); }
+.cell.sp .num { z-index: 1; top: 9%; left: 11%; color: #14100a; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .trap-mark { position: absolute; inset: 12%; border-radius: 8px; display: grid; place-items: center; background: color-mix(in srgb, var(--pc) 35%, #3a2a1a); box-shadow: 0 0 0 2px var(--pc); }
 .trap-mark .ic { width: 70%; height: 70%; color: #f3eadb; }
@@ -107,14 +107,14 @@ body.playing #game-title h1 { font-size: 1.05rem; padding: 0 90px; white-space: 
 
 /* ----- Tokens ----- */
 .tokens { position: absolute; inset: 0; pointer-events: none; }
-.token { position: absolute; width: calc(var(--cell) * .56); height: calc(var(--cell) * .84); transform: translate(-50%, -82%); transition: left .16s ease, top .16s ease; z-index: 10; }
-.token.crowd { width: calc(var(--cell) * .44); height: calc(var(--cell) * .66); }
-.pawn { width: 100%; height: 100%; transform-origin: 50% 92%; transition: opacity .35s, transform .35s; }
+.token { position: absolute; width: calc(var(--cell) * .8); height: calc(var(--cell) * 1.1); transform: translate(-50%, -84%); transition: left .16s ease, top .16s ease; z-index: 10; }
+.token.crowd { width: calc(var(--cell) * .64); height: calc(var(--cell) * .88); }
+.pawn { position: relative; width: 100%; height: 100%; transform-origin: 50% 90%; transition: opacity .35s, transform .35s; filter: drop-shadow(0 2px 2px rgba(30,16,4,.45)); }
 .pawn-svg { width: 100%; height: 100%; display: block; overflow: visible; }
-/* glowing ring on the board under the current player's pawn */
-.token::before { content: ''; position: absolute; left: 50%; top: 92%; width: 150%; height: 46%; transform: translate(-50%, -50%) scale(.4); border-radius: 50%; border: 2px solid var(--pc); background: color-mix(in srgb, var(--pc) 30%, transparent); opacity: 0; transition: .3s; pointer-events: none; }
-.token.current::before { opacity: 1; transform: translate(-50%, -50%) scale(1); animation: ringPulse 1.4s ease-in-out infinite; }
-@keyframes ringPulse { 50% { box-shadow: 0 0 10px 2px var(--pc); } }
+/* coloured disc on the board under every pawn; pulsing ring for the current one */
+.token::before { content: ''; position: absolute; left: 50%; top: 88%; width: 120%; height: 38%; transform: translate(-50%, -50%); border-radius: 50%; background: var(--pc); opacity: .55; box-shadow: 0 0 0 2px rgba(26,15,5,.55); pointer-events: none; transition: .3s; }
+.token.current::before { opacity: .9; width: 165%; height: 52%; box-shadow: 0 0 0 2.5px #fff, 0 0 0 4px rgba(26,15,5,.7); animation: ringPulse 1.2s ease-in-out infinite; }
+@keyframes ringPulse { 50% { box-shadow: 0 0 0 2.5px #fff, 0 0 0 4px rgba(26,15,5,.7), 0 0 14px 5px var(--pc); } }
 .token.current .pawn { animation: pawnIdle 1.6s ease-in-out infinite; }
 @keyframes pawnIdle { 50% { transform: translateY(-6%); } }
 .token.hop .pawn { animation: hop .17s ease-out; }
@@ -209,10 +209,10 @@ body.playing #game-title h1 { font-size: 1.05rem; padding: 0 90px; white-space: 
 .card-btn em b { font-family: var(--disp); background: rgba(0,0,0,.3); padding: 2px 8px; border-radius: 8px; }
 .player-btn { background: color-mix(in srgb, var(--pc) 20%, #1a1228); border: 1.5px solid var(--pc); color: #fff; text-transform: none; justify-content: flex-start; }
 .player-btn .mini-pawn { width: 17px; height: 25px; }
-.face-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 6px 6px 14px; }
-.face-btn { aspect-ratio: 1; border: none; border-radius: 14px; background: linear-gradient(145deg, #fff, #d9d9e3); color: #2a2a3a; padding: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,.4); }
-.face-btn:active { transform: scale(.92); }
-.face-btn svg { width: 100%; height: 100%; display: block; }
+.face-grid { display: grid; grid-template-columns: repeat(3, 64px); grid-auto-rows: 64px; gap: 14px; justify-content: center; margin: 8px 0 18px; }
+.face-btn { width: 64px; height: 64px; padding: 9px; border: none; border-radius: 14px; background: linear-gradient(145deg, #ffffff, #dcdce6); color: #2a2a3a; cursor: pointer; box-shadow: 0 4px 0 #a9a9b8, 0 8px 14px rgba(0,0,0,.45); transition: transform .1s; }
+.face-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #a9a9b8, 0 4px 8px rgba(0,0,0,.45); }
+.face-btn svg { width: 46px; height: 46px; display: block; }
 
 /* Legend */
 .legend h4 { font-family: var(--disp); color: var(--violet-2); text-transform: uppercase; font-size: .8rem; letter-spacing: .6px; margin: 14px 0 8px; }

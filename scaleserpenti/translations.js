@@ -3,7 +3,7 @@ const gameTranslations = {
     'it': {
         'gameTitle': 'Scale & Serpenti Party',
         'pageTitleDesc': 'Scale & Serpenti Party - Il gioco da tavolo pazzo | DrewGames',
-        'metaDescription': 'Scale e Serpenti con 200 caselle, tabellone sempre diverso, potenziamenti, imprevisti, portali, burroni e missili! Il gioco da tavolo pazzo da fare con gli amici.',
+        'metaDescription': 'Scale e Serpenti con 120 caselle, tabellone sempre diverso, potenziamenti, imprevisti, portali, burroni e missili! Il gioco da tavolo pazzo da fare con gli amici.',
         'home': 'Home',
 
         // Setup
@@ -188,7 +188,7 @@ const gameTranslations = {
     'en': {
         'gameTitle': 'Snakes & Ladders Party',
         'pageTitleDesc': 'Snakes & Ladders Party - The crazy board game | DrewGames',
-        'metaDescription': 'Snakes and Ladders with 200 squares, a new board every game, power-ups, surprises, portals, cliffs and missiles! The crazy board game to play with friends.',
+        'metaDescription': 'Snakes and Ladders with 120 squares, a new board every game, power-ups, surprises, portals, cliffs and missiles! The crazy board game to play with friends.',
         'home': 'Home',
 
         // Setup

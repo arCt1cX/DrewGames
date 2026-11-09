@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================================================
     // State
     // ===================================================================
-    let N = 200, ROWS = 20, bounce = true, density = 'normal', missileBack = 10;
+    let N = 120, ROWS = 12, bounce = true, density = 'normal', missileBack = 8;
     let cells = [];          // index 1..N → { type }
     let jumps = {};          // from → to (ladders & snakes)
     let ladders = [], snakes = [];
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startGameBtn.addEventListener('click', () => {
         const t = T();
         const count = parseInt(playerCountSelect.value);
-        N = parseInt($('board-size').value) || 200;
+        N = parseInt($('board-size').value) || 120;
         density = $('density').value || 'normal';
         bounce = $('bounce').value !== 'off';
         players = [];
@@ -240,14 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateBoard() {
         ROWS = N / COLS;
         CELL_H = 10;
-        missileBack = Math.max(6, Math.round(N / 20));
-        const scale = N / 200;
+        missileBack = Math.max(6, Math.round(N / 15));
         const used = new Set([1, N]);
         cells = Array.from({ length: N + 1 }, () => ({ type: 'normal' }));
         jumps = {}; ladders = []; snakes = []; traps = {};
 
-        const nL = Math.max(5, Math.round(10 * scale));
-        const nS = Math.max(5, Math.round(10 * scale));
+        const nL = Math.max(5, Math.round(N / 17));
+        const nS = Math.max(5, Math.round(N / 17));
         const maxLen = Math.max(16, Math.round(N * 0.19));
 
         const place = (count, isLadder) => {
@@ -289,10 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
         place(nS, false);
 
         const mult = { few: 0.55, normal: 1, many: 1.7 }[density] || 1;
-        const nPower = Math.max(3, Math.round(12 * scale * mult));
-        const nEvent = Math.max(3, Math.round(12 * scale * mult));
-        const nSwap = N >= 150 ? 2 : 1;
-        const nTele = N >= 150 ? 2 : 1;
+        const nPower = Math.max(3, Math.round(N / 16 * mult));
+        const nEvent = Math.max(3, Math.round(N / 16 * mult));
+        const nSwap = N >= 100 ? 2 : 1;
+        const nTele = N >= 100 ? 2 : 1;
 
         const putRandom = (type, count, lo, hi) => {
             for (let i = 0; i < count; i++) {
@@ -476,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const perRow = k <= 3 ? k : Math.ceil(k / 2);
                 const row = Math.floor(idx / perRow), colI = idx % perRow;
                 const inRow = row === 0 ? perRow : k - perRow;
-                const sp = perRow >= 4 ? 2.1 : 2.6;
+                const sp = perRow >= 4 ? 2.3 : perRow === 3 ? 3.0 : 3.6;
                 ox = (colI - (inRow - 1) / 2) * sp;
                 oy = k <= 3 ? (colI % 2 ? 0.9 : -0.3) : (row === 0 ? -1.3 : 1.5) * CELL_H / 10;
             }
@@ -491,12 +490,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function tokenEl(i) { return tokensEl.children[i]; }
 
-    // Classic board-game pawn in the player's colour
+    // Classic board-game pawn in the player's colour. On the board it gets
+    // a white "sticker" outline with a dark edge so it pops off the squares.
     function pawnSvg(color, cls = 'pawn-svg') {
-        return `<svg class="${cls}" viewBox="0 0 40 60" aria-hidden="true">` +
-            `<ellipse cx="20" cy="55.6" rx="15.5" ry="3.8" fill="rgba(40,22,6,.32)"/>` +
-            `<g stroke="rgba(30,16,4,.6)" stroke-width="1.3" stroke-linejoin="round">` +
-            `<path d="M5.5 52.4c0-4.2 3.2-6.4 7.6-7.4L15.7 31h8.6l2.6 14c4.4 1 7.6 3.2 7.6 7.4 0 1.7-6.5 3-14.5 3S5.5 54.1 5.5 52.4z" fill="${color}"/>` +
+        const body = 'M5.5 52.4c0-4.2 3.2-6.4 7.6-7.4L15.7 31h8.6l2.6 14c4.4 1 7.6 3.2 7.6 7.4 0 1.7-6.5 3-14.5 3S5.5 54.1 5.5 52.4z';
+        const sil = `<path d="${body}"/><ellipse cx="20" cy="29.6" rx="8.4" ry="2.9"/><circle cx="20" cy="16.5" r="10"/>`;
+        const big = cls === 'pawn-svg';
+        return `<svg class="${cls}" viewBox="-4 -4 48 66" aria-hidden="true">` +
+            (big ? `<ellipse cx="20" cy="56" rx="17" ry="4.4" fill="rgba(30,16,4,.4)"/>` +
+                `<g fill="#1a0f05" stroke="#1a0f05" stroke-width="8" stroke-linejoin="round">${sil}</g>` +
+                `<g fill="#fff" stroke="#fff" stroke-width="5" stroke-linejoin="round">${sil}</g>` : '') +
+            `<g stroke="rgba(30,16,4,.7)" stroke-width="1.3" stroke-linejoin="round">` +
+            `<path d="${body}" fill="${color}"/>` +
             `<ellipse cx="20" cy="29.6" rx="8.4" ry="2.9" fill="${color}"/>` +
             `<circle cx="20" cy="16.5" r="10" fill="${color}"/></g>` +
             `<path d="M9.4 50.6c.6-2.6 2.6-3.8 4.8-4.4l2.1-12.6h2L16.9 46.9c-2.3.8-4 2-4.5 4.3z" fill="rgba(255,255,255,.4)"/>` +
