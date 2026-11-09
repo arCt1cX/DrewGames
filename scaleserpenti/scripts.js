@@ -350,18 +350,49 @@ document.addEventListener('DOMContentLoaded', () => {
         gridEl.innerHTML = html;
     }
 
-    // Artwork printed on special squares (flat "ink on paper" style)
+    // Artwork printed on special squares: single-colour line art (like ink
+    // printed on a cardboard board), drawn in the square's frame colour.
     function squareArt(type, t) {
-        const sv = inner => `<svg viewBox="0 0 40 40" aria-hidden="true">${inner}</svg>`;
-        const ink = 'stroke="#3b2410" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"';
+        const P = 'fill="rgba(255,252,244,.75)"';
+        const sv = inner => `<svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
         switch (type) {
-            case 'power': return sv(`<path d="M23.5 4 9 22.5h9.2L15.6 36 31 16.5h-9.4z" fill="#f2b81c" ${ink}/><path d="M21 8.5 13 19" stroke="#fff3b0" stroke-width="1.6" stroke-linecap="round"/>`);
-            case 'event': return sv(`<circle cx="20" cy="20" r="14.5" fill="#f08a2c" ${ink}/><path d="M15.3 15.4a4.9 4.9 0 1 1 7 4.4c-1.5.7-2.3 1.7-2.3 3.3v1" fill="none" stroke="#fff8ea" stroke-width="3.4" stroke-linecap="round"/><circle cx="20" cy="29" r="2.1" fill="#fff8ea"/>`);
-            case 'swap': return sv(`<path d="M7 14h20.5l-4.5-4.5M7 14l0 0" fill="none" stroke="#3b2410" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14h20.5l-4.5-4.5" fill="none" stroke="#1fa58f" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M33 26H12.5l4.5 4.5" fill="none" stroke="#3b2410" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M33 26H12.5l4.5 4.5" fill="none" stroke="#e0566b" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>`);
-            case 'teleport': return sv(`<circle cx="20" cy="20" r="15" fill="#3a1d5e" ${ink}/><g class="spin"><path d="M20 20c0-2 2.5-2.4 3.6-.9 1.6 2.1-.2 5.4-3.6 5.4-4.2 0-6.6-4.6-4.6-8.4 2.4-4.6 9.4-5 12.6-.6 3.6 5-.2 12.8-8 12.8" fill="none" stroke="#e7a6ff" stroke-width="2.4" stroke-linecap="round"/></g><circle cx="20" cy="20" r="15" fill="none" stroke="#b25ae6" stroke-width="1.6" stroke-dasharray="2 3"/>`);
-            case 'cliff': return sv(`<path d="M5 21 9 13l5 2 4-6 5 3 5-3 4 6 4 4-3 6 2 5-7 1-5-3-6 4-5-4-6-2z" fill="#4a2a12" ${ink}/><path d="M9 21l3-5 5 1.5 3.5-4.5 4 2.5 4.5-2 3 4.5 2.5 3-2.5 4 1 3.5-5 .5-4-2.5-5 3-3.5-3-4.5-1.5z" fill="#120804"/><path d="M5 21 1.5 19M35 19l3.5-2M14 34l-1 4M27 34l1 4" stroke="#3b2410" stroke-width="1.2" stroke-linecap="round"/>`);
-            case 'start': return sv(`<path d="M6 25h21l-5-5M27 25l-5 5" fill="none" stroke="#2a8a4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="20" y="18" text-anchor="middle" font-family="Bricolage Grotesque, Arial, sans-serif" font-weight="800" font-size="11" fill="#2a8a4f">${esc(t.startLabel)}</text>`);
-            case 'finish': return sv(`<path d="M11 36V5" stroke="#3b2410" stroke-width="2.4" stroke-linecap="round"/><path d="M12 6h20v13H12z" fill="#fff8ea" ${ink}/><path d="M12 6h5v4.3h-5zM22 6h5v4.3h-5zM17 10.3h5v4.4h-5zM27 10.3h5v4.4h-5zM12 14.7h5V19h-5zM22 14.7h5V19h-5z" fill="#2b1a0c"/>`);
+            // treasure chest = you get an item
+            case 'power': return sv(
+                `<path d="M7 19h26v12.5a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" ${P}/>` +
+                `<path d="M7 19c0-6.5 4.5-10.5 13-10.5S33 12.5 33 19z" ${P}/>` +
+                `<path d="M12.5 10.2V33.5M27.5 10.2V33.5" stroke-width="1.4" opacity=".55"/>` +
+                `<rect x="17" y="16" width="6" height="7.5" rx="1.3" ${P}/><path d="M20 19.3v1.6"/>`);
+            // a drawn card with a question mark
+            case 'event': return sv(
+                `<rect x="13.5" y="8" width="17" height="24" rx="2.5" transform="rotate(10 22 20)" ${P} opacity=".7"/>` +
+                `<rect x="10" y="7" width="17" height="24" rx="2.5" ${P}/>` +
+                `<path d="M15 15.3a3.5 3.5 0 1 1 5 3.2c-1 .5-1.5 1.2-1.5 2.3v.6" stroke-width="2.3"/>` +
+                `<circle cx="18.5" cy="25.3" r="1.3" fill="currentColor" stroke="none"/>`);
+            // two pawns trading places
+            case 'swap': return sv(
+                `<path d="M29.5 14.5A11 11 0 0 0 10.6 12.2"/><path d="M9.9 7.6l.7 4.6 4.6-.7"/>` +
+                `<path d="M10.5 25.5a11 11 0 0 0 18.9 2.3"/><path d="M30.1 32.4l-.7-4.6-4.6.7"/>` +
+                `<circle cx="14.5" cy="20" r="2.6" ${P}/><circle cx="25.5" cy="20" r="2.6" fill="currentColor"/>`);
+            // a magic doorway
+            case 'teleport': return sv(
+                `<path d="M6 34h28"/>` +
+                `<path d="M11 34V18a9 9 0 0 1 18 0v16" ${P}/>` +
+                `<path d="M15 34V18.5a5 5 0 0 1 10 0V34" stroke-width="1.4" stroke-dasharray="1.6 2.4"/>` +
+                `<path d="M20 21.5v6M17 24.5h6" stroke-width="1.6"/>` +
+                `<path d="M32.5 7.5v4M30.5 9.5h4M7.5 9v3M6 10.5h3" stroke-width="1.4"/>`);
+            // the edge of a cliff, with a long drop
+            case 'cliff': return sv(
+                `<path d="M4 13h13.5l2 3-1.6 4.2 2.1 3.8-1.2 4.4 1.7 5.6H4z" ${P}/>` +
+                `<path d="M8 18.5l3 2.5-1.5 3M12 26.5l2.5 1.5" stroke-width="1.3" opacity=".6"/>` +
+                `<path d="M29 8v16"/><path d="M24.8 19.8 29 24l4.2-4.2"/>` +
+                `<circle cx="26.5" cy="30.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="31.5" cy="33" r="1.4" fill="currentColor" stroke="none"/>`);
+            case 'start': return sv(
+                `<text x="20" y="19" text-anchor="middle" font-family="Bricolage Grotesque, Arial, sans-serif" font-weight="800" font-size="12" fill="currentColor" stroke="none">${esc(t.startLabel)}</text>` +
+                `<path d="M8 27h22M25 22.5l5 4.5-5 4.5"/>`);
+            case 'finish': return sv(
+                `<path d="M12 35V6"/>` +
+                `<path d="M12.5 7h18v12h-18z" ${P}/>` +
+                `<path d="M12.5 7h4.5v4h-4.5zM21.5 7h4.5v4h-4.5zM17 11h4.5v4H17zM26 11h4.5v4H26zM12.5 15h4.5v4h-4.5zM21.5 15h4.5v4h-4.5z" fill="currentColor" stroke="none"/>`);
         }
         return '';
     }

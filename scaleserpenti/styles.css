@@ -95,9 +95,8 @@ body.playing #game-title h1 { font-size: 1.05rem; padding: 0 90px; white-space: 
 .s-start { --sc: #2a8a4f; --tint: #d3ebcc; }
 .s-finish { --sc: #b07a1a; --tint: #f6dfa8; }
 .cell.s-finish::before { background: repeating-conic-gradient(rgba(59,36,16,.2) 0 25%, transparent 0 50%) 0 0 / 34% 34%, var(--tint); }
-.cell .art { position: relative; width: min(58%, calc(var(--cell) * .58)); height: min(58%, calc(var(--cell) * .58)); transform: translate(6%, 12%); pointer-events: none; }
+.cell .art { position: relative; width: min(78%, calc(var(--cell) * .78)); height: min(78%, calc(var(--cell) * .78)); transform: translateY(11%); color: color-mix(in srgb, var(--sc) 80%, #2a1806); pointer-events: none; }
 .cell .art svg { width: 100%; height: 100%; display: block; overflow: visible; }
-.cell .art .spin { transform-origin: 20px 20px; animation: spin 7s linear infinite; }
 .cell.sp .num { z-index: 1; top: 9%; left: 11%; color: #14100a; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .trap-mark { position: absolute; inset: 12%; border-radius: 8px; display: grid; place-items: center; background: color-mix(in srgb, var(--pc) 35%, #3a2a1a); box-shadow: 0 0 0 2px var(--pc); }
@@ -264,5 +263,4 @@ body.playing .home-button { top: max(6px, env(safe-area-inset-top)); padding: 5p
     .item { font-size: .64rem; }
 }
 .lg-ic.lg-art { background: var(--tint); box-shadow: inset 0 0 0 1.5px var(--sc); }
-.lg-ic.lg-art svg { width: 26px; height: 26px; display: block; }
-.lg-ic.lg-art .spin { transform-origin: 20px 20px; animation: spin 7s linear infinite; }
+.lg-ic.lg-art svg { width: 26px; height: 26px; display: block; color: color-mix(in srgb, var(--sc) 80%, #2a1806); }
