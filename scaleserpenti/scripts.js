@@ -249,43 +249,59 @@ document.addEventListener('DOMContentLoaded', () => {
         const nS = Math.max(5, Math.round(N / 17));
         const maxLen = Math.max(16, Math.round(N * 0.19));
 
+        // Try to put one ladder (a = bottom) or snake (a = head) of length len
+        const attempt = (isLadder, a, len, tries) => {
+            const b = isLadder ? a + len : a - len;
+            if (b < 2 || b > N - 1 || used.has(a) || used.has(b)) return false;
+            if (rowOf(a) === rowOf(b)) return false;
+            // keep endpoints from touching other endpoints (clearer drawing)
+            if (used.has(a + 1) && used.has(a - 1)) return false;
+            // prefer mostly-vertical pieces that don't cross each other
+            const pa = cellXY(a), pb = cellXY(b);
+            const colDiff = Math.abs(pa.col - pb.col);
+            if (colDiff > (tries < 300 ? 4 : 6)) return false;
+            const sameMin = tries < 300 ? 6 : 1.5;
+            const otherMin = tries < 200 ? 3 : 0;
+            const clash = ladders.concat(snakes).some(o => {
+                const d = segDist(pa, pb, cellXY(o.from), cellXY(o.to));
+                const same = (ladders.includes(o)) === isLadder;
+                return d < (same ? sameMin : otherMin);
+            });
+            if (clash) return false;
+            used.add(a); used.add(b);
+            (isLadder ? ladders : snakes).push({ from: a, to: b, color: pick(SNAKE_COLORS) });
+            jumps[a] = b;
+            return true;
+        };
+
         const place = (count, isLadder) => {
             const segLo = isLadder ? 2 : 12;
             const segHi = isLadder ? N - 12 : N - 1;
-            const span = (segHi - segLo) / count;
+            const span = (segHi - segLo) / Math.max(1, count);
             for (let i = 0; i < count; i++) {
                 for (let tries = 0; tries < 500; tries++) {
                     const strict = tries < 250;
                     const lo = strict ? Math.floor(segLo + i * span) : segLo;
                     const hi = strict ? Math.floor(segLo + (i + 1) * span) : segHi;
-                    const a = rnd(lo, Math.max(lo, hi));
-                    const len = rnd(8, maxLen);
-                    const b = isLadder ? a + len : a - len;
-                    if (b < 2 || b > N - 1 || used.has(a) || used.has(b)) continue;
-                    if (rowOf(a) === rowOf(b)) continue;
-                    // keep endpoints from touching other endpoints (clearer drawing)
-                    if (used.has(a + 1) && used.has(a - 1)) continue;
-                    // prefer mostly-vertical pieces that don't cross each other
-                    const pa = cellXY(a), pb = cellXY(b);
-                    const colDiff = Math.abs(pa.col - pb.col);
-                    if (colDiff > (tries < 300 ? 4 : 6)) continue;
-                    const sameMin = tries < 300 ? 6 : 1.5;
-                    const otherMin = tries < 200 ? 3 : 0;
-                    const clash = ladders.concat(snakes).some(o => {
-                        const d = segDist(pa, pb, cellXY(o.from), cellXY(o.to));
-                        const same = (ladders.includes(o)) === isLadder;
-                        return d < (same ? sameMin : otherMin);
-                    });
-                    if (clash) continue;
-                    used.add(a); used.add(b);
-                    (isLadder ? ladders : snakes).push({ from: a, to: b, color: pick(SNAKE_COLORS) });
-                    jumps[a] = b;
-                    break;
+                    if (attempt(isLadder, rnd(lo, Math.max(lo, hi)), rnd(6, maxLen), tries)) break;
                 }
             }
         };
-        place(nL, true);
-        place(nS, false);
+
+        // Sometimes (not always) the board gets ONE extra-long ladder and/or
+        // ONE extra-long snake. Never more than one of each, or the game
+        // would be over (or never end) too quickly.
+        let longL = false, longS = false;
+        if (Math.random() < 0.5) {
+            for (let tries = 0; tries < 400 && !longL; tries++)
+                longL = attempt(true, rnd(3, Math.round(N * 0.35)), rnd(Math.round(N * 0.38), Math.round(N * 0.55)), tries);
+        }
+        if (Math.random() < 0.5) {
+            for (let tries = 0; tries < 400 && !longS; tries++)
+                longS = attempt(false, rnd(Math.round(N * 0.62), N - 2), rnd(Math.round(N * 0.33), Math.round(N * 0.5)), tries);
+        }
+        place(nL - (longL ? 1 : 0), true);
+        place(nS - (longS ? 1 : 0), false);
 
         const mult = { few: 0.55, normal: 1, many: 1.7 }[density] || 1;
         const nPower = Math.max(3, Math.round(N / 16 * mult));
@@ -401,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const H = ROWS * CELL_H;
         artEl.setAttribute('viewBox', `0 0 100 ${H.toFixed(3)}`);
         let out = '';
-        const OUT = 'rgba(52,30,10,.6)';
+        const OUT = '#6b4a2c';
         // Ladders
         ladders.forEach(l => {
             const a = cellXY(l.from), b = cellXY(l.to);
@@ -438,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const seg = (from, to) => 'M' + pts.slice(from, to + 1).map(p => p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join(' L');
             let outline = '', body = '';
-            const CH = 7;
+            const CH = 4;
             for (let i = 0; i < NP; i += CH) {
                 const t = i / NP;
                 const w = 2.5 * (1 - t * 0.7);
@@ -446,7 +462,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 outline += `<path d="${d}" stroke="${OUT}" stroke-width="${(w + 0.8).toFixed(2)}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
                 body += `<path d="${d}" stroke="${s.color[0]}" stroke-width="${w.toFixed(2)}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
             }
-            const pattern = `<path d="${seg(4, Math.round(NP * 0.8))}" stroke="${s.color[1]}" stroke-width="0.75" stroke-dasharray="0.35 2.3" fill="none" stroke-linecap="round"/>`;
             // Head: a smooth teardrop that grows out of the neck. Its outline is
             // drawn together with the body's outline (under every fill), so
             // there is no seam between neck and head.
@@ -459,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `<circle cx="1.15" cy="-0.72" r="0.48" fill="#fff"/><circle cx="1.15" cy="0.72" r="0.48" fill="#fff"/>` +
                 `<circle cx="1.3" cy="-0.72" r="0.26" fill="#111"/><circle cx="1.3" cy="0.72" r="0.26" fill="#111"/>` +
                 `<circle cx="2.25" cy="-0.32" r="0.09" fill="${OUT}"/><circle cx="2.25" cy="0.32" r="0.09" fill="${OUT}"/></g>`;
-            out += `<g class="snake">${tongue}${outline}${headOutline}${body}${pattern}${headFill}</g>`;
+            out += `<g class="snake">${tongue}${outline}${headOutline}${body}${headFill}</g>`;
         });
         artEl.innerHTML = out;
     }
